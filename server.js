@@ -190,6 +190,17 @@ app.get("/logout",(req,res)=>{
         }res.redirect('/login')
     })
 })
+app.get("/api/user_info",(req,res)=>{
+    if(req.session.ID){
+        res.json({
+        loggedIn : true,
+        username : req.session.username,
+        role : req.session.role
+        })
+    }else{
+        res.json({loggedIn:false})
+    }
+})
 
 
 app.listen(port,()=>{

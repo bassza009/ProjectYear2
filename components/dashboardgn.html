@@ -23,6 +23,12 @@
         if(document.getElementById("role").value == 'student'){
             document.getElementById("button_sd").style.display='block'
         }
+        fetch('/api/user_info').then(response=>response.json()).then(data=>{
+            if(data.loggedIn){
+                
+
+            }
+        })
     </script>
 </body>
 </html>
