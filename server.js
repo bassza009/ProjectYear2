@@ -4,18 +4,25 @@ const port = 3000
 const path = require('path')
 const url = require("url")
 const sql = require('mysql2')
-const parser = require("body-parser")
 const { connect } = require('http2')
 const { userInfo } = require('os')
 const cors =require("cors")
 const bodyParser = require('body-parser')
-
+const bcy = require("bcryptjs")
+const session = require("express-session")
+const { hash } = require('crypto')
 
 //middleware
+const middleware=((req,res,next)=>{
+    console.log(`Request from ${new Date().toISOString()}`)
+    console.log(`Method :${req.method} ,URl : ${req.url}`)
+    next()
+})
+app.use(middleware)
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended:true}))
-
+app.use(express.static(path.join(__dirname,"components")))
 
 //Connect to database
 const database = sql.createConnection({
@@ -29,49 +36,87 @@ database.connect((err)=>{
     if(err) throw err;
     console.log('Connected to database')
 })
-app.use(express.static(path.join(__dirname,"components")))
-app.get('/login',(req,res)=>{
-    res.sendFile(path.join(__dirname,'components','login.html'))
-})
+
+
+//session set
+app.use(session({
+    secret:"KEysofMysecret",
+    resave:false,
+    saveUninitialized:true,
+    cookie:{maxAge:24*60*60*1000}
+}))
+
 //API for register
-app.post("/register",(req,res)=>{
-    console.log(req.body)
+app.post("/register",async (req,res)=>{
     
+    console.log(req.body)
     const email = req.body.email
     const password = req.body.password
     const username = req.body.username
-    
+    const hash_password = await bcy.hash(password,10)
     const sql = "INSERT INTO userdata (username,email,pass_word) value (?,?,?)"
-    database.query(sql,[username,email,password],(err,result)=>{
+    database.query(sql,[username,email,hash_password],(err,result)=>{
         if(err){
             console.error(err)
+            res.redirect("/register?error=102")//can't register 
+            //res.send("Register error"+ err.sqlMessage)
             
-            res.send("Register error")
         }else{
             res.redirect("/login")
             
         }
     })
 })
+app.get("/login",(req,res)=>{
+    //if already login this will send you to /dashboard
+    
+    res.sendFile(path.join(__dirname,"components","login.html"))    
+})
+app.get("/register",(req,res)=>{
+    res.sendFile(path.join(__dirname,"components","register.html"))
+
+})
+
 
 //API for login
-app.post("/login",(req,res)=>{
+app.post("/login", (req,res)=>{
     const {email,password}= req.body
-    const sql = "SELECT pass_word from userdata where email = ?"
-    database.query(sql,[email,password],(err,result)=>{
+    const sql = "SELECT * from userdata where email = ?"
+    database.query(sql,[email,password],async (err,result)=>{
         if(err){
             throw err
         }
         if (result.length>0){
-            res.sendFile(path.join(__dirname,"Components","index.html"))
+            const user = result[0]
+            const match_pass = await bcy.compare(password,user.pass_word)//compare input password and password in database
+            if(match_pass){
+                req.session.userid = user.ID //ดึงข้อมูลจากdatabase(ข้างหลังเป็นdatabase)  
+                req.session.username = user.username
+                req.session.role = 'user' //configเองนะ
+                console.log("User login complete"+user.username)
+                res.redirect("/dashboard")
+            }else{
+                res.redirect("/login?error=101")//wrong password
+            } 
         }else{
-            res.send("Password or email incorrect")
+            res.redirect("/login?error=100")//this account doesn't exist
         }
     })
 })
+app.get("/dashboard",(req,res)=>{
+    if(!req.session.userid){
+      res.redirect('/?error = 103') //login first  
+    }
+    res.sendFile(path.join(__dirname,"components","dashboard.html"))
+})
 
-
-
+app.get("/logout",(req,res)=>{
+    req.session.destroy((err)=>{
+        if(err) {
+            throw err
+        }res.redirect('/login')
+    })
+})
 
 
 app.listen(port,()=>{
