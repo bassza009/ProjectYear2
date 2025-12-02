@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dash board general</h1>
+    <img src="unnamed.jpg" alt="whylogin" >
+    <button type="button"style="display:none" id = 'button_sd'>Create post</button>
+    <button type="button"style="display:block">Hire</button>
+    <form action="/logout">
+        <button type="submit">logout</button>
+    </form>
+    <input type="hidden" id = 'role' name= 'role'>
+    <script>
+        const role_url = new URLSearchParams(window.location.search)
+        const role = role_url.get("role")
+        if(role){
+            document.getElementById("role").value = role
+        }
+        if(document.getElementById("role").value == 'student'){
+            document.getElementById("button_sd").style.display='block'
+        }
+    </script>
+</body>
+</html>

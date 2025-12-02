@@ -38,23 +38,23 @@ database.connect((err)=>{
     if(err) throw err;
     console.log('Connected to database')
 })
-const store_session_sql =new mySQLstore({
-    expiration:86400000,
-    createDatabase:true,
-    schema:{
-        tableName:session,
-        columnName:{
-            session_id:"session_id",
-            expires:"expires",
-            data:'data'
-        }
-    }
-},database)
+// const store_session_sql =new mySQLstore({
+//     expiration:86400000,
+//     createDatabase:true,
+//     schema:{
+//         tableName:session,
+//         columnName:{
+//             session_id:"session_id",
+//             expires:"expires",
+//             data:'data'
+//         }
+//     }
+// },database)
 
 //session set
 app.use(session({
     secret:"KEysofMysecret",
-    store:store_session_sql,
+    // store:store_session_sql,
     resave:false,
     saveUninitialized:true,
     cookie:{maxAge:24*60*60*1000}
@@ -68,9 +68,10 @@ app.post("/register",async (req,res)=>{
     const email = req.body.email
     const password = req.body.password
     const username = req.body.username
+    const role = req.body.role
     const hash_password = await bcy.hash(password,10)
-    const sql = "INSERT INTO userdata (username,email,pass_word) value (?,?,?)"
-    database.query(sql,[username,email,hash_password],(err,result)=>{
+    const sql = "INSERT INTO userdata (username,email,pass_word,roles) value (?,?,?,?)"
+    database.query(sql,[username,email,hash_password,role],(err,result)=>{
         if(err){
             console.error(err)
             res.redirect("/register?error=102")//can't register 
@@ -108,9 +109,17 @@ app.post("/login", (req,res)=>{
             if(match_pass){
                 req.session.userid = user.ID //ดึงข้อมูลจากdatabase(ข้างหลังเป็นdatabase)  
                 req.session.username = user.username
-                req.session.role = 'user' //configเองนะ
+                req.session.roles = user.roles //role
                 console.log("User login complete"+user.username)
-                res.redirect("/dashboard")
+                if(user.roles==='dev'){
+                    res.redirect('/dashboard?role=dev')
+                    console.log(req.body)
+                }else if(user.roles==='student'){
+                    res.redirect('/dashboard?role=student')
+                    console.log(req.body)
+                }else{
+                    res.redirect('/dashboard?role=general')    
+                }
             }else{
                 res.redirect("/login?error=101")//wrong password
             } 
@@ -123,8 +132,10 @@ app.get("/dashboard",(req,res)=>{
     if(!req.session.userid){
       res.redirect('/?error = 103') //login first  
     }
-    res.sendFile(path.join(__dirname,"components","dashboard.html"))
+    
+    res.sendFile(path.join(__dirname,"components","dashboardgn.html"))
 })
+
 app.get("/reset1",(req,res)=>{
     res.sendFile(path.join(__dirname,"components","reset.html"))
 })
