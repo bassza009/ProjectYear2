@@ -1,35 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        #picture{
-            display:none;
-            width:50% ;
+const role_url = new URLSearchParams(window.location.search)
+        const role = role_url.get("role")
+        if(role){
+            document.getElementById("role").value = role
         }
-        #username{
-            display:none;
+        if(document.getElementById("role").value == 'student'){
+            document.getElementById("button_sd").style.display='block'
         }
-    </style>
-</head>
-<body>
-    <h1>Dash board general</h1>
-    <img src="unnamed.jpg" id = "picture" alt="whylogin" >
-    <button type="button"style="display:none" id = 'button_sd' onclick ="create_post()">Create post</button>
-    <p id = 'username' name = 'username'></p>
-    <button type="button"style="display:block">Hire</button>
-    <form action="/logout">
-        <button type="submit">logout</button>
-    </form>
-    <input type="hidden" id = 'role' name= 'role'>
-    <script >
-        
         fetch('/api/user_info').then(response=>response.json()).then(data=>{
             
             if(data.loggedIn){
-                console.log("userdata:",data)
+                
                 if(data.role==='student'||data.role==='dev'){
                             document.getElementById("button_sd").style.display='block'
                     }
@@ -59,12 +39,9 @@
             fetch('/api/user_info').then(response=>response.json()).then(data=>{
                 console.log("Username : ",data)
                 if(data.username){    
-                    username_name.innerText=data.email
+                    username_name.innerText=data.username
                 }
             })
                 
             
-        }            
-</script>
-</body>
-</html>
+        }          

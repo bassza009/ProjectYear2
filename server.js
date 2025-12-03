@@ -26,6 +26,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static(path.join(__dirname,"components")))
 
+
 //Connect to database
 const database = sql.createConnection({
     host : "localhost",
@@ -84,9 +85,10 @@ app.post("/register",async (req,res)=>{
     })
 })
 app.get("/login",(req,res)=>{
+    
     //if already login this will send you to /dashboard
     if(req.session.userid)
-        return res.redirect('/dashboard')
+        return res.redirect(`/dashboard?role=${req.session.roles}`)
     res.sendFile(path.join(__dirname,"components","login.html"))    
 })
 app.get("/register",(req,res)=>{
@@ -101,6 +103,7 @@ app.post("/login", (req,res)=>{
     const sql = "SELECT * from userdata where email = ?"
     database.query(sql,[email,password],async (err,result)=>{
         if(err){
+            console.log(err)
             throw err
         }
         if (result.length>0){
@@ -110,6 +113,7 @@ app.post("/login", (req,res)=>{
                 req.session.userid = user.ID //ดึงข้อมูลจากdatabase(ข้างหลังเป็นdatabase)  
                 req.session.username = user.username
                 req.session.roles = user.roles //role
+                req.session.email = user.email
                 console.log("User login complete"+user.username)
                 if(user.roles==='dev'){
                     res.redirect('/dashboard?role=dev')
@@ -190,12 +194,14 @@ app.get("/logout",(req,res)=>{
         }res.redirect('/login')
     })
 })
+//
 app.get("/api/user_info",(req,res)=>{
-    if(req.session.ID){
+    if(req.session.userid){
         res.json({
         loggedIn : true,
         username : req.session.username,
-        role : req.session.role
+        role : req.session.roles,
+        email : req.session.email
         })
     }else{
         res.json({loggedIn:false})
