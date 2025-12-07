@@ -17,54 +17,67 @@
 <body>
     <h1>Dash board general</h1>
     <img src="unnamed.jpg" id = "picture" alt="whylogin" >
-    <button type="button"style="display:none" id = 'button_sd' onclick ="create_post()">Create post</button>
+    
+    
+    <form action="/job_form" >
+        <button style="display:none" type="submit" id = 'button_sd'>click</button>
+    </form>
+    
     <p id = 'username' name = 'username'></p>
     <button type="button"style="display:block">Hire</button>
-    <form action="/logout">
+    <form action="/change_data">
+        <button style="display: none;" type="submit"id = 'button_change'>change data</button>
+    </form>
+    <form action="/logout" >
         <button type="submit">logout</button>
     </form>
+    
     <input type="hidden" id = 'role' name= 'role'>
+    <div id ='job_feed'>hello</div>
     <script >
         
         fetch('/api/user_info').then(response=>response.json()).then(data=>{
             
             if(data.loggedIn){
                 console.log("userdata:",data)
-                if(data.role==='student'||data.role==='dev'){
+                if((data.role==='student'||data.role==='dev') &&data.create_job !=1){
                             document.getElementById("button_sd").style.display='block'
                     }
-
+                else{document.getElementById("button_sd").style.display='none'}
+                if(data.create_job ==1){
+                            document.getElementById("button_change").style.display='block'
+                    }
+                else{document.getElementById("button_change").style.display='none'}
             }
         })
-        function create_post(){
-            const hide=document.getElementById("picture").style
-            const user_hide = document.getElementById("username").style
-            if(hide.display ==='none'){
-                hide.display ='block'
-            }else if(hide.display==='block'){
-                hide.display = 'none'
-            }else{
-                hide.display='block'
-            }
-            if(user_hide.display ==='none'){
-                user_hide.display ='block'
-            }else if(user_hide.display==='block'){
-                user_hide.display = 'none'
-            }else{
-                user_hide.display='block'
-            }
-            
-            const username_name = document.getElementById("username")
-            console.log(username_name)
-            fetch('/api/user_info').then(response=>response.json()).then(data=>{
-                console.log("Username : ",data)
-                if(data.username){    
-                    username_name.innerText=data.email
+
+        function show_job(){
+            fetch('/api/jobs').then(response=>response.json()).then(jobs=>{
+                const feed = document.getElementById("job_feed")
+                feed.innerHTML=''
+                if(jobs.length===0){
+                    feed.innerHTML="<p>No right now :<</p>"
+                    return ;    
                 }
+                jobs.forEach(job=>{
+                    const html = `
+                        <div>
+                            <p>Name : ${job.username}</p>
+                            <p>Job : ${job.job}</p>
+                            <p>Group : ${job.user_group}</p>
+                            <p>Contact number : ${job.user_number}</p>
+                            <p>Budjet : ${job.budjet}</p>
+                            <text-area width = 100px height = 100px>${job.des_cription}
+                            </text-area>
+                        </div>
+                    `;
+                    feed.innerHTML += html
+                })
             })
-                
             
-        }            
+        }
+        show_job()
+        
 </script>
 </body>
 </html>

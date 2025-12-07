@@ -100,7 +100,8 @@ app.get("/register",(req,res)=>{
 //API for login
 app.post("/login", (req,res)=>{
     const {email,password}= req.body
-    const sql = "SELECT * from userdata where email = ?"
+    const sql = "SELECT user_job.job_create,userdata.ID ,userdata.username ,userdata.email,userdata.roles,userdata.pass_word from userdata left join user_job on user_job.ID = userdata.ID where email = ?"
+    const sql2 = "SELECT * from userdata where email = ?"
     database.query(sql,[email,password],async (err,result)=>{
         if(err){
             console.log(err)
@@ -109,12 +110,15 @@ app.post("/login", (req,res)=>{
         if (result.length>0){
             const user = result[0]
             const match_pass = await bcy.compare(password,user.pass_word)//compare input password and password in database
+            
             if(match_pass){
+                
                 req.session.userid = user.ID //ดึงข้อมูลจากdatabase(ข้างหลังเป็นdatabase)  
                 req.session.username = user.username
                 req.session.roles = user.roles //role
                 req.session.email = user.email
-                console.log("User login complete"+user.username)
+                req.session.create_job = user.job_create
+                console.log("User login complete "+user.username+user.job_create)
                 if(user.roles==='dev'){
                     res.redirect('/dashboard?role=dev')
                     console.log(req.body)
@@ -201,13 +205,78 @@ app.get("/api/user_info",(req,res)=>{
         loggedIn : true,
         username : req.session.username,
         role : req.session.roles,
-        email : req.session.email
+        email : req.session.email,
+        create_job: req.session.create_job
         })
     }else{
         res.json({loggedIn:false})
     }
 })
+app.post('/create_job',(req,res)=>{
+    const {job,group,number,budjet,description} = req.body
+    const userId = req.session.userid 
+    if(!userId || req.session.create_job){
+        return res.redirect('/login?error=100')
+    }    
+    const sql = "insert into user_job (ID,job,user_group,user_number,budjet,des_cription,job_create)values (?,?,?,?,?,?,1)"
+    database.query(sql,[userId,job,group,number,budjet,description],(err,result)=>{
+        if(err){
+            console.log(err)
+            res.redirect('/job_form?error=106')//incorrect input form
+        }
+        req.session.create_job = 1  
+        
+        req.session.save(()=>{
+            res.redirect('/dashboard?status = success')
+        })
+        
+    })
 
+})
+
+app.get('/job_form',(req,res)=>{
+    if((req.session.roles =='student' || req.session.roles =='dev')&&req.session.create_job!=1){
+        res.sendFile(path.join(__dirname,'components','job_form.html'))
+    }
+    else{return res.redirect('/dashboard?error=103')}
+    
+
+})
+app.get('/api/jobs',(req,res)=>{
+    const sql=
+            `SELECT * ,userdata.username FROM userdata
+            inner JOIN user_job
+            ON user_job.ID = userdata.ID`
+
+    database.query(sql,(err,result)=>{
+        if(err){
+            console.log(err)
+            return res.status(500).json([])
+
+        }
+        res.json(result)
+    })
+})
+
+app.post('/api/change_data',(req,res)=>{
+    const {job,group,number,budjet,description} = req.body
+    
+    const sql = "UPDATE user_job SET job = ?,user_group =?,user_number=?,budjet = ?,des_cription = ? WHERE ID = ?"
+    database.query(sql,[job,group,number,budjet,description,req.session.userid],(err,result)=>{
+        if(err){
+            console.log(err)
+            res.redirect("/change_data?error = 108")
+        }
+        res.redirect('/dashboard?status=success')
+
+    })
+})
+app.get("/change_data",(req,res)=>{
+    if(!req.session.create_job){
+        res.redirect("/create_job?error=107")//doesn't create job yet
+    }
+    res.sendFile(path.join(__dirname,"components","change_data.html"))
+})
 
 app.listen(port,()=>{
     console.log("Server is running....")

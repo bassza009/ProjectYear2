@@ -1,22 +1,22 @@
-const role_url = new URLSearchParams(window.location.search)
-        const role = role_url.get("role")
-        if(role){
-            document.getElementById("role").value = role
-        }
-        if(document.getElementById("role").value == 'student'){
-            document.getElementById("button_sd").style.display='block'
-        }
-        fetch('/api/user_info').then(response=>response.json()).then(data=>{
+// const role_url = new URLSearchParams(window.location.search)
+//         const role = role_url.get("role")
+//         if(role){
+//             document.getElementById("role").value = role
+//         }
+//         if(document.getElementById("role").value == 'student'){
+//             document.getElementById("button_sd").style.display='block'
+//         }
+//         fetch('/api/user_info').then(response=>response.json()).then(data=>{
             
-            if(data.loggedIn){
+//             if(data.loggedIn){
                 
-                if(data.role==='student'||data.role==='dev'){
-                            document.getElementById("button_sd").style.display='block'
-                    }
+//                 if(data.role==='student'||data.role==='dev'){
+//                             document.getElementById("button_sd").style.display='block'
+//                     }
 
-            }
-        })
-        function create_post(){
+//             }
+//         })
+function create_post(){
             const hide=document.getElementById("picture").style
             const user_hide = document.getElementById("username").style
             if(hide.display ==='none'){
@@ -44,4 +44,4 @@ const role_url = new URLSearchParams(window.location.search)
             })
                 
             
-        }          
+        }           

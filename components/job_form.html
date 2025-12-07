@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/create_job" method="POST">
+        <p id="name"></p>
+        <input type="text" placeholder="job" name = 'job' id="job">
+        <input type="text" placeholder="group"name = 'group' id="group">
+        <input type="number" placeholder="number"name = 'number' id="number">
+        <input type="number" placeholder="budjet"name = 'budjet' id="budjet">
+        <textarea   style="width:300px; height:300px;"name = 'description' id="description">Description about job</textarea>
+        <button type="submit">create post</button>
+    </form>
+
+    <script>
+        const name = document.getElementById("name")
+        fetch('/api/user_info').then(Response=>Response.json()).then(data=>{
+            if(data.username){
+                name.innerText = `hi ${data.create_job}`
+            }
+        })
+    </script>
+</body>
+</html>
