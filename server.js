@@ -40,17 +40,18 @@ database.connect((err)=>{
     console.log('Connected to database')
 })
 // const store_session_sql =new mySQLstore({
-//     expiration:86400000,
-//     createDatabase:true,
-//     schema:{
-//         tableName:session,
-//         columnName:{
-//             session_id:"session_id",
-//             expires:"expires",
-//             data:'data'
-//         }
-//     }
-// },database)
+//      expiration:86400000,
+//      createDatabase:true,
+//      schema:{
+//          tableName:session,
+//          columnName:{
+//              session_id:"session_id",
+//              expires:"expires",
+//              data:'data'
+//          }
+//      }
+//  },database)
+
 
 //session set
 app.use(session({
@@ -141,7 +142,7 @@ app.post("/login", (req,res)=>{
 })
 app.get("/dashboard",(req,res)=>{
     if(!req.session.userid){
-      res.redirect('/?error = 103') //login first  
+      res.redirect('/?error=103') //login first  
     }
     
     res.sendFile(path.join(__dirname,"components","dashboardgn.html"))
@@ -181,13 +182,13 @@ app.post("/reset2",async(req,res)=>{
     console.log("Debug ->password ",password)
     console.log("Debug ->hash_password ",hash_password)
     if(!email){
-        return res.redirect("/reset1?error = 106")//null email
+        return res.redirect("/reset1?error=106")//null email
     }
     const sql = 'update userdata set pass_word = ?  where email = ?'
     database.query(sql,[hash_password,email],(err,result)=>{
         if(err){
             console.log(err)
-            return res.redirect("/reset2?error = 107")//can't reset
+            return res.redirect("/reset2?error=107")//can't reset
         }
         console.log("debug -> result",result)
         res.redirect("/login")
@@ -268,7 +269,7 @@ app.post('/api/change_data',(req,res)=>{
     database.query(sql,[job,group,number,budjet,description,req.session.userid],(err,result)=>{
         if(err){
             console.log(err)
-            res.redirect("/change_data?error = 108")
+            res.redirect("/change_data?error=108")//can't change data
         }
         res.redirect('/dashboard?status=success')
 

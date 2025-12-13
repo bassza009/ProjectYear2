@@ -25,7 +25,7 @@
     </form>
     
     <p id = 'username' name = 'username'></p>
-    <button type="button"style="display:block">Hire</button>
+    
     <form action="/change_data">
         <button style="display: none;" type="submit"id = 'button_change'>change data</button>
     </form>
@@ -61,7 +61,7 @@
                 }
                 jobs.forEach(job=>{
                     const html = `
-                        <div>
+                        <div class = 'student_post'>
                             <p>Name : ${job.username}</p>
                             <p>Job : ${job.job}</p>
                             <p>Group : ${job.user_group}</p>
