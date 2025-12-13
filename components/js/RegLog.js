@@ -15,3 +15,4 @@ else if(error_code === '100'){
     error_element.innerText="This account doesn't exist"
     error_element.style.color = "red"
 }
+

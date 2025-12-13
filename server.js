@@ -100,7 +100,9 @@ app.get("/register",(req,res)=>{
 //API for login
 app.post("/login", (req,res)=>{
     const {email,password}= req.body
-    const sql = "SELECT user_job.job_create,userdata.ID ,userdata.username ,userdata.email,userdata.roles,userdata.pass_word from userdata left join user_job on user_job.ID = userdata.ID where email = ?"
+    const sql = `SELECT user_job.job_create,userdata.ID ,userdata.username ,userdata.email,userdata.roles,userdata.pass_word,userdata.userPhoneNumber
+                from userdata 
+                left join user_job on user_job.ID = userdata.ID where email = ?`
     const sql2 = "SELECT * from userdata where email = ?"
     database.query(sql,[email,password],async (err,result)=>{
         if(err){
@@ -118,6 +120,7 @@ app.post("/login", (req,res)=>{
                 req.session.roles = user.roles //role
                 req.session.email = user.email
                 req.session.create_job = user.job_create
+                req.session.uerPhone = user.userPhoneNumber
                 console.log("User login complete "+user.username+user.job_create)
                 if(user.roles==='dev'){
                     res.redirect('/dashboard?role=dev')

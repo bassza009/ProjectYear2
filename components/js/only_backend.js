@@ -1,42 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        #picture{
-            display:none;
-            width:50% ;
-        }
-        #username{
-            display:none;
-        }
-    </style>
-    
-</head>
-<body>
-    <h1>Dash board general</h1>
-    <img src="unnamed.jpg" id = "picture" alt="whylogin" >
-    
-    
-    <form action="/job_form" >
-        <button style="display:none" type="submit" id = 'button_sd'>click</button>
-    </form>
-    
-    <p id = 'username' name = 'username'></p>
-    <button type="button"style="display:block">Hire</button>
-    <form action="/change_data">
-        <button style="display: none;" type="submit"id = 'button_change'>change data</button>
-    </form>
-    <form action="/logout" >
-        <button type="submit">logout</button>
-    </form>
-    
-    <input type="hidden" id = 'role' name= 'role'>
-    <div id ='job_feed'>hello</div>
-    <script>
-        fetch('/api/user_info').then(response=>response.json()).then(data=>{
+fetch('/api/user_info').then(response=>response.json()).then(data=>{
             
             if(data.loggedIn){
                 console.log("userdata:",data)
@@ -56,7 +18,7 @@
                 const feed = document.getElementById("job_feed")
                 feed.innerHTML=''
                 if(jobs.length===0){
-                    feed.innerHTML="<p>No job right now :<</p>"
+                    feed.innerHTML="<p>No right now :<</p>"
                     return ;    
                 }
                 jobs.forEach(job=>{
@@ -77,6 +39,3 @@
             
         }
         show_job()
-    </script>
-</body>
-</html>
