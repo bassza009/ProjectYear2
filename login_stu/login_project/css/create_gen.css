@@ -1,0 +1,151 @@
+body{
+    background-image:url(/photo/background_logo_SDhire.jpg);
+    background-repeat: no-repeat;  
+    background-size: cover;        
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+
+.main_center{
+  text-align: center;
+  justify-items: center;
+  box-shadow: 0px 0px 30px 0px rgb(178, 177, 177);
+  border-radius:50px;
+  background: white;
+  width: 950px;
+  height: 750px;
+
+  position: absolute;    
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main_center h2{
+  margin-top: 75px;
+  font-size:25px;
+}
+/*-----------------------------------1 account-------------------------------------------------*/
+.Set_account{
+  display: flex;
+  flex-direction: column; /* บังคับให้เรียงจากบนลงล่าง */
+  align-items: center;
+}
+
+
+.Set_account{
+  margin-top: 60px;
+}
+
+.account {
+  width: 500px;        
+  text-align: left; 
+}
+
+.account label{
+  font-weight: bold;
+}
+.Set_account input{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  width: 500px;
+  height: 35px;
+
+}
+
+/*-----------------------------------2 Set_profile-------------------------------------------------*/
+.Set_profile{
+  display:none;
+  flex-direction: column; /* บังคับให้เรียงจากบนลงล่าง */
+  align-items: center;
+}
+
+.Set_profile h4{
+  font-size:17px;
+  margin-bottom: -1px;
+}
+
+.Set_profile p{
+  font-size:17px;
+  color: #8b8484;
+}
+
+.img_file{
+    justify-self: center;
+}
+
+#file-input {
+    display: none;
+ }
+.upload-icon {
+  margin-top: 25px;
+  cursor: pointer;
+  width: 210px;
+  height:210px;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+.fron_l {
+    margin-top: 20px;
+  width: 500px;        
+  text-align: left; 
+}
+
+.Set_profile input{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  width: 500px;
+  height: 35px;
+
+}
+
+/*----------------------------------------------- button ----------------------------------*/
+.Set_account button,
+.Set_profile button{
+  margin-top: 20px;
+  width: 200px;
+  height: 60px;
+  border-radius: 6px;
+  border: none;  
+  background-color: blueviolet;
+  color: white;
+  font-size: medium;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.Set_account button:hover,
+.Set_profile button:hover {
+  background-color: #4fdd83;
+    color: #040404;    
+    transform: scale(1.1); 
+}
+
+
+
+.back-btn {
+    position: absolute; /*ตัวนี้อิสระมั้ง*/
+    top: 30px;
+    left: 30px; 
+    background: none;
+    border: none;
+    font-size: 24px;   /* ขนาดลูกศร */
+    color: #666;       
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    color: #9b4dca;    
+    transform: scale(1.1);/
+            
+}
