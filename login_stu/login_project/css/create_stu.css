@@ -1,0 +1,176 @@
+body{
+    background-image:url(/photo/background_logo_SDhire.jpg);
+    background-repeat: no-repeat;  
+    background-size: cover;        
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+
+.main_center{
+  text-align: center;
+  justify-items: center;
+  box-shadow: 0px 0px 30px 0px rgb(178, 177, 177);
+  border-radius:50px;
+  background: white;
+  width: 950px;
+  height: 750px;
+
+  position: absolute;    
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.main_center h2{
+  margin-top: 75px;
+  font-size:25px;
+}
+
+/*-----------------------------------1 Set_profile-------------------------------------------------*/
+.Set_profile{
+  display:flex;
+  flex-direction: column; /* บังคับให้เรียงจากบนลงล่าง */
+  align-items: center;
+}
+
+.Set_profile h4{
+  font-size:17px;
+  margin-bottom: -1px;
+}
+
+.Set_profile p{
+  font-size:17px;
+  color: #8b8484;
+}
+
+.img_file{
+  justify-self: center;
+}
+
+#file-input {
+    display: none;
+ }
+.upload-icon {
+  margin-top: 25px;
+  cursor: pointer;
+  width: 210px;
+  height:210px;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+}
+
+
+/*--------------------------------------------- 2 Setname ---------------------------------*/
+.Set_name{
+  
+  display: none;
+  flex-direction: column; /* จัดเรียงจากบนลงล่าง */
+  align-items: center;    /* จัดให้อยู่กึ่งกลางแนวนอน */
+  margin-top: 40px;
+  font-family: sans-serif;
+}
+
+.Set_name{
+  margin-top: 60px;
+}
+
+.fron_l {
+  width: 500px;        
+  text-align: left; 
+}
+
+.Set_name input,.Set_name textarea{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  width: 500px;
+  height: 35px;
+
+}
+
+.Set_name textarea{
+  height: 150px;
+  resize: none; /* ห้ามปรับขนาด */
+  overflow-y: auto; /* ให้มี Scrollbar ขึ้นมาถ้าพิมพ์ยาวเกินบรรทัด */
+  box-sizing: border-box; 
+  padding: 10px;
+}
+/*----------------------------------------------3 Set Contact --------------------------------------*/
+.Set_Contact{
+  display: none;
+  flex-direction: column; /* บังคับให้เรียงจากบนลงล่าง */
+  align-items: center;
+}
+
+
+.Set_Contact{
+  margin-top: 60px;
+}
+
+.contact_l {
+  width: 500px;        
+  text-align: left; 
+}
+
+.contact_l label{
+  font-weight: bold;
+}
+.Set_Contact input{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  width: 500px;
+  height: 35px;
+
+}
+
+
+/*----------------------------------------------- button ----------------------------------*/
+.Set_Contact button,
+.Set_name button,
+.Set_profile button{
+  margin-top: 20px;
+  width: 200px;
+  height: 60px;
+  border-radius: 6px;
+  border: none;  
+  background-color: blueviolet;
+  color: white;
+  font-size: medium;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.Set_Contact button:hover,
+.Set_name button:hover,
+.Set_profile button:hover {
+  background-color: #4fdd83;
+    color: #040404;    
+    transform: scale(1.1); 
+}
+
+
+
+.back-btn {
+    position: absolute; /*ตัวนี้อิสระมั้ง*/
+    top: 30px;
+    left: 30px; 
+    background: none;
+    border: none;
+    font-size: 24px;   /* ขนาดลูกศร */
+    color: #666;       
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    color: #9b4dca;    
+    transform: scale(1.1);/
+            
+}

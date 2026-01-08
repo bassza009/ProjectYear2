@@ -1,0 +1,152 @@
+header {
+    display: flex;
+    padding: 8px 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #8336ff, #c5adeb);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+header button {
+    padding: 6px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-radius: 4px;
+    border: none;
+    transition: 0.2s;
+}
+
+header button:hover {
+    background: #ffffff9e;
+}
+
+/*------------------------- -----------------------------*/
+main {    
+    align-items: center;
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    flex-wrap: wrap;  
+}
+
+.text_recommend h1 {
+    font-size: 40px;
+}
+
+.text_recommend button{
+    background: #9602ac;
+    color: white;
+    padding: 5px 7px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 70px;
+}
+
+.text_recommend button:hover{
+    background: yellow;
+}
+
+.img_right img {
+    left: 50%;
+    width: 240px;
+    height: auto;
+}
+
+/*-------------------------------------------------------------*/
+.form_input form{ /*ลืมform*/
+    margin-top: -0.25rem;
+    display:flex;
+    align-items: center;
+    border: 1px solid #807878;
+    border-radius: 3px;    
+}
+
+.form_input select {
+    padding: 10px;
+    width: 150px;
+    border: none;
+    cursor: pointer;
+}
+
+.form_input input {
+    border: none;
+    border-left: 2px solid #ccc;
+    padding: 10px;
+    flex: 1;
+    width: 450px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#reset,
+#submit{
+    color: white;
+    padding: 5px 7px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 70px;
+}
+
+#reset {
+    background: #b0acac;
+}
+
+#submit {
+    background: #9602ac;
+}
+
+#reset:hover{
+    background: red;
+}
+#submit:hover{
+    background: green;
+}
+
+/* ส่วนหลักของ Footer */
+.site-footer {
+    width: 100%;
+    background-color: #8A2BE2; /* สีม่วงสว่างด้านบน */
+    color: white;
+    text-align: center;
+    margin-top: auto; /* ช่วยดันลงล่างถ้าใช้ร่วมกับ flex ใน body */
+}
+
+/* ส่วนที่โชว์อีเมล */
+.footer-contact {
+    padding: 20px 0;
+}
+
+.footer-contact p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+/* ส่วนแถบล่างสุด (ลิขสิทธิ์) */
+.footer-bottom {
+    background-color: #721ab3; /* สีม่วงที่เข้มขึ้นตามรูป */
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* เส้นแบ่งบางๆ */
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+}

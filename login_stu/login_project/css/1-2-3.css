@@ -1,0 +1,42 @@
+.step-container {
+  display: flex;
+  align-items: center;
+}
+
+/* วงกลม */
+.step {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #888; 
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+/* เส้นเชื่อม */
+.line {
+  width: 100px;
+  height: 2px;
+  background-color: #9b4dca; /* สีม่วงตามรูป */
+}
+
+/* สีม่วงสำหรับสถานะที่ Active */
+.step.active {
+  background-color: #9b4dca;
+}
+
+.line {
+  width: 100px;
+  height: 3px;
+  background-color: #ccc; /* สีเทาตอนยังไม่ไปถึง */
+  transition: 0.4s; /* เพิ่ม Animation ตอนเปลี่ยนสี */
+}
+
+.line.active {
+  background-color: #9b4dca; /* สีม่วงเมื่อไปถึง */
+}

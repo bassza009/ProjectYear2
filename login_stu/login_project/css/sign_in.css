@@ -1,0 +1,130 @@
+body{
+    background-image:url(/photo/background_logo_SDhire.jpg);
+    background-repeat: no-repeat;  
+    background-size: cover;        
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+main{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.general{
+    display: none;
+    flex-direction: row-reverse;
+}
+
+.student{
+    display: flex;
+}
+
+.student,.general{
+    box-shadow: 0px 0px 5px 0px rgb(119, 114, 114);
+    border: none;
+    border-radius: 5px;
+    background: white;
+    width: 750px;
+    height: 450px;
+
+    position: absolute;    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+
+}
+
+.left_login,.right_login{
+    text-align: center;
+    flex: 1;
+    padding: 60px 50px;
+}
+
+.left_login h2,.right_login h2{
+    font-size: 32px;
+    font-weight: 600px;
+}
+
+.left_login p,.right_login p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+.left_login input,.right_login input{
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.left_login button,.right_login button{
+    width: 50%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: #6a0dad;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.left_login button:hover,.right_login button:hover {
+    background: #ba94db;
+}
+
+
+.right_gen,.left_stu{
+    flex: 1;
+    padding: 60px 50px;
+    background: linear-gradient(135deg, #8D38C9, #A45DD6);
+    color: white;
+    text-align: center;
+}
+
+.right_gen{
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.left_stu{
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+
+.right_gen h2,.left_stu h2{
+    font-size: 32px;
+    font-weight: 600px;
+}
+
+.right_genc p,.left_stu p{
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.right_gen .toGeneral,.left_stu .toStudent{
+    transition: 0.2s;
+    margin-top: 50px;
+    padding: 14px 25px;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.right_gen button:hover,.left_stu button:hover{
+    background: #ccc;
+    
+}
+
+
+/* แก้ขนาดจอ */

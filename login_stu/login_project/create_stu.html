@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สร้างโปรไฟล์</title>
+    <link rel="stylesheet" href="css/create_stu.css">
+    <link rel="stylesheet" href="css/1-2-3.css">
+</head>
+<body>
+    <main>
+        <div class="main_center">
+            <button type="button" class="back-btn" onclick="goBack()"> < </button>
+
+            <h2>สร้างโปรไฟล์</h2> 
+
+            <div class="step-container">
+                <div class="step active" id="circle1">1</div>
+                <div class="line" id="line1"></div>
+                <div class="step" id="circle2">2</div>
+                <div class="line" id="line2"></div>
+                <div class="step" id="circle3">3</div>
+            </div>           
+                <div id="part1" class="Set_profile">
+                    <h4>เลือกโปรไฟล์ของคุณ</h4>
+                    <p>ควรใช้ภาพถ่ายตัวจริงของคุณเห็นใบหน้าชัดเจน</p>
+                    <form class="img_file">
+                        <label for="file-input">
+                            <div class="upload-icon">คลิกเพื่อเลือกรูป</div>
+                        </label>
+                        <input id="file-input" type="file" accept="image/*" />
+                    </form>
+                    <button type="button" onclick="goToStep(2)">ดำเนินการต่อ</button>
+                </div>
+            
+                <div id="part2" class="Set_name">
+                    <form class="fron_l">
+                            <label>ชื่อที่ใช้แสดงในระบบ(ควรเป็นชื่อที่ดูเป็นทางการ)</label><br>
+                            <input type="text" placeholder="กรอกชื่อของคุณ"><br>
+                            <label>อธิบาย</label><br>
+                            <textarea placeholder="อธิบายลักษณะงาน"></textarea>
+                    </form>
+                    <button type="button" onclick="goToStep(3)">ดำเนินการต่อ</button>
+                </div>
+            
+
+                <div id="part3"class="Set_Contact">
+                    <p>ช่องทางติดต่อ</p>
+                    <form class="contact_l">
+                            <label>อีเมลที่ติดต่อได้</label>
+                            <input type="email" placeholder="ระบุอีเมล"><br>
+                            <label>เบอร์โทรที่ติดต่อได้</label>
+                            <input type="text" placeholder="ระบุเบอร์โทร"><br>
+                            <label>ID Line</label>
+                            <input type="text" placeholder="ระบุ ID Line"><br>
+                            <label>เพิ่มลิงก์</label>
+                            <input type="text" placeholder="URL">                          
+                    </form>
+                    <button type="submit">ยืนยัน</button>
+                </div>
+        </div>
+    </main>
+    <script src="action123.js"></script>
+</body>
+</html>
