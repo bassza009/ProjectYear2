@@ -1,0 +1,167 @@
+header {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #8557A5, #AE73D8);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;    
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000; /* เพิ่มตัวนี้เพื่อให้ Header ลอยทับทุกอย่าง */
+}
+
+header h2 {
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+header button {
+    margin-right: 50px;
+    padding: 6px 14px;
+    font-size: 15px;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-radius: 4px;
+    border: none;
+    transition: 0.2s;
+
+}
+
+header button:hover {
+    transform: scale(1.1);
+    background: whitesmoke;
+}
+
+/*------------------------------------------------------*/
+main {    
+    align-items: center;
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+    flex-wrap: wrap;  
+}
+
+.text_recommend h1 {
+    font-size: 40px;
+}
+
+.text_recommend button{
+    background: linear-gradient(135deg, #8D38C9, #A45DD6);
+    color: white;
+    padding: 5px 7px;    
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 70px; 
+}
+
+.text_recommend button:hover{
+    transform: scale(1.1);
+    background: rgba(153, 0, 255, 0.593);
+}
+
+.img_right img {
+    left: 50%;
+    width: 240px;
+    height: auto;
+}
+
+/*------------------------------------------------------from_selrct*/
+
+
+.form_input form{ /*ลืมform*/
+    margin-top: -0.25rem;
+    display:flex;
+    align-items: center;
+    border: 2px solid #B9B9B9;
+    border-radius: 3px;    
+}
+
+.form_input select {
+    padding: 10px;
+    width: 150px;
+    border: none;
+    cursor: pointer;
+}
+
+.form_input input {
+    border: none;
+    border-left: 2px solid #B9B9B9;
+    padding: 10px;
+    flex: 1;
+    width: 450px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+#reset,
+#submit{
+    color: white;
+    padding: 5px 7px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 70px;
+}
+
+#reset {
+    background: #b0acac;
+    transition: 0.2s;
+}
+
+#submit {
+    background: #9602ac;
+    transition: 0.2s;
+}
+
+#reset:hover{
+    transform: scale(1.1);
+    background: red;
+}
+#submit:hover{
+    transform: scale(1.1);
+    background: green;
+}
+
+
+/* --------------------------------------------------------Footer */
+
+footer {  
+    margin-top: 50px;
+    bottom: 0;
+    background: linear-gradient(135deg, #8557A5, #AE73D8);
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.footer-contact {
+    padding: 5px 0;
+}
+
+.footer-contact p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.footer-bottom {
+    padding: 10px 0;
+    border-top: 2px solid rgba(85, 82, 82, 0.2); /* เส้นแบ่งบางๆ */
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+}
