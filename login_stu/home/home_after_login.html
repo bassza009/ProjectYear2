@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home SDhire</title>
+
+    <link rel="stylesheet" href="css/table_job.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/buttom_sw.css">
+    <link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+
+    <header>        
+        <h2>SDhire</h2>
+
+        <div class="profile_container">
+            <button type="button" class="profile_button" onclick="toggleDropdown()">
+                <div class="photo_profile">
+                    <img src="/photo/racha.png" alt="โปรไฟล์">
+                </div>
+                <span>Profile</span>
+            </button>
+
+
+            <div class="data_box" id="myDropdown">
+                <div class="user_infor">
+                    <img src="/photo/racha.png" alt="โปรไฟล์" >
+                    <div class="user_name">
+                        <h1>จิ๊นซี ฮ่องเต้</h1>
+                        <p>✅ สถานะ : ราชา</p>
+                    </div>
+                </div>
+                
+                <div class="button_VO">
+                    <button class="b_view">ดูโปรไฟล์</button>
+                    <button class="b_logout">ออกจากระบบ</button>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+        <div class="profile">
+            <div class="text_recommend">
+                <h1>พื้นที่รวมงานฟรีแลนซ์สำหรับเด็กมหาลัย</h1>
+                <p>รวมทุกโอกาศงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
+                พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p><br>
+                <button type="submit">โพสต์</button>
+            </div>
+
+            <div class="img_right">
+                <img src="/photo/profile.png" alt="profile" >
+            </div>
+            </div>
+            <div class="form_input">
+                <form >     
+                <select name="typew" id="typew">
+                    <option selected>ประเภทงาน</option>
+                    <option value="0">งานทั่วไป</option>
+                    <option value="1">เรียนพิเศษ</option>
+                    <option value="2">ภาพถ่าย-วิดีโอ</option>
+                    <option value="3">ออกแบบกราฟิก</option>
+                </select>
+                <input type="search" id="search" placeholder="ค้นหา">
+                <button id="reset" type="reset">ล้าง</button>
+                <button id="submit" type="submit">ค้นหา</button>
+                </form>
+            </div>
+            
+
+
+            <div class="post_sw">
+                <div class="toggle_sw">
+                    <button class="toggle_skill">โพสต์รับงาน</button>
+                    <button class="toggle_job">โพสต์งาน</button>
+                </div>
+                <div class="post_skil">
+                                    
+                    <div class="post">
+                        <div class="post_d">
+                            <div class="img_back"> 
+                            <img src="/photo/bellll.png" alt="พื้นหลัง">
+                            </div>
+
+                            <div class="cover">
+                            <div class="img_profile">
+                                <img src="/photo/racha.png" alt="โปรไฟล์">
+                            </div>
+                            <h5>จิ๊นซี ฮ่องเต้</h5>
+                            <p>⭐5.0</p>
+                            </div>
+
+                            <div class="content">
+                            <h5>เบียวราชา</h5>
+                            <p>ราชาไม่หวั่นไหว ราชาไม่โลเล ราชาไม่พึ่งใคร <br> ราชาไม่มีวันยอมแพ้ 
+                            </p>
+                            </div>
+                            
+                            <div class="money"> 
+                            <h5>เริ่มต้น</h5>
+                            <h3>จำนวนเงิน</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="post_job">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ชื่องาน</th>
+                                    <th>ประเภท</th>
+                                    <th>งบประมาณ</th>
+                                    <th>ลงประกาศเมื่อ</th>
+                                    <th>กำหนดส่งงาน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>หารถไปส่งจากหอใน ไป ในเมืองค่ะ</td>
+                                    <td>งานทั่วไป</td>
+                                    <td>250</td>
+                                    <td>15/12/2025 15:40</td>
+                                    <td>-</td>
+                                </tr>
+
+                                <tr>
+                                    <td>หาคนออกแบบโปรเตอร์ โปรโมทกิจกรรม </td>
+                                    <td>งานออกแบบ</td>
+                                    <td>250</td>
+                                    <td>15/12/2025 15:40</td>
+                                    <td>01/01/2026</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+    <div class="footer-contact">
+        <p>ติดต่อเรา</p>
+        <p>sdhire67@gmail.com</p>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 SDhire, All right reserved</p>
+    </div>
+</footer>
+
+    <script src="profile_buttom.js"></script>
+</body>
+</html>
