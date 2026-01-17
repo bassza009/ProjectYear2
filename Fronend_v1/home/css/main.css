@@ -3,10 +3,11 @@ main {
     width: 80%;
     height: auto;
     margin: auto;
-    margin-top: 50px;
+   
 }
 
 .profile {
+     margin-top: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;  
