@@ -32,7 +32,7 @@ h4,h5{
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: 0.2s;
     right: 30px;
-    top: 390px;
+    top: 380px;
 }
 
 .img_profile button {
@@ -46,7 +46,7 @@ h4,h5{
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     transition: 0.2s;
     left: 250px;
-    top: 480px;
+    top: 470px;
 }
 
 .back_pro button:hover
