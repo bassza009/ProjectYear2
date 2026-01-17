@@ -1,3 +1,16 @@
+/* 1. จัดการโครงสร้างหน้าเว็บทั้งหมด */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* บังคับให้สูงเท่ากับหน้าจอพอดี */
+    margin: 0;         /* ลบขอบขาวรอบๆ จอ */
+}
+
+/* 2. ตัวคลุมเนื้อหาจะยืดพื้นที่ที่เหลือทั้งหมดเพื่อดัน footer ลงไป */
+.content-wrapper {
+    flex: 1; 
+}
+
 header {
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
