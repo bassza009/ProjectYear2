@@ -1,0 +1,104 @@
+h1,h3,h5,p,span{
+    margin: 0;
+}
+.event_job{
+    margin: 0;
+    margin-top: 20px;
+    padding: 0  130px;
+}
+
+.box_LR{
+    display: flex;
+    gap: 100px;
+}
+
+.img_post img{
+    width: 700px;
+    height: 420px;
+    border-radius: 5px;
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2); 
+}
+
+
+.details{
+    width: 700px;
+    height: 320px;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    padding: 25px;
+    margin-top: 10px;
+    box-sizing: border-box; /*ใส่แก้บล็อคเคลื่อนตอนใส่padding*/
+}
+
+.details h3{
+    
+    font-size: 20px;
+}
+.details p{
+    font-size: 15px;
+}
+.profile_user{
+    display: flex;
+    align-items: center;
+    width: 450px;
+    height: 120px;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    margin-bottom: 50px;
+}
+
+.img_profile img{
+    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.user_name {
+    margin-left: 20px;
+}
+
+.user_name button{
+    margin-top: 5px;
+    width: 120px;
+    height: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(215, 215, 215);
+}
+
+.box_review{
+    display: flex;
+    align-items: center;
+    width: 450px;
+    height: 80px;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    margin-bottom: 50px;
+}
+
+.general img{
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+.comment {
+    margin-left: 10px;
+}
+.comment h5 {
+    font-size: 16px;
+    color: #333;
+}
+
+.comment .stars {
+    font-size: 12px;        /* ปรับขนาดดาว */
+}
+
+.comment p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}
