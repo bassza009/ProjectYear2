@@ -67,6 +67,11 @@ h1,h3,h5,p,span{
     background-color: rgb(215, 215, 215);
 }
 
+.user_name button:hover {
+    background-color: #d8dadf;
+    transform: scale(1.1);
+}
+
 .box_review{
     display: flex;
     align-items: center;
