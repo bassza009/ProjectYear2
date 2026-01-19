@@ -12,7 +12,7 @@ const bcy = require("bcryptjs")
 const session = require("express-session")
 const { hash } = require('crypto')
 const { create } = require('domain')
-const mySQLstore = require("express-mysql-session")(session)
+//const mySQLstore = require("express-mysql-session")(session)
 
 //middleware
 const middleware=((req,res,next)=>{
