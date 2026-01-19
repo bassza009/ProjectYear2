@@ -1,88 +1,129 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home_Project</title>
-    <link rel="stylesheet" href="css/home_login.css">
-    <link rel="stylesheet" href="css/post.css">
+    <title>หน้าแรก - SDhire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/home_login.css">    
 </head>
 <body>
-    <div class="content-wrapper">
-        <header>        
-            <h2>SDhire</h2>
-            <button type="button">เข้าสู่ระบบ</button>
-        </header>
 
-        <main>
-            <div class="profile">
+    <header>        
+        <h2>SDhire</h2>
+        <button type="button">เข้าสู่ระบบ</button>
+    </header>
+
+    <main>
+        <div class="hero">
             <div class="text_recommend">
-                <h1>พื้นที่รวมงานฟรีแลนซ์สำหรับเด็กมหาลัย</h1>
-                <p>รวมทุกโอกาศงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
-                พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p><br>
-                <button type="submit">โพสต์</button>
+                <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
+                <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
+                พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
+                <a href="post_job.html" class="btn-post">โพสต์</a>
             </div>
-
             <div class="img_right">
-                <img src="/photo/profile.png" alt="profile" >
+                <img src="../photo/profile.png" alt="profile">
             </div>
-            </div>
-            <div class="form_input">
-                <form >     
+        </div>
+
+        <div class="form_input">
+            <form id="searchForm">     
                 <select name="typew" id="typew">
-                    <option selected>ประเภทงาน</option>
+                    <option alue="" disabled selected hidden>ประเภทงาน</option>
                     <option value="0">งานทั่วไป</option>
                     <option value="1">เรียนพิเศษ</option>
                     <option value="2">ภาพถ่าย-วิดีโอ</option>
                     <option value="3">ออกแบบกราฟิก</option>
                 </select>
-                <input type="search" id="search" placeholder="ค้นหา">
-                <button id="reset" type="reset">ล้าง</button>
-                <button id="submit" type="submit">ค้นหา</button>
-                </form>
-            </div>
+            <input type="search" id="search" placeholder="ค้นหา">
+            <button id="reset" type="reset">ล้าง</button>
+            <button id="submit" type="submit">ค้นหา</button>
+            </form>
+        </div>
 
-            <!-- เหลือโพสต์ -->
-            <div class="post">
-            <div class="post_d">
-                <div class="img_back"> 
-                <img src="/photo/bellll.png" alt="พื้นหลัง">
-                </div>
+        <h3 class="section-title">งานแนะนำสำหรับคุณ</h3>
+        
+        <div class="job-grid" id="jobDisplay"></div>
+    </main>
 
-                <div class="cover">
-                <div class="img_profile">
-                    <img src="/photo/racha.png" alt="โปรไฟล์">
-                </div>
-                <h5>จิ๊นซี ฮ่องเต้</h5>
-                <p>⭐5.0</p>
-                </div>
-
-                <div class="content">
-                <h5>เบียวราชา</h5>
-                <p>ราชาไม่หวั่นไหว ราชาไม่โลเล ราชาไม่พึ่งใคร <br> ราชาไม่มีวันยอมแพ้ 
-                </p>
-                </div>
-                
-                <div class="money"> 
-                <h5>เริ่มต้น</h5>
-                <h3>จำนวนเงิน</h3>
-                </div>
-            </div>
-            <!-- แยก -->
-            
-
-            </div>
-        </main>
-    </div>
     <footer>
         <div class="footer-contact">
-            <p>ติดต่อเรา</p>
-            <p>sdhire67@gmail.com</p>
+            <p>ติดต่อเรา: sdhire67@gmail.com</p>
         </div>
         <div class="footer-bottom">
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
 
+    <script>
+    // ฟังก์ชันหลักสำหรับวาด Card งานบนหน้าจอ
+    function renderJobs(filterType = 'all', searchTerm = '') {
+        const jobs = JSON.parse(localStorage.getItem('allJobs')) || [];
+        const display = document.getElementById('jobDisplay');
+        
+        // กรองข้อมูลตามประเภทและคำค้นหา
+        const filteredJobs = jobs.filter(job => {
+            const matchesType = (filterType === 'all' || job.category === filterType);
+            const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                 (job.detail && job.detail.toLowerCase().includes(searchTerm.toLowerCase()));
+            return matchesType && matchesSearch;
+        });
+
+        if (filteredJobs.length === 0) {
+            display.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding: 50px; color: #999;'>ไม่พบงานที่ตรงกับการค้นหา</p>";
+            return;
+        }
+
+        let html = "";
+        // เรียงจากใหม่ไปเก่า (ตัวที่เพิ่งโพสต์จะอยู่บนสุด)
+        filteredJobs.slice().reverse().forEach(job => {
+            const jobImage = job.image ? job.image : 'https://via.placeholder.com/300x160?text=No+Image';
+            
+            html += `
+                <div class="card">
+                    <img src="${jobImage}" class="card-img">
+                    <div class="card-content">
+                        <div class="profile-area">
+                            <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}&background=9b59b6&color=fff" class="avatar" style="border-radius: 50%; width: 50px; height: 50px; object-fit:cover;">
+                            <div style="margin-left:10px; font-size: 0.90rem;">
+                                <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
+                                <small style="color:#888;">${job.category || 'งานทั่วไป'}</small>
+                            </div>
+                        </div>
+                        <div class="title" style="margin-top:10px; font-weight:bold;">${job.title}</div>
+                        <div class="desc" style="font-size:0.85rem; color:#666; height: 40px; overflow: hidden;">${job.detail || 'ไม่มีรายละเอียดงาน'}</div>
+                        <div class="price" style="margin-top:10px; color:#2ecc71; font-weight:bold;">
+                            <span>เริ่มต้น</span><br>
+                            <b style="color:#2baf2b">${Number(job.price).toLocaleString()} บาท</b> 
+                        </div>
+                    </div>
+                </div>`;
+        });
+        display.innerHTML = html;
+    }
+
+    // เมื่อโหลดหน้าเว็บ
+    window.onload = function() {
+        renderJobs(); // แสดงงานทั้งหมดตอนเริ่ม
+
+        const searchForm = document.getElementById('searchForm');
+        const typeSelect = document.getElementById('typew');
+        const searchInput = document.getElementById('search');
+
+        // เมื่อกดปุ่มค้นหา
+        searchForm.onsubmit = function(e) {
+            e.preventDefault(); // กันหน้าเว็บ Refresh
+            renderJobs(typeSelect.value, searchInput.value);
+        };
+
+        // เมื่อกดปุ่ม Reset
+        searchForm.onreset = function() {
+            setTimeout(() => renderJobs(), 10); // รอให้ค่าใน Input เคลียร์ก่อนแล้วค่อยโหลดใหม่
+        };
+    };
+</script>
+        
+    </script>
 </body>
 </html>
