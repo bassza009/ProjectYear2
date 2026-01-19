@@ -231,7 +231,7 @@ app.post('/create_job',(req,res)=>{
         req.session.create_job = 1  
         
         req.session.save(()=>{
-            res.redirect('/dashboard?status = success')
+            res.redirect('/dashboard?status=success')
         })
         
     })
