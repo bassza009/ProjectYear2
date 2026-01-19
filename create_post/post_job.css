@@ -1,92 +1,167 @@
-h3,h5,p{
-  margin: 0;
-}
-/*--------------กรอบรอบโพสต์ย่อย */
-.post{
-  display: grid; /* เปิดใช้งานระบบ Grid */
-  grid-template-columns: repeat(4, 1fr);  /* แบ่งเป็น 4 คอลัมน์เท่าๆ กัน */
-
-}
-.post_d{
-  margin-top: 10px;
-  border: 2px solid #B9B9B9;
-  border-radius: 5px;
-  width: 260px;
-  height: 270px;
-
-  
-  position: relative;
-  padding-bottom: 60px;
-  overflow: hidden;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit', sans-serif; 
 }
 
-/*--------------รูปพื้นหลัง โพสต์ย่อย */
-.img_back img{
-  margin-top: 2px;
-  margin-left: 5px;
-  width: 250px;
-  height: 100px;
-  border-radius: 5px;
+.container {
+    max-width: 1384px;
+    height: 1260px;
+    width: 90%;
+    margin: 40px auto; 
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(212, 212, 212, 1);
 }
 
-/*--------------รูปโปรไฟล์ โพสต์ย่อย */
-.img_profile img{
-  width: 70px;
-  height: 70px;
-  border: 2px solid #B9B9B9;
-  border-radius: 100%;
-  margin: -20px 0px 5px 5px; /*บน ล่าง ซ้าย ขวา*/
+.container h1 {
+    text-align:center;
+    margin-bottom:20px;
 }
 
-/*--------------ชื่อผู้ใช้ */
-.cover h5{
-  text-overflow: ellipsis; /* เติม ... ท้ายข้อความ */
-  white-space: nowrap; /* ห้ามขึ้นบรรทัดใหม่ */
-  overflow: hidden; /* ซ่อนส่วนที่เกิน */
-  margin-top: -55px;
-  margin-left: 90px;
-  font-size: 16px;
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 586px;
+    height: 330px;
+    border:1px dashed #ddd;
+    margin: 40px auto;
+    border-radius: 10px;
+    text-align:center;
+    cursor:pointer;
+    overflow: hidden;
+    background: white;
+    box-sizing: border-box;
+    position: relative;
 }
 
-/*--------------ดาว */
-.cover p{
-  margin-left: 90px;
-  font-size: 13px;
+.upload-area small {
+    color: #5D5D5D;
+    margin: 0;
+    margin-top: 15px;
 }
 
-/*--------------เนื้อหา */
-.content{
-  margin-left: 5px;
+.upload-area button {
+    background:#9b59b6;
+    color:white;
+    border:none;
+    padding:8px 35px;
+    border-radius:4px;
+    margin-top: 15px;
 }
 
-.content h5{
-  margin-top: 10px;
-  font-size: medium;
+#preview {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border:1px solid #ddd;
+    border-radius:5px;
+    object-fit: contain;
 }
 
-.content p{
-  font-size: small;
-  word-break: break-all;
-
-  display: -webkit-box;
-   /* -webkit-line-clamp: 5;จำนวนบรรทัดที่ต้องการ */
-  -webkit-box-orient: vertical;  
-  overflow: hidden; /* ต้องมีตัวนี้ด้วยจุดไข่ปลาถึงจะขึ้น */
-  
-  text-overflow: ellipsis; /* เปลี่ยนส่วนที่ล้นให้เป็น ... */
-  line-height: 1.5;
-  margin-bottom: 10px;
+div {
+    margin-bottom:15px;
+    
 }
 
-/*---------------------------------------จำนวนเงิน*/
-.money{  
-  text-align: right;
-  color: blueviolet;
+.inputnamejob input {
+    width:100%;
+    padding: 10px 20px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    margin-top: 5px;
+    outline: none;
+}
 
-  position: absolute; /* ลอยตัวเป็นอิสระ */
-  bottom: 10px;      /* ล็อคติดขอบล่าง 10px */
-  right: 10px;       /* ล็อคติดขอบขวา 10px */
+.form-row {
+  display: flex;     
+  gap: 20px;         
+  align-items: flex-end; 
 }
-.money h5,.money h3{
-  font-size: small;
+.inputcategory {
+    display: flex;
+    flex-direction: column; 
+    flex: 1; 
 }
+.peice {
+    display: flex;
+    flex-direction: column; 
+    flex: 1; 
+}
+.inputcategory select{
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-top: 5px;
+    background-color: white;
+    color: #817E7E;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    outline: none;
+    /*appearance: none;*/
+}
+
+.peice input {
+    width:100%;
+    padding:10px 20px;
+    margin-top: 5px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    outline: none;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail textarea {
+    width: 100%;
+    min-height: 440px;
+    margin-top: 5px;
+    padding:10px 20px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    resize: none;
+    overflow: hidden;
+    outline: none;
+}
+
+.inputcategory select:hover {
+    border-color: #9b59b6;     
+}
+.inputnamejob input:hover {
+    border-color: #9b59b6;     
+}
+.peice input:hover {
+    border-color: #9b59b6;
+}
+.detail textarea:hover {
+    border-color: #9b59b6;
+}
+
+.post_button {
+    display: flex;
+    justify-content: center;
+}
+.post_button button{
+    background:#9b59b6;
+    color:white;
+    cursor: pointer;
+    border:none;
+    padding:15px 60px;
+    border-radius:4px;
+    margin-top: 10px;
+}
+button:hover {
+    background: #8e44ad;
+}
+button:active {
+    background: #868686; 
+}
+
