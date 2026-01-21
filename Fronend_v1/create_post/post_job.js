@@ -59,5 +59,5 @@ function submitJob() {
 
     // 5. ไปหน้าหลัก (เช็คชื่อไฟล์หน้าหลักของคุณให้ดี index.html หรือ index1.html)
     alert("ลงประกาศสำเร็จ!");
-    window.location.href = 'index1.html'; 
+    window.location.href = 'home_login.html'; 
 }
