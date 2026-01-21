@@ -1,0 +1,131 @@
+CSS
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f3f3f3;
+}
+
+/* Top Bar */
+.topbar {
+  background: linear-gradient(90deg,#9b59b6,#b27cd3);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.top-menu {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  background: #8e44ad;
+  border: none;
+  color: white;
+  padding: 6px 15px;
+  border-radius: 5px;
+}
+
+/* Card */
+.container {
+  background: white;
+  width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+textarea {
+  height: 300px;   /* ปรับตามที่ต้องการ */
+  resize: none;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ตัวหนังสือ */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.row .form-group {
+  flex: 1;
+}
+
+/* Upload box */
+.upload-box {
+  border: 2px dashed #aaa;
+  padding: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn-upload {
+  background: #8e44ad;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
+/* ปุ่ม Post */
+.btn-post {
+  background: #8e44ad;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 5px;
+  display: block;
+  margin: 20px auto;
+  font-size: 16px;
+}
+
+select option {
+  background-color: white;
+  color: black;
+}
+
+.btn-post:hover {
+  background: #7d3c98;
+  box-shadow: 0 8px 20px rgba(155, 89, 182, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-post:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(155, 89, 182, 0.25);
+}
+
+/* ทำชี้สีม่วง */
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: #9b59b6;
+}
