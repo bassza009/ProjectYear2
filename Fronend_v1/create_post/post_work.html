@@ -4,18 +4,42 @@
   <meta charset="UTF-8">
   <title>โพสต์งาน | SDhire</title>
   <link rel="stylesheet" href="css/post_work.css">
+  <link rel="stylesheet" href="css copy/Template_HF.css">
 </head>
 <body>
 
-  <!-- Top Bar -->
-  <div class="topbar">
-    <div class="logo">SDhire</div>
-    <div class="top-menu">
-      <button class="btn">โพสต์</button>
-      <div class="profile">Profile</div>
-    </div>
-  </div>
+  <div class="content-wrapper">
+        <header>        
+            <h2>SDhire</h2>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
 
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <button class="b_view">ดูโปรไฟล์</button>
+                        <button class="b_logout">ออกจากระบบ</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+            <main>
   <!-- Main Card -->
   <div class="container">
     <h2>โพสต์งาน</h2>
@@ -55,6 +79,19 @@
     <button class="btn-post">โพสต์</button>
 
   </div>
+  </main>
+     </div>
+        <footer>
+            <div class="footer-contact">
+                <p>ติดต่อเรา</p>
+                <p>sdhire67@gmail.com</p>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 SDhire, All right reserved</p>
+            </div>
+        </footer>
+
+        <script src="swith_PR.js"></script>
 
 </body>
 </html>
