@@ -110,7 +110,7 @@ body{
 
 /*----------------------------------------------- button ----------------------------------*/
 .Set_account button,
-.Set_profile button{
+.Set_profile .submit{
   margin-top: 20px;
   width: 200px;
   height: 60px;
@@ -124,13 +124,11 @@ body{
 }
 
 .Set_account button:hover,
-.Set_profile button:hover {
-  background-color: #4fdd83;
-    color: #040404;    
+.Set_profile .submit:hover {
+  background-color: #8508f9;
+    color: #ffffff;    
     transform: scale(1.1); 
 }
-
-
 
 .back-btn {
     position: absolute; /*ตัวนี้อิสระมั้ง*/
@@ -146,6 +144,6 @@ body{
 
 .back-btn:hover {
     color: #9b4dca;    
-    transform: scale(1.1);/
-            
+    transform: scale(1.1);
 }
+

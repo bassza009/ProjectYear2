@@ -5,23 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สร้างบัญชี</title>
     <link rel="stylesheet" href="css/create_gen.css">
-    <link rel="stylesheet" href="css/1-2-3.css">
+    <link rel="stylesheet" href="css/action_123.css">
 </head>
 <body>
     <main>
         <div class="main_center">
-            <button type="button" class="back-btn" onclick="goBack()"> < </button>
-
             <h2>สร้างโปรไฟล์</h2> 
 
-
             <div class="step-container">
-                <div class="step active" id="circle1">1</div>
-                <div class="line" id="line1"></div>
-                <div class="step" id="circle2">2</div>
+                <div class="step active" id="c1">1</div>
+                <div class="line" id="l1"></div>
+                <div class="step" id="c2">2</div>
             </div>
 
-            <div id="part1"class="Set_account">
+            <div id="p1"class="Set_account">
                 <form class="account">
                         <label>อีเมลที่ติดต่อได้</label>
                         <input type="email" name="email" id="email" placeholder="อีเมลหรือหมายเลขโทรศัพท์มือถือ" required><br>
@@ -32,11 +29,14 @@
                         <label>เบอร์โทรที่ติดต่อได้</label>
                         <input type="text" placeholder="ระบุเบอร์โทร"><br>                          
                 </form>
-                 <button type="button" onclick="goToStep(2)">ดำเนินการต่อ</button>
+                 <button type="button" onclick="goToStep_gen(2)">ดำเนินการต่อ</button>
             </div>
 
 
-            <div id="part2" class="Set_profile">
+            <div id="p2" class="Set_profile">
+
+                <button type="button" class="back-btn" onclick="goBack_gen()"> < </button>
+        
                 <h4>เลือกโปรไฟล์ของคุณ</h4>
                 <p>ควรใช้ภาพถ่ายตัวจริงของคุณเห็นใบหน้าชัดเจน</p>
                 <form >
@@ -51,12 +51,12 @@
                         <input type="text" placeholder="กรอกชื่อของคุณ"><br>
                     </div>
                 </form>
-                <button type="submit">ยืนยัน</button>               
+                <button type="submit" class="submit">ยืนยัน</button>               
             </div>
         </div>
     </main>
 
-    <script src="action12.js"></script>
+    <script src="action123.js"></script>
     
 </body>
 </html>
