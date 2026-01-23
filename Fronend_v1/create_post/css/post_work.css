@@ -124,8 +124,28 @@ select option {
 }
 
 /* ทำชี้สีม่วง */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+/* ตอนเอาเมาส์ชี้ */
 input:hover,
 textarea:hover,
 select:hover {
   border-color: #9b59b6;
+}
+
+/* ตอนคลิกใช้งาน */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #9b59b6;
+  box-shadow: none;
 }
