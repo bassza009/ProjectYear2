@@ -22,13 +22,15 @@ body{
     box-shadow: 0px 0px 5px 0px rgb(119, 114, 114);
     border: none;
     border-radius: 20px;
-    background: white;
+    background: linear-gradient(45deg, #8D38C9, #A45DD6);
+    color: white;
+    
 
     /* ปรับตรงนี้ */
     width: 90%;            /* ใช้เปอร์เซ็นต์แทน px */
-    max-width: 850px;     /* กว้างสุดไม่เกิน 1100px */
+    max-width: 1000px;     /* กว้างสุดไม่เกิน 1100px */
     height: auto;          /* ให้ความสูงยืดตามเนื้อหา */
-    min-height: 550px;     /* ความสูงขั้นต่ำ */
+    min-height: 650px;     /* ความสูงขั้นต่ำ */
 
     position: absolute;    
     top: 50%;
@@ -50,46 +52,54 @@ body{
 }
 
 .left_login h2,.right_login h2{
-    font-size: 32px;
+    margin: 0;
+    font-size: 38px;
     font-weight: 600px;
 }
 
 .left_login p,.right_login p {
-    font-size: 18px;
+    margin: 0;
+    font-size: 25px;
+    margin-top: 10px;
     margin-bottom: 30px;
-    color: #444;
+    color: #ffffff;
 }
-
-.left_login input,.right_login input{
+/*---------------------------------------*/
+/* รวบประกาศคุณสมบัติที่เหมือนกันไว้ด้วยกัน */
+.left_login input, .right_login input,
+.left_login button, .right_login button {
     width: 100%;
-    padding: 10px 15px;
     border-radius: 30px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
     font-size: 16px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.left_login button,.right_login button{
-    width: 50%;
-    padding: 14px;
+.left_login input, .right_login input {
+    height: 50px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+}
+
+.left_login button, .right_login button {
+    padding: 10px 15px;
     border: none;
-    border-radius: 30px;
-    background: #6a0dad;
-    color: white;
-    font-size: 15px;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
     cursor: pointer;
 }
 
+
 .left_login button:hover,.right_login button:hover {
-    background: #ba94db;
+    background: #cccccc86;
 }
 
 
 .right_gen,.left_stu{
     flex: 1;
     padding: 60px 50px;
-    background: linear-gradient(135deg, #8D38C9, #A45DD6);
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
 
     align-self: stretch;    /* บังคับให้ยืดเต็มความสูงกล่องแม่ทันที */
@@ -101,36 +111,51 @@ body{
 }
 
 .right_gen{
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    
+    background-image:url(/photo/background_logo_SDhire.jpg);
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
 }
 
-.left_stu{
+.left_stu{    
+    background-image:url(/photo/bellll.png);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
 }
 
 .right_gen h2,.left_stu h2{
-    font-size: 32px;
+    margin: 0;
+    font-size: px;
     font-weight: 600px;
 }
 
 .right_genc p,.left_stu p{
+    margin: 0;
     font-size: 18px;
     margin-bottom: 30px;
+    color: #000000;
+}
+
+.right_login a,.right_login span {
+    margin: 0;
+    font-size: 16px;
     color: #ffffff;
 }
 
+/*---------------button------------------*/
 .right_gen .toGeneral,.left_stu .toStudent{
     transition: 0.2s;
     margin-top: 50px;
     padding: 14px 25px;
     background: transparent;
-    border: 2px solid white;
-    color: white;
+    border: 1px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
     border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
+
 }
 
 
@@ -138,4 +163,3 @@ body{
     background: #ccc;
     
 }
-
