@@ -1,53 +1,3 @@
-
-body {
-    background-color: #ffffff;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #8557A5, #AE73D8);
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;    
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    padding: 15px 5px;
-    z-index: 1000; /* เพิ่มตัวนี้เพื่อให้ Header ลอยทับทุกอย่าง */
-}
-
-header h2 {
-    color: white;
-    margin: 0;
-    padding: 10px 20px;
-}
-
-header button {
-    background: #ffffff;
-     font-weight: bold;
-    color: #9b59b6;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 20px;
-    box-shadow: 0 0 20px #770b8d48;
-}
-
-header button:hover {
-    background: #e2e2e2;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-header button:active {
-    background: #acacac;
-    transform: translateY(2px);
-}
-
-/*-----------------------------*/
 .hero {
     display: flex;
     align-items: center;
@@ -173,11 +123,17 @@ header button:active {
     padding: 0 5%;  
     font-size: 1.5rem; 
 }
+
+.post_skill{
+    padding: 0;
+    margin: 0;
+}
+
 .job-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
-    padding: 15px 5%;
+    padding: 15px 0;
     margin: 0 auto;
 }
 .card{
@@ -249,109 +205,4 @@ header button:active {
     font-family: 'Kanit';
 }
 
-
-/* --------------------------------------------------------Footer */
-
-footer {  
-    margin-top: 50px;
-    bottom: 0;
-    background: linear-gradient(135deg, #8557A5, #AE73D8);
-    width: 100%;
-    color: white;
-    text-align: center;
-}
-
-.footer-contact {
-    padding: 5px 0;
-}
-
-.footer-contact p {
-    margin: 5px 0;
-    font-size: 16px;
-}
-
-.footer-bottom {
-    padding: 10px 0;
-    border-top: 2px solid rgba(85, 82, 82, 0.2); /* เส้นแบ่งบางๆ */
-}
-
-.footer-bottom p {
-    margin: 0;
-    font-size: 14px;
-}
-
-
-/*----------------------------------------------*/
-/* โครงสร้างพื้นหลังที่บังทั้งหน้าจอ */
-.modal-overlay {
-    display: none; /* ซ่อนไว้ก่อน */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px); /* ทำให้พื้นหลังเบลอแบบทันสมัย */
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-}
-
-/* กล่องเนื้อหา Modal */
-.modal-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    animation: slideUp 0.3s ease-out;
-}
-
-.modal-logo {
-    width: 80px;
-    margin-bottom: 20px;
-    border-radius: 50%;
-}
-
-.modal-body h2 {
-    color: #8557A5;
-    margin-bottom: 10px;
-}
-
-.modal-body p {
-    color: #666;
-    margin-bottom: 30px;
-    font-size: 0.95rem;
-}
-
-/* กลุ่มปุ่มกดยืนยัน */
-.modal-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #8557A5, #AE73D8);
-    color: white;
-    padding: 12px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-secondary {
-    background: transparent;
-    color: #8557A5;
-    border: 1px solid #8557A5;
-    padding: 10px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-primary:hover { transform: scale(1.05); }
+/*-------------------------------------------*/

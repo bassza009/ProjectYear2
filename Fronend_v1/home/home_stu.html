@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home SDhire</title>
+
+    <link rel="stylesheet" href="css/table_job.css"> <!-- โพสต์งาน -->
+    <link rel="stylesheet" href="css/buttom_sw.css"> <!-- กดสลับงานกับโพสต์ -->
+    <link rel="stylesheet" href="css/Tem_home_HF.css"> <!-- หัวกับท้าย -->
+    <link rel="stylesheet" href="css/Tem_main.css"> <!-- ตัวเนื้อหา  -->
+</head>
+<body>
+   <div class="content-wrapper">
+        <header>        
+            <h2>SDhire</h2>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <button class="b_view">ดูโปรไฟล์</button>
+                        <button class="b_logout">ออกจากระบบ</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="hero">
+                <div class="text_recommend">
+                    <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
+                    <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
+                    พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
+                    <a href="../create_post/post_skill.html" class="btn-post">โพสต์</a>
+                </div>
+                <div class="img_right">
+                    <img src="/photo/profile.png" alt="profile">
+                </div>
+            </div>
+
+            <div class="form_input">
+                <form id="searchForm">     
+                    <select name="typew" id="typew">
+                        <option alue="" disabled selected hidden>ประเภทงาน</option>
+                        <option value="0">งานทั่วไป</option>
+                        <option value="1">เรียนพิเศษ</option>
+                        <option value="2">ภาพถ่าย-วิดีโอ</option>
+                        <option value="3">ออกแบบกราฟิก</option>
+                    </select>
+                <input type="search" id="search" placeholder="ค้นหา">
+                <button id="reset" type="reset">ล้าง</button>
+                <button id="submit" type="submit">ค้นหา</button>
+                </form>
+            </div>
+
+            <h3 class="section-title">งานแนะนำสำหรับคุณ</h3>
+            
+            <div class="post_sw">
+                <div class="toggle_sw">
+                    <button class="toggle_skill">โพสต์รับงาน</button>
+                    <button class="toggle_job">โพสต์งาน</button>
+                </div>
+                
+                <div class="post_skill">
+                    <div class="job-grid" id="jobDisplay"></div>
+                </div>
+
+                <div class="post_job">
+                    <div class="table-container"> <table>
+                            <thead>
+                                <tr>
+                                    <th>ชื่องาน</th>
+                                    <th>ประเภท</th>
+                                    <th>งบประมาณ (บาท)</th>
+                                    <th>ลงประกาศเมื่อ</th>
+                                    <th>กำหนดส่ง</th>
+                                    <th>จัดการ</th> </tr>
+                            </thead>
+                            <tbody id="jobTableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <footer>
+        <div class="footer-contact">
+            <p>ติดต่อเรา</p>
+            <p>sdhire67@gmail.com</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SDhire, All right reserved</p>
+        </div>
+    </footer>
+
+    <script src="profile_buttom.js"></script>
+    <script src="post.js"></script>
+</body>
+</html>

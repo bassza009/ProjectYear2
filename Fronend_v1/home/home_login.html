@@ -11,7 +11,7 @@
 
     <header>        
         <h2>SDhire</h2>
-        <button type="button">เข้าสู่ระบบ</button>
+        <button type="button">เข้าสู่ระบบ </button>
     </header>
 
     <main>
@@ -20,10 +20,10 @@
                 <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
                 <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
                 พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
-                <a href="/ProjectYear2/Fronend_v1/create_post/post_job copy.html" class="btn-post">โพสต์</a>
+                <a href="../login_project/sign_in.html" class="btn-post">โพสต์</a>
             </div>
             <div class="img_right">
-                <img src="../photo/profile.png" alt="profile">
+                <img src="/photo/profile.png" alt="profile">
             </div>
         </div>
 
@@ -56,7 +56,21 @@
         </div>
     </footer>
 
-    
-        <script src="post.js"></script>
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="/photo/logo_sdhire.jpg" alt="Logo" class="modal-logo">
+                <h2>กรุณาเข้าสู่ระบบ</h2>
+                <p>เพื่อเข้าถึงฟีเจอร์การโพสต์งานและจัดการโปรไฟล์ของคุณ</p>
+                <div class="modal-buttons">
+                    <a href="../login_project/sign_in.html" class="btn-primary">ไปที่หน้าเข้าสู่ระบบ</a>
+                    <button type="button" class="btn-secondary" id="stayGuest">ดูในฐานะผู้เยี่ยมชม</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="login_home.js"></script>
+    <script src="post.js"></script>
 </body>
 </html>
