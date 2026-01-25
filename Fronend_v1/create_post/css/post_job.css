@@ -5,16 +5,23 @@
     font-family: 'Kanit', sans-serif; 
 }
 
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;       
+    margin: 0;
+}
 .container {
     max-width: 1384px;
-    height: 1260px;
-    width: 90%;
-    margin: 40px auto; 
+    min-height: 1260px;
+    width: 95%;
     background-color: white;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(212, 212, 212, 1);
-}
+    margin-top: 10px;
+}  
 
 .container h1 {
     text-align:center;
@@ -35,7 +42,6 @@
     cursor:pointer;
     overflow: hidden;
     background: white;
-    box-sizing: border-box;
     position: relative;
 }
 
@@ -62,11 +68,6 @@
     border:1px solid #ddd;
     border-radius:5px;
     object-fit: contain;
-}
-
-div {
-    margin-bottom:15px;
-    
 }
 
 .inputnamejob input {

@@ -1,29 +1,32 @@
-body{
-    background-image:url(/photo/background_logo_SDhire.jpg);
-    background-repeat: no-repeat;  
-    background-size: cover;        
-    background-position: center;
-    height: 100vh;
+* {
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif; 
+}
+
+body {
+    background: #f5f0ff; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
     margin: 0;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    background: url(/Fronend_v1/photo/background_logo_SDhire.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
-
-.main_center{
-  text-align: center;
-  justify-items: center;
-  box-shadow: 0px 0px 30px 0px rgb(178, 177, 177);
-  border-radius:50px;
-  background: white;
-  width: 950px;
-  height: 750px;
-
-  position: absolute;    
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.container {
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    width: 90%;
+    max-width: 800px;
+    border-radius: 30px;
+    padding: 50px;
+    position: relative;
+    text-align: center;
 }
 
+<<<<<<< HEAD
 .main_center h2{
   margin-top: 75px;
   font-size:25px;
@@ -130,20 +133,108 @@ body{
     transform: scale(1.1); 
 }
 
+=======
+>>>>>>> 4e178c8 (update look create_gen.css)
 .back-btn {
-    position: absolute; /*ตัวนี้อิสระมั้ง*/
+    position: absolute;
     top: 30px;
-    left: 30px; 
-    background: none;
+    left: 30px;
     border: none;
-    font-size: 24px;   /* ขนาดลูกศร */
-    color: #666;       
+    background: none;
+    font-size: 24px;
+    color: #666;
     cursor: pointer;
     transition: 0.3s;
 }
 
+<<<<<<< HEAD
 .back-btn:hover {
     color: #9b4dca;    
     transform: scale(1.1);
 }
 
+=======
+.back-btn:hover { 
+  color: #9b4dca; 
+}
+
+.step-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.account, .fron_l {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+/* Image Upload */
+.img_upload_container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.upload-icon {
+    width: 180px;
+    height: 180px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.upload-icon small {
+  color: #5D5D5D;
+  text-decoration: underline;
+}
+
+#file-input { 
+  display: none; 
+}
+
+/* Buttons */
+button.next-btn, button.submit-btn {
+    background: #a855f7;
+    color: white;
+    border: none;
+    padding: 15px 80px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button.next-btn:hover, button.submit-btn:hover { 
+  background: #9333ea; 
+}
+
+button.next-btn:active, button.submit-btn:active { 
+  background: #868686; 
+}
+>>>>>>> 4e178c8 (update look create_gen.css)
