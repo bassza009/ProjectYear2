@@ -16,10 +16,9 @@ h1,h3,h5,p,span{
 
 .box_LR{
     display: flex;
-    gap: 100px;
     flex-wrap: wrap; 
     gap: 30px; 
-    justify-content: center
+    justify-content: center;
 }
 
 .img_post img{
@@ -47,8 +46,7 @@ h1,h3,h5,p,span{
     box-sizing: border-box; /*ใส่แก้บล็อคเคลื่อนตอนใส่padding*/
 }
 
-.details h3{
-    
+.details h3{    
     font-size: 20px;
 }
 .details p{
