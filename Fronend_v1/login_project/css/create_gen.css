@@ -10,7 +10,7 @@ body {
     align-items: center; 
     min-height: 100vh;
     margin: 0;
-    background: url(/Fronend_v1/photo/background_logo_SDhire.jpg);
+    background: url(/photo/background_logo_SDhire.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -26,115 +26,6 @@ body {
     text-align: center;
 }
 
-<<<<<<< HEAD
-.main_center h2{
-  margin-top: 75px;
-  font-size:25px;
-}
-/*-----------------------------------1 account-------------------------------------------------*/
-.Set_account{
-  display: flex;
-  flex-direction: column; /* บังคับให้เรียงจากบนลงล่าง */
-  align-items: center;
-}
-
-
-.Set_account{
-  margin-top: 60px;
-}
-
-.account {
-  width: 500px;        
-  text-align: left; 
-}
-
-.account label{
-  font-weight: bold;
-}
-.Set_account input{
-  margin-top: 5px;
-  margin-bottom: 15px;
-  font-size: 20px;
-  width: 500px;
-  height: 35px;
-
-}
-
-/*-----------------------------------2 Set_profile-------------------------------------------------*/
-.Set_profile{
-  display:none;
-  flex-direction: column; /* บังคับให้เรียงจากบนลงล่าง */
-  align-items: center;
-}
-
-.Set_profile h4{
-  font-size:17px;
-  margin-bottom: -1px;
-}
-
-.Set_profile p{
-  font-size:17px;
-  color: #8b8484;
-}
-
-.img_file{
-    justify-self: center;
-}
-
-#file-input {
-    display: none;
- }
-.upload-icon {
-  margin-top: 25px;
-  cursor: pointer;
-  width: 210px;
-  height:210px;
-  border: 2px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-}
-
-.fron_l {
-    margin-top: 20px;
-  width: 500px;        
-  text-align: left; 
-}
-
-.Set_profile input{
-  margin-top: 5px;
-  margin-bottom: 15px;
-  font-size: 20px;
-  width: 500px;
-  height: 35px;
-
-}
-
-/*----------------------------------------------- button ----------------------------------*/
-.Set_account button,
-.Set_profile .submit{
-  margin-top: 20px;
-  width: 200px;
-  height: 60px;
-  border-radius: 6px;
-  border: none;  
-  background-color: blueviolet;
-  color: white;
-  font-size: medium;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.Set_account button:hover,
-.Set_profile .submit:hover {
-  background-color: #8508f9;
-    color: #ffffff;    
-    transform: scale(1.1); 
-}
-
-=======
->>>>>>> 4e178c8 (update look create_gen.css)
 .back-btn {
     position: absolute;
     top: 30px;
@@ -147,13 +38,6 @@ body {
     transition: 0.3s;
 }
 
-<<<<<<< HEAD
-.back-btn:hover {
-    color: #9b4dca;    
-    transform: scale(1.1);
-}
-
-=======
 .back-btn:hover { 
   color: #9b4dca; 
 }
@@ -237,4 +121,3 @@ button.next-btn:hover, button.submit-btn:hover {
 button.next-btn:active, button.submit-btn:active { 
   background: #868686; 
 }
->>>>>>> 4e178c8 (update look create_gen.css)
