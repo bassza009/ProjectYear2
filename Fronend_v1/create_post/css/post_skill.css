@@ -58,12 +58,15 @@
     object-fit: contain;
 }
 
-.inputnamejob input {
+.inputnamejob input,
+.peice input,
+.detail textarea{
     width:100%;
-    padding: 10px 20px;
+    box-sizing: border-box;
     border:1px solid #ddd;
-    border-radius:4px;
+    padding: 10px 20px;
     margin-top: 5px;
+    border-radius:5px;
     outline: none;
 }
 
@@ -83,7 +86,6 @@
     flex: 1; 
 }
 .inputcategory select{
-    width: 100%;
     padding: 10px 20px;
     border-radius: 4px;
     margin-top: 5px;
@@ -95,30 +97,15 @@
     /*appearance: none;*/
 }
 
-.peice input {
-    width:100%;
-    padding:10px 20px;
-    margin-top: 5px;
-    border:1px solid #ddd;
-    border-radius:5px;
-    outline: none;
-}
-
 .detail {
     display: flex;
     flex-direction: column;
 }
 
 .detail textarea {
-    width: 100%;
     min-height: 440px;
-    margin-top: 5px;
-    padding:10px 20px;
-    border:1px solid #ddd;
-    border-radius:5px;
     resize: none;
     overflow: hidden;
-    outline: none;
 }
 
 .inputcategory select:hover {
@@ -137,6 +124,7 @@
 .post_buttonS {
     display: flex;
     justify-content: center;
+    margin-top: 50px;
 }
 .post_buttonS button{
     background:#9b59b6;

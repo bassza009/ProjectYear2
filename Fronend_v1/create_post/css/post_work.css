@@ -1,46 +1,13 @@
-CSS
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #f3f3f3;
-}
-
-/* Top Bar */
-.topbar {
-  background: linear-gradient(90deg,#9b59b6,#b27cd3);
-  color: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 20px;
-}
-
-.top-menu {
-  display: flex;
-  gap: 10px;
-}
-
-.btn {
-  background: #8e44ad;
-  border: none;
-  color: white;
-  padding: 6px 15px;
-  border-radius: 5px;
-}
-
 /* Card */
 .container {
-  background: white;
-  width: 800px;
-  margin: 40px auto;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 1384px;
+    height: auto;
+    width: 90%;
+    margin: 40px auto; 
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(212, 212, 212, 1);
 }
 
 textarea {
@@ -48,7 +15,7 @@ textarea {
   resize: none;
 }
 
-h2 {
+h1{
   text-align: center;
   margin-bottom: 20px;
 }
@@ -65,7 +32,8 @@ label {
 
 input, textarea, select {
   width: 100%;
-  padding: 10px;
+  box-sizing: border-box;
+  padding: 10px 20ยป;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
@@ -97,13 +65,13 @@ input, textarea, select {
 
 /* ปุ่ม Post */
 .btn-post {
+  margin: 50px auto;
   background: #8e44ad;
   color: white;
   border: none;
   padding: 12px 40px;
   border-radius: 5px;
   display: block;
-  margin: 20px auto;
   font-size: 16px;
 }
 

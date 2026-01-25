@@ -1,97 +1,95 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>โพสต์งาน | SDhire</title>
-  <link rel="stylesheet" href="css/post_work.css">
-  <link rel="stylesheet" href="css copy/Template_HF.css">
+    <meta charset="UTF-8">
+    <title>โพสต์งาน | SDhire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/post_work.css">
+    <link rel="stylesheet" href="css/Template_HF.css">
 </head>
 <body>
-
-  <div class="content-wrapper">
+    <div class="content-wrapper">
         <header>        
-            <h2>SDhire</h2>
-            <div class="profile_container">
-                <div class="buttom_header">
-                    
-                    <button type="button" class="profile_button" onclick="toggleDropdown()">
-                        <div class="photo_profile">
-                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
-                        </div>
-                        <span>Profile</span>
-                    </button>
+              <h2>SDhire</h2>
+              <div class="profile_container">
+                  <div class="buttom_header">
+                      <button type="button" class="profile_button" onclick="toggleDropdown()">
+                          <div class="photo_profile">
+                              <img src="/photo/OIP.webp" alt="โปรไฟล์">
+                          </div>
+                          <span>Profile</span>
+                      </button>
+                  </div>
+
+                  <div class="data_box" id="myDropdown">
+                      <div class="user_infor">
+                          <img src="/photo/OIP.webp" alt="โปรไฟล์" >
+                          <div class="user_name">
+                              <h1>User Name</h1>
+                          </div>
+                      </div>
+                      
+                      <div class="button_VO">
+                          <button class="b_view">ดูโปรไฟล์</button>
+                          <button class="b_logout">ออกจากระบบ</button>
+                      </div>
+                  </div>
+              </div>
+          </header>
+
+          <main>
+            <!-- Main Card -->
+            <div class="container">
+              <h1>โพสต์งาน</h1>
+
+              <div class="form-group">
+                <label>ชื่องาน</label>
+                <input type="text" id="title" placeholder="ชื่องาน">
+              </div>
+
+              <div class="form-group">
+                <label>อธิบายเกี่ยวกับรายละเอียดงาน</label>
+                <textarea id="detail" rows="6"></textarea>
+              </div>
+
+              <div class="row">
+                <div class="form-group">
+                  <label>ประเภท</label>
+                  <select id="category"> 
+                    <option value="">เลือกหมวดหมู่</option>
+                    <option value="ออกแบบ">ออกแบบ</option>
+                    <option value="เขียนโปรแกรม">เขียนโปรแกรม</option>
+                    <option value="ตัดต่อวิดีโอ">ตัดต่อวิดีโอ</option>
+                  </select>
                 </div>
 
-                <div class="data_box" id="myDropdown">
-                    <div class="user_infor">
-                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
-                        <div class="user_name">
-                            <h1>FirstName LastName</h1>
-                            <p>✅ สถานะ : นิสิต</p>
-                        </div>
-                    </div>
-                    
-                    <div class="button_VO">
-                        <button class="b_view">ดูโปรไฟล์</button>
-                        <button class="b_logout">ออกจากระบบ</button>
-                    </div>
+                <div class="form-group">
+                  <label>งบประมาณ</label>
+                  <input type="number" id="price" placeholder="บาท">
                 </div>
+              </div>
+
+              <div class="form-group">
+                <label>กำหนดส่งงาน</label>
+                <input type="date" id="deadline">
+              </div>
+
+              <button class="btn-post" onclick="submitwork()">โพสต์</button>
+
             </div>
-        </header>
-
-            <main>
-  <!-- Main Card -->
-  <div class="container">
-    <h2>โพสต์งาน</h2>
-
-    <div class="form-group">
-      <label>ชื่องาน</label>
-      <input type="text" placeholder="ชื่องาน">
+            </main>
     </div>
-
-    <div class="form-group">
-      <label>อธิบายเกี่ยวกับรายละเอียดงาน</label>
-      <textarea rows="6"></textarea>
-    </div>
-
-    <div class="row">
-      <div class="form-group">
-        <label>ประเภท</label>
-        <select>
-          <option>เลือกหมวดหมู่</option>
-          <option>ออกแบบ</option>
-          <option>เขียนโปรแกรม</option>
-          <option>ตัดต่อวิดีโอ</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>งบประมาณ</label>
-        <input type="number" placeholder="บาท">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>กำหนดส่งงาน</label>
-      <input type="date">
-    </div>
-
-    <button class="btn-post">โพสต์</button>
-
-  </div>
-  </main>
-     </div>
-        <footer>
-            <div class="footer-contact">
-                <p>ติดต่อเรา</p>
-                <p>sdhire67@gmail.com</p>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 SDhire, All right reserved</p>
-            </div>
-        </footer>
-
-        <script src="swith_PR.js"></script>
-
+    <footer>
+        <div class="footer-contact">
+            <p>ติดต่อเรา</p>
+            <p>sdhire67@gmail.com</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SDhire, All right reserved</p>
+        </div>
+    </footer>
+        
+    <script src="post_table.js"></script>
+    <script src="swith_PR.js"></script>
 </body>
 </html>
