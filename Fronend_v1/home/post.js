@@ -70,3 +70,4 @@
 /* เคลียโพสต์
     localStorage.clear();
 */
+

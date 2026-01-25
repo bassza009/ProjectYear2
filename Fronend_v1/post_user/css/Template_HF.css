@@ -127,11 +127,18 @@ header button:hover {
 }
 
 .button_VO {
+    width: 100%;
     display: flex;
     gap: 10px;
 }
 
-.button_VO button {
+.button_VO a {
+    flex: 1; 
+    text-decoration: none; /* เอาเส้นใต้ของลิงก์ออก */
+}
+
+.button_VO button{
+    width: 100%;
     flex: 1;          /* สั่งให้ปุ่มทั้งสองมีความกว้างเท่ากันเป๊ะ */
     padding: 10px;
     border-radius: 8px;
@@ -141,12 +148,23 @@ header button:hover {
 
 .button_VO .b_view {
     border: 1.5px solid #8a2be2; 
-    color: #000000;
+    color: #8a2be2; /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
 }
 
+.button_VO .b_view:hover {
+    background: #8a2be2;
+    color: white;
+}
+
+/* ตกแต่งสีปุ่มออกจากระบบ */
 .button_VO .b_logout {
     border: 1.5px solid #ff4d4d;
-    color: #000000;
+    color: #ff4d4d; /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
+}
+
+.button_VO .b_logout:hover {
+    background: #ff4d4d;
+    color: white;
 }
 
 /*--------------------------------------------------------------------*/

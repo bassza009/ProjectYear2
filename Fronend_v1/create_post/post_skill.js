@@ -61,3 +61,5 @@ function submitJob() {
     alert("ลงประกาศสำเร็จ!");
     window.location.href = 'home_stu.html'; 
 }
+
+/*---------------------------*/
