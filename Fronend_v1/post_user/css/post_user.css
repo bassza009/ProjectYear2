@@ -4,25 +4,42 @@ h1,h3,h5,p,span{
 .event_job{
     margin: 0;
     margin-top: 20px;
-    padding: 0  130px;
+    padding: 0 5%; 
+    box-sizing: border-box;
+}
+.event_name {
+    width: 100%;
+    max-width: 1250px; /* ต้องเท่ากับความกว้างรวมของ box_LR */
+    margin: 0 auto 20px auto; /* จัดกลาง และห่างจากด้านล่าง 20px */
+    text-align: left; /* หรือ center ตามความชอบ */
 }
 
 .box_LR{
     display: flex;
     gap: 100px;
+    flex-wrap: wrap; 
+    gap: 30px; 
+    justify-content: center
 }
 
 .img_post img{
-    width: 700px;
-    height: 420px;
+   width: 100%;           /* ให้กว้างเต็มพื้นที่กล่องแม่ที่ยืดหดได้ */
+    max-width: 700px;      /* ขนาดใหญ่สุดที่คุณตั้งไว้ */
+    aspect-ratio: 16 / 9;  /* บังคับสัดส่วน 16:9 ตลอดเวลา */
+    object-fit: cover;     /* สำคัญ: กันรูปเบี้ยวหรือยืดผิดสัดส่วน */
     border-radius: 5px;
     box-shadow: 0 1px 30px rgba(0, 0, 0, 0.2); 
+    display: block;
+    object-fit: contain; 
+    background-color: #f0f0f0; /* ใส่สีพื้นหลังกันกล่องโบ๋ */
 }
 
 
 .details{
-    width: 700px;
-    height: 320px;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    min-height: 320px;
     border-radius: 5px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
     padding: 25px;
@@ -37,11 +54,23 @@ h1,h3,h5,p,span{
 .details p{
     font-size: 15px;
 }
+
+.box_userRe {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
 .profile_user{
     display: flex;
     align-items: center;
-    width: 450px;
-    height: 120px;
+    width: 100%; /* ใช้ความกว้างเต็มแม็กซ์ของกล่องพ่อ */
+    min-width: 420px;
+    height: auto;
+    min-height: 120px;
+    padding: 5px 0;
+    box-sizing: border-box;
     border-radius: 5px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
     margin-bottom: 50px;
@@ -72,33 +101,45 @@ h1,h3,h5,p,span{
     transform: scale(1.1);
 }
 
-.box_review{
+.box_review {
     display: flex;
-    align-items: center;
-    width: 450px;
-    height: 80px;
-    border-radius: 5px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
-    margin-bottom: 50px;
+    align-items: flex-start; /* ให้รูปโปรไฟล์อยู่ด้านบนเสมอแม้ข้อความยาว */
+    width: 450px;           
+    min-height: 80px;        
+    height: auto;            
+    padding: 15px;          
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 15px;
+    background: #fff;
+    box-sizing: border-box;  /* สำคัญ: เพื่อไม่ให้ padding ไปเพิ่มความกว้างกล่อง */
 }
 
-.general img{
-    margin-left: 10px;
-    width: 40px;
-    height: 40px;
+.general img {
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    border: 1px solid black;
+    border: 1px solid #ddd;
+    flex-shrink: 0;         /* กันรูปโดนบีบเบี้ยวเมื่อข้อความเยอะ */
 }
+
 .comment {
-    margin-left: 10px;
+    margin-left: 15px;
+    flex-grow: 1;           /* ให้พื้นที่ข้อความขยายเต็มกล่อง */
+    word-wrap: break-word;   /* ตัดคำยาวๆ ไม่ให้ทลุ */
+    overflow-wrap: break-word; 
+    max-width: 350px;       /* คุมความกว้างข้อความ */
 }
+
 .comment h5 {
+    margin: 0 0 5px 0;
     font-size: 16px;
     color: #333;
 }
 
 .comment .stars {
-    font-size: 12px;        /* ปรับขนาดดาว */
+    font-size: 12px;
+    margin-bottom: 5px;
 }
 
 .comment p {
@@ -106,4 +147,5 @@ h1,h3,h5,p,span{
     font-size: 14px;
     line-height: 1.5;
     color: #555;
+    white-space: normal;     /* ยอมให้ขึ้นบรรทัดใหม่ตามธรรมชาติ */
 }

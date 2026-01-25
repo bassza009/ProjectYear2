@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post_Jop</title>
-
+    <link rel="stylesheet" href="css/review.css">
     <link rel="stylesheet" href="css/post_user.css">
     <link rel="stylesheet" href="css/Template_HF.css">
 </head>
@@ -54,7 +54,7 @@
                 <div class="box_LR">
                     <div class="box_post">
                         <div class="img_post">
-                            <img src="/photo/meem.jpg" alt="โพสต์งาน">
+                            <img src="/photo/pro_G.jpg" alt="โพสต์งาน">
                         </div>
                         <div class="details">
                             <h3>รายละเอียดงาน</h3>
@@ -77,17 +77,31 @@
                             </div>
                         </div>
                         <div class="review">
-                            <h1>รีวิว</h1>
-                            <div class="box_review">
-                                <div class="general">
-                                    <img src="/photo/pro_G.jpg" alt="โปรไฟล์">
-                                </div>
-                                <div class="comment">
-                                    <h5>เบียวไร</h5>
-                                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                                    <p>สอนดีมาก</p>
-                                </div>
+                            <div class="review-header">
+                                <h1>รีวิว</h1>
+                                <button id="openReview">เขียนรีวิว</button>
                             </div> 
+                            <div id="reviewModal" class="modal">
+                                <div class="modal-content">
+                                    <div class="star-rating">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                    
+                                    <textarea id="reviewText" placeholder="เขียนความรู้สึก..."></textarea>
+                                    
+                                    <div class="modal-buttons">
+                                        <button id="cancelBtn">ยกเลิก</button>
+                                        <button id="submitBtn">ตกลง</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="reviewContainer"> </div>
+ 
                         </div>
                     </div>
 
@@ -107,5 +121,6 @@
     </footer>
 
 <script src="swith_PR.js"></script>
+<script src="review.js"></script>
 </body>
 </html>
