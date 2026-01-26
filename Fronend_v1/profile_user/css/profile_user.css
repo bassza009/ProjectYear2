@@ -190,26 +190,6 @@ h4,h5{
     flex: 1;
 }
 
-.post_user {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.post_user span{
-    font-size: 20px;
-}
-.avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%; /* รูปวงกลม */
-    border: 1px solid #ddd;
-}
-.username {
-    font-weight: bold;
-    font-size: 18px;
-}
 .post_text h3 {
     margin: 10px 0;
     font-size: 18px;
