@@ -11,7 +11,9 @@
 <body>
     <div class="content-wrapper">
         <header>        
-            <h2>SDhire</h2>
+            <a href="/Fronend_v1/home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
             <div class="profile_container">
                 <div class="buttom_header">
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
@@ -61,8 +63,8 @@
                 </div>
 
                     <div class="toggle_sw">
-                        <button class="toggle_post">โพสต์ของคุณ</button>
-                        <button class="toggle_review">รีวิว</button>
+                        <button class="toggle_post" onclick="switchTab('post')">โพสต์ของคุณ</button>
+                        <button class="toggle_review" onclick="switchTab('review')">รีวิว</button>
                     </div>
 
                 <div class="job">    
@@ -93,29 +95,17 @@
                         <div class="post" id="post_sw">
                             <div class="post_job">
                                 <div class="post_text">
-                                    <h3>รับสอนพิเศษ</h3>
-                                    <p>รับสอนวิชาภาษาอังกฤษ ตั้งแต่ 18:00 - 20:00 น.</p>
-                                    <p>สอนแบบออนไลน์</p>
-                                    <p>ทักถามรายละเอียดได้เลย</p>
+                                    <h3 id="pro_title">รับสอนพิเศษ</h3>
+                                    <p id="pro_detail">รายละเอียด...</p>
                                 </div>
                             </div>
 
                             <div class="poster">
-                                <img src="/photo/Gemini.png" alt="โพสต์ของคุณ">
+                                <img id="pro_img" src="..." alt="โพสต์ของคุณ">
                             </div>
                         </div>
 
-                        <div class="review" id="review_sw">
-                            <div class="general">
-                                <img src="/photo/pro_G.jpg" alt="โปรไฟล์">
-                            </div>
-
-                            <div class="comment">
-                                <h5>เบียวไร</h5>
-                                <div class="stars">⭐⭐⭐⭐⭐</div>
-                                <p>ราชาไม่หวั่นไหว ราชาไม่โลเล ราชาไม่พึ่งใคร ราชาไม่มีวันยอมแพ้</p>
-                            </div>
-                        </div>
+                        <div class="review" id="review_sw"> </div>
                     </div>
                 </div>
             </div>
@@ -131,6 +121,7 @@
     </div>
     </footer>
 
+<script src="switch_tap.js"></script>
 <script src="swith_PR.js"></script>
 </body>
 </html>

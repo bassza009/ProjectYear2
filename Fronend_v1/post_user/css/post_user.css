@@ -102,13 +102,15 @@ h1,h3,h5,p,span{
 .box_review {
     display: flex;
     align-items: flex-start; /* ให้รูปโปรไฟล์อยู่ด้านบนเสมอแม้ข้อความยาว */
-    width: 450px;           
+    width: 100%;             /* เปลี่ยนจาก 420px เป็น 100% */
+    max-width: 100%;  
     min-height: 80px;        
     height: auto;            
     padding: 15px;          
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
     margin-bottom: 15px;
+    margin-left: 5px;
     background: #fff;
     box-sizing: border-box;  /* สำคัญ: เพื่อไม่ให้ padding ไปเพิ่มความกว้างกล่อง */
 }
@@ -124,9 +126,10 @@ h1,h3,h5,p,span{
 .comment {
     margin-left: 15px;
     flex-grow: 1;           /* ให้พื้นที่ข้อความขยายเต็มกล่อง */
+    min-width: 0;
     word-wrap: break-word;   /* ตัดคำยาวๆ ไม่ให้ทลุ */
     overflow-wrap: break-word; 
-    max-width: 350px;       /* คุมความกว้างข้อความ */
+    max-width: 343px;       /* คุมความกว้างข้อความ */
 }
 
 .comment h5 {
@@ -146,4 +149,12 @@ h1,h3,h5,p,span{
     line-height: 1.5;
     color: #555;
     white-space: normal;     /* ยอมให้ขึ้นบรรทัดใหม่ตามธรรมชาติ */
+}
+
+#reviewContainer {
+    max-height: 500px;
+    overflow-y: auto; 
+    overflow-x: hidden;      /* กันการไถออกด้านข้าง */
+    padding: 10px;           /* เพิ่มพื้นที่รอบๆ ให้เงาของกล่องไม่โดนตัด */
+    box-sizing: border-box;
 }

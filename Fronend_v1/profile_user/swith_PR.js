@@ -18,8 +18,6 @@ window.onclick = function(event) {
         }
     }
 }
-
-
 /*--------------------------------------- */
 // 1. อ้างอิงปุ่มตามชื่อ Class ใหม่ที่คุณส่งมา
 const btnPost = document.querySelector('.toggle_post');
@@ -49,5 +47,3 @@ btnReview.addEventListener('click', () => {
 
 // 5. กำหนดให้เริ่มต้นที่หน้า "โพสต์ของคุณ"
 btnPost.click();
-
-/*--------------------------------------- */
