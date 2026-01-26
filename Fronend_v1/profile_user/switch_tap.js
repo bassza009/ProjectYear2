@@ -77,4 +77,6 @@ if (reviews.length > 0 && profileReviewContainer) {
         `;
         profileReviewContainer.insertAdjacentHTML('beforeend', html);
     });
-}
+} 
+
+//localStorage.clear();
