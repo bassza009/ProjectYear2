@@ -173,13 +173,13 @@ h4,h5{
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 670px;
-
+    overflow-y: auto;
 }
 
 .post {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: flex-start;
     background: white;
     border: 1px solid #e0e0e0;
     padding: 30px;
@@ -190,26 +190,6 @@ h4,h5{
     flex: 1;
 }
 
-.post_user {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.post_user span{
-    font-size: 20px;
-}
-.avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%; /* รูปวงกลม */
-    border: 1px solid #ddd;
-}
-.username {
-    font-weight: bold;
-    font-size: 18px;
-}
 .post_text h3 {
     margin: 10px 0;
     font-size: 18px;
@@ -230,47 +210,49 @@ h4,h5{
 }
 
 /*--------------รัวิว ---------------------------------------------*/
+
 .review {
-    display: none;          
-    align-items: flex-start; 
+    display: none; /* จะถูกเปลี่ยนเป็น flex โดย JS เมื่อกดปุ่ม */
+    flex-direction: column; /* สั่งให้รีวิวแต่ละอันเรียงต่อกันลงมาข้างล่าง */
     gap: 15px;           
+    background-color: transparent; /* เปลี่ยนเป็นใส เพราะเราจะให้แต่ละรีวิวมีกล่องของตัวเอง */
+    width: 100%;
+    
+}
+.review-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
     background-color: white;
     padding: 20px;
-    margin-bottom: 15px;  
-    border-radius: 15px;    
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    width: 100%;
+    margin-bottom: 10px; 
+    box-sizing: border-box;
+    overflow: hidden; 
     
-    /* การทำเงาฟุ้งๆ (Soft Shadow) */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
-    border: 1px solid #f0f0f0; /* เส้นขอบบางๆ กันสีกลืนกับพื้นหลัง */
 }
 
-/* ตกแต่งรูปโปรไฟล์วงกลม */
-.general img {
+.review-item .general img {
     width: 50px;
     height: 50px;
-    border-radius: 50%;     /* ทำให้เป็นวงกลมเป๊ะ */
+    border-radius: 50%;
     object-fit: cover;
-    background-color: #eee;
 }
 
-/* ตกแต่งข้อความ */
-.comment h5 {
-    margin: 0 0 5px 0;      /* เอาขอบด้านบนออกให้ชื่อชิดด้านบน */
-    font-size: 16px;
-    color: #333;
+.review-item .comment h5 {
+    margin: 0 0 5px 0;
 }
 
-.comment .stars {
-    font-size: 12px;        /* ปรับขนาดดาว */
-    margin-bottom: 8px;
-}
-
-.comment p {
-    margin: 0;
+.review-item p {
+    margin: 5px 0 0 0;
     font-size: 14px;
-    line-height: 1.5;
     color: #555;
+    line-height: 1.5;
+    
+    /* แก้ปัญหาการล้นตรงจุดนี้ */
+    white-space: normal;       /* ยอมให้ขึ้นบรรทัดใหม่ */
+    word-break: break-word;    /* ตัดคำที่ยาวเกินไป */
+    overflow-wrap: break-word; /* กันเหนียวสำหรับคำยาวพืดเดียว */
 }
-
-
-

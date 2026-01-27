@@ -11,13 +11,14 @@
 <body>
     <div class="content-wrapper">
         <header>        
-            <h2>SDhire</h2>
+            <a href="/Fronend_v1/home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
             <div class="profile_container">
                 <div class="buttom_header">
-                    <button type="button" class="post_button">โพสต์</button>
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
-                            <img src="/photo/racha.png" alt="โปรไฟล์">
+                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
                         </div>
                         <span>Profile</span>
                     </button>
@@ -25,16 +26,20 @@
 
                 <div class="data_box" id="myDropdown">
                     <div class="user_infor">
-                        <img src="/photo/racha.png" alt="โปรไฟล์" >
+                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
                         <div class="user_name">
-                            <h1>จิ๊นซี ฮ่องเต้</h1>
+                            <h1>FirstName LastName</h1>
                             <p>✅ สถานะ : ราชา</p>
                         </div>
                     </div>
                     
                     <div class="button_VO">
-                        <button class="b_view">ดูโปรไฟล์</button>
-                        <button class="b_logout">ออกจากระบบ</button>
+                        <a href="/Fronend_v1/profile_user/profile_user.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="/Fronend_v1/home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
                     </div>
                 </div>
             </div>
@@ -48,20 +53,18 @@
                 </div>
                 <div class="cover">
                     <div class="img_profile">
-                        <img src="/photo/racha.png" alt="โปรไฟล์">
-                        <button>📝</button>
+                        <img src="/photo/mimm.jpg" alt="โปรไฟล์">
+                        <button>➕</button>
                     </div>
                     <div class="user_name">
-                        <h1>จิ๊นซี ฮ่องเต้</h1>
-                        <span>✅ สถานะ : ราชา</span><br>
-                        <span>🏫คณะ : มหาชน</span>
+                        <h1>FirstName LastName</h1>
+                        <span>👤 สถานะ : นิสิต</span><br>
                     </div>
                 </div>
 
-            
                     <div class="toggle_sw">
-                        <button class="toggle_post">โพสต์ของคุณ</button>
-                        <button class="toggle_review">รีวิว</button>
+                        <button class="toggle_post" onclick="switchTab('post')">โพสต์ของคุณ</button>
+                        <button class="toggle_review" onclick="switchTab('review')">รีวิว</button>
                     </div>
 
                 <div class="job">    
@@ -76,8 +79,8 @@
                             </div>
                             
                             <h4>แกลเลอรีรูปภาพ/ผลงาน</h4>
-                            <img src="/photo/patu.jpeg" alt="ผลงาน">
-                            <img src="/photo/patu.jpeg" alt="ผลงาน">
+                            <img src="/photo/logo_sdhire.jpg" alt="ผลงาน">
+                            <img src="/photo/mimm.jpg" alt="ผลงาน">
                         </div>
                         <div class="contact">
                             <h4>ช่องทางติดต่อ</h4>
@@ -91,34 +94,18 @@
                     <div class="box_R">
                         <div class="post" id="post_sw">
                             <div class="post_job">
-                                <div class="post_user">
-                                    <img src="/photo/racha.png" alt="โปรไฟล์" class="avatar">
-                                    <span class="username">จิ๊นซี ฮ่องเต้</span>
-                                </div>
                                 <div class="post_text">
-                                    <h3>รับสอนพิเศษ</h3>
-                                    <p>รับสอนวิชาภาษาอังกฤษ ตั้งแต่ 18:00 - 20:00 น.</p>
-                                    <p>สอนแบบออนไลน์</p>
-                                    <p>ทักถามรายละเอียดได้เลย</p>
+                                    <h3 id="pro_title">รับสอนพิเศษ</h3>
+                                    <p id="pro_detail">รายละเอียด...</p>
                                 </div>
                             </div>
 
                             <div class="poster">
-                                <img src="/photo/patu.jpeg" alt="โพสต์ของคุณ">
+                                <img id="pro_img" src="..." alt="โพสต์ของคุณ">
                             </div>
                         </div>
 
-                        <div class="review" id="review_sw">
-                            <div class="general">
-                                <img src="/photo/sheepy pp.jpg" alt="โปรไฟล์">
-                            </div>
-
-                            <div class="comment">
-                                <h5>เบียวไร</h5>
-                                <div class="stars">⭐⭐⭐⭐⭐</div>
-                                <p>ราชาไม่หวั่นไหว ราชาไม่โลเล ราชาไม่พึ่งใคร ราชาไม่มีวันยอมแพ้</p>
-                            </div>
-                        </div>
+                        <div class="review" id="review_sw"> </div>
                     </div>
                 </div>
             </div>
@@ -134,6 +121,7 @@
     </div>
     </footer>
 
+<script src="switch_tap.js"></script>
 <script src="swith_PR.js"></script>
 </body>
 </html>

@@ -8,13 +8,18 @@ body {
     justify-content: center; 
     align-items: center; 
     min-height: 100vh;
+    color: #333;
     margin: 0;
+    background: url(/photo/background_logo_SDhire.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .main_center {
     background: white;
     width: 90%;
     max-width: 800px;
+    min-height: 750px;
     padding: 50px;
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
