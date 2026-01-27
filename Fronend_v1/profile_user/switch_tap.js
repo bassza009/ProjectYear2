@@ -73,6 +73,8 @@ if (reviews.length > 0 && profileReviewContainer) {
                     </div>
                     <p style="margin: 5px 0 0 0; font-size: 14px; color: #555;">${item.comment}</p>
                 </div>
+                
+
             </div>
         `;
         profileReviewContainer.insertAdjacentHTML('beforeend', html);

@@ -106,3 +106,34 @@ submitBtn.onclick = () => {
 document.getElementById('openReview').onclick = () => {
     document.getElementById('reviewModal').style.display = 'flex'; // ต้องเป็น flex เพื่อให้จัดกลาง
 };
+
+//////////////////////////////////////////////////////////////////////
+// ดึงงานทั้งหมดจาก localStorage
+const jobs = JSON.parse(localStorage.getItem('allJobs')) || [];
+
+// ถ้าไม่มีงาน
+if (jobs.length === 0) {
+    alert("ยังไม่มีข้อมูลงาน");
+}
+
+// เลือกงานล่าสุด (หรือจะเลือกตาม id ก็ได้)
+const job = jobs[jobs.length - 1];
+
+// แปลงประเภทงาน
+function getCategoryText(cat) {
+    switch (cat) {
+        case "0": return "งานทั่วไป";
+        case "1": return "เรียนพิเศษ";
+        case "2": return "ภาพถ่าย-วิดีโอ";
+        case "3": return "ออกแบบกราฟิก";
+        default: return "-";
+    }
+}
+
+// ใส่ข้อมูลลง HTML
+document.getElementById('jobTitle').innerText = job.title;
+document.getElementById('jobCategory').innerText = 
+    "ประเภทงาน : " + getCategoryText(job.category);
+
+document.getElementById('jobImage').src = job.image;
+document.getElementById('jobDetail').innerText = job.detail;

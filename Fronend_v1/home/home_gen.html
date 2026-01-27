@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,10 +85,14 @@
                 
                 <div class="post_skill">
                     <div class="job-grid" id="jobDisplay"></div>
+                    <!-- Pagination (ต้องอยู่ตรงนี้) -->
+                    <div class="pagination" id="pagination"></div>
+                    <!-- JS จะเป็นคนสร้างปุ่ม 1 2 3 ... ให้เอง -->
                 </div>
 
                 <div class="post_job">
-                    <div class="table-container"> <table>
+                    <div class="table-container">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>ชื่องาน</th>
@@ -97,10 +102,11 @@
                                     <th>กำหนดส่ง</th>
                                     <th>จัดการ</th> </tr>
                             </thead>
-                            <tbody id="jobTableBody">
-                                </tbody>
+                            <tbody id="jobTableBody"></tbody>
                         </table>
                     </div>
+                     <!-- pagination ของโพสต์งาน -->
+                    <div class="pagination" id="jobPagination"></div>
                 </div>
             </div>
         </main>
@@ -116,7 +122,7 @@
     </footer>
 
     <script src="profile_buttom.js"></script>
-    <script src="post.js"></script>
+    <script src="view_post.js"></script>
     <script src="table.js"></script>
 </body>
 </html>

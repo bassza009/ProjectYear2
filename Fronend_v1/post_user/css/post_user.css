@@ -1,3 +1,4 @@
+
 h1,h3,h5,p,span{
     margin: 0;
     margin-top: 1;
@@ -18,14 +19,15 @@ h1,h3,h5,p,span{
 
 .box_LR{
     display: flex;
-    flex-wrap: wrap; 
     gap: 30px; 
     justify-content: center;
+
 }
 
 .img_post img{
-    width: 100%;           /* ให้กว้างเต็มพื้นที่กล่องแม่ที่ยืดหดได้ */
-    max-width: 700px;      /* ขนาดใหญ่สุดที่คุณตั้งไว้ */
+    width: 100%;       /* ให้กว้างเต็มพื้นที่กล่องแม่ที่ยืดหดได้ */
+    max-width: 700px;
+    min-width: 700px;      /* ขนาดใหญ่สุดที่คุณตั้งไว้ */
     aspect-ratio: 16 / 9;  /* บังคับสัดส่วน 16:9 ตลอดเวลา */
     object-fit: cover;     /* สำคัญ: กันรูปเบี้ยวหรือยืดผิดสัดส่วน */
     border-radius: 5px;
@@ -111,17 +113,18 @@ h1,h3,h5,p,span{
 }
 
 .user_name button{
-    margin-top: 5px;
-    width: 120px;
-    height: 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: rgb(215, 215, 215);
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #9b59b6;
+    color: #9b59b6;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
-.user_name button:hover {
-    background-color: #d8dadf;
-    transform: scale(1.1);
+.user_name button:hover{
+    background: #8a2be2;
+    color: white;
 }
 
 .box_review {
