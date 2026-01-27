@@ -44,7 +44,7 @@ function renderJobs() {
         const img = job.image || "https://via.placeholder.com/300x160?text=No+Image";
 
         html += `
-         <a href="/Fronend_v1/post_user/post_user.html?id=${job.id}" class="card-link">
+         <a href="/Fronend_v1/post_user/view_post_user.html?id=${job.id}" class="card-link">
             <div class="card">
                 <img src="${img}" class="card-img">
 

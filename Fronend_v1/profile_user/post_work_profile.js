@@ -28,7 +28,7 @@ function renderMyJobs() {
                     <span class="deadline">📅 กำหนดส่ง: <strong>${job.deadline}</strong></span>
                 </div>
             </div>
-                <a href="/Fronend_v1/post_user/post_gen.html?id=${job.id}">
+                <a href="/Fronend_v1/post_user/view_post_gen.html?id=${job.id}">
                     <button class="btn-read">เข้าไปดูโพสต์</button>
                 </a>
         `;

@@ -6,44 +6,43 @@
     <title>Post_Jop</title>
     <link rel="stylesheet" href="css/review.css">
     <link rel="stylesheet" href="css/post_user.css">
-    <link rel="stylesheet" href="../create_post/css/Template_HF.css">
+    <link rel="stylesheet" href="css/Template_HF.css">
 </head>
 <body>
     <div class="content-wrapper">
         <header>        
-            <a href="/Fronend_v1/home/home_stu.html" style="text-decoration: none; color: inherit;">
-                <h2>SDhire</h2>
-            </a>
-            <div class="profile_container">
-                <div class="buttom_header">
-                    <button type="button" class="profile_button" onclick="toggleDropdown()">
-                        <div class="photo_profile">
-                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
-                        </div>
-                        <span>Profile</span>
-                    </button>
-                </div>
+                <a href="/Fronend_v1/home/home_gen.html" style="text-decoration: none; color: inherit;">
+                    <h2>SDhire</h2>
+                </a>
+                  <div class="profile_container">
+                      <div class="buttom_header">
+                          <button type="button" class="profile_button" onclick="toggleDropdown()">
+                              <div class="photo_profile">
+                                  <img src="/photo/OIP.webp" alt="โปรไฟล์">
+                              </div>
+                              <span>Profile</span>
+                          </button>
+                      </div>
 
-                <div class="data_box" id="myDropdown">
-                    <div class="user_infor">
-                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
-                        <div class="user_name">
-                            <h1>FirstName LastName</h1>
-                            <p>✅ สถานะ : นิสิต</p>
-                        </div>
-                    </div>
-                    
-                    <div class="button_VO">
-                        <a href="/Fronend_v1/profile_user/profile_user.html">
-                            <button class="b_view">ดูโปรไฟล์</button>
-                        </a>
-                        <a href="/Fronend_v1/home/home_login.html" >           
-                            <button class="b_logout">ออกจากระบบ</button>
-                        </a> 
-                    </div>
-                </div>
-            </div>
-        </header>
+                      <div class="data_box" id="myDropdown">
+                          <div class="user_infor">
+                              <img src="/photo/OIP.webp" alt="โปรไฟล์" >
+                              <div class="user_name">
+                                  <h1>User Name</h1>
+                              </div>
+                          </div>
+                          
+                          <div class="button_VO">
+                              <a href="/Fronend_v1/profile_user/profile_gen.html">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                            <a href="/Fronend_v1/home/home_login.html" >           
+                                <button class="b_logout">ออกจากระบบ</button>
+                            </a> 
+                          </div>
+                      </div>
+                  </div>
+              </header>
 
         <main>
            <div class="event_job">
@@ -71,10 +70,12 @@
                                 <h1>FirstName LastName</h1>
                                 <span>✅ สถานะ : นิสิต</span><br>
                                 <span>🏫 คณะ: เทคโนโลยีสารสนเทศและการสื่อสาร</span><br>
-                                <a href="../profile_user/profile_user.html">
+                                <a href="../profile_user/view_profile_user.html">
                                     <button class="btn-outline">ดูโปรไฟล์</button>
                                 </a> 
-                            </div> </div> <div class="review">
+                            </div> 
+                        </div> 
+                        <div class="review">
                             <div class="review-header">
                                 <h1>รีวิว</h1>
                                 <button id="openReview">เขียนรีวิว</button>
@@ -82,7 +83,6 @@
                             <div id="reviewContainer"> </div>
                         </div>
                     </div>
-
                 </div>
            </div>
 

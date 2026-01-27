@@ -44,11 +44,6 @@ function submitJob() {
 
 
 */
-
-
-
-
-
     // 3. สร้างก้อนข้อมูล
     const newJob = {
         id: Date.now(),

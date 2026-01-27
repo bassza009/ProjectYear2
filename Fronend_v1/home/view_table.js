@@ -17,7 +17,7 @@ function renderJobTable() {
     // วนลูปข้อมูลมาสร้างแถวตาราง (แสดงงานใหม่ล่าสุดไว้ข้างบนสุด)
     myJobs.slice().reverse().forEach(job => {
         const row = `        
-           <tr onclick="window.location.href='/Fronend_v1/post_user/post_gen.html?id=${job.id}'"
+           <tr onclick="window.location.href='/Fronend_v1/post_user/view_post_gen.html?id=${job.id}'"
             style="cursor:pointer;">
             <td>${job.title}</td>
             <td>${job.category}</td>

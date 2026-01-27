@@ -92,7 +92,7 @@ document.getElementById('openReview').onclick = () => {
     document.getElementById('reviewModal').style.display = 'flex'; // ต้องเป็น flex เพื่อให้จัดกลาง
 };
 
-////////////////////////////////////////////////////////////////////// ดึงโพส
+//////////////////////////////////////////////////////////////////////
 // ดึงงานทั้งหมดจาก localStorage
 const jobs = JSON.parse(localStorage.getItem('allJobs')) || [];
 
