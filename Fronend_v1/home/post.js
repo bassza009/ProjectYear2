@@ -44,27 +44,30 @@ function renderJobs() {
         const img = job.image || "https://via.placeholder.com/300x160?text=No+Image";
 
         html += `
-        <div class="card">
-            <img src="${img}" class="card-img">
-            <div class="card-content">
-                <div class="profile-area">
-                    <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}"
-                         class="avatar">
-                    <div>
-                        <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
-                        <small>${job.category || 'งานทั่วไป'}</small>
+         <a href="/Fronend_v1/post_user/post_user.html?id=${job.id}" class="card-link">
+            <div class="card">
+                <img src="${img}" class="card-img">
+
+                <div class="card-content">
+                    <div class="profile-area">
+                        <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}"
+                            class="avatar">
+                        <div>
+                            <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
+                            <small>${job.category || 'งานทั่วไป'}</small>
+                        </div>
+                    </div>
+
+                    <div class="title">${job.title}</div>
+                    <div class="desc">${job.detail || 'ไม่มีรายละเอียด'}</div>
+
+                    <div class="price">
+                        <span>เริ่มต้น</span><br>
+                        <b>${Number(job.price).toLocaleString()} บาท</b>
                     </div>
                 </div>
-
-                <div class="title">${job.title}</div>
-                <div class="desc">${job.detail || 'ไม่มีรายละเอียด'}</div>
-
-                <div class="price">
-                    <span>เริ่มต้น</span><br>
-                    <b>${Number(job.price).toLocaleString()} บาท</b>
-                </div>
             </div>
-        </div>`;
+        </a>`;
     });
 
     display.innerHTML = html;

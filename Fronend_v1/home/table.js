@@ -16,17 +16,15 @@ function renderJobTable() {
 
     // วนลูปข้อมูลมาสร้างแถวตาราง (แสดงงานใหม่ล่าสุดไว้ข้างบนสุด)
     myJobs.slice().reverse().forEach(job => {
-        const row = `
-            <tr>
-                <td>${job.title}</td>
-                <td>${job.category}</td>
-                <td>${Number(job.price).toLocaleString()}</td>
-                <td>${job.postDate}</td>
-                <td>${job.deadline || '-'}</td>
-                <td>
-                    <button onclick="deleteJob(${job.id})" class="btn-delete" style="color:red; cursor:pointer; border:none; background:none;">ลบ</button>
-                </td>
-            </tr>
+        const row = `        
+           <tr onclick="window.location.href='/Fronend_v1/post_user/post_gen.html?id=${job.id}'"
+            style="cursor:pointer;">
+            <td>${job.title}</td>
+            <td>${job.category}</td>
+            <td>${Number(job.price).toLocaleString()}</td>
+            <td>${job.postDate}</td>
+            <td>${job.deadline || '-'}</td>
+        </tr>
         `;
         tableBody.innerHTML += row;
     });

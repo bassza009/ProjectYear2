@@ -199,3 +199,11 @@ footer {
     font-size: 14px;
 }
 
+.card-link,
+.card-link:link,
+.card-link:visited,
+.card-link:hover,
+.card-link:active {
+    color: inherit;          /* ใช้สีเดียวกับ parent */
+    text-decoration: none;   /* ลบเส้นขีด */
+}
