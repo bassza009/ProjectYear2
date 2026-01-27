@@ -109,17 +109,18 @@ h1,h3,h5,p,span{
 }
 
 .user_name button{
-    margin-top: 5px;
-    width: 120px;
-    height: 20px;
-    border-radius: 5px;
-    border: none;
-    background-color: rgb(215, 215, 215);
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #9b59b6;
+    color: #9b59b6;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
-.user_name button:hover {
-    background-color: #d8dadf;
-    transform: scale(1.1);
+.user_name button:hover{
+    background: #8a2be2;
+    color: white;
 }
 
 .box_review {

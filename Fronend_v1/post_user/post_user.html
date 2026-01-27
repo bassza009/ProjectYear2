@@ -48,21 +48,18 @@
         <main>
            <div class="event_job">
                 <div class="event_name">
-                    <h1>ติวภาษาอังกฤษ</h1>
-                    <p>ประเภทงาน : ติวเตอร์</p>
+                    <h1 id="jobTitle">ชื่องาน</h1>
+                    <p id="jobCategory">ประเภทงาน :</p>
                 </div>
 
                 <div class="box_LR">
                     <div class="box_post">
                         <div class="img_post">
-                            <img src="/photo/pro_G.jpg" alt="โพสต์งาน">
+                            <img id="jobImage" src="" alt="โพสต์งาน">
                         </div>
                         <div class="details">
                             <h3>รายละเอียดงาน</h3>
-                            <p>รับสอนวิชาภาษาอังกฤษ 
-                                สอนแบบออนไลน์ 
-                                มีชีทสรุปให้
-                            </p>
+                            <p id="jobDetail"></p>
                         </div>
                     </div>
                     <div class="box_userRe">
@@ -74,35 +71,15 @@
                                 <h1>FirstName LastName</h1>
                                 <span>✅ สถานะ : นิสิต</span><br>
                                 <span>🏫 คณะ: เทคโนโลยีสารสนเทศและการสื่อสาร</span><br>
-                                <button>ดูโปรไฟล์</button>
-                            </div>
-                        </div>
-                        <div class="review">
+                                <a href="../profile_user/profile_user.html">
+                                    <button class="btn-outline">ดูโปรไฟล์</button>
+                                </a> 
+                            </div> </div> <div class="review">
                             <div class="review-header">
                                 <h1>รีวิว</h1>
                                 <button id="openReview">เขียนรีวิว</button>
-                            </div> 
-                            <div id="reviewModal" class="modal">
-                                <div class="modal-content">
-                                    <div class="star-rating">
-                                        <span class="star" data-value="1">&#9733;</span>
-                                        <span class="star" data-value="2">&#9733;</span>
-                                        <span class="star" data-value="3">&#9733;</span>
-                                        <span class="star" data-value="4">&#9733;</span>
-                                        <span class="star" data-value="5">&#9733;</span>
-                                    </div>
-                                    
-                                    <textarea id="reviewText" placeholder="เขียนความรู้สึก..."></textarea>
-                                    
-                                    <div class="modal-buttons">
-                                        <button id="cancelBtn">ยกเลิก</button>
-                                        <button id="submitBtn">ตกลง</button>
-                                    </div>
-                                </div>
                             </div>
-
                             <div id="reviewContainer"> </div>
- 
                         </div>
                     </div>
 
