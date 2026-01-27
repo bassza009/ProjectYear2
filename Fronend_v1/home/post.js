@@ -1,7 +1,7 @@
 /* ================================
    GLOBAL STATE
 ================================ */
-const itemsPerPage = 20;
+const itemsPerPage = 10;
 let currentPage = 1;
 let currentType = 'all';
 let currentSearch = '';
