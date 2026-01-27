@@ -36,19 +36,11 @@ function submitJob() {
     const detail = document.getElementById('detail').value;
     const category = document.getElementById('category').value;
 
-<<<<<<< HEAD
-    // // 2. ตรวจสอบข้อมูลเบื้องต้น
-    // if (!title || !price || !imageData) {
-    //     alert("กรุณากรอกชื่องาน ราคา และอัปโหลดรูปภาพให้ครบถ้วน");
-    //     return;
-    // }
-=======
  /*   // 2. ตรวจสอบข้อมูลเบื้องต้น
     if (!title || !price || !imageData) {
         alert("กรุณากรอกชื่องาน ราคา และอัปโหลดรูปภาพให้ครบถ้วน");
         return;
     }
->>>>>>> b572b33bc4880e072ffe80f4473f1adcf4cbc1d4
 
 
 */
@@ -67,12 +59,8 @@ function submitJob() {
     jobs.push(newJob);
     localStorage.setItem('allJobs', JSON.stringify(jobs));
 
-<<<<<<< HEAD
-    // 5. ไปหน้าหลัก 
-=======
     // 5. ไปหน้าหลัก (เช็คชื่อไฟล์หน้าหลักของคุณให้ดี index.html หรือ index1.html)
     alert("ลงประกาศสำเร็จ!");
->>>>>>> b572b33bc4880e072ffe80f4473f1adcf4cbc1d4
     window.location.href = '../home/home_stu.html'; 
 }
 

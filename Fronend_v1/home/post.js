@@ -44,18 +44,6 @@ function renderJobs() {
         const img = job.image || "https://via.placeholder.com/300x160?text=No+Image";
 
         html += `
-<<<<<<< HEAD
-        <div class="card">
-            <img src="${img}" class="card-img" >
-            
-            <div class="card-content">
-                <div class="profile-area">
-                    <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}"
-                         class="avatar">
-                    <div>
-                        <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
-                        <small>${job.category || 'งานทั่วไป'}</small>
-=======
          <a href="/Fronend_v1/post_user/post_user.html?id=${job.id}" class="card-link">
             <div class="card">
                 <img src="${img}" class="card-img">
@@ -76,7 +64,6 @@ function renderJobs() {
                     <div class="price">
                         <span>เริ่มต้น</span><br>
                         <b>${Number(job.price).toLocaleString()} บาท</b>
->>>>>>> b572b33bc4880e072ffe80f4473f1adcf4cbc1d4
                     </div>
                 </div>
             </div>

@@ -426,3 +426,26 @@ footer {
     object-fit: cover;
     flex-shrink: 0;
 }
+.price {
+    text-align: right;
+    color: #2baf2b;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: 'Kanit';
+}
+.price span {
+    font-weight:normal;
+    font-size:1rem;
+    color:#2baf2b;
+    font-family: 'Kanit';
+}
+
+.card-link,
+.card-link:link,
+.card-link:visited,
+.card-link:hover,
+.card-link:active {
+    color: inherit;          /* ใช้สีเดียวกับ parent */
+    text-decoration: none;   /* ลบเส้นขีด */
+}
