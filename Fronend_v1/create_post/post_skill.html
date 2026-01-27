@@ -15,7 +15,6 @@
             <h2>SDhire</h2>
             <div class="profile_container">
                 <div class="buttom_header">
-                    
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <img src="/photo/mimm.jpg" alt="โปรไฟล์">
@@ -49,7 +48,7 @@
                         <div id="placeholder">
                             <small>ภาพหน้าปกงานddddd</small><br>
                             <small>ขนาดแนะนำ 1280*720px หรือ 16:9</small><br>
-                            <button type="button">อัปโหลดภาพ</button>
+                            <button type="button" class="img_up">อัปโหลดภาพ</button>
                         </div>
                         <img id="preview" src="">
                         <input type="file" id="fileInput" hidden accept="image/*" >
@@ -64,7 +63,7 @@
                             <div class="inputcategory" required>
                                 <label>ประเภทงาน</label> 
                                 <select name="category" id="category">
-                                    <option alue="" disabled selected hidden>ประเภทงาน</option>
+                                    <option alue="" disabled selected hidden>เลือกหมวดหมู่</option>
                                     <option value="0">งานทั่วไป</option>
                                     <option value="1">เรียนพิเศษ</option>
                                     <option value="2">ภาพถ่าย-วิดีโอ</option>

@@ -1,7 +1,7 @@
 
 .container {
     max-width: 1384px;
-    height: 1260px;
+    height: 1200px;
     width: 90%;
     margin: 40px auto; 
     background-color: white;
@@ -58,6 +58,10 @@
     object-fit: contain;
 }
 
+label {
+    margin-top: 10px;
+}
+
 .inputnamejob input,
 .peice input,
 .detail textarea{
@@ -74,6 +78,9 @@
   display: flex;     
   gap: 20px;         
   align-items: flex-end; 
+}
+#category {
+    color: #000;
 }
 .inputcategory {
     display: flex;
@@ -96,7 +103,6 @@
     outline: none;
     /*appearance: none;*/
 }
-
 .detail {
     display: flex;
     flex-direction: column;
@@ -124,7 +130,7 @@
 .post_buttonS {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 .post_buttonS button{
     background:#9b59b6;
@@ -134,11 +140,12 @@
     padding:15px 60px;
     border-radius:4px;
     margin-top: 10px;
+    font-size: 16px;
 }
-button:hover {
+.post_buttonS button:hover {
     background: #8e44ad;
 }
-button:active {
+.post_buttonS button:active {
     background: #868686; 
 }
 
