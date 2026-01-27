@@ -24,6 +24,7 @@ h1,h4,p{
 /* LEFT */
 .details{
     width: 100%;
+    min-width: 700px;
     max-width: 750px; 
     height: auto;
     min-height: 320px;

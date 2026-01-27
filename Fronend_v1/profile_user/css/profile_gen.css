@@ -1,0 +1,168 @@
+.main_profile{
+    margin: 10px 10px;
+}
+h4,h5{
+    margin: 0;
+}
+.back_pro img{
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.img_profile img{
+  width: 220px;
+  height: 220px;
+  border: 2px solid #B9B9B9;
+  border-radius: 100%;
+  margin: -120px 0px 10px 55px; /*บน ล่าง ซ้าย ขวา*/
+}
+
+.back_pro button {
+    position: absolute;
+    padding: 8px 15px;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    right: 30px;
+    top: 380px;
+}
+
+.img_profile button {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background-color: #e4e6eb;
+    border: none; 
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    left: 250px;
+    top: 470px;
+}
+
+.back_pro button:hover
+,.img_profile button:hover {
+    background-color: #d8dadf;
+    transform: scale(1.1);
+}
+
+
+/*--------------ชื่อผู้ใช้ ---------------------------------------------*/
+.user_name h1{
+  margin: 0;
+  text-overflow: ellipsis; /* เติม ... ท้ายข้อความ */
+  white-space: nowrap; /* ห้ามขึ้นบรรทัดใหม่ */
+  overflow: hidden; /* ซ่อนส่วนที่เกิน */
+  margin-top: -110px;
+  margin-left: 300px;
+  font-size: 35px;
+}
+.user_name span{
+  margin-left: 320px;
+  font-size: 16px;
+}
+
+/*-------------- ส่วนพวกงาน ---------------------------------------------*/
+.job{
+    margin-top: 100px ;
+    display: flex;
+    gap: 15px;
+}
+
+/*-------------- บลอคขวา พวกโพสต์ กับรีวิว ---------------------------------------------*/
+.box_R{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 670px;
+    overflow-y: auto;
+}
+
+.post {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: white;
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+    border-radius: 8px;
+    margin: 10px;
+}
+.post_job {
+    flex: 1;
+}
+
+.post-main{
+    margin-bottom: 12px;
+}
+
+.post_text h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+.post_text p {
+    margin: 5px 0;
+    font-size: 15px;
+    color: #333;
+}
+/*----------------------------------------------------------*/
+
+.btn-read {
+    background-color: #636363; 
+    color: rgb(255, 255, 255);             
+    border: none;             
+    padding: 8px 16px;    
+    border-radius: 8px;     
+    font-size: 14px;       
+    cursor: pointer;       
+    margin-top: 10px;       
+}
+
+.btn-read:hover {
+    background-color: #000000; 
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+/* ก้อนคลุมข้อมูลเสริม */
+.post-info-meta {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px; /* ระยะห่างระหว่างงบกับวันที่ */
+    font-size: 14px;
+    color: #555;
+    border-top: 1px dashed #ddd; /* เส้นปรุแยกส่วน */
+    padding-top: 10px;
+}
+
+/* ตกแต่งงบประมาณ */
+.budget strong {
+    color: #2e7d32; /* สีเขียวเข้ม ดูเป็นเรื่องเงิน */
+}
+
+/* ตกแต่งกำหนดส่ง */
+.deadline strong {
+    color: #d32f2f; /* สีแดง แจ้งเตือนเรื่องเวลา */
+}
+
+/* ปรับแต่ง post-main เพิ่มเติมเพื่อให้ปุ่มอยู่ล่างสุดเสมอ */
+.post-main {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px; /* กำหนดความสูงขั้นต่ำ */
+}

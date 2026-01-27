@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile_General</title>
-
     <link rel="stylesheet" href="css/profile_gen.css">
     <link rel="stylesheet" href="css/Template_HF.css">
 </head>
@@ -16,7 +15,6 @@
             </a>
             <div class="profile_container">
                 <div class="buttom_header">
-                    <button type="button" class="post_button">โพสต์</button>
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <img src="/photo/OIP.webp" alt="โปรไฟล์">
@@ -44,7 +42,7 @@
                 </div>
             </div>
         </header>
-
+ 
         <main>
             <div class="main_profile">
                 <div class="back_pro">
@@ -53,29 +51,22 @@
                 <div class="cover">
                     <div class="img_profile">
                         <img src="/photo/OIP.webp" alt="โปรไฟล์">
-                        <button>📝</button>
+                        <button>➕</button>
                     </div>
                     <div class="user_name">
                         <h1>User Name</h1>
                     </div>
                 </div>
                 <div class="job">    
-                   <div class="box_R">
-                    <h1>โพสต์ของคุณ</h1>
-                        <div class="post" id="post_sw">
-                            <div class="post_job">
-                                <div class="post_text">
-                                    <h3 id="pro_title">รับสอนพิเศษ</h3>
-                                    <p id="pro_detail">รายละเอียด...</p>
-                                </div>
-                            </div>
+                    <div class="box_R">
+                        <h1>โพสต์ของคุณ</h1>
+                        <div class="post-layout" id="postList"></div> 
+                    </div>
 
-                            <div class="poster">
-                                <img id="pro_img" src="..." alt="โพสต์ของคุณ">
-                            </div>
+                    <div id="commentModal" class="modal">
+                        <div class="modal-content">
+                            <div id="commentContainer"></div>
                         </div>
-
-                        <div class="review" id="review_sw"> </div>
                     </div>
                 </div>
             </div>
@@ -93,7 +84,7 @@
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
-
+<script src="post_work_profile.js"></script>
 <script src="swith_PR.js"></script>
 </body>
 </html>

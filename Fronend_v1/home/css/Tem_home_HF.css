@@ -35,7 +35,6 @@ header h2 {
 }
 
 header button:hover {
-    transform: scale(1.1);
     background: whitesmoke;
     color: #000000;
 }
