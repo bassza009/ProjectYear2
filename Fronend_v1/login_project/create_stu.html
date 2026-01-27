@@ -3,63 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สร้างโปรไฟล์</title>
-    <link rel="stylesheet" href="css/create_stu.css">
+    <title>สร้างบัญชี</title>
     <link rel="stylesheet" href="css/action_123.css">
+    <link rel="stylesheet" href="css/create_stu.css">
 </head>
 <body>
-    <main>
-        <div class="main_center">
-            <button type="button" class="back-btn" onclick="goBack_stu()"> < </button>
+    <div class="main_center">
+        <button type="button" class="back-btn" onclick="goBack()"> < </button> 
 
-            <h2>สร้างโปรไฟล์</h2> 
+        <h1>สร้างโปรไฟล์</h1>
 
-            <div class="step-container">
-                <div class="step active" id="circle1">1</div>
-                <div class="line" id="line1"></div>
-                <div class="step" id="circle2">2</div>
-                <div class="line" id="line2"></div>
-                <div class="step" id="circle3">3</div>
-            </div>           
-                <div id="part1" class="Set_profile">
-                    <h4>เลือกโปรไฟล์ของคุณ</h4>
+        <div class="step-container">
+            <div class="step active" id="circle1">1</div>
+            <div class="line" id="line1"></div>
+            <div class="step" id="circle2">2</div>
+            <div class="line" id="line2"></div>
+            <div class="step" id="circle3">3</div>
+        </div> 
+        
+        <form id="mainForm">
+                <div id="part1" class="set_profile">
+                    <h3>เลือกโปรไฟล์ของคุณ</h3>
                     <p>ควรใช้ภาพถ่ายตัวจริงของคุณเห็นใบหน้าชัดเจน</p>
                     <form class="img_file">
                         <label for="file-input">
-                            <div class="upload-icon">คลิกเพื่อเลือกรูป</div>
+                            <div class="upload-icon" id="imagePreview">
+                                <small>คลิกเพื่อเลือกรูป</small>
+                            </div>
                         </label>
-                        <input id="file-input" type="file" accept="image/*" />
+                        <input id="file-input" type="file" accept="image/*" onchange="previewImage(event)"/>
                     </form>
-                    <button type="button" onclick="goToStep_stu(2)">ดำเนินการต่อ</button>
+                    <button type="button" class="next" onclick="goToStep(2)">ดำเนินการต่อ</button>
                 </div>
-            
-                <div id="part2" class="Set_name">
-                    <form class="fron_l">
-                            <label>ชื่อที่ใช้แสดงในระบบ(ควรเป็นชื่อที่ดูเป็นทางการ)</label><br>
-                            <input type="text" placeholder="กรอกชื่อของคุณ"><br>
-                            <label>อธิบาย</label><br>
-                            <textarea placeholder="อธิบายลักษณะงาน"></textarea>
-                    </form>
-                    <button type="button" onclick="goToStep_stu(3)">ดำเนินการต่อ</button>
-                </div>
-            
 
-                <div id="part3"class="Set_Contact">
-                    <p>ช่องทางติดต่อ</p>
-                    <form class="contact_l">
+                <div id="part2" class="set_name">
+                    <div class="fron_l">
+                            <label>ชื่อที่ใช้แสดงในระบบ(ควรเป็นชื่อที่ดูเป็นทางการ)</label>
+                            <input type="text" placeholder="กรอกชื่อของคุณ">
+                            <label>อธิบาย</label>
+                            <textarea placeholder="อธิบายลักษณะงาน"></textarea>
+                    </div>
+                    <button type="button" class="next" onclick="goToStep(3)">ดำเนินการต่อ</button>
+                </div>
+
+                <div id="part3"class="set_contact">
+                    <h3>ช่องทางติดต่อ</h3>
+                    <div class="contact_l">
                             <label>อีเมลที่ติดต่อได้</label>
-                            <input type="email" placeholder="ระบุอีเมล"><br>
+                            <input type="email" placeholder="ระบุอีเมล">
                             <label>เบอร์โทรที่ติดต่อได้</label>
-                            <input type="text" placeholder="ระบุเบอร์โทร"><br>
+                            <input type="text" placeholder="ระบุเบอร์โทร">
                             <label>ID Line</label>
-                            <input type="text" placeholder="ระบุ ID Line"><br>
+                            <input type="text" placeholder="ระบุ ID Line">
                             <label>เพิ่มลิงก์</label>
                             <input type="text" placeholder="URL">                          
-                    </form>
-                    <button type="submit">ยืนยัน</button>
+                    </div>
+                    <button type="submit" class="submit">ยืนยัน</button>
                 </div>
-        </div>
-    </main>
+
+        </form> 
+    </div>
+
     <script src="action123.js"></script>
 </body>
 </html>
