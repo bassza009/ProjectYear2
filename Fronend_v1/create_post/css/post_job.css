@@ -1,14 +1,27 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit', sans-serif; 
+}
 
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;       
+    margin: 0;
+}
 .container {
     max-width: 1384px;
-    height: 1200px;
-    width: 90%;
-    margin: 40px auto; 
+    min-height: 1260px;
+    width: 95%;
     background-color: white;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(212, 212, 212, 1);
-}
+    margin-top: 10px;
+}  
 
 .container h1 {
     text-align:center;
@@ -29,7 +42,6 @@
     cursor:pointer;
     overflow: hidden;
     background: white;
-    box-sizing: border-box;
     position: relative;
 }
 
@@ -58,19 +70,12 @@
     object-fit: contain;
 }
 
-label {
-    margin-top: 10px;
-}
-
-.inputnamejob input,
-.peice input,
-.detail textarea{
+.inputnamejob input {
     width:100%;
-    box-sizing: border-box;
-    border:1px solid #ddd;
     padding: 10px 20px;
+    border:1px solid #ddd;
+    border-radius:4px;
     margin-top: 5px;
-    border-radius:5px;
     outline: none;
 }
 
@@ -78,9 +83,6 @@ label {
   display: flex;     
   gap: 20px;         
   align-items: flex-end; 
-}
-#category {
-    color: #000;
 }
 .inputcategory {
     display: flex;
@@ -93,6 +95,7 @@ label {
     flex: 1; 
 }
 .inputcategory select{
+    width: 100%;
     padding: 10px 20px;
     border-radius: 4px;
     margin-top: 5px;
@@ -103,15 +106,31 @@ label {
     outline: none;
     /*appearance: none;*/
 }
+
+.peice input {
+    width:100%;
+    padding:10px 20px;
+    margin-top: 5px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    outline: none;
+}
+
 .detail {
     display: flex;
     flex-direction: column;
 }
 
 .detail textarea {
+    width: 100%;
     min-height: 440px;
+    margin-top: 5px;
+    padding:10px 20px;
+    border:1px solid #ddd;
+    border-radius:5px;
     resize: none;
     overflow: hidden;
+    outline: none;
 }
 
 .inputcategory select:hover {
@@ -127,25 +146,22 @@ label {
     border-color: #9b59b6;
 }
 
-.post_buttonS {
+.post_button {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
 }
-.post_buttonS button{
+.post_button button{
     background:#9b59b6;
     color:white;
     cursor: pointer;
     border:none;
-    padding:15px 60px;
     border-radius:4px;
     margin-top: 10px;
-    font-size: 16px;
 }
-.post_buttonS button:hover {
+button:hover {
     background: #8e44ad;
 }
-.post_buttonS button:active {
+button:active {
     background: #868686; 
 }
 

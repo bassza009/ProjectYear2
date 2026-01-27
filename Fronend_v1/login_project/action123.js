@@ -1,5 +1,5 @@
 /*-------------  Create Student---*/
-function goToStep_stu(stepNumber) {
+function goToStep(stepNumber) {
     // 1. ซ่อนทุกส่วนก่อน
     document.getElementById('part1').style.display = 'none';
     document.getElementById('part2').style.display = 'none';
@@ -21,16 +21,16 @@ function goToStep_stu(stepNumber) {
     }
 }
 
-function goBack_stu() {
+function goBack() {
     // หาว่าตอนนี้หน้าไหนกำลังแสดงอยู่ (ดูจาก display ที่ไม่ใช่ none)
     if (document.getElementById('part2').style.display === 'block') {
-        goToStep_stu(1);
+        goToStep(1);
         // ถอดสีม่วงออกจากวงกลม 2 และเส้น 1
         document.getElementById('circle2').classList.remove('active');
         document.getElementById('line1').classList.remove('active');
     } 
     else if (document.getElementById('part3').style.display === 'block') {
-        goToStep_stu(2);
+        goToStep(2);
         // ถอดสีม่วงออกจากวงกลม 3 และเส้น 2
         document.getElementById('circle3').classList.remove('active');
         document.getElementById('line2').classList.remove('active');
@@ -50,6 +50,7 @@ function goBack_stu() {
         document.getElementById('l1').classList.add('active');
     }
 }
+
 function goBack_gen() {
     // หาว่าตอนนี้หน้าไหนกำลังแสดงอยู่ (ดูจาก display ที่ไม่ใช่ none)
     if (document.getElementById('p2').style.display === 'block') {
@@ -58,4 +59,15 @@ function goBack_gen() {
         document.getElementById('c2').classList.remove('active');
         document.getElementById('l1').classList.remove('active');
     }
+}
+
+// ฟังก์ชันพรีวิวรูปภาพ
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const output = document.getElementById('imagePreview');
+        output.style.backgroundImage = `url('${reader.result}')`;
+        output.innerText = ""; // ล้างข้อความออก
+    }
+    reader.readAsDataURL(event.target.files[0]);
 }

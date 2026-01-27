@@ -23,12 +23,12 @@ header {
 header h2 {
     color: white;
     margin: 0;
-    padding: 10px 20px;
+    padding: 0px 2%;
 }
 
 header button {
     background: #ffffff;
-     font-weight: bold;
+    font-weight: bold;
     color: #9b59b6;
     border: none;
     padding: 10px 20px;
@@ -251,7 +251,6 @@ header button:active {
 
 
 /* --------------------------------------------------------Footer */
-
 footer {  
     margin-top: 50px;
     bottom: 0;
@@ -354,4 +353,6 @@ footer {
     transition: 0.3s;
 }
 
-.btn-primary:hover { transform: scale(1.05); }
+.btn-primary:hover { 
+    transform: scale(1.05); 
+}

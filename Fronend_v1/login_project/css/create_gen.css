@@ -4,24 +4,25 @@
 }
 
 body {
-    background: #f5f0ff; 
     display: flex;
     justify-content: center; 
     align-items: center; 
     min-height: 100vh;
+    color: #333;
     margin: 0;
     background: url(/photo/background_logo_SDhire.jpg);
     background-size: cover;
     background-position: center;
 }
 
-.container {
+.main_center {
     background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     width: 90%;
     max-width: 800px;
-    border-radius: 30px;
+    min-height: 750px;
     padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     position: relative;
     text-align: center;
 }
@@ -39,16 +40,10 @@ body {
 }
 
 .back-btn:hover { 
-  color: #9b4dca; 
+    color: #9b4dca; 
 }
 
-.step-container {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    margin-bottom: 40px;
-}
-
+/* Form Styles */
 .account, .fron_l {
     display: flex;
     flex-direction: column;
@@ -66,14 +61,18 @@ label {
 
 input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 10px 20px;
     margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #ddd;
     outline: none;
 }
 
-/* Image Upload */
+.set_profile {
+    display: none;
+}
+
+/* Image Upload Circle */
 .img_upload_container {
     display: flex;
     justify-content: center;
@@ -93,17 +92,18 @@ input {
     justify-content: center;
     overflow: hidden;
 }
+
 .upload-icon small {
-  color: #5D5D5D;
-  text-decoration: underline;
+    text-decoration: underline;
+    color: #5D5D5D;
 }
 
 #file-input { 
-  display: none; 
+    display: none; 
 }
 
 /* Buttons */
-button.next-btn, button.submit-btn {
+button.next, button.submit {
     background: #a855f7;
     color: white;
     border: none;
@@ -114,10 +114,6 @@ button.next-btn, button.submit-btn {
     margin-top: 20px;
 }
 
-button.next-btn:hover, button.submit-btn:hover { 
-  background: #9333ea; 
-}
-
-button.next-btn:active, button.submit-btn:active { 
-  background: #868686; 
+button.next:hover, button.submit:hover { 
+    background: #9333ea; 
 }

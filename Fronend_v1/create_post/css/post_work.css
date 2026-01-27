@@ -33,9 +33,9 @@ label {
 input, textarea, select {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px 20ยป;
+  padding: 10px 20px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+
 }
 
 .row {
@@ -66,11 +66,11 @@ input, textarea, select {
 /* ปุ่ม Post */
 .btn-post {
   margin: 50px auto;
-  background: #8e44ad;
+  background:#9b59b6;
   color: white;
   border: none;
-  padding: 12px 40px;
-  border-radius: 5px;
+  padding:15px 60px;
+  border-radius: 4px;
   display: block;
   font-size: 16px;
 }
@@ -81,15 +81,12 @@ select option {
 }
 
 .btn-post:hover {
-  background: #7d3c98;
-  box-shadow: 0 8px 20px rgba(155, 89, 182, 0.35);
-  transform: translateY(-2px);
+    background: #8e44ad;
+}
+.btn-post:active {
+    background: #868686; 
 }
 
-.btn-post:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(155, 89, 182, 0.25);
-}
 
 /* ทำชี้สีม่วง */
 input,

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สร้างบัญชี</title>
-    <link rel="stylesheet" href="css/create_gen.css">
     <link rel="stylesheet" href="css/action_123.css">
+    <link rel="stylesheet" href="css/create_gen.css">
 </head>
 <body>
-    <div class="container">
+    <div class="main_center">
         <button type="button" class="back-btn" onclick="goBack()"> < </button> 
- 
+
         <h1>สร้างบัญชี</h1>
 
         <div class="step-container">
@@ -20,32 +20,29 @@
         </div> 
         
         <form id="mainForm">
-            <div id="part1" class="Set_account"> 
+            <div id="part1" class="set_account"> 
                 <div class="account">
                     <label>อีเมลที่ติดต่อได้</label>
                     <input type="email" placeholder="ระบุอีเมล" required>
-                    
                     <label>รหัสผ่าน</label>
                     <input type="password" id="pass1" placeholder="ระบุรหัสผ่าน" required>
-                    
                     <label>ยืนยันรหัสผ่าน</label>
                     <input type="password" id="pass2" placeholder="ระบุยืนยันรหัสผ่าน" required>
-                    
                     <label>เบอร์โทรที่ติดต่อได้</label>
                     <input type="text" placeholder="ระบุเบอร์โทร">
                 </div>
-                <button type="button" class="next-btn" onclick="goToStep(2)">ดำเนินการต่อ</button>
+                <button type="button" class="next" onclick="goToStep(2)">ดำเนินการต่อ</button>
             </div>
 
-            <div id="part2" class="Set_profile" style="display: none;">
-                <h4>เลือกโปรไฟล์ของคุณ</h4>
+            <div id="part2" class="set_profile">
+                <h3>เลือกโปรไฟล์ของคุณ</h3>
                 <p>ควรใช้ภาพถ่ายตัวจริงของคุณเห็นใบหน้าชัดเจน</p>
                 
                 <div class="img_upload_container">
                     <label for="file-input">
                         <div class="upload-icon" id="imagePreview">
-                            <small>อัปโหลดภาพ</small>
-                            </div>
+                            <small>คลิกเพื่อเลือกรูป</small>
+                        </div>
                     </label>
                     <input id="file-input" type="file" accept="image/*" onchange="previewImage(event)" />
                 </div>
@@ -54,12 +51,11 @@
                     <label>ชื่อที่ใช้แสดงในระบบ</label>
                     <input type="text" placeholder="กรอกชื่อของคุณ">
                 </div>
-                <button type="submit" class="submit-btn">สร้างบัญชี</button>               
+                <button type="submit" class="submit">สร้างบัญชี</button>               
             </div>
         </form> 
     </div>
 
     <script src="action12.js"></script>
-    
 </body>
 </html>

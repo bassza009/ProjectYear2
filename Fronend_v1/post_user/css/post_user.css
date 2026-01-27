@@ -33,6 +33,29 @@ h1,h3,h5,p,span{
     background-color: #f0f0f0; /* ใส่สีพื้นหลังกันกล่องโบ๋ */
 }
 
+.post_button{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 50px;
+    padding: 5px 45px;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    margin-right: 5px;
+    box-shadow: 0 0 20px #770b8d48;
+}
+.post_button:hover {
+    background: #e2e2e2;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.post_button:active {
+    background: #acacac;
+    transform: translateY(2px);
+}
 
 .details{
     width: 100%;
