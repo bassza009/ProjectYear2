@@ -1,23 +1,40 @@
-// ฟังก์ชันแสดงข้อมูลในตาราง
+
+const jobItemsPerPage = 10;
+let jobCurrentPage = 1;
+
+// ===============================
+// วาดตารางงาน
+// ===============================
 function renderJobTable() {
-    const tableBody = document.getElementById('jobTableBody');
-    if (!tableBody) return; // กัน Error ถ้าหน้าอื่นเรียกใช้ไฟล์นี้แต่ไม่มีตาราง
+    const tableBody = document.getElementById("jobTableBody");
+    if (!tableBody) return;
 
-    // ดึงข้อมูลจาก LocalStorage
-    const myJobs = JSON.parse(localStorage.getItem('myPostedJobs')) || [];
-
-    // ล้างข้อมูลเก่าในตารางก่อน
+    const myJobs = JSON.parse(localStorage.getItem("myPostedJobs")) || [];
     tableBody.innerHTML = "";
 
+    // ไม่มีงาน
     if (myJobs.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">ยังไม่มีงานที่คุณประกาศ</td></tr>';
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center;">
+                    ยังไม่มีงานที่คุณประกาศ
+                </td>
+            </tr>
+        `;
+        renderJobPagination(0);
         return;
     }
 
-    // วนลูปข้อมูลมาสร้างแถวตาราง (แสดงงานใหม่ล่าสุดไว้ข้างบนสุด)
-    myJobs.slice().reverse().forEach(job => {
-        const row = `        
-           <tr onclick="window.location.href='/Fronend_v1/post_user/view_post_gen.html?id=${job.id}'"
+    // เรียงงานใหม่ไว้บน
+    const jobs = myJobs.slice().reverse();
+
+    const start = (jobCurrentPage - 1) * jobItemsPerPage;
+    const end = start + jobItemsPerPage;
+    const pageJobs = jobs.slice(start, end);
+
+    pageJobs.forEach(job => {
+        const row = `
+            <tr onclick="window.location.href='/Fronend_v1/post_user/view_post_gen.html?id=${job.id}'"
             style="cursor:pointer;">
             <td>${job.title}</td>
             <td>${job.category}</td>
@@ -28,23 +45,57 @@ function renderJobTable() {
         `;
         tableBody.innerHTML += row;
     });
+
+    renderJobPagination(jobs.length);
 }
 
-// ฟังก์ชันลบงาน
-function deleteJob(id) {
-    if (confirm("คุณแน่ใจหรือไม่ว่าต้องการลบงานนี้?")) {
-        let myJobs = JSON.parse(localStorage.getItem('myPostedJobs')) || [];
-        
-        // กรองเอาเฉพาะอันที่ ID ไม่ตรงกับที่กดลบเก็บไว้
-        myJobs = myJobs.filter(job => job.id !== id);
-        
-        // บันทึกกลับ
-        localStorage.setItem('myPostedJobs', JSON.stringify(myJobs));
-        
-        // วาดตารางใหม่
-        renderJobTable();
+// ===============================
+// สร้าง pagination 1 2 3
+// ===============================
+function renderJobPagination(totalItems) {
+    const pagination = document.getElementById("jobPagination");
+    if (!pagination) return;
+
+    pagination.innerHTML = "";
+
+    const totalPages = Math.ceil(totalItems / jobItemsPerPage);
+    if (totalPages <= 1) return;
+
+    const createBtn = (text, page, active = false, disabled = false) => {
+        const btn = document.createElement("button");
+        btn.textContent = text;
+        btn.className = "page-btn";
+
+        if (active) btn.classList.add("active");
+        btn.disabled = disabled;
+
+        btn.onclick = () => {
+            jobCurrentPage = page;
+            renderJobTable();
+        };
+
+        return btn;
+    };
+
+    // ปุ่มก่อนหน้า
+    pagination.appendChild(
+        createBtn("«", jobCurrentPage - 1, false, jobCurrentPage === 1)
+    );
+
+    // ปุ่มเลขหน้า
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.appendChild(
+            createBtn(i, i, i === jobCurrentPage)
+        );
     }
+
+    // ปุ่มถัดไป
+    pagination.appendChild(
+        createBtn("»", jobCurrentPage + 1, false, jobCurrentPage === totalPages)
+    );
 }
 
-// เมื่อโหลดหน้าเว็บ ให้ดึงตารางออกมาแสดงทันที
-document.addEventListener('DOMContentLoaded', renderJobTable);
+// ===============================
+// โหลดหน้าแล้วแสดงทันที
+// ===============================
+document.addEventListener("DOMContentLoaded", renderJobTable);
