@@ -32,15 +32,15 @@ fileInput.addEventListener('change', function() {
 function submitJob() {
     // 1. ดึงค่า (ต้องเช็ค ID ให้ตรงกับ HTML)
     const title = document.getElementById('title').value;
-    const price = document.getElementById('peice').value; // ใน HTML ของคุณใช้ id="peice"
+    const price = document.getElementById('peice').value;
     const detail = document.getElementById('detail').value;
     const category = document.getElementById('category').value;
 
-    // 2. ตรวจสอบข้อมูลเบื้องต้น
-    if (!title || !price || !imageData) {
-        alert("กรุณากรอกชื่องาน ราคา และอัปโหลดรูปภาพให้ครบถ้วน");
-        return;
-    }
+    // // 2. ตรวจสอบข้อมูลเบื้องต้น
+    // if (!title || !price || !imageData) {
+    //     alert("กรุณากรอกชื่องาน ราคา และอัปโหลดรูปภาพให้ครบถ้วน");
+    //     return;
+    // }
 
     // 3. สร้างก้อนข้อมูล
     const newJob = {
@@ -57,9 +57,8 @@ function submitJob() {
     jobs.push(newJob);
     localStorage.setItem('allJobs', JSON.stringify(jobs));
 
-    // 5. ไปหน้าหลัก (เช็คชื่อไฟล์หน้าหลักของคุณให้ดี index.html หรือ index1.html)
-    alert("ลงประกาศสำเร็จ!");
-    window.location.href = 'home_stu.html'; 
+    // 5. ไปหน้าหลัก 
+    window.location.href = '../home/home_stu.html'; 
 }
 
 /*---------------------------*/

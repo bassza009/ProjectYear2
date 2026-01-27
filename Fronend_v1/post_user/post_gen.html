@@ -43,55 +43,50 @@
                   </div>
               </header>
 
-              <main>
-                  <div class="event_work">                    
-                    <div class="event_name">
-                      <h1>หาคนสอนภาษาอังกฤษ</h1>
-                      <p>ประเภทงาน : การศึกษา</p>
-                    </div>
-                    <div class="box_LR">
-                      <!-- Left -->
-                        <div class="left">
-                            <div class="details">
-                                <h4>รายละเอียดงาน</h4>
-                                <p>ต้องการครูสอนภาษาอังกฤษ ตัวต่อตัว เน้นสนทนา ใช้ในชีวิตประจำวัน</p>
-                                <hr>
+                <main>
+                    <div class="event_work">                    
+                        <div class="event_name">
+                            <h1 id="displayTitle">กำลังโหลดชื่องาน...</h1> 
+                            <p id="displayCategory">ประเภทงาน : ...</p>
+                        </div>
+                        <div class="box_LR">
+                            <div class="left">
+                                <div class="details">
+                                    <h4>รายละเอียดงาน</h4>
+                                    <p id="displayDetail">กำลังโหลดรายละเอียด...</p>
+                                    <hr>
 
-                                <div class="comment-action">
-                                    <button class="btn-comment" onclick="toggleCommentForm()">แสดงความคิดเห็น</button>
-                                    <div id="commentForm" class="comment-input">
-                                        <textarea id="commentText" placeholder="พิมพ์ข้อความของคุณ..." rows="3"></textarea>
-                                        <button class="btn-send" onclick="submitComment()">ส่งข้อความ</button>
+                                    <div class="comment-action">
+                                        <button class="btn-comment" onclick="toggleCommentForm()">แสดงความคิดเห็น</button>
+                                        <div id="commentForm" class="comment-input" style="display:none;">
+                                            <textarea id="commentText" placeholder="พิมพ์ข้อความของคุณ..." rows="3"></textarea>
+                                            <button class="btn-send" onclick="submitComment()">ส่งข้อความ</button>
+                                        </div>
+                                    </div>
+                                    <div id="commentContainer"></div>
+                                </div>
+                            </div>
+
+                            <div class="right">
+                                <div class="profile_user">
+                                    <div class="img_profile">
+                                        <img src="/photo/OIP.webp" alt="โปรไฟล์">
+                                    </div>
+                                    <div class="user_name">
+                                        <h1>User Name</h1>
+                                        <button class="btn-outline">ดูโปรไฟล์</button>
                                     </div>
                                 </div>
 
-                                <div id="commentContainer"></div>
+                                <div class="card">
+                                    <h1>กำหนดส่งงาน</h1>
+                                    <p id="displayDeadline">...</p>
+                                    <h1 class="price">งบประมาณ</h1>
+                                    <p id="displayPrice">... บาท</p>
+                                </div>
                             </div>
                         </div>
-
-                      <!-- Right -->
-                      <div class="right">
-                        <div class="profile_user">
-                            <div class="img_profile">
-                                <img src="/photo/OIP.webp" alt="โปรไฟล์">
-                            </div>
-                            <div class="user_name">
-                                <h1>User Name</h1>
-                                <button class="btn-outline">ดูโปรไฟล์</button>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                          <h1>กำหนดส่งงาน</h1>
-                          <p>ภายใน 7 วัน</p>
-
-                          <h1 class="price">งบประมาณ</h1>
-                          <p>400 บาท</p>
-                        </div>
-                      </div>
                     </div>
-
-                  </div>  
               </main>
         </div>
         <footer>
@@ -103,6 +98,7 @@
                 <p>© 2025 SDhire, All right reserved</p>
             </div>
         </footer>
+        <script src="post_detail.js"></script>
         <script src="comment.js"></script>
         <script src="swith_PR.js"></script>
 </body>

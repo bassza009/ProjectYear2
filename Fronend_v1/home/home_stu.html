@@ -78,33 +78,35 @@
             <h3 class="section-title">งานแนะนำสำหรับคุณ</h3>
             
             <div class="post_sw">
-                <div class="toggle_sw">
-                    <button class="toggle_skill">โพสต์รับงาน</button>
-                    <button class="toggle_job">โพสต์งาน</button>
-                </div>
-                
-                <div class="post_skill">
-                    <div class="job-grid" id="jobDisplay"></div>
-                </div>
+                    <div class="toggle_sw">
+                        <button class="toggle_skill active">โพสต์รับงาน</button>
+                        <button class="toggle_job">โพสต์งาน</button>
+                    </div>
 
-                <div class="post_job">
-                    <div class="table-container"> <table>
-                            <thead>
-                                <tr>
-                                    <th>ชื่องาน</th>
-                                    <th>ประเภท</th>
-                                    <th>งบประมาณ (บาท)</th>
-                                    <th>ลงประกาศเมื่อ</th>
-                                    <th>กำหนดส่ง</th>
-                                    <th>จัดการ</th> </tr>
-                            </thead>
-                            <tbody id="jobTableBody">
-                                </tbody>
-                        </table>
+                <!-- <div id="pagination" class="pagination"></div> -->
+
+                    <div class="post_skill" id="skillSection">
+                        <div class="job-grid" id="jobDisplay"></div>
+                    </div>
+
+                    <div class="post_job" id="jobSection" style="display: none;">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ชื่องาน</th>
+                                        <th>ประเภท</th>
+                                        <th>งบประมาณ (บาท)</th>
+                                        <th>ลงประกาศเมื่อ</th>
+                                        <th>กำหนดส่ง</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="jobTableBody"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                </div>
-
             </div>
         </main>
     </div>

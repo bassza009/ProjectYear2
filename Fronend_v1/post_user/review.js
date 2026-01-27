@@ -40,10 +40,25 @@ submitBtn.onclick = () => {
     const currentUserName = document.querySelector('.user_infor h1')?.innerText || "FirstName LastName";
     const currentUserImg = document.querySelector('.user_infor img')?.src || "/photo/mimm.jpg";
 
+    // บังคับใส่ดาว
     if (selectedRating == 0) {
-        alert("กรุณาเลือกดาวก่อนครับ");
-        return;
+    const errorElement = document.getElementById("error-msg");
+    errorElement.innerText = "⚠ กรุณาเลือกดาวก่อนครับ";
+    errorElement.style.display = "block"; 
+    return;
     }
+    
+    // ล้างข้อความเตือนเก่าทิ้ง
+    const openReviewBtn = document.getElementById("openReview");
+    const errorElement = document.getElementById("error-msg");
+    openReviewBtn.addEventListener("click", () => {
+    errorElement.innerText = "";
+    errorElement.style.display = "none";
+    selectedRating = 0; 
+    updateStars(0); 
+    document.getElementById("reviewModal").style.display = "block";
+});
+    
 
     // --- ส่วนที่ 1: บันทึกลง LocalStorage ---
     const newReview = {
@@ -76,7 +91,7 @@ submitBtn.onclick = () => {
     `;
 
     reviewContainer.insertAdjacentHTML('afterbegin', reviewHTML);
-    alert("ส่งรีวิวเรียบร้อย ข้อมูลจะไปแสดงที่โปรไฟล์ด้วยครับ!");
+
     closeAndReset();
 };
 

@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Profile_General</title>
-=======
     <title>Post_Jop</title>
     <link rel="stylesheet" href="css/review.css">
->>>>>>> 07f10f02d13ca155b613ab2e3db09947064f439e
     <link rel="stylesheet" href="css/post_user.css">
     <link rel="stylesheet" href="../create_post/css/Template_HF.css">
 </head>
@@ -20,7 +16,6 @@
             </a>
             <div class="profile_container">
                 <div class="buttom_header">
-                    <button type="button" class="post_button">โพสต์</button>
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <img src="/photo/mimm.jpg" alt="โปรไฟล์">
@@ -86,9 +81,11 @@
                             <div class="review-header">
                                 <h1>รีวิว</h1>
                                 <button id="openReview">เขียนรีวิว</button>
+                                
                             </div> 
                             <div id="reviewModal" class="modal">
                                 <div class="modal-content">
+                                    <p id="error-msg"></p>
                                     <div class="star-rating">
                                         <span class="star" data-value="1">&#9733;</span>
                                         <span class="star" data-value="2">&#9733;</span>
