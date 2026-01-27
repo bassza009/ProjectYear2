@@ -11,14 +11,22 @@ function renderJobTable() {
     const myJobs = JSON.parse(localStorage.getItem("myPostedJobs")) || [];
     tableBody.innerHTML = "";
 
+    // ไม่มีงาน
     if (myJobs.length === 0) {
-        tableBody.innerHTML =
-            `<tr><td colspan="6" style="text-align:center;">ยังไม่มีงานที่คุณประกาศ</td></tr>`;
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align:center;">
+                    ยังไม่มีงานที่คุณประกาศ
+                </td>
+            </tr>
+        `;
         renderJobPagination(0);
         return;
     }
 
+    // เรียงงานใหม่ไว้บน
     const jobs = myJobs.slice().reverse();
+
     const start = (jobCurrentPage - 1) * jobItemsPerPage;
     const end = start + jobItemsPerPage;
     const pageJobs = jobs.slice(start, end);
@@ -49,6 +57,7 @@ function renderJobPagination(totalItems) {
     if (!pagination) return;
 
     pagination.innerHTML = "";
+
     const totalPages = Math.ceil(totalItems / jobItemsPerPage);
     if (totalPages <= 1) return;
 
@@ -56,25 +65,31 @@ function renderJobPagination(totalItems) {
         const btn = document.createElement("button");
         btn.textContent = text;
         btn.className = "page-btn";
+
         if (active) btn.classList.add("active");
         btn.disabled = disabled;
+
         btn.onclick = () => {
             jobCurrentPage = page;
             renderJobTable();
         };
+
         return btn;
     };
 
+    // ปุ่มก่อนหน้า
     pagination.appendChild(
         createBtn("«", jobCurrentPage - 1, false, jobCurrentPage === 1)
     );
 
+    // ปุ่มเลขหน้า
     for (let i = 1; i <= totalPages; i++) {
         pagination.appendChild(
             createBtn(i, i, i === jobCurrentPage)
         );
     }
 
+    // ปุ่มถัดไป
     pagination.appendChild(
         createBtn("»", jobCurrentPage + 1, false, jobCurrentPage === totalPages)
     );
