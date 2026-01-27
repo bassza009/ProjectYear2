@@ -1,0 +1,270 @@
+.main_profile{
+    margin: 10px 10px;
+}
+h4,h5{
+    margin: 0;
+}
+.back_pro img{
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.img_profile img{
+  width: 220px;
+  height: 220px;
+  border: 2px solid #B9B9B9;
+  border-radius: 100%;
+  margin: -120px 0px 10px 55px; /*บน ล่าง ซ้าย ขวา*/
+}
+
+.back_pro button {
+    position: absolute;
+    padding: 8px 15px;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: 0.2s;
+    right: 30px;
+    top: 380px;
+}
+
+.img_profile button {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    background-color: #e4e6eb;
+    border: none; 
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    left: 250px;
+    top: 470px;
+}
+
+.back_pro button:hover
+,.img_profile button:hover {
+    background-color: #d8dadf;
+    transform: scale(1.1);
+}
+
+
+/*--------------ชื่อผู้ใช้ ---------------------------------------------*/
+.user_name h1{
+  margin: 0;
+  text-overflow: ellipsis; /* เติม ... ท้ายข้อความ */
+  white-space: nowrap; /* ห้ามขึ้นบรรทัดใหม่ */
+  overflow: hidden; /* ซ่อนส่วนที่เกิน */
+  margin-top: -110px;
+  margin-left: 300px;
+  font-size: 35px;
+}
+.user_name span{
+  margin-left: 320px;
+  font-size: 16px;
+}
+
+/*-------------- ส่วนพวกงาน ---------------------------------------------*/
+.job{
+    display: flex;
+    gap: 15px;
+}
+
+/*--------------ปุ่มกด ---------------------------------------------*/
+.toggle_sw {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 410px;
+    gap: 10px;
+    background-color: transparent;
+    
+}
+.toggle_sw button {
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border-radius: 12px 12px 0 0; 
+    transition: 0.3s;
+}
+.toggle_post {
+    
+    background: linear-gradient(to bottom, #999999, #777777);
+    box-shadow: 0 -2px 10px rgba(163, 70, 224, 0.2); 
+}
+.toggle_review {
+    background: linear-gradient(to bottom, #999999, #777777);
+}
+.toggle_sw button.active {
+    background: linear-gradient(to bottom, #a346e0, #8338b8); 
+    box-shadow: 0 -2px 10px rgba(163, 70, 224, 0.4);
+    position: relative;
+    z-index: 2;
+}
+.toggle_sw button:not(.active) {
+    background: linear-gradient(to bottom, #999999, #777777);
+    color: #eeeeee;
+}
+
+.toggle_sw button:hover {
+    filter: brightness(1.1); /* สว่างขึ้นเล็กน้อย */
+    transform: translateY(-1px); /* ลอยขึ้นนิดหน่อย */
+}
+
+/*--------------สถิติ อธิบาย แกลลอรี่ ติดต่อ ---------------------------------------------*/
+.math{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    width: 330px;
+    height: 470px;
+
+}
+
+.math h4{
+    margin-top: 10px;
+}
+
+.explain{
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(125, 125, 125, 0.912) ;
+    width: 330px;
+    height: 170px;
+}
+
+.math img{
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.contact{
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    width: 330px;
+    height: 150px;
+}
+
+.contact span ,.contact a{
+    display: inline-block; 
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/*-------------- บลอคขวา พวกโพสต์ กับรีวิว ---------------------------------------------*/
+.box_R{
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 670px;
+    overflow-y: auto;
+}
+
+.post {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    text-decoration: none; /* ลบเส้นใต้ลิงก์ */
+    color: inherit;       /* ใช้สีตัวอักษรตามเดิม ไม่ให้เป็นสีฟ้าแบบลิงก์ */
+    transition: 0.3s;      /* เพิ่มความลื่นไหลเวลาเอาเมาส์วาง */
+    cursor: pointer;
+}
+
+/* เอฟเฟกต์ตอนเอาเมาส์วาง (Hover) ให้ดูเหมือนกดได้ */
+.post:hover {
+    background-color: #f9f9f9;
+    border-color: #6a5acd; /* เปลี่ยนสีขอบเบาๆ ให้รู้ว่าโฟกัสอยู่ */
+    transform: translateY(-2px); /* ยกตัวขึ้นเล็กน้อย */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.post_job {
+    display: flex;
+    flex-direction: column;
+}
+.post_text h3 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+.post_text p {
+    margin: 5px 0;
+    font-size: 15px;
+    color: #333;
+}
+.poster img{
+    align-self: flex-end;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    display: block;
+}
+
+/*--------------รัวิว ---------------------------------------------*/
+
+.review {
+    display: none; /* จะถูกเปลี่ยนเป็น flex โดย JS เมื่อกดปุ่ม */
+    flex-direction: column; /* สั่งให้รีวิวแต่ละอันเรียงต่อกันลงมาข้างล่าง */
+    gap: 15px;           
+    background-color: transparent; /* เปลี่ยนเป็นใส เพราะเราจะให้แต่ละรีวิวมีกล่องของตัวเอง */
+    width: 100%;
+    
+}
+.review-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+    width: 100%;
+    margin-bottom: 10px; 
+    box-sizing: border-box;
+    overflow: hidden; 
+    
+}
+
+.review-item .general img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-item .comment h5 {
+    margin: 0 0 5px 0;
+}
+
+.review-item p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    
+    /* แก้ปัญหาการล้นตรงจุดนี้ */
+    white-space: normal;       /* ยอมให้ขึ้นบรรทัดใหม่ */
+    word-break: break-word;    /* ตัดคำที่ยาวเกินไป */
+    overflow-wrap: break-word; /* กันเหนียวสำหรับคำยาวพืดเดียว */
+}
+
+
