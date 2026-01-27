@@ -44,6 +44,7 @@
                   </div>
               </header>
 
+       
         <main>
            <div class="event_job">
                 <div class="event_name">
@@ -70,7 +71,7 @@
                                 <h1>FirstName LastName</h1>
                                 <span>✅ สถานะ : นิสิต</span><br>
                                 <span>🏫 คณะ: เทคโนโลยีสารสนเทศและการสื่อสาร</span><br>
-                                <a href="../profile_user/view_profile_user.html">
+                                <a href="../profile_user/profile_user.html">
                                     <button class="btn-outline">ดูโปรไฟล์</button>
                                 </a> 
                             </div> 
@@ -79,14 +80,35 @@
                             <div class="review-header">
                                 <h1>รีวิว</h1>
                                 <button id="openReview">เขียนรีวิว</button>
+                                
+                            </div> 
+                            <div id="reviewModal" class="modal">
+                                <div class="modal-content">
+                                    <p id="error-msg"></p>
+                                    <div class="star-rating">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                    
+                                    <textarea id="reviewText" placeholder="เขียนความรู้สึก..."></textarea>
+                                    
+                                    <div class="modal-buttons">
+                                        <button id="cancelBtn">ยกเลิก</button>
+                                        <button id="submitBtn">ตกลง</button>
+                                    </div>
+                                </div>
                             </div>
+
                             <div id="reviewContainer"> </div>
                         </div>
                     </div>
                 </div>
            </div>
-
         </main>
+    
     </div>
    
 <script src="swith_PR.js"></script>
