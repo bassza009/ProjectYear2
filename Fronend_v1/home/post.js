@@ -54,7 +54,7 @@ function renderJobs() {
                             class="avatar">
                         <div>
                             <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
-                            <small>${job.category || 'งานทั่วไป'}</small>
+                            <small>${job.category || 'ยังไม่เลือก'}</small>
                         </div>
                     </div>
 
@@ -152,3 +152,6 @@ window.onload = () => {
         }, 10);
     };
 };
+
+
+//localStorage.clear();
