@@ -216,6 +216,7 @@ h4,h5{
 .poster img{
     align-self: flex-end;
     width: 100%;
+    max-width: 350px;
     height: 220px;
     object-fit: cover;
     border-radius: 15px;
@@ -228,18 +229,12 @@ h4,h5{
 }
 
 #pro_detail {
-    margin: 5px 0;
-    font-size: 15px;
-    color: #333;
-    line-height: 1.6;
-    
     /* การตัดข้อความเมื่อยาวเกินไป */
     display: -webkit-box;
-    -webkit-line-clamp: 6;    /* แสดงสูงสุด 6 บรรทัด (ปรับเปลี่ยนได้ตามชอบ) */
+    -webkit-line-clamp: 10;    /* แสดงสูงสุด x บรรทัด (ปรับเปลี่ยนได้ตามชอบ) */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    
     /* สำหรับภาษาไทย */
     word-break: break-word; 
     white-space: normal;

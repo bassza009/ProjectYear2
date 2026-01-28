@@ -24,5 +24,5 @@ function submitwork() {
     let myJobs = JSON.parse(localStorage.getItem('myPostedJobs')) || [];
     myJobs.push(newJob);
     localStorage.setItem('myPostedJobs', JSON.stringify(myJobs));
-    window.location.href = '../home/home_stu.html'; 
+    window.location.href = '../home/home_gen.html'; 
 }
