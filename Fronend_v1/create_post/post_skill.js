@@ -59,8 +59,8 @@ function submitJob() {
     jobs.push(newJob);
     localStorage.setItem('allJobs', JSON.stringify(jobs));
 
-    // 5. ไปหน้าหลัก (เช็คชื่อไฟล์หน้าหลักของคุณให้ดี index.html หรือ index1.html)
-    alert("ลงประกาศสำเร็จ!");
+    // 5. ไปหน้าหลัก
+    
     window.location.href = '../home/home_stu.html'; 
 }
 

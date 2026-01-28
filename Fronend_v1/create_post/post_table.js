@@ -4,11 +4,12 @@ function submitwork() {
     const category = document.getElementById('category').value;
     const price = document.getElementById('price').value;
     const deadline = document.getElementById('deadline').value;
-
+/*
     if (!title || !category || !price) {
         alert("กรุณากรอกข้อมูล ชื่องาน, ประเภท และงบประมาณ ให้ครบถ้วน");
         return;
     }
+    */
 
     const newJob = {
         id: Date.now(),
@@ -23,10 +24,5 @@ function submitwork() {
     let myJobs = JSON.parse(localStorage.getItem('myPostedJobs')) || [];
     myJobs.push(newJob);
     localStorage.setItem('myPostedJobs', JSON.stringify(myJobs));
-
-    if (confirm("ลงประกาศงานสำเร็จ! ต้องการดูรายละเอียดงานหรือไม่?")) {
-        window.location.href = "post_gen.html";
-    } else {
-        window.location.href = "home_stu.html";
-    }
+    window.location.href = '../home/home_stu.html'; 
 }
