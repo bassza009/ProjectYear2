@@ -197,3 +197,119 @@ h1,h3,h5,p,span{
     border: 1px solid #f8d7da;
     margin-top: 10px;
 }
+/* ล้าง padding ที่ตั้งไว้กว้างๆ เฉพาะจุดที่ต้องเป๊ะ */
+.star-rating, .modal-content, .comment .stars {
+    padding: 0 !important;
+}
+
+/* Modal Styling */
+.modal {
+    position: fixed; z-index: 1000; left: 0; top: 0;
+    width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+}
+.modal-content {
+    background: white; padding: 25px !important; border-radius: 15px;
+    width: 90%; max-width: 400px; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+#reviewText {
+    width: 100%; height: 100px; margin-top: 10px; padding: 10px;
+    border-radius: 8px; border: 1px solid #ddd; resize: none; box-sizing: border-box;
+}
+
+/* ดาวสีทอง Premium */
+/* ระบบดาวแบบ Shopee */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+.star-rating input { display: none; }
+.star-rating label { font-size: 40px; color: #ddd; cursor: pointer; transition: 0.2s; }
+.star-rating label:before { content: '★'; }
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label { color: #fbbf24; }
+
+/* การอัปโหลดรูปและ Preview */
+.custom-file-upload {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+#image-preview-container img {
+    width: 80px; height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* รูปในรายการรีวิว */
+/* คลุมพื้นที่อัปโหลด */
+.upload-section {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* ปรับแต่งปุ่มอัปโหลด (Label) ให้เหมือนปุ่มกดจริงๆ */
+.custom-file-upload {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #f1f5f9;
+    border-color: #fbbf24; /* สีเหลืองตามธีมของคุณ */
+    color: #b45309;
+    transform: translateY(-1px);
+}
+
+/* ซ่อน Input file ของจริง */
+#reviewImgInput {
+    display: none;
+}
+
+/* ส่วนแสดงรูปตัวอย่าง (Preview) */
+#image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#image-preview-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+#image-preview-container img:hover {
+    transform: scale(1.1);
+    cursor: zoom-in;
+}
+
+/* ต้องมีบรรทัดนี้ในไฟล์ CSS */
+#reviewModal {
+    display: none; 
+    /* ... style อื่นๆ ... */
+}
