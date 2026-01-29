@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/home_login.css">    
+    <link rel="stylesheet" href="css/Tem_main.css">
 </head>
 <body>
 
@@ -15,40 +16,161 @@
         <button type="button">เข้าสู่ระบบ </button>
     </header>
 
-    <main>
-        <div class="hero">
-            <div class="text_recommend">
-                <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
-                <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
-                พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
-                <a href="../login_project/sign_in.html" class="btn-post">โพสต์</a>
+       <main>
+            <div class="hero">
+                <div class="text_recommend">
+                    <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
+                    <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
+                    พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
+                    <a href="/Fronend_v1/create_post/post_work.html" class="btn-post">โพสต์</a>
+                </div>
+                <div class="img_right">
+                    <img src="/photo/profile.png" alt="profile">
+                </div>
             </div>
-            <div class="img_right">
-                <img src="/photo/profile.png" alt="profile">
+
+            <div class="form_input">
+                <form id="searchForm">     
+                    <select name="typew" id="typew">
+                        <option alue="" disabled selected hidden>ประเภทงาน</option>
+                        <option value="0">งานทั่วไป</option>
+                        <option value="1">เรียนพิเศษ</option>
+                        <option value="2">ภาพถ่าย-วิดีโอ</option>
+                        <option value="3">ออกแบบกราฟิก</option>
+                    </select>
+                <input type="search" id="search" placeholder="ค้นหา">
+                <button id="reset" type="reset">ล้าง</button>
+                <button id="submit" type="submit">ค้นหา</button>
+                </form>
             </div>
-        </div>
+            <section class="category-showcase">
+            <div class="cat-header">
+                <h3>หมวดหมู่งานยอดนิยม</h3>
+                <a href="#" class="see-more">ดูทั้งหมด <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
 
-        <div class="form_input">
-            <form id="searchForm">     
-                <select name="typew" id="typew">
-                    <option alue="" disabled selected hidden>ประเภทงาน</option>
-                    <option value="0">งานทั่วไป</option>
-                    <option value="1">เรียนพิเศษ</option>
-                    <option value="2">ภาพถ่าย-วิดีโอ</option>
-                    <option value="3">ออกแบบกราฟิก</option>
-                </select>
-            <input type="search" id="search" placeholder="ค้นหา">
-            <button id="reset" type="reset">ล้าง</button>
-            <button id="submit" type="submit">ค้นหา</button>
-            </form>
-        </div>
+            <div class="cat-grid">
+                <a href="#" class="cat-card-icon color-1">
+                    <div class="icon-box">
+                        <img src="../icon/package.png">
+                    </div>
+                    <div class="cat-info">
+                        <span>รับจ้างทั่วไป</span>
+                        <small>85 งาน</small>
+                    </div>
+                </a>
+                <a href="#" class="cat-card-icon color-2">
+                    <div class="icon-box">
+                        <img src="../icon/programming.png" >
+                    </div>
+                    <div class="cat-info">
+                        <span>เขียนโปรแกรม</span>
+                        <small>120 งาน</small>
+                    </div>
+                </a>
 
-        <h3 class="section-title">งานแนะนำสำหรับคุณ</h3>
-        
-        <div class="job-grid" id="jobDisplay"></div>
-        <!-- Pagination (ต้องอยู่ตรงนี้) -->
-        <div class="pagination" id="pagination"></div>
-        <!-- JS จะเป็นคนสร้างปุ่ม 1 2 3 ... ให้เอง -->
+                <a href="#" class="cat-card-icon color-3">
+                    <div class="icon-box">
+                        <img src="../icon/art-design.png">
+                    </div>
+                    <div class="cat-info">
+                        <span>กราฟิกดีไซน์</span>
+                        <small>85 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-4">
+                    <div class="icon-box">
+                        <img src="../icon/video.png">
+                    </div>
+                    <div class="cat-info">
+                        <span>ตัดต่อวิดีโอ</span>
+                        <small>40 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-5">
+                    <div class="icon-box">
+                        <img src="../icon/language.png">
+                    </i></div>
+                    <div class="cat-info">
+                        <span>แปลภาษา</span>
+                        <small>30 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-6">
+                    <div class="icon-box">
+                        <img src="../icon/thesis.png" >
+                    </i></div>
+                    <div class="cat-info">
+                        <span>ติวเตอร์</span>
+                        <small>65 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-1">
+                    <div class="icon-box">
+                        <img src="../icon/photo-camera.png">
+                    </i></div>
+                    <div class="cat-info">
+                        <span>ถ่ายภาพ</span>
+                        <small>25 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-2">
+                    <div class="icon-box">
+                        <img src="../icon/music.png" >
+                    </div>
+                    <div class="cat-info">
+                        <span>ดนตรี และเสียง</span>
+                        <small>25 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-3">
+                    <div class="icon-box">
+                        <img src="../icon/folder.png" >
+                    </div>
+                    <div class="cat-info">
+                        <span>เอกสาร</span>
+                        <small>25 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-4">
+                    <div class="icon-box">
+                        <img src="../icon/technical.png">
+                    </div>
+                    <div class="cat-info">
+                        <span>ซ่อมแซม</span>
+                        <small>25 งาน</small>
+                    </div>
+                </a>
+
+                <a href="#" class="cat-card-icon color-5">
+                    <div class="icon-box">
+                        <img src="../icon/tarot.png">
+                    </div>
+                    <div class="cat-info">
+                        <span>สายมู</span>
+                        <small>25 งาน</small>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+                    <h3 class="section-title">งานแนะนำสำหรับคุณ</h3>
+                    
+                    <div class="main_post">
+                    </div>
+                        <div class="post_skill">
+                            <div class="job-grid" id="jobDisplay"></div>
+                            <!-- Pagination (ต้องอยู่ตรงนี้) -->
+                            <div class="pagination" id="pagination"></div>
+                            <!-- JS จะเป็นคนสร้างปุ่ม 1 2 3 ... ให้เอง -->
+                    </div>
     </main>
 
     <footer>

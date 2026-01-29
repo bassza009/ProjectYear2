@@ -5,13 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile Page</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Template_HF.css">
 </head>
 <body>
+ <div class="content-wrapper">
+        <header>        
+            <a href="/Fronend_v1/home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="/Fronend_v1/profile_user/profile_user.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="/Fronend_v1/home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
 
     <div class="profile-container">
-        <header class="profile-header">
+        <div class="profile-header">
             <div class="avatar-wrapper">
-                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Kanjana" alt="Avatar" class="avatar-img">
+                <img src="/photo/pro_G.jpg" alt="Avatar" class="avatar-img">
                 <button class="edit-avatar-btn">✎</button>
             </div>
             
@@ -31,9 +68,9 @@
                     <span class="check-icon">✓</span> งานที่สำเร็จ : 10 งาน
                 </div>
             </div>
-        </header>
+        </div>
 
-        <div class="profile-content">
+        <dg8iv class="profile-content">
             <aside class="sidebar">
                 <section class="contact-section">
                     <div class="section-header">
@@ -72,7 +109,7 @@
                         <p class="label">ความคิดเห็นที่เป็นประโยชน์</p>
                         <div class="review-card">
                             <div class="user-placeholder">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="user">
+                                <img src="/photo/pro_G.jpg" alt="user">
                             </div>
                             <div class="review-content">
                                 <div class="stars">★★★★★</div>
@@ -101,7 +138,20 @@
             </main>
         </div>
     </div>
+    </div>
 
+    <footer>
+    <div class="footer-contact">
+        <p>ติดต่อเรา</p>
+        <p>sdhire67@gmail.com</p>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 SDhire, All right reserved</p>
+    </div>
+    </footer>
+
+
+    <script src="swith_PR.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
