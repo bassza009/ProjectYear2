@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Page</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="profile-container">
+        <header class="profile-header">
+            <div class="avatar-wrapper">
+                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Kanjana" alt="Avatar" class="avatar-img">
+                <button class="edit-avatar-btn">✎</button>
+            </div>
+            
+            <div class="header-info">
+                <div class="name-rating-row">
+                    <h1 id="user-name">Loading...</h1>
+                    <div class="rating">
+                        <span class="star">★</span>
+                        <span class="rating-value">4.9</span>
+                    </div>
+                </div>
+                <p class="status-badge">
+                    <span class="status-dot"></span> สถานะ : นิสิต
+                </p>
+                <p class="faculty-text">คณะ : เทคโนโลยีสารสนเทศและการสื่อสาร</p>
+                <div class="stats-card">
+                    <span class="check-icon">✓</span> งานที่สำเร็จ : 10 งาน
+                </div>
+            </div>
+        </header>
+
+        <div class="profile-content">
+            <aside class="sidebar">
+                <section class="contact-section">
+                    <div class="section-header">
+                        <h3>ช่องทางการติดต่อ</h3>
+                        <button onclick="toggleEdit()" id="edit-btn" class="btn-small">แก้ไข</button>
+                    </div>
+                    
+                    <ul class="contact-list" id="contact-list">
+                        <li>
+                            <span class="icon">📧</span>
+                            <span class="contact-value" id="val-email">kanjana02548m@gmail.com</span>
+                        </li>
+                        <li>
+                            <span class="icon">📞</span>
+                            <span class="contact-value" id="val-phone">099-790-XXXX</span>
+                        </li>
+                        <li>
+                            <span class="icon">💬</span>
+                            <span class="contact-value" id="val-line">kanjana_25</span>
+                        </li>
+                        <li>
+                            <span class="icon">📸</span>
+                            <span class="contact-value" id="val-ig">jxrney.bxm</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="review-section">
+                    <h3>รีวิว</h3>
+                    <div class="filter-tags">
+                        <button class="tag">มีรูปภาพ</button>
+                        <button class="tag active">★ 5 (123)</button>
+                        <button class="tag">★ 4</button>
+                    </div>
+                    <div class="review-preview">
+                        <p class="label">ความคิดเห็นที่เป็นประโยชน์</p>
+                        <div class="review-card">
+                            <div class="user-placeholder">
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="user">
+                            </div>
+                            <div class="review-content">
+                                <div class="stars">★★★★★</div>
+                                <p class="quote">"ทำงานเร็วมากค่ะ สอนเข้าใจง่าย แนะนำเลย! เนื้อหาแน่นมาก เป็นกันเองสุดๆ ถ้ามีโอกาสจะกลับมาเรียนซ้ำแน่นอนค่ะ"</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <main class="main-content">
+                <div class="work-card">
+                    <div class="card-image">
+                        <img src="/photo/pro_G.jpg" alt="Work">
+                        <span class="badge">Open for registration</span>
+                    </div>
+                    <div class="card-body">
+                        <h4>รับสอนพิเศษ</h4>
+                        <ul class="work-details">
+                            <li>• รับสอนภาษาอังกฤษ 18:00 - 20:00 น.</li>
+                            <li>• สอนแบบออนไลน์ผ่าน Zoom/Meet</li>
+                            <li>• ทักถามรายละเอียดได้เลย เป็นกันเองค่ะ</li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

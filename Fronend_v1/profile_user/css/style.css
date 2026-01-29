@@ -1,0 +1,335 @@
+:root {
+    --primary-color: #f97316;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-light: #64748b;
+    --border-color: #e2e8f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.profile-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* Header Section */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 40px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.avatar-wrapper {
+    position: relative;
+}
+
+.avatar-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 4px solid #fff7ed;
+    object-fit: cover;
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.name-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.rating {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.status-badge {
+    color: #16a34a;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+.stats-card {
+    margin-top: 15px;
+    background: #fff7ed;
+    color: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 8px;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+
+/* Layout Content */
+.profile-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    border-right: 1px solid var(--border-color);
+}
+
+.main-content {
+    flex: 2;
+    min-width: 350px;
+    padding: 30px;
+    background-color: #fafafa;
+}
+
+/* Sidebar Components */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.contact-list {
+    list-style: none;
+}
+
+.contact-list li {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-small {
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: none;
+    background: #f1f5f9;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.btn-save {
+    background: #22c55e;
+    color: white;
+}
+
+/* Review Styles */
+.filter-tags {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.tag {
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: white;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.tag.active {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+.review-card {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.user-placeholder {
+    width: 40px;
+    height: 40px;
+    background: #e2e8f0;
+    border-radius: 50%;
+}
+
+.quote {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+/* Work Card */
+.work-card {
+    background: white;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.work-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    position: relative;
+    height: 200px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #facc15;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.work-details {
+    list-style: none;
+    margin-top: 10px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Input style for editing */
+.edit-input {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+}
+
+/* ส่วนของ Section รีวิว */
+.review-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: auto; /* ให้สูงตามเนื้อหาจริง */
+    min-height: min-content;
+}
+
+/* ปรับแต่งกลุ่มปุ่ม Filter ให้กดง่ายขึ้น */
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap; /* ถ้าจอมือถือแคบ ให้ปุ่มลงมาบรรทัดใหม่ */
+    gap: 8px;
+}
+
+.review-preview {
+    margin-top: 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* หัวใจหลัก: การปรับ Review Card ให้ขยายตามข้อความ */
+.review-card {
+    display: flex;
+    align-items: flex-start; /* ให้ไอคอนอยู่ด้านบนสุดเสมอ */
+    gap: 15px;
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.user-placeholder {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0; /* ป้องกันไม่ให้รูปโดนบีบจนเบี้ยว */
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f1f5f9;
+}
+
+.user-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.review-content {
+    flex: 1; /* กินพื้นที่ที่เหลือทั้งหมด */
+}
+
+.stars {
+    color: #fbbf24;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+.quote {
+    font-size: 0.9rem;
+    line-height: 1.5; /* เพิ่มระยะบรรทัดให้อ่านง่าย */
+    color: var(--text-main);
+    word-break: break-word; /* ป้องกันข้อความยาวเกินขอบ */
+    white-space: normal; /* มั่นใจว่าข้อความจะขึ้นบรรทัดใหม่ */
+}
