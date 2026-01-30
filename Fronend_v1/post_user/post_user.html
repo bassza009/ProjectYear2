@@ -83,26 +83,37 @@
                                 
                             </div> 
                             <div id="reviewModal" class="modal">
-                                <div class="modal-content">
-                                    <p id="error-msg"></p>
-                                    <div class="star-rating">
-                                        <span class="star" data-value="1">&#9733;</span>
-                                        <span class="star" data-value="2">&#9733;</span>
-                                        <span class="star" data-value="3">&#9733;</span>
-                                        <span class="star" data-value="4">&#9733;</span>
-                                        <span class="star" data-value="5">&#9733;</span>
-                                    </div>
-                                    
-                                    <textarea id="reviewText" placeholder="เขียนความรู้สึก..."></textarea>
-                                    
-                                    <div class="modal-buttons">
-                                        <button id="cancelBtn">ยกเลิก</button>
-                                        <button id="submitBtn">ตกลง</button>
-                                    </div>
+                            <div class="modal-content">
+                                <h3>ให้คะแนนผลงาน</h3>
+                                <p id="error-msg" style="color: red; display: none; font-size: 14px;"></p>
+                                
+                                <div class="star-rating">
+                                    <input type="radio" name="rating" id="rat-5" value="5"><label for="rat-5"></label>
+                                    <input type="radio" name="rating" id="rat-4" value="4"><label for="rat-4"></label>
+                                    <input type="radio" name="rating" id="rat-3" value="3"><label for="rat-3"></label>
+                                    <input type="radio" name="rating" id="rat-2" value="2"><label for="rat-2"></label>
+                                    <input type="radio" name="rating" id="rat-1" value="1"><label for="rat-1"></label>
+                                </div>
+
+                                <div class="upload-section">
+                                    <label for="reviewImgInput" class="custom-file-upload">
+                                        📸 เพิ่มรูปภาพผลงาน
+                                    </label>
+                                    <input type="file" id="reviewImgInput" accept="image/*" onchange="previewImage(this)">
+                                    <div id="image-preview-container"></div> 
+                                </div>
+
+                                <textarea id="reviewText" placeholder="เขียนรีวิวของคุณที่นี่..."></textarea>
+                                
+                                <div class="modal-buttons">
+                                    <button id="cancelBtn">ยกเลิก</button>
+                                    <button id="submitBtn">ตกลง</button>
                                 </div>
                             </div>
+                        </div>
+                        </div>
 
-                            <div id="reviewContainer"> </div>
+                        <div id="reviewContainer"> </div>
                         </div>
                     </div>
                 </div>

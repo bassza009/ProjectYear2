@@ -107,3 +107,18 @@
     font-weight: bold;
     cursor: pointer;
 };
+
+#openReview {
+    background: #f0f0f0; 
+    border: 1px solid #ccc;
+    padding: 6px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+#openReview:hover {
+    transform: scale(1.1);
+    background: #e5e5e5;
+}

@@ -1,6 +1,12 @@
 const jobItemsPerPage = 10;
 let jobCurrentPage = 1;
 
+const catNames = {
+    "0": "งานทั่วไป",
+    "1": "เรียนพิเศษ",
+    "2": "ภาพถ่าย-วิดีโอ",
+    "3": "ออกแบบกราฟิก"
+};
 // ===============================
 // วาดตารางงาน
 // ===============================
@@ -32,11 +38,13 @@ function renderJobTable() {
     const pageJobs = jobs.slice(start, end);
 
     pageJobs.forEach(job => {
+        const displayCategory = catNames[job.category] || job.category || "เลือกหมวดหมู่";
+
         const row = `
             <tr onclick="window.location.href='/Fronend_v1/post_user/post_gen.html?id=${job.id}'"
                 style="cursor:pointer;">
                 <td>${job.title}</td>
-                <td>${job.category}</td>
+                <td>${displayCategory}</td> 
                 <td>${Number(job.price).toLocaleString()}</td>
                 <td>${job.postDate}</td>
                 <td>${job.deadline || "-"}</td>

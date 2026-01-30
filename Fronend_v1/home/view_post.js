@@ -6,6 +6,12 @@ let currentPage = 1;
 let currentType = 'all';
 let currentSearch = '';
 
+const categoryNames = {
+    "0": "งานทั่วไป",
+    "1": "เรียนพิเศษ",
+    "2": "ภาพถ่าย-วิดีโอ",
+    "3": "ออกแบบกราฟิก"
+};
 /* ================================
    RENDER JOBS (มี pagination)
 ================================ */
@@ -33,7 +39,7 @@ function renderJobs() {
     if (pageJobs.length === 0) {
         display.innerHTML = `
           <p style="grid-column:1/-1;text-align:center;padding:50px;color:#999;">
-            ไม่พบงานที่ตรงกับการค้นหา
+            ไม่พบงาน
           </p>`;
         renderPagination(0);
         return;
@@ -54,7 +60,7 @@ function renderJobs() {
                             class="avatar">
                         <div>
                             <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
-                            <small>${job.category || 'งานทั่วไป'}</small>
+                            <small>${categoryNames[job.category] || job.category || 'ยังไม่เลือก'}</small>
                         </div>
                     </div>
 
@@ -152,3 +158,5 @@ window.onload = () => {
         }, 10);
     };
 };
+
+//localStorage.clear();

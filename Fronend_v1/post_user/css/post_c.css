@@ -1,0 +1,156 @@
+/* --- 1. Global Styles --- */
+h1, h3, h5, p, span {
+    margin: 0;
+    padding: 0; /* ลบ padding 5% เดิมออกเพื่อไม่ให้โครงสร้างภายในเพี้ยน */
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Kanit', sans-serif;
+}
+
+.event_job {
+    max-width: 1250px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.event_name {
+    margin-bottom: 25px;
+}
+
+.event_name h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.event_name p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* --- 2. Layout Structure --- */
+.box_LR {
+    display: flex;
+    gap: 50px; /* ระยะห่างระหว่างภาพกับโพรไฟล์ */
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* --- 3. Left Side: Post Content --- */
+.box_post {
+    flex: 1;
+    max-width: 700px; /* ล็อคความกว้างฝั่งซ้าย */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.img_post img {
+    width: 100%;
+    max-width: 700px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background-color: #eee;
+    display: block;
+}
+
+.details {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    min-height: 320px;
+}
+
+.details h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.details p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* --- 4. Right Side: Profile & Reviews --- */
+.box_userRe {
+    width: 100%;
+    max-width: 450px; /* ล็อคความกว้างฝั่งขวา */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 600px; /* ขยายความยาวให้สมดุล */
+}
+
+.profile_user {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.img_profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.user_name {
+    margin-left: 20px;
+}
+
+.user_name h1 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.user_name span {
+    font-size: 14px;
+    color: #666;
+}
+
+.btn-outline {
+    margin-top: 15px;
+    background: transparent;
+    border: 1.5px solid #9b59b6;
+    color: #9b59b6;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: #9b59b6;
+    color: white;
+}
+
+/* --- 5. Review Container --- */
+#reviewContainer {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.box_review {
+    display: flex;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
