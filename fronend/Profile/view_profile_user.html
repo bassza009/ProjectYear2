@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Template_HF.css">
+    <link rel="stylesheet" href="css/review.css">
+</head>
+<body>
+ <div class="content-wrapper">
+        <header>        
+            <a href="../Home/home_login.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="/photo/OIP.webp" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="/photo/OIP.webp" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>User Name</h1>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="../Profile/profile_gen.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="../Home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <main>
+            <div class="profile-header">
+                <div class="avatar-wrapper">
+                    <img src="/photo/pro_G.jpg" alt="Avatar" class="avatar-img">
+                </div>
+                
+                <div class="header-info">
+                    <div class="name-rating-row">
+                        <h1 id="user-name">Loading...</h1>
+                    </div>
+                    <p class="status-badge">
+                        <span class="status-dot"></span> สถานะ : นิสิต
+                    </p>
+                    <p class="faculty-text">คณะ : เทคโนโลยีสารสนเทศและการสื่อสาร</p>
+                    <div class="stats-card">
+                        <span class="check-icon">✓</span> งานที่สำเร็จ : 10 งาน
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-content">
+                <div class="sidebar">
+                    <section class="contact-section">
+                        <div class="section-header">
+                            <h3>ช่องทางการติดต่อ</h3>
+                        </div>
+                        
+                        <ul class="contact-list" id="contact-list">
+                            <li>
+                                <img class="icon" src="../icon/gmail.png" alt="gmail">
+                                <span class="contact-value" id="val-email">sdhire67@gmail.com</span>
+                            </li>
+                            <li>
+                                <img src="../icon/telephone.png" alt="phone">
+                                <span class="contact-value" id="val-phone">012-345-XXXX</span>
+                            </li>
+                            <li>
+                                <img src="../icon/line.png" alt="line">
+                                <span class="contact-value" id="val-line">sdhire67</span>
+                            </li>
+                            <li>
+                                <img src="../icon/instagram.png" alt="ig">
+                                <span class="contact-value" id="val-ig">sdhire67</span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="review-section">
+                            <div class="review-header">
+                                <h3>คะแนนและรีวิว</h3>
+                                <button id="openReview">เขียนรีวิว</button>
+                            </div>
+                            
+                            <div id="reviewModal" class="modal">
+                                <div class="modal-content">
+                                    <h3>ให้คะแนนผลงาน</h3>
+                                    <p id="error-msg" style="color: red; display: none; font-size: 14px;"></p>
+                                    
+                                    <div class="star-rating">
+                                        <input type="radio" name="rating" id="rat-5" value="5"><label for="rat-5"></label>
+                                        <input type="radio" name="rating" id="rat-4" value="4"><label for="rat-4"></label>
+                                        <input type="radio" name="rating" id="rat-3" value="3"><label for="rat-3"></label>
+                                        <input type="radio" name="rating" id="rat-2" value="2"><label for="rat-2"></label>
+                                        <input type="radio" name="rating" id="rat-1" value="1"><label for="rat-1"></label>
+                                    </div>
+
+                                    <div class="upload-section">
+                                        <label for="reviewImgInput" class="custom-file-upload">
+                                            📸 เพิ่มรูปภาพผลงาน
+                                        </label>
+                                        <input type="file" id="reviewImgInput" accept="image/*" onchange="previewImage(this)">
+                                        <div id="image-preview-container"></div> 
+                                    </div>
+
+                                    <textarea id="reviewText" placeholder="เขียนรีวิวของคุณที่นี่..."></textarea>
+                                    
+                                    <div class="modal-buttons">
+                                        <button id="cancelBtn">ยกเลิก</button>
+                                        <button id="submitBtn">ตกลง</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="rating-summary-card">
+                                <div class="rating-left">
+                                    <h1 id="avg-score">0.0</h1>
+                                    <div class="stars-display" id="avg-stars"></div>
+                                    <p id="total-reviews-count">จาก 0 รีวิว</p>
+                                </div>
+                                
+                                <div class="rating-right">
+                                    <div class="bar-row">
+                                        <span>5 ดาว</span>
+                                        <div class="bar-bg"><div class="bar-fill" id="bar-5"></div></div>
+                                        <span class="count-text" id="count-5">0</span>
+                                    </div>
+                                    <div class="bar-row">
+                                        <span>4 ดาว</span>
+                                        <div class="bar-bg"><div class="bar-fill" id="bar-4"></div></div>
+                                        <span class="count-text" id="count-4">0</span>
+                                    </div>
+                                    <div class="bar-row">
+                                        <span>3 ดาว</span>
+                                        <div class="bar-bg"><div class="bar-fill" id="bar-3"></div></div>
+                                        <span class="count-text" id="count-3">0</span>
+                                    </div>
+                                    <div class="bar-row">
+                                        <span>2 ดาว</span>
+                                        <div class="bar-bg"><div class="bar-fill" id="bar-2"></div></div>
+                                        <span class="count-text" id="count-2">0</span>
+                                    </div>
+                                    <div class="bar-row">
+                                        <span>1 ดาว</span>
+                                        <div class="bar-bg"><div class="bar-fill" id="bar-1"></div></div>
+                                        <span class="count-text" id="count-1">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            
+
+                            <div class="filter-tags">
+                                <button class="tag active" onclick="filterReviews('all')">ทั้งหมด</button>
+                                <button class="tag" onclick="filterReviews('hasImage')">มีรูปภาพ (<span id="f-img">0</span>)</button>
+                                <button class="tag" onclick="filterReviews(5)">5 ดาว (<span id="f-5">0</span>)</button>
+                                <button class="tag" onclick="filterReviews(4)">4 ดาว (<span id="f-4">0</span>)</button>
+                                <button class="tag" onclick="filterReviews(3)">3 ดาว (<span id="f-3">0</span>)</button>
+                                <button class="tag" onclick="filterReviews(2)">2 ดาว (<span id="f-2">0</span>)</button>
+                                <button class="tag" onclick="filterReviews(1)">1 ดาว (<span id="f-1">0</span>)</button>
+                            </div>
+                            <h3 style="margin: 0;">ความคิดเห็นที่มีประโยชน์</h3>
+                            <div id="image-gallery-preview" class="image-gallery"></div>
+                            <div id="reviewContainer" class="review-preview"></div>
+                            <button id="show-all-reviews-btn" class="btn-view-more" onclick="showFullReviews()" style="display:none;">
+                                ดูรีวิวทั้งหมด
+                            </button>
+
+                    </section>
+                </div>
+
+                <div class="main-content">
+                    <h3 class="section-title">งานที่เปิดรับ</h3>
+                    <div id="job-container">
+                        <p id="no-job-msg" style="text-align:center; color:#888; margin-top:20px;">ยังไม่มีโพสต์งานของคุณในขณะนี้</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+    <div class="footer-contact">
+        <p>ติดต่อเรา</p>
+        <p>sdhire67@gmail.com</p>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 SDhire, All right reserved</p>
+    </div>
+    </footer>
+
+    <script src="review_star.js"></script>
+    <script src="swith_PR.js"></script>
+    <script src="post_script.js"></script>
+</body>
+</html>

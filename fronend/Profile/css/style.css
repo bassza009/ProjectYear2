@@ -260,3 +260,14 @@ main {
 .btn-delete:hover { background-color: #f5c6cb; }
 
 
+/* ลบเส้นใต้จากลิงก์ของ Card */
+.card-link {
+    text-decoration: none; /* เอาเส้นขีดออก */
+    color: inherit;        /* ให้ใช้สีตัวอักษรตามปกติ ไม่เป็นสีน้ำเงิน */
+    display: block;        /* ทำให้ลิงก์ครอบคลุมพื้นที่ทั้งหมดของ Card */
+}
+
+/* ป้องกันไม่ให้มีเส้นขีดเมื่อเอาเมาส์ไปชี้ (Optional) */
+.card-link:hover {
+    text-decoration: none;
+}

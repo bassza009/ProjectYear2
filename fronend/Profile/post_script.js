@@ -48,9 +48,11 @@ function displayUserJobs() {
                             <strong>รายละเอียด:</strong> ${job.detail}
                         </li>
                     </ul>
+                    <a href="../Post/view_post_jop.html?id=${job.id}" class="card-link" >
                     <div class="action-buttons">
                         <button class="btn-edit" onclick="viewJobDetail(${job.id})">ดูโพสต์</button>
                     </div>
+                    </a>
                 </div>`;
             jobContainer.appendChild(jobCard);
         });
