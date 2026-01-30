@@ -69,7 +69,7 @@ function deleteJob(jobId) {
 
 function editJob(jobId) {
     localStorage.setItem('editingJobId', jobId);
-    window.location.href = '../create_post/post_skill.html'; 
+    window.location.href = '../edit_post/post_skill.html'; 
 }
 
 /* =========================================

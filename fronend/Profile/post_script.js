@@ -49,7 +49,7 @@ function displayUserJobs() {
                         </li>
                     </ul>
                     <div class="action-buttons">
-                        <button class="btn-edit">ดูโพสต์</button>
+                        <button class="btn-edit" onclick="viewJobDetail(${job.id})">ดูโพสต์</button>
                     </div>
                 </div>`;
             jobContainer.appendChild(jobCard);
@@ -68,7 +68,7 @@ function deleteJob(jobId) {
 
 function editJob(jobId) {
     localStorage.setItem('editingJobId', jobId);
-    window.location.href = '../create_post/post_skill.html'; 
+    window.location.href = '../edit_post/post_skill.html'; 
 }
 
 /* =========================================
