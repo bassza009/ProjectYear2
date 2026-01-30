@@ -57,7 +57,7 @@ function displayUserJobs() {
         });
     }
 }
-
+    
 function deleteJob(jobId) {
     if (confirm("ลบโพสต์นี้หรือไม่?")) {
         let jobs = JSON.parse(localStorage.getItem('allJobs')) || [];
