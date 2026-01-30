@@ -242,7 +242,7 @@ main {
     border-radius: 50%;
     border: none;
     background-color: transparent;
-    color: #9b59b6;              /* น้ำเงินแบบ Google */
+    color: #9b59b6;             
     font-size: 14px;
     cursor: pointer;
 }
@@ -353,11 +353,19 @@ main {
     height: 90px; 
     box-sizing: border-box;
 }
-.icon-box img {
-    width: 32px;  /* ปรับขนาดไอคอนให้เล็กลงเล็กน้อยเพื่อให้มีพื้นที่หายใจ */
+.icon-box img{
+    width: 32px;  
     height: 32px;
-    object-fit: contain; /* ป้องกันรูปเบี้ยว */
+    object-fit: contain; 
 }
+.icon-box img, .form_input img{
+    padding: 10px;
+    width: 32px;  
+    height: 32px;
+    object-fit: contain; 
+}
+
+
 
 /* ส่วนของวงกลมไอคอน */
 .icon-box {
