@@ -84,27 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    function updateReviewUI() {
-        const reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
-        if (!reviewContainer) return;
-        reviewContainer.innerHTML = '';
-        reviews.sort((a, b) => (b.likes || 0) - (a.likes || 0));
-
-        reviews.reverse().forEach(rev => {
-            const html = `
-                <div class="box_review" style="display:flex; gap:15px; margin-bottom:20px; padding:15px; background:#fff; border-radius:12px; border:1px solid #f0f0f0;">
-                    <img src="${rev.profilePic}" style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
-                    <div style="flex:1;">
-                        <h4 style="margin:0;">${rev.name}</h4>
-                        <div style="color:#fbbf24; margin:3px 0;">${renderStars(rev.rating)}</div>
-                        <p style="font-size:14px; color:#475569;">${rev.comment || 'ไม่มีรีวิว'}</p>
-                        ${rev.reviewImg ? `<img src="${rev.reviewImg}" style="max-width:150px; border-radius:8px; margin-top:10px; cursor:pointer;" onclick="window.open(this.src)">` : ''}
-                    </div>
-                </div>`;
-            reviewContainer.insertAdjacentHTML('beforeend', html);
-        });
-    }
-
     function renderStars(r) {
         let s = '';
         for (let i = 1; i <= 5; i++) s += (i <= r) ? '★' : '☆';

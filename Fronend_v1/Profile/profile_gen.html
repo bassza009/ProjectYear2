@@ -6,18 +6,19 @@
     <title>User Profile Page</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Template_HF.css">
+    <link rel="stylesheet" href="css/review.css">
 </head>
 <body>
  <div class="content-wrapper">
         <header>        
-            <a href="/Fronend_v1/home/home_stu.html" style="text-decoration: none; color: inherit;">
+            <a href="/Fronend_v1/home/home_gen.html" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
             </a>
             <div class="profile_container">
                 <div class="buttom_header">
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
-                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
+                            <img src="/photo/OIP.webp" alt="โปรไฟล์">
                         </div>
                         <span>Profile</span>
                     </button>
@@ -25,15 +26,14 @@
 
                 <div class="data_box" id="myDropdown">
                     <div class="user_infor">
-                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
+                        <img src="/photo/OIP.webp" alt="โปรไฟล์" >
                         <div class="user_name">
-                            <h1>FirstName LastName</h1>
-                            <p>✅ สถานะ : นิสิต</p>
+                            <h1>User Name</h1>
                         </div>
                     </div>
                     
                     <div class="button_VO">
-                        <a href="/Fronend_v1/profile_user/profile_user.html">
+                        <a href="/Fronend_v1/profile_user/profile_gen.html">
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>
                         <a href="/Fronend_v1/home/home_login.html" >           
@@ -49,7 +49,6 @@
             <div class="profile-header">
                 <div class="avatar-wrapper">
                     <img src="/photo/pro_G.jpg" alt="Avatar" class="avatar-img">
-                    <button class="edit-avatar-btn">✎</button>
                 </div>
                 
                 <div class="header-info">
@@ -71,7 +70,6 @@
                     <section class="contact-section">
                         <div class="section-header">
                             <h3>ช่องทางการติดต่อ</h3>
-                            <button onclick="toggleEdit()" id="edit-btn" class="btn-small">แก้ไข</button>
                         </div>
                         
                         <ul class="contact-list" id="contact-list">
@@ -95,8 +93,10 @@
                     </section>
 
                     <section class="review-section">
-                            <h3>คะแนนและรีวิว</h3>
-                            <button id="openReview">เขียนรีวิว</button>
+                            <div class="review-header">
+                                <h3>คะแนนและรีวิว</h3>
+                                <button id="openReview">เขียนรีวิว</button>
+                            </div>
                             
                             <div id="reviewModal" class="modal">
                                 <div class="modal-content">
@@ -211,6 +211,6 @@
 
     <script src="review_star.js"></script>
     <script src="swith_PR.js"></script>
-    <script src="script.js"></script>
+    <script src="post_script.js"></script>
 </body>
 </html>
