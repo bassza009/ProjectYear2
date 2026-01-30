@@ -23,11 +23,11 @@
             <div id="part1" class="set_account"> 
                 <div class="account">
                     <label>อีเมลที่ติดต่อได้</label>
-                    <input type="email" placeholder="ระบุอีเมล" required>
+                    <input type="email" placeholder="ระบุอีเมล" >
                     <label>รหัสผ่าน</label>
-                    <input type="password" id="pass1" placeholder="ระบุรหัสผ่าน" required>
+                    <input type="password" id="pass1" placeholder="ระบุรหัสผ่าน" >
                     <label>ยืนยันรหัสผ่าน</label>
-                    <input type="password" id="pass2" placeholder="ระบุยืนยันรหัสผ่าน" required>
+                    <input type="password" id="pass2" placeholder="ระบุยืนยันรหัสผ่าน" >
                     <label>เบอร์โทรที่ติดต่อได้</label>
                     <input type="text" placeholder="ระบุเบอร์โทร">
                 </div>
@@ -51,11 +51,17 @@
                     <label>ชื่อที่ใช้แสดงในระบบ</label>
                     <input type="text" placeholder="กรอกชื่อของคุณ">
                 </div>
-                <button type="submit" class="submit">สร้างบัญชี</button>               
+                <button type="submit" id="submitBtn" class="submit">สร้างบัญชี</button>            
             </div>
         </form> 
     </div>
 
     <script src="action12.js"></script>
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", function(event) {
+        event.preventDefault(); 
+        window.location.href = '../home/home_gen.html'; 
+});
+    </script>
 </body>
 </html>

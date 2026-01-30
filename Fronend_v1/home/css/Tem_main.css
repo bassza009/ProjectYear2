@@ -67,6 +67,12 @@
     flex: 1; 
     outline: none;
 }
+.data_box { /* ซ่อนตอนเริ่ม */
+    display: none; 
+} 
+.data_box.show { /* แสดงเมื่อมีคลาส show */
+    display: block; 
+} 
 
 #reset, #submit {
     padding: 8px 20px;

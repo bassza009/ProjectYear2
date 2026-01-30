@@ -32,7 +32,7 @@ fileInput.addEventListener('change', function() {
 function submitJob() {
     // 1. ดึงค่า (ต้องเช็ค ID ให้ตรงกับ HTML)
     const title = document.getElementById('title').value;
-    const price = document.getElementById('peice').value; // ใน HTML ของคุณใช้ id="peice"
+    const price = document.getElementById('peice').value;
     const detail = document.getElementById('detail').value;
     const category = document.getElementById('category').value;
 

@@ -1,5 +1,8 @@
+
 h1,h3,h5,p,span{
     margin: 0;
+    margin-top: 1;
+    padding: 0 5%; 
 }
 .event_job{
     margin: 0;
@@ -16,14 +19,15 @@ h1,h3,h5,p,span{
 
 .box_LR{
     display: flex;
-    flex-wrap: wrap; 
     gap: 30px; 
     justify-content: center;
+
 }
 
 .img_post img{
-   width: 100%;           /* ให้กว้างเต็มพื้นที่กล่องแม่ที่ยืดหดได้ */
-    max-width: 700px;      /* ขนาดใหญ่สุดที่คุณตั้งไว้ */
+    width: 100%;       /* ให้กว้างเต็มพื้นที่กล่องแม่ที่ยืดหดได้ */
+    max-width: 700px;
+    min-width: 700px;      /* ขนาดใหญ่สุดที่คุณตั้งไว้ */
     aspect-ratio: 16 / 9;  /* บังคับสัดส่วน 16:9 ตลอดเวลา */
     object-fit: cover;     /* สำคัญ: กันรูปเบี้ยวหรือยืดผิดสัดส่วน */
     border-radius: 5px;
@@ -90,7 +94,7 @@ h1,h3,h5,p,span{
     min-width: 420px;
     height: auto;
     min-height: 120px;
-    padding: 5px 0;
+    padding: 10px 10px;
     box-sizing: border-box;
     border-radius: 5px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
@@ -181,4 +185,15 @@ h1,h3,h5,p,span{
     overflow-x: hidden;      /* กันการไถออกด้านข้าง */
     padding: 10px;           /* เพิ่มพื้นที่รอบๆ ให้เงาของกล่องไม่โดนตัด */
     box-sizing: border-box;
+}
+#error-msg {
+    color: #d93025;          
+    background-color: #fce8e6; 
+    padding: 10px 15px;      
+    border-radius: 8px;     
+    font-size: 14px;
+    font-weight: bold;
+    display: none;           
+    border: 1px solid #f8d7da;
+    margin-top: 10px;
 }
