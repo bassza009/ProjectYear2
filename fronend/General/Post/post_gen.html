@@ -84,7 +84,7 @@
                             <aside class="content-right">
                                 <div class="stats-card">
                                     <h3>ข้อมูลการจ้างงาน</h3>
-
+                                    
                                     <div class="stats-item">
                                         <span>กำหนดส่ง</span>
                                         <strong>-</strong>
@@ -97,6 +97,45 @@
                                         <span>จ้างงานสำเร็จ</span>
                                         <strong>0 ครั้ง</strong>
                                     </div>
+
+                                    <div class="stats-card">
+                                    <div class="comment-header-row">
+                                        <h3>ความคิดเห็น</h3>
+                                        <button class="btn-view-all" onclick="openAllComments()">อ่านทั้งหมด</button>
+                                    </div>
+                                    
+                                    <div id="commentContainer"></div>
+
+                                    <div class="comment-action">
+                                        <button class="btn-comment" onclick="openCommentModal()">
+                                            ✍️ แสดงความคิดเห็น...
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="commentModal" class="modal-overlay">
+                                    <div class="modal-window mini-modal">
+                                        <div class="modal-header">
+                                            <h3>เขียนความคิดเห็น</h3>
+                                            <span class="close-modal" onclick="closeCommentModal()">&times;</span>
+                                        </div>
+                                        <div class="modal-body">
+                                            <textarea id="commentText" placeholder="พิมพ์ข้อความของคุณ..." rows="4"></textarea>
+                                            <button class="btn-send" onclick="submitComment()">ส่งข้อความ</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="allCommentsModal" class="modal-overlay">
+                                    <div class="modal-window">
+                                        <div class="modal-header">
+                                            <h3>ความคิดเห็นทั้งหมด</h3>
+                                            <span class="close-modal" onclick="closeAllComments()">&times;</span>
+                                        </div>
+                                        <div id="fullCommentList" class="modal-body scrollable-list">
+                                            </div>
+                                    </div>
+                                </div>
                                 </div>
                             </aside>
                         </div>
@@ -112,6 +151,7 @@
                 <p>© 2025 SDhire, All right reserved</p>
             </div>
         </footer>
+
         <script src="post_detail.js"></script>
         <script src="comment.js"></script>
         <script src="swith_PR.js"></script>
