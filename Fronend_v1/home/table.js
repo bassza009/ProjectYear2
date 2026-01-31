@@ -77,11 +77,10 @@ function renderJobPagination(totalItems) {
         if (active) btn.classList.add("active");
         btn.disabled = disabled;
 
-        btn.onclick = () => {
+        btn.addEventListener("click", () => {
             jobCurrentPage = page;
-            renderJobTable();
-        };
-
+             renderJobTable();
+            });
         return btn;
     };
 
