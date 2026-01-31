@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>รายละเอียดงาน | SDhire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/post_gen.css">
+    <link rel="stylesheet" href="css/Template_HF.css">
+    <link rel="html" href="">
+</head>
+<body>
+    <div class="content-wrapper">
+           <header>        
+            <a href="../Home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+                
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="../Profile/profile_user.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="../Home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
+                <main>
+                    <div class="event_work">                    
+                        <div class="event_name">
+                            <h1 id="displayTitle">กำลังโหลดชื่องาน...</h1> 
+                            <p id="displayCategory">ประเภทงาน : ...</p>
+                        </div>
+                        <div class="box_LR">
+                            <div class="left">
+                                <div class="details">
+                                    <h4>รายละเอียดงาน</h4>
+                                    <p id="displayDetail">กำลังโหลดรายละเอียด...</p>
+                                    <hr>
+
+                                    <div class="comment-action">
+                                        <button class="btn-comment" onclick="toggleCommentForm()">แสดงความคิดเห็น</button>
+                                        <div id="commentForm" class="comment-input" style="display:none;">
+                                            <textarea id="commentText" placeholder="พิมพ์ข้อความของคุณ..." rows="3"></textarea>
+                                            <button class="btn-send" onclick="submitComment()">ส่งข้อความ</button>
+                                        </div>
+                                    </div>
+                                    <div id="commentContainer"></div>
+                                </div>
+                            </div>
+
+                            <div class="right">
+                                <div class="profile_user">
+                                    <div class="img_profile">
+                                        <img src="/photo/OIP.webp" alt="โปรไฟล์">
+                                    </div>
+                                    <div class="user_name">
+                                        <h1>User Name</h1>
+                                        <a href="../Profile/view_profile_gen.html">
+                                            <button class="btn-outline">ดูโปรไฟล์</button>                                   </div>
+                                        </a>
+                                        
+                                </div>
+
+                                <div class="card">
+                                    <h1>กำหนดส่งงาน</h1>
+                                    <p id="displayDeadline">...</p>
+                                    <h1 class="price">งบประมาณ</h1>
+                                    <p id="displayPrice">... บาท</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              </main>
+        </div>
+        <footer>
+            <div class="footer-contact">
+                <p>ติดต่อเรา</p>
+                <p>sdhire67@gmail.com</p>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 SDhire, All right reserved</p>
+            </div>
+        </footer>
+        <script src="post_detail.js"></script>
+        <script src="comment.js"></script>
+        <script src="swith_PR.js"></script>
+</body>
+</html>

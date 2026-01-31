@@ -1,39 +1,9 @@
 
-/* ===== Navbar ===== */
-.navbar {
-  background: linear-gradient(90deg, #9b5de5, #b583f0);
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #fff;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.btn {
-  padding: 6px 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-.btn.purple {
-  background: #7b2cbf;
-  color: #fff;
-}
-
-.btn.profile {
-  background: #fff;
-  color: #333;
-}
 
 /* ===== Layout ===== */
 .container {
-  padding: 20px 30px;
+    margin-top: 90px;
+    padding: 20px 30px;
 }
 
 .page-wrapper {
