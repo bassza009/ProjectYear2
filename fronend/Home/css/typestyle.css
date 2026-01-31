@@ -1,0 +1,199 @@
+
+/* ===== Navbar ===== */
+.navbar {
+  background: linear-gradient(90deg, #9b5de5, #b583f0);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.purple {
+  background: #7b2cbf;
+  color: #fff;
+}
+
+.btn.profile {
+  background: #fff;
+  color: #333;
+}
+
+/* ===== Layout ===== */
+.container {
+  padding: 20px 30px;
+}
+
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.main-box {
+  width: 1200px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* ===== Category ===== */
+.path {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.category-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  background: #7b2cbf;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.category-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Tabs ===== */
+.tab {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+/* ===== Price Tabs ===== */
+.tab.price {
+  background: #d6d6d6;   /* เทา */
+  color: #222;           /* ดำ */
+}
+
+.tab.price:hover {
+  background: #c2c2c2;
+}
+
+.tab.price.active {
+  background: #7b2cbf;  /* ม่วง */
+  color: #fff;
+}
+
+.tab.active {
+  background: #7b2cbf;
+  color: #fff;
+}
+
+/* ===== Content ===== */
+.content {
+  display: flex;
+  gap: 24px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #f9f9f9;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.sidebar input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+.price-tabs {
+  display: flex;
+  flex-direction: column;   /* เรียงลงทีละบรรทัด */
+  gap: 10px;
+}
+
+/* ===== Posts ===== */
+.post-area {
+  flex: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 12px;
+}
+
+.badge {
+  font-size: 12px;
+  background: #eee;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.price {
+  color: #2ca24c;
+  font-weight: bold;
+}
+
+.category-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* ให้เลื่อนซ้ายขวาได้ */
+    padding-bottom: 5px;
+    -ms-overflow-style: none;  /* ซ่อน scrollbar (IE/Edge) */
+    scrollbar-width: none;  /* ซ่อน scrollbar (Firefox) */
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none; /* ซ่อน scrollbar (Chrome/Safari) */
+}
+
+.tab {
+    transition: all 0.2s ease; /* เพิ่ม Animation เวลาเปลี่ยนสี */
+    white-space: nowrap; /* ป้องกันตัวอักษรตกบรรทัด */
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDhire</title>
+  <link rel="stylesheet" href="css/typestyle.css" />
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <header class="navbar">
+    <div class="logo">SDhire</div>
+    <div class="nav-actions">
+      <button class="btn purple">โพสต์</button>
+      <button class="btn profile">Profile</button>
+    </div>
+  </header>
+
+  <!-- ===== Page ===== -->
+  <main class="container">
+    <div class="page-wrapper">
+      <section class="main-box">
+
+        <!-- ===== Category ===== -->
+        <header class="category">
+          <div class="path" id="categoryPath">
+            ประเภทงาน : ติวเตอร์ &gt; ทั้งหมด
+          </div>
+
+        <div class="category-bar">
+            <button class="filter-btn">🔍 คัดกรอง</button>
+            <div class="filter-panel" id="filterPanel">
+                <div class="category-scroll">
+                    <button class="tab active" data-category="all">ทั้งหมด</button>
+                    <button class="tab" data-category="thai">ภาษาไทย</button>
+                    <button class="tab" data-category="foreign">ภาษาต่างประเทศ</button>
+                    <button class="tab" data-category="math">คณิตศาสตร์</button>
+                </div>
+            </div>
+        </div>
+        </header>
+
+        <!-- ===== Content ===== -->
+        <div class="content">
+
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <h3>ตัวคัดกรองราคา</h3>
+            <input type="text" placeholder="งบประมาณที่คุณมีอยู่" />
+
+            <div class="price-tabs">
+                <button class="tab price active">คะแนนรีวิว</button>
+                <button class="tab price">ยอดขาย</button>
+                <button class="tab price">ราคา (ต่ำ-สูง)</button>
+                <button class="tab price">ราคา (สูง-ต่ำ)</button>
+            </div>
+          </aside>
+
+          <!-- Posts -->
+          <section class="post-area">
+            <div class="grid">
+
+              <!-- Card -->
+              <article class="card">
+                <img src="https://picsum.photos/300/180?1" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>สอนออนไลน์ภาษาอังกฤษ</p>
+                  <span class="price">เริ่มต้น 100 บาท</span>
+                </div>
+              </article>
+
+              <article class="card">
+                <img src="https://picsum.photos/300/180?2" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>400 Robux</p>
+                  <span class="price">เริ่มต้น 220 บาท</span>
+                </div>
+              </article>
+
+              <article class="card">
+                <img src="https://picsum.photos/300/180?3" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>400 Robux</p>
+                  <span class="price">เริ่มต้น 220 บาท</span>
+                </div>
+              </article>
+
+              <article class="card">
+                <img src="https://picsum.photos/300/180?4" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>400 Robux</p>
+                  <span class="price">เริ่มต้น 220 บาท</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="typestyle.js"></script>
+</body>
+</html>
