@@ -45,53 +45,104 @@
             </div>
         </header>
 
-                <main>
-                    <div class="event_work">                    
-                        <div class="event_name">
-                            <h1 id="displayTitle">กำลังโหลดชื่องาน...</h1> 
-                            <p id="displayCategory">ประเภทงาน : ...</p>
-                        </div>
-                        <div class="box_LR">
-                            <div class="left">
-                                <div class="details">
-                                    <h4>รายละเอียดงาน</h4>
-                                    <p id="displayDetail">กำลังโหลดรายละเอียด...</p>
-                                    <hr>
+                <main class="container">
+                    <div class="page-wrapper">
+                        <section class="profile-header-card">
+                            <div class="header-main-info">
+                                <div class="company-logo">
+                                    <img src="/photo/OIP.webp" alt="Logo">
+                                </div>
+                                <div class="user-details">
+                                    <h1>User Name</h1>
+                                    </div>
+                            </div>
+                            
+                            <div class="header-actions">
+                                <a href="../Profile/profile_gen.html" class="btn-view-profile">ดูโปรไฟล์</a>
+                            </div>
+                        </section>
+
+                        <div class="profile-content-grid">
+                            <div class="content-left">
+                                <article class="info-section">
+                                    <h3>ประกาศงานล่าสุด</h3>
+                                    <div class="job-list">
+                                        <div class="job-item">
+                                            <div class="job-info">
+                                                <h1 class="job-link">ชื่องาน</h1>
+                                                <span>ประเภทงาน :</span><br>
+                                                <span>รายละเอียดงาน </span><br>
+                                                
+                                                <p class="job-meta">โพสต์งานเมื่อ</p>
+                                                
+                                            </div>
+                                           
+                                        </div>
+                                    
+                                    </div>
+                                </article>
+                            </div>
+
+                            <aside class="content-right">
+                                <div class="stats-card">
+                                    <h3>ข้อมูลการจ้างงาน</h3>
+                                    
+                                    <div class="stats-item">
+                                        <span>กำหนดส่ง</span>
+                                        <strong>-</strong>
+                                    </div>
+                                    <div class="stats-item">
+                                        <span>งบประมาณ</span>
+                                        <strong>0 บาท</strong>
+                                    </div>
+                                    <div class="stats-item">
+                                        <span>จ้างงานสำเร็จ</span>
+                                        <strong>0 ครั้ง</strong>
+                                    </div>
+
+                                    <div class="stats-card">
+                                    <div class="comment-header-row">
+                                        <h3>ความคิดเห็น</h3>
+                                        <button class="btn-view-all" onclick="openAllComments()">อ่านทั้งหมด</button>
+                                    </div>
+                                    
+                                    <div id="commentContainer"></div>
 
                                     <div class="comment-action">
-                                        <button class="btn-comment" onclick="toggleCommentForm()">แสดงความคิดเห็น</button>
-                                        <div id="commentForm" class="comment-input" style="display:none;">
-                                            <textarea id="commentText" placeholder="พิมพ์ข้อความของคุณ..." rows="3"></textarea>
+                                        <button class="btn-comment" onclick="openCommentModal()">
+                                            ✍️ แสดงความคิดเห็น...
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="commentModal" class="modal-overlay">
+                                    <div class="modal-window mini-modal">
+                                        <div class="modal-header">
+                                            <h3>เขียนความคิดเห็น</h3>
+                                            <span class="close-modal" onclick="closeCommentModal()">&times;</span>
+                                        </div>
+                                        <div class="modal-body">
+                                            <textarea id="commentText" placeholder="พิมพ์ข้อความของคุณ..." rows="4"></textarea>
                                             <button class="btn-send" onclick="submitComment()">ส่งข้อความ</button>
                                         </div>
                                     </div>
-                                    <div id="commentContainer"></div>
                                 </div>
-                            </div>
 
-                            <div class="right">
-                                <div class="profile_user">
-                                    <div class="img_profile">
-                                        <img src="/photo/OIP.webp" alt="โปรไฟล์">
+                                <div id="allCommentsModal" class="modal-overlay">
+                                    <div class="modal-window">
+                                        <div class="modal-header">
+                                            <h3>ความคิดเห็นทั้งหมด</h3>
+                                            <span class="close-modal" onclick="closeAllComments()">&times;</span>
+                                        </div>
+                                        <div id="fullCommentList" class="modal-body scrollable-list">
+                                            </div>
                                     </div>
-                                    <div class="user_name">
-                                        <h1>User Name</h1>
-                                        <a href="../Profile/view_profile_gen.html">
-                                            <button class="btn-outline">ดูโปรไฟล์</button>                                   </div>
-                                        </a>
-                                        
                                 </div>
-
-                                <div class="card">
-                                    <h1>กำหนดส่งงาน</h1>
-                                    <p id="displayDeadline">...</p>
-                                    <h1 class="price">งบประมาณ</h1>
-                                    <p id="displayPrice">... บาท</p>
                                 </div>
-                            </div>
+                            </aside>
                         </div>
                     </div>
-              </main>
+                </main>
         </div>
         <footer>
             <div class="footer-contact">

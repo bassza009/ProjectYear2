@@ -4,7 +4,7 @@
 
 let isShowingAll = false; // เก็บสถานะว่ากำลังดูรีวิวทั้งหมดอยู่หรือไม่
 let currentFilter = 'all';
-const MAX_INITIAL_REVIEWS = 3;
+const MAX_INITIAL_REVIEWS = 2;
 
 const categoryNames = {
     "0": "งานทั่วไป",
@@ -39,8 +39,9 @@ function displayUserJobs() {
             jobCard.className = 'work-card';
             jobCard.innerHTML = `
                <a href="../Post/post_jop.html?id=${job.id}" class="card-link" >
-                <div class="card-image"><img src="${job.image}"></div>
+                <div class="card-image"><img src="${job.image}"></div></a>
                 <div class="card-body">
+                
                     <h4>${job.title}</h4>
                     <ul class="work-details">
                         <li><strong>ประเภทงาน:</strong>${categoryNames[job.category] || job.category || 'ยังไม่เลือก'}</li>
@@ -54,7 +55,7 @@ function displayUserJobs() {
                         <button class="btn-delete" onclick="deleteJob(${job.id})">🗑️ ลบ</button>
                     </div>
                 </div>
-                </a>`;
+                `;
             jobContainer.appendChild(jobCard);
         });
     }
