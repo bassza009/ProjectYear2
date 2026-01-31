@@ -1,187 +1,187 @@
-h1,h4,p{
-    margin: 0;
-}
-.event_work{
-    margin: 0;
-    margin-top: 20px;
-    padding: 0 5%; 
-    box-sizing: border-box;
-}
-.event_name {
-    width: 100%;
-    max-width: 1250px; /* ต้องเท่ากับความกว้างรวมของ box_LR */
-    margin: 0 auto 20px auto; /* จัดกลาง และห่างจากด้านล่าง 20px */
-    text-align: left; /* หรือ center ตามความชอบ */
+/* =========================================
+   1. GLOBAL & LAYOUT
+   ========================================= */
+main {
+    max-width: 1000px;
+    margin: 10px auto;
+    background: #faffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.box_LR{
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 30px; 
-    justify-content: center;
+.container {
+    padding: 40px 20px;
 }
 
-/* LEFT */
-.details{
-    width: 100%;
-    min-width: 700px;
-    max-width: 750px; 
-    height: auto;
-    min-height: 320px;
-    border-radius: 5px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
-    padding: 15px 25px;
-    box-sizing: border-box; /*ใส่แก้บล็อคเคลื่อนตอนใส่padding*/
-}
-.details h4{    
-    font-size: 20px;
-}
-.details p{
-    font-size: 15px;
-}
-/*------------------------------------------*/
-/* RIGHT */
-.right {
-    width: 100%;
-    max-width: 450px;
+.page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    gap: 25px;
+}
+/* =========================================
+   2. PROFILE HEADER (ชื่อคลาสตรงกับ HTML)
+   ========================================= */
+.profile-header-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    display: flex; /* จัดเรียงข้อมูลกะปุ่มดูโปรไฟล์แยกซ้าย-ขวา */
+    justify-content: space-between;
+    align-items: center;
 }
 
-.profile_user{
+.header-main-info {
     display: flex;
     align-items: center;
-    width: 100%; /* ใช้ความกว้างเต็มแม็กซ์ของกล่องพ่อ */
-    min-width: 420px;
-    height: auto;
-    min-height: 120px;
-    padding: 5px 0;
-    box-sizing: border-box;
-    border-radius: 5px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
-    margin-bottom: 50px;
+    gap: 20px;
 }
 
-.img_profile img{
-    margin-left: 10px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+.company-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%; /* ทรงกลมตาม CSS ล่าสุดของคุณ */
+    overflow: hidden;
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
 }
 
-.user_name {
-    margin-left: 20px;
-}
-
-.user_name button{
-    margin-top: 10px;
-    background: white;
-    border: 1px solid #9b59b6;
-    color: #9b59b6;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.user_name button:hover{
-    background: #8a2be2;
-    color: white;
-}
-/*----------------------------*/
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-}
-
-.card h1{
-    font-size: 15px;
-}
-
-.card p{
-    margin-bottom: 10px;
-    font-size: 15px;
-}
-
-/*-------------------------------------------*/
-/* ส่วนของการจัดตำแหน่งและโครงสร้าง */
-.comment {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-    align-items: flex-start;
-}
-
-.comment-content {
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 12px;
-    flex: 1;
-    min-width: 0; /* เพิ่มตัวนี้เพื่อกัน Flexbox ดันจนล้น */
-}
-
-/* ส่วนของข้อความภายใน */
-.comment-content h4 {
-    margin: 0; 
-    font-size: 14px; 
-    color: #333; 
-}
-
-.comment-content p {   
-    margin: 5px 0 0; 
-    font-size: 14px; 
-    color: #555; 
-    /* ยุบรวมการกันล้นไว้ที่นี่ที่เดียว */
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    word-break: break-word; 
-}
-
-/* Container หลัก */
-#commentContainer {
+.company-logo img {
     width: 100%;
-    height: auto; 
-    max-height: 500px;
-    overflow-y: auto; /* ถ้าคอมเมนต์เยอะเกิน 500px จะมี scroll */
-}
-
-/* ปุ่มและ Input (คงเดิมแต่จัดกลุ่ม) */
-.comment-action { text-align: right; }
-.comment-input { display: none; margin-top: 10px; }
-.comment-input textarea {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    box-sizing: border-box;
-    resize: none;
-}
-
-/* ปุ่มกดต่างๆ */
-.btn-comment {
-    margin-top: 10px;
-    background: white;
-    border: 1px solid #9b59b6;
-    color: #9b59b6;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.btn-send {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-.avatar img {
-    width: 35px;
-    height: 35px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 50%;
+}
+
+/* คลาสใหม่ที่ตรงกับ HTML */
+.user-details h1 {
+    font-size: 26px;
+    margin: 0;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+/* ตกแต่งปุ่มดูโปรไฟล์ ในส่วน header-actions */
+.btn-view-profile {
+    text-decoration: none;
+    color: #4f46e5;
+    border: 1.5px solid #4f46e5;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-view-profile:hover {
+    background: #4f46e5;
+    color: white;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+}
+
+/* =========================================
+   3. CONTENT GRID (ส่วนเนื้อหางาน)
+   ========================================= */
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+}
+
+.info-section {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+}
+
+.info-section h3 {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 12px;
+}
+
+/* รายการงาน (Job Item) */
+.job-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.job-item:hover {
+    background: #fbfcfe;
+    border-color: #cbd5e1;
+}
+
+/* ปรับหัวข้อชื่องานให้เด่น (คลาส .job-link ใน HTML) */
+.job-link {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4f46e5;
+    margin: 0 0 10px 0;
+}
+
+.job-info span {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.job-meta {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 15px;
+}
+
+/* =========================================
+   4. SIDEBAR (ส่วนสถิติและกำหนดส่ง)
+   ========================================= */
+.stats-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    position: sticky;
+    top: 20px;
+}
+
+.stats-card h3 {
+    font-size: 16px;
+    color: #475569;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stats-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.stats-item span {
+    color: #64748b;
+}
+
+.stats-item strong {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.text-green {
+    color: #10b981 !important;
 }
