@@ -134,9 +134,38 @@
                         <div id="reviewContainer" class="review-preview">
                             </div>
 
-                        <button id="show-all-reviews-btn" class="btn-view-more" onclick="showFullReviews()" style="display:none;">
+                        <button id="show-all-reviews-btn" class="btn-view-more" onclick="showReviews()" style="display:none;">
                             ดูรีวิวทั้งหมด
                         </button>
+
+                        <div id="image-gallery-preview" class="image-gallery"></div>
+                            <div id="reviewContainer" class="review-preview"></div>
+
+                            <button id="show-all-reviews-btn" class="btn-view-more" onclick="showReviews()" style="display:none;">
+                                ดูรีวิวทั้งหมด
+                            </button>
+
+                            <div id="fullReviewModal" class="modal-overlay">
+                                <div class="modal-window">
+                                    <div class="modal-header">
+                                        <div class="header-top">
+                                            <h3>รีวิวทั้งหมด</h3>
+                                            <span class="close-modal" onclick="closeReviews()">&times;</span>
+                                        </div>
+                                        <div class="filter-tags modal-filters">
+                                            <button class="tag active" onclick="filterReviews('all')">ทั้งหมด</button>
+                                            <button class="tag" onclick="filterReviews('hasImage')">มีรูปภาพ (<span id="mf-img">0</span>)</button>
+                                            <button class="tag" onclick="filterReviews(5)">5 ดาว (<span id="mf-5">0</span>)</button>
+                                            <button class="tag" onclick="filterReviews(4)">4 ดาว (<span id="mf-4">0</span>)</button>
+                                            <button class="tag" onclick="filterReviews(3)">3 ดาว (<span id="mf-3">0</span>)</button>
+                                            <button class="tag" onclick="filterReviews(2)">2 ดาว (<span id="mf-2">0</span>)</button>
+                                            <button class="tag" onclick="filterReviews(1)">1 ดาว (<span id="mf-1">0</span>)</button>
+                                        </div>
+                                    </div>
+                                    <div id="modalReviewList" class="modal-body">
+                                        </div>
+                                </div>
+                            </div>
                     </section>
 
                     <div id="reviewModal" class="modal">
