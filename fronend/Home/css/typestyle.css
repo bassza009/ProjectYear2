@@ -28,17 +28,17 @@
   display: flex;
   gap: 12px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   position: relative; /* ⭐ สำคัญ: ปุ่มไม่ขยับ */
 }
 
 /* ===== Filter Button ===== */
 .filter-btn {
-  background: #e0e0e0;        /* ไม่กด = เทา */
+  background: #eeeded;        /* ไม่กด = เทา */
   color: #333;
   border: none;
   padding: 8px 18px;
-  border-radius: 999px;
+  border-radius: 100px;
   cursor: pointer;
   flex-shrink: 0;
   white-space: nowrap;
@@ -54,7 +54,7 @@
 .filter-panel {
   display: none;
   position: absolute;        /* ⭐ ลอย ไม่ดัน layout */
-  top: 100%;
+  top: 80%;
   left: 0;
   width: 100%;
   background: #fff;
@@ -92,11 +92,11 @@
 
 /* ===== Tabs ===== */
 .tab {
-  background: #e0e0e0;
+  background: #eeeded;
   color: #333;
   border: none;
   padding: 8px 16px;
-  border-radius: 999px;
+  border-radius: 100px;
   cursor: pointer;
   flex-shrink: 0;
   white-space: nowrap;
@@ -110,7 +110,8 @@
 
 /* ===== Price Tabs ===== */
 .tab.price {
-  background: #e0e0e0;
+  background: white;
+  border: 1px solid #ddd;
   color: #222;
   padding: 12px 16px;     /* ⭐ เพิ่มความสูง */
   font-size: 14px;
@@ -135,15 +136,10 @@
 /* Sidebar */
 .sidebar {
   width: 260px;
+  margin-top: 10px;
   background: #f9f9f9;
   padding: 18px;
   border-radius: 16px;
-}
-
-.sidebar input {
-  width: 100%;
-  padding: 8px;
-  margin: 10px 0;
 }
 
 .price-tabs {
@@ -155,6 +151,7 @@
 /* ===== Posts ===== */
 .post-area {
   flex: 1;
+  margin-top: 10px;
 }
 
 .grid {
@@ -194,18 +191,17 @@
 }
 
 /* ===== Budget Input ===== */
-.sidebar input[type="text"] {
-  width: 190px;              /* ขนาดพอดีตามภาพ */
+.sidebar input{
+  width: 100%;              /* ขนาดพอดีตามภาพ */
   padding: 10px 12px;
   border-radius: 12px;
   border: 1px solid #ccc;
   font-size: 14px;
   display: block;
-  margin: 10px auto 20px;    /* กึ่งกลาง + เว้นด้านล่าง */
   box-sizing: border-box;
 }
 
-.sidebar input[type="text"]:focus {
+.sidebar input:focus {
   outline: none;
   border-color: #9b59b6;
 }
