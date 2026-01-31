@@ -1,0 +1,451 @@
+
+body {
+    background-color: #ffffff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #8557A5, #AE73D8);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;    
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 15px 5px;
+    z-index: 1000; /* เพิ่มตัวนี้เพื่อให้ Header ลอยทับทุกอย่าง */
+}
+
+header h2 {
+    color: white;
+    margin: 0;
+    padding: 0px 2%;
+}
+
+header button {
+    background: #ffffff;
+    font-weight: bold;
+    color: #9b59b6;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    box-shadow: 0 0 20px #770b8d48;
+}
+
+header button:hover {
+    background: #e2e2e2;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+header button:active {
+    background: #acacac;
+    transform: translateY(2px);
+}
+
+/*-----------------------------*/
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 5%;
+    background: white;
+}
+
+.text_recommend h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.btn-post {
+    background: #9b59b6;
+    color: white;
+    padding: 12px 35px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-post:hover {
+    background: #8e44ad;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+}
+.btn-post:active {
+    background: #868686;
+}
+.img_right img {
+    width: 400px;
+    height: auto;
+}
+
+/*-----------------------------*/
+.form_input {
+    padding: 0 5%;
+}
+
+.form_input form {
+    display: flex;
+    align-items: center;
+    background-color: white; 
+    padding: 5px 15px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    margin-top: -0.25rem;
+}
+
+.form_input select {
+    padding: 10px 10px;
+    color: #333; 
+    border: none;
+    background: transparent; 
+    cursor: pointer;
+    outline: none;
+}
+
+.form_input input {
+    padding: 10px 15px;
+    border: none;
+    border-left: 1px solid #ddd; 
+    flex: 1; 
+    outline: none;
+}
+
+#reset, #submit {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#reset {
+    background-color: #8e8e8e; 
+    color: white;
+}
+
+#submit {
+    background-color: #9b59b6;
+    color: white;
+}
+
+
+#reset,
+#submit{
+    color: white;
+    padding: 5px 7px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 70px;
+}
+
+#reset {
+    background: #b0acac;
+    transition: 0.2s;
+}
+
+#submit {
+    background: #9602ac;
+    transition: 0.2s;
+}
+
+#reset:hover{
+    background: red;
+}
+#submit:hover{
+    background: green;
+}
+#submit:active, #reset:active {
+    background: #868686;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+/* --------------------------------------------------------*/
+.section-title { 
+    padding: 0 5%;  
+    font-size: 1.5rem; 
+}
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 15px 5%;
+    margin: 0 auto;
+}
+.card{
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border: 1px solid #eee;
+}
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.card-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background: #ddd;
+}
+.card-content{
+   padding: 15px; 
+   position: relative;
+}
+.card-content {
+    padding: 15px;
+    position: relative;
+}
+.profile-area {
+    display: flex;
+    gap: 5px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+    font-family: 'Sarabun';
+}
+.avater {
+    width: 40px;
+    height: 40px;
+    margin: 10px 0;
+    color: #333;
+}
+.title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 10px 0;
+    color: #333;
+    font-family: 'Sarabun';
+}
+.desc {
+    font-size: 0.85rem;
+    color: #4d4b4b;
+    height: 2em;
+    overflow: hidden;
+    line-height: 1.2;
+    font-family: 'Prompt', sans-serif;
+}
+.price {
+    text-align: right;
+    color: #9b59b6;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: 'Kanit';
+}
+.price span {
+    font-weight:normal;
+    font-size:1rem;
+    color:#2baf2b;
+    font-family: 'Kanit';
+}
+
+
+/* --------------------------------------------------------Footer */
+footer {  
+    margin-top: 50px;
+    bottom: 0;
+    background: linear-gradient(135deg, #8557A5, #AE73D8);
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.footer-contact {
+    padding: 5px 0;
+}
+
+.footer-contact p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.footer-bottom {
+    padding: 10px 0;
+    border-top: 2px solid rgba(85, 82, 82, 0.2); /* เส้นแบ่งบางๆ */
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+/*----------------------------------------------*/
+/* โครงสร้างพื้นหลังที่บังทั้งหน้าจอ */
+.modal-overlay {
+    display: none; /* ซ่อนไว้ก่อน */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px); /* ทำให้พื้นหลังเบลอแบบทันสมัย */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+/* กล่องเนื้อหา Modal */
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+.modal-logo {
+    width: 80px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+}
+
+.modal-body h2 {
+    color: #8557A5;
+    margin-bottom: 10px;
+}
+
+.modal-body p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* กลุ่มปุ่มกดยืนยัน */
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #8557A5, #AE73D8);
+    color: white;
+    padding: 12px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #8557A5;
+    border: 1px solid #8557A5;
+    padding: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover { 
+    transform: scale(1.05); 
+}
+/* ===== Pagination ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 40px 0;
+    font-family: 'Kanit', sans-serif;
+}                                               
+
+.page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    color: #9b59b6;              /* น้ำเงินแบบ Google */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.page-btn:hover {
+    background-color: #e8f0fe;
+}
+
+.page-btn.active {
+    background-color: #9b59b6;
+    color: #fff;
+    font-weight: 500;
+    cursor: default;
+}
+
+.page-btn.prev,
+.page-btn.next {
+    font-size: 16px;
+    border-radius: 50%;
+}
+
+.page-btn:disabled {
+    color: #ccc;
+    cursor: default;
+}
+
+.page-btn:disabled:hover {
+    background-color: transparent;
+}
+
+.page-dots {
+    padding: 0 6px;
+    color: #777;
+    font-size: 14px;
+}
+
+/* ภาพผู้โพสต์วงกลม */
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.price {
+    text-align: right;
+    color: #2baf2b;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin-top: 5px;
+    font-family: 'Kanit';
+}
+.price span {
+    font-weight:normal;
+    font-size:1rem;
+    color:#2baf2b;
+    font-family: 'Kanit';
+}
+
+.card-link,
+.card-link:link,
+.card-link:visited,
+.card-link:hover,
+.card-link:active {
+    color: inherit;          /* ใช้สีเดียวกับ parent */
+    text-decoration: none;   /* ลบเส้นขีด */
+}

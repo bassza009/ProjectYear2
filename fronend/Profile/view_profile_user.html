@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>User Profile Page</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Template_HF.css">
     <link rel="stylesheet" href="css/review.css">
@@ -11,14 +11,14 @@
 <body>
  <div class="content-wrapper">
         <header>        
-            <a href="../home/home_stu.html" style="text-decoration: none; color: inherit;">
+            <a href="../Home/home_login.html" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
             </a>
             <div class="profile_container">
                 <div class="buttom_header">
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
-                            <img src="../Photo_new/profile_user.jpg" alt="โปรไฟล์">
+                            <img src="/photo/OIP.webp" alt="โปรไฟล์">
                         </div>
                         <span>Profile</span>
                     </button>
@@ -26,15 +26,14 @@
 
                 <div class="data_box" id="myDropdown">
                     <div class="user_infor">
-                        <img src="../Photo_new/profile_user.jpg" alt="โปรไฟล์" >
+                        <img src="/photo/OIP.webp" alt="โปรไฟล์" >
                         <div class="user_name">
-                            <h1>FirstName LastName</h1>
-                            <p>✅ สถานะ : นิสิต</p>
+                            <h1>User Name</h1>
                         </div>
                     </div>
                     
                     <div class="button_VO">
-                        <a href="../Profile/profile_user.html">
+                        <a href="../Profile/profile_gen.html">
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>
                         <a href="../Home/home_login.html" >           
@@ -50,7 +49,6 @@
             <div class="profile-header">
                 <div class="avatar-wrapper">
                     <img src="/photo/pro_G.jpg" alt="Avatar" class="avatar-img">
-                    <button class="edit-avatar-btn">✎</button>
                 </div>
                 
                 <div class="header-info">
@@ -72,7 +70,6 @@
                     <section class="contact-section">
                         <div class="section-header">
                             <h3>ช่องทางการติดต่อ</h3>
-                            <button onclick="toggleEdit()" id="edit-btn" class="btn-small">แก้ไข</button>
                         </div>
                         
                         <ul class="contact-list" id="contact-list">
@@ -130,6 +127,10 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+
 
                             <div class="rating-summary-card">
                                 <div class="rating-left">
@@ -210,6 +211,6 @@
 
     <script src="review_star.js"></script>
     <script src="swith_PR.js"></script>
-    <script src="script.js"></script>
+    <script src="post_script.js"></script>
 </body>
 </html>

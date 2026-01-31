@@ -303,4 +303,95 @@
     border-radius: 6px;
 }
 
+/* =========================================
+   5. RATING SUMMARY
+   ========================================= */
+.rating-summary-card {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+}
+
+.rating-left {
+    flex: 1;
+    text-align: center;
+}
+
+.rating-left h1 {
+    font-size: 48px;
+    color: #333;
+}
+
+.stars-display, .stars {
+    color: #fbbf24;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.rating-right {
+    flex: 2;
+}
+
+.bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #666;
+}
+
+.bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: #fbbf24;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* =========================================
+   6. GLOBAL BUTTONS & HELPERS
+   ========================================= */
+.btn-view-more {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border: 1px solid #fbbf24;
+    color: #fbbf24;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-send-reply {
+    padding: 6px 12px;
+    background: #fbbf24;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-small {
+    padding: 4px 12px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
 

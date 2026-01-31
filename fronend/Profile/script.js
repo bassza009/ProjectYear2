@@ -38,6 +38,7 @@ function displayUserJobs() {
             const jobCard = document.createElement('div');
             jobCard.className = 'work-card';
             jobCard.innerHTML = `
+               <a href="../Post/post_jop.html?id=${job.id}" class="card-link" >
                 <div class="card-image"><img src="${job.image}"></div>
                 <div class="card-body">
                     <h4>${job.title}</h4>
@@ -52,12 +53,13 @@ function displayUserJobs() {
                         <button class="btn-edit" onclick="editJob(${job.id})">✏️ แก้ไข</button>
                         <button class="btn-delete" onclick="deleteJob(${job.id})">🗑️ ลบ</button>
                     </div>
-                </div>`;
+                </div>
+                </a>`;
             jobContainer.appendChild(jobCard);
         });
     }
 }
-
+    
 function deleteJob(jobId) {
     if (confirm("ลบโพสต์นี้หรือไม่?")) {
         let jobs = JSON.parse(localStorage.getItem('allJobs')) || [];
@@ -69,7 +71,7 @@ function deleteJob(jobId) {
 
 function editJob(jobId) {
     localStorage.setItem('editingJobId', jobId);
-    window.location.href = '../create_post/post_skill.html'; 
+    window.location.href = '../edit_post/post_skill.html'; 
 }
 
 /* =========================================

@@ -97,11 +97,12 @@ function submitJob() {
     alert(editingId ? "อัปเดตข้อมูลสำเร็จ!" : "โพสต์งานสำเร็จ!");
     
     // ย้ายไปหน้าแสดงผล (เช็ค Path ให้ตรงกับโปรเจกต์คุณ)
-    window.location.href = '../profile_user/profile_user.html'; 
+    window.location.href = '../Profile/profile_user.html'; 
 }
 
 // ฟังก์ชันยกเลิก (เผื่ออยากกดกลับโดยไม่เซฟ)
 function cancelEdit() {
     localStorage.removeItem('editingJobId');
-    window.location.href = '../profile_user/profile.html';
+    window.location.href = '../Profile/profile_user.html';
 }
+

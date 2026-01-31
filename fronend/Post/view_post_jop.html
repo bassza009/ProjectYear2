@@ -12,32 +12,38 @@
 <body>
 
     <header>        
-        <a href="../Home/home_stu.html" class="logo-link" style="text-decoration: none;">
-            <h2>SDhire</h2>
-        </a>
-        <div class="profile_container">
-            <button type="button" class="profile_button" onclick="toggleDropdown()">
-                <div class="photo_profile">
-                    <img src="/photo/mimm.jpg" alt="โปรไฟล์">
-                </div>
-                <span>Profile</span>
-            </button>
-            
-            <div class="data_box" id="myDropdown">
-                <div class="user_infor">
-                    <img src="/photo/mimm.jpg" alt="โปรไฟล์">
-                    <div class="user_name">
-                        <h1>FirstName LastName</h1>
-                        <p>✅ สถานะ : นิสิต</p>
-                    </div>
-                </div>
-                <div class="button_VO">
-                    <a href="../Profile/profile_user.html"><button class="b_view">ดูโปรไฟล์</button></a>
-                    <a href="../Home/home_login.html"><button class="b_logout">ออกจากระบบ</button></a> 
-                </div>
-            </div>
-        </div>
-    </header>
+                <a href="/Fronend_v1/home/home_gen.html" style="text-decoration: none; color: inherit;">
+                    <h2>SDhire</h2>
+                </a>
+                  <div class="profile_container">
+                      <div class="buttom_header">
+                          <button type="button" class="profile_button" onclick="toggleDropdown()">
+                              <div class="photo_profile">
+                                  <img src="/photo/OIP.webp" alt="โปรไฟล์">
+                              </div>
+                              <span>Profile</span>
+                          </button>
+                      </div>
+
+                      <div class="data_box" id="myDropdown">
+                          <div class="user_infor">
+                              <img src="/photo/OIP.webp" alt="โปรไฟล์" >
+                              <div class="user_name">
+                                  <h1>User Name</h1>
+                              </div>
+                          </div>
+                          
+                          <div class="button_VO">
+                              <a href="../Profile/profile_gen.html">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                            <a href="../Home/home_login.html" >           
+                                <button class="b_logout">ออกจากระบบ</button>
+                            </a> 
+                          </div>
+                      </div>
+                  </div>
+              </header>
 
     <main class="content-wrapper">
         <div class="event_name">
@@ -72,7 +78,7 @@
                             <small>ราคาเริ่มต้น</small>
                             <h2 id="jobPrice">฿0</h2>
                         </div>
-                        <a href="../Profile/profile_user.html">
+                        <a href="../Profile/view_profile_user.html">
                             <button class="btn-view-profile">ดูโปรไฟล์เต็ม</button>
                         </a>
                     </div>
