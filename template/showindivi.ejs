@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+    <% if (userdata){ %>
+        <div>
+            <p>ID : <%= userdata.ID%></p>
+            <p>Username : <%= userdata.username%></p>
+            <p>password : <%= userdata.pass_word%></p>
+            <p>Email : <%= userdata.email%></p>
+            <p>Phone : <%= userdata.userPhoneNumber%></p>
+            <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>">
+        </div>
+    <% }else{ %>
+        <p>no data</p>
+    <% }   %>
+    <form action="/indivi/api" method="post">
+        <input type="number" placeholder="ID" id="id" name="id">
+        <button type="submit">click</button>
+    </form>
+    </center>
+</body>
+</html>

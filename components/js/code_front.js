@@ -41,7 +41,5 @@ function create_post(){
                 if(data.username){    
                     username_name.innerText=data.username
                 }
-            })
-                
-            
+            })   
         }           
