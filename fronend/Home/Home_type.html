@@ -4,17 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SDhire</title>
-  <link rel="stylesheet" href="css/typestyle.css" />
+  <link rel="stylesheet" href="css/typestyle.css" >
+  <link rel="stylesheet" href="css/Tem_home_HF.css">
 </head>
 <body>
 
   <!-- ===== Navbar ===== -->
-  <header class="navbar">
-    <div class="logo">SDhire</div>
-    <div class="nav-actions">
-      <button class="btn purple">โพสต์</button>
-      <button class="btn profile">Profile</button>
-    </div>
+  <header >
+    <a href="../Home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="/photo/mimm.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="/photo/mimm.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="../Profile/profile_user.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="../Home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
   </header>
 
   <!-- ===== Page ===== -->
@@ -23,7 +51,7 @@
       <section class="main-box">
 
         <!-- ===== Category ===== -->
-        <header class="category">
+        <div class="category">
           <div class="path" id="categoryPath">
             ประเภทงาน : ติวเตอร์ &gt; ทั้งหมด
           </div>
@@ -39,7 +67,7 @@
                 </div>
             </div>
         </div>
-        </header>
+    </div>
 
         <!-- ===== Content ===== -->
         <div class="content">
@@ -48,7 +76,7 @@
           <aside class="sidebar">
             <h3>ตัวคัดกรองราคา</h3>
             <input type="text" placeholder="งบประมาณที่คุณมีอยู่" />
-
+            <h3>เรียงตาม</h3>
             <div class="price-tabs">
                 <button class="tab price active">คะแนนรีวิว</button>
                 <button class="tab price">ยอดขาย</button>
@@ -109,7 +137,8 @@
       </section>
     </div>
   </main>
-
+  
   <script src="typestyle.js"></script>
+  <script src="profile_buttom.js"></script>
 </body>
 </html>

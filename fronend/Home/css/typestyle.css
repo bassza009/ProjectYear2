@@ -1,38 +1,6 @@
-
-/* ===== Navbar ===== */
-.navbar {
-  background: linear-gradient(90deg, #9b5de5, #b583f0);
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #fff;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.btn {
-  padding: 6px 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-.btn.purple {
-  background: #7b2cbf;
-  color: #fff;
-}
-
-.btn.profile {
-  background: #fff;
-  color: #333;
-}
-
 /* ===== Layout ===== */
 .container {
+  margin-top: 90px;
   padding: 20px 30px;
 }
 
@@ -61,21 +29,60 @@
   gap: 12px;
   align-items: center;
   margin-bottom: 20px;
+  position: relative; /* ⭐ สำคัญ: ปุ่มไม่ขยับ */
 }
 
+/* ===== Filter Button ===== */
 .filter-btn {
-  background: #7b2cbf;
-  color: #fff;
+  background: #e0e0e0;        /* ไม่กด = เทา */
+  color: #333;
   border: none;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border-radius: 999px;
   cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
+.filter-btn.active {
+  background: #9b59b6;        /* กดแล้ว = ม่วง */
+  color: #fff;
+}
+
+/* ===== Filter Panel ===== */
+.filter-panel {
+  display: none;
+  position: absolute;        /* ⭐ ลอย ไม่ดัน layout */
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 14px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  margin-top: 10px;
+  z-index: 10;
+}
+
+.filter-panel.show {
+  display: block;
+}
+
+/* หมวดหมู่ในกล่องคัดกรอง */
+.filter-panel .category-scroll {
+  display: flex;
+  flex-wrap: wrap;           /* ⭐ ขึ้นบรรทัดใหม่ */
+  gap: 10px;
+  overflow: visible;         /* ⭐ ไม่เลื่อนขวา */
+}
+
+/* ===== Category Scroll (แถบบน) ===== */
 .category-scroll {
   display: flex;
   gap: 10px;
   overflow-x: auto;
+  padding-bottom: 5px;
   scrollbar-width: none;
 }
 
@@ -92,11 +99,22 @@
   border-radius: 999px;
   cursor: pointer;
   flex-shrink: 0;
+  white-space: nowrap;
+  transition: all 0.2s ease;
 }
+
+.tab.active {
+  background: #9b59b6;
+  color: #fff;
+}
+
 /* ===== Price Tabs ===== */
 .tab.price {
-  background: #d6d6d6;   /* เทา */
-  color: #222;           /* ดำ */
+  background: #e0e0e0;
+  color: #222;
+  padding: 12px 16px;     /* ⭐ เพิ่มความสูง */
+  font-size: 14px;
+  border-radius: 12px;
 }
 
 .tab.price:hover {
@@ -104,12 +122,7 @@
 }
 
 .tab.price.active {
-  background: #7b2cbf;  /* ม่วง */
-  color: #fff;
-}
-
-.tab.active {
-  background: #7b2cbf;
+  background: #9b59b6;
   color: #fff;
 }
 
@@ -135,7 +148,7 @@
 
 .price-tabs {
   display: flex;
-  flex-direction: column;   /* เรียงลงทีละบรรทัด */
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -180,20 +193,19 @@
   font-weight: bold;
 }
 
-.category-scroll {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto; /* ให้เลื่อนซ้ายขวาได้ */
-    padding-bottom: 5px;
-    -ms-overflow-style: none;  /* ซ่อน scrollbar (IE/Edge) */
-    scrollbar-width: none;  /* ซ่อน scrollbar (Firefox) */
+/* ===== Budget Input ===== */
+.sidebar input[type="text"] {
+  width: 190px;              /* ขนาดพอดีตามภาพ */
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  display: block;
+  margin: 10px auto 20px;    /* กึ่งกลาง + เว้นด้านล่าง */
+  box-sizing: border-box;
 }
 
-.category-scroll::-webkit-scrollbar {
-    display: none; /* ซ่อน scrollbar (Chrome/Safari) */
-}
-
-.tab {
-    transition: all 0.2s ease; /* เพิ่ม Animation เวลาเปลี่ยนสี */
-    white-space: nowrap; /* ป้องกันตัวอักษรตกบรรทัด */
+.sidebar input[type="text"]:focus {
+  outline: none;
+  border-color: #9b59b6;
 }
