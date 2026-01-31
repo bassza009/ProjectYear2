@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <form action="/register/api" method="post" enctype="multipart/form-data">
+        <input type="text" placeholder="Username" id = "username" name = "username" required>
+        <input type="email" placeholder="Email" id = "email" name = "email" required>
+        <input type="number" placeholder="password" id = "password" name = "password" required>
+        <input type="text" placeholder="phone" id = "phone" name = "phone" required>
+        <input type="file" placeholder="picture" id = "picture" name = "picture" accept=".jpg,.png,.jpeg">
+        <button type="submit">click</button>
+    </form>
+</body>
+</html>

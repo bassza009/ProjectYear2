@@ -1,0 +1,32 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+           
+        </style>
+    </head>
+    <body>
+        <center>
+        <h1>show data</h1>
+        <div id="showdata">
+            <% if (userdata.length){ %>
+                <% userdata.forEach((user)=>{ %>
+                    <div>
+                        <p>ID : <%= user.ID%></p>
+                        <p>Username : <%= user.username%></p>
+                        <p>Email : <%= user.pass_word%></p>
+                        <p>ID : <%= user.userPhoneNumber%></p>
+                    </div>
+                <%})%>
+            <%}else { %>    
+                <p>no data</p>
+            <% } %>
+        </div>
+        </center>
+        
+        
+    </body>
+    </html>

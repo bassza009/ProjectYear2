@@ -6,13 +6,16 @@
     <title>หน้าแรก - SDhire</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="css/home_login.css">    
-    <link rel="stylesheet" href="css/Tem_main.css">
+    <link rel="stylesheet" href="/../home/css/home_login.css">    
+    <link rel="stylesheet" href="/../home/css/Tem_home_HF.css">
+    <link rel="stylesheet" href="/../home/css/Tem_main.css">
 </head>
 <body>
 
     <header>        
-        <h2>SDhire</h2>
+        <a href="http://localhost:3000" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
         <button type="button">เข้าสู่ระบบ </button>
     </header>
 
@@ -22,7 +25,7 @@
                     <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
                     <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
                     พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
-                    <a href="../login_project/create_stu.html" class="btn-post">โพสต์</a>
+                    <a href="/Fronend_v1/create_post/post_work.html" class="btn-post">โพสต์</a>
                 </div>
                 <div class="img_right">
                     <img src="/photo/profile.png" alt="profile">
@@ -124,7 +127,7 @@
                         <img src="../icon/music.png" >
                     </div>
                     <div class="cat-info">
-                        <span>ดนตรีและเสียง</span>
+                        <span>ดนตรี และเสียง</span>
                         <small>25 งาน</small>
                     </div>
                 </a>
@@ -149,12 +152,12 @@
                     </div>
                 </a>
 
-                <a href="#" class="cat-card-icon color-6">
+                <a href="#" class="cat-card-icon color-5">
                     <div class="icon-box">
                         <img src="../icon/tarot.png">
                     </div>
                     <div class="cat-info">
-                        <span>อื่นๆ</span>
+                        <span>สายมู</span>
                         <small>25 งาน</small>
                     </div>
                 </a>
@@ -190,14 +193,15 @@
                 <h2>กรุณาเข้าสู่ระบบ</h2>
                 <p>เพื่อเข้าถึงฟีเจอร์การโพสต์งานและจัดการโปรไฟล์ของคุณ</p>
                 <div class="modal-buttons">
-                    <a href="../login_project/sign_in.html" class="btn-primary">ไปที่หน้าเข้าสู่ระบบ</a>
+                    <a href="/login" class="btn-primary">ไปที่หน้าเข้าสู่ระบบ</a>
+                    
                     <button type="button" class="btn-secondary" id="stayGuest">ดูในฐานะผู้เยี่ยมชม</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="login_home.js"></script>
-    <script src="post.js"></script>
+    <script src="../homejs/login_home.js"></script>
+    <script src="../homejs/post.js"></script>
 </body>
 </html>

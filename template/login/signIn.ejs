@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
-    <link rel="stylesheet" href="css/sign_in.css">
+    <link rel="stylesheet" href="/../login/css/sign_in.css">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
             <div class="left_login">
                 <h2>เข้าสู่ระบบ</h2>
                 <p>สำหรับนิสิต</p>
-                <form action="/login" method="POST">
+                <form action="/loginSTD/api" method="POST">
                     <input type="email" name="email" id="email" placeholder="อีเมลหรือหมายเลขโทรศัพท์มือถือ"><br>
                     <input type="password" name = 'password' id="password" placeholder="รหัสผ่าน"><br>
                     <button type="submit"id="submitBtn_create">เข้าสู่ระบบ</button>
@@ -31,16 +31,14 @@
             <div class="right_login">
                 <h2>เข้าสู่ระบบ</h2>
                 <p>สำหรับบุคคลทั่วไป</p>
-                <form action="/login" method="POST">
+                
+                <form action="/logingen" method="POST">
                     <input type="email" name="email" id="email" placeholder="อีเมลหรือหมายเลขโทรศัพท์มือถือ" ><br>
                     <input type="password" name = 'password' id="password" placeholder="รหัสผ่าน" ><br>
-                    
                     <button type="submit" id="submitBtn">เข้าสู่ระบบ</button>
-                    
                     <span>ยังไม่มีบัญชีผู้เข้าใช้ ? 
-                        <a href="create_gen.html">สร้างบัญชี</a>    
+                        <a href="http://localhost:3000/general/regisGen">สร้างบัญชี</a>    
                     </span>
-                    
                 </form>
 
             </div>
@@ -56,8 +54,8 @@
         </div>
     </main>
 
-    <script src="./sign_in.html"></script>
-    <script>
+    <script src="/../loginjs/action_singin.js"></script>
+    <!-- <script>
         document.getElementById("submitBtn").addEventListener("click", function(event) {
         event.preventDefault(); 
         window.location.href = '../home/home_gen.html'; 
@@ -66,7 +64,7 @@
         event.preventDefault(); 
         window.location.href = 'create_stu.html'; 
     });
-    </script>
+    </script>-->
 
 </body>
 </html>

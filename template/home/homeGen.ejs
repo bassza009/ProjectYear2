@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home SDhire</title>
 
-    <link rel="stylesheet" href="css/table_job.css"> <!-- โพสต์งาน -->
-    <link rel="stylesheet" href="css/buttom_sw.css"> <!-- กดสลับงานกับโพสต์ -->
-    <link rel="stylesheet" href="css/Tem_home_HF.css"> <!-- หัวกับท้าย -->
-    <link rel="stylesheet" href="css/Tem_main.css"> <!-- ตัวเนื้อหา  -->
+    <link rel="stylesheet" href="/../home/css/table_job.css"> <!-- โพสต์งาน -->
+    <link rel="stylesheet" href="/../home/css/buttom_sw.css"> <!-- กดสลับงานกับโพสต์ -->
+    <link rel="stylesheet" href="/../home/css/Tem_home_HF.css"> <!-- หัวกับท้าย -->
+    <link rel="stylesheet" href="/../home/css/Tem_main.css"> <!-- ตัวเนื้อหา  -->
+    
 </head>
 <body>
    <div class="content-wrapper">
         <header>        
-            <a href="../Home/home_gen.html" style="text-decoration: none; color: inherit;">
+            <a href="http://localhost:3000" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
             </a>
             <div class="profile_container">
@@ -31,16 +31,18 @@
                     <div class="user_infor">
                         <img src="/photo/OIP.webp" alt="โปรไฟล์" >
                         <div class="user_name">
-                            <h1>FirstName LastName</h1>
+                            <h1><%= userdata.username %></h1>
                         </div>
                     </div>
                     
                     <div class="button_VO">
-                        <a href="../Profile/profile_gen.html">
+                        <a href="/Fronend_v1/profile_user/profile_gen.html">
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>
-                        <a href="../Home/home_login.html" >           
-                            <button class="b_logout">ออกจากระบบ</button>
+                        <a >
+                        <form action="/logout" method="POST">       
+                            <button class="b_logout" type="submit">ออกจากระบบ</button>
+                        </form> 
                         </a> 
                     </div>
                 </div>
@@ -54,10 +56,10 @@
                     <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
                     <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
                     พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
-                    <a href="../edit_post/post_work.html" class="btn-post">โพสต์</a>
+                    <a href="/Fronend_v1/create_post/post_work.html" class="btn-post">โพสต์</a>
                 </div>
                 <div class="img_right">
-                    <img src="../Photo_new/profile.png" alt="profile">
+                    <img src="../photo/profile.png" alt="profile">
                 </div>
             </div>
 
@@ -76,7 +78,7 @@
     </div>
 
     <div class="cat-grid">
-        <a href="work_trpe.html" class="cat-card-icon color-1">
+        <a href="#" class="cat-card-icon color-1">
             <div class="icon-box">
                 <img src="../icon/package.png">
             </div>
@@ -85,8 +87,7 @@
                 <small>85 งาน</small>
             </div>
         </a>
-
-        <a href="program_type.html" class="cat-card-icon color-2">
+        <a href="#" class="cat-card-icon color-2">
             <div class="icon-box">
                 <img src="../icon/programming.png" >
             </div>
@@ -96,7 +97,7 @@
             </div>
         </a>
 
-        <a href="graphics_type.html" class="cat-card-icon color-3">
+        <a href="#" class="cat-card-icon color-3">
             <div class="icon-box">
                 <img src="../icon/art-design.png">
             </div>
@@ -106,7 +107,7 @@
             </div>
         </a>
 
-        <a href="video_type.html" class="cat-card-icon color-4">
+        <a href="#" class="cat-card-icon color-4">
             <div class="icon-box">
                 <img src="../icon/video.png">
             </div>
@@ -116,7 +117,7 @@
             </div>
         </a>
 
-        <a href="translate_type.html" class="cat-card-icon color-5">
+        <a href="#" class="cat-card-icon color-5">
             <div class="icon-box">
                 <img src="../icon/language.png">
             </i></div>
@@ -126,7 +127,7 @@
             </div>
         </a>
 
-        <a href="study_type.html" class="cat-card-icon color-6">
+        <a href="#" class="cat-card-icon color-6">
             <div class="icon-box">
                 <img src="../icon/thesis.png" >
             </i></div>
@@ -136,7 +137,7 @@
             </div>
         </a>
 
-        <a href="photo_type.html" class="cat-card-icon color-1">
+        <a href="#" class="cat-card-icon color-1">
             <div class="icon-box">
                 <img src="../icon/photo-camera.png">
             </i></div>
@@ -146,17 +147,17 @@
             </div>
         </a>
 
-        <a href="music_type.html" class="cat-card-icon color-2">
+        <a href="#" class="cat-card-icon color-2">
             <div class="icon-box">
                 <img src="../icon/music.png" >
             </div>
             <div class="cat-info">
-                <span>ดนตรีและเสียง</span>
+                <span>ดนตรี และเสียง</span>
                 <small>25 งาน</small>
             </div>
         </a>
 
-        <a href="document_type.html" class="cat-card-icon color-3">
+        <a href="#" class="cat-card-icon color-3">
             <div class="icon-box">
                 <img src="../icon/folder.png" >
             </div>
@@ -166,7 +167,7 @@
             </div>
         </a>
 
-        <a href="repair_type.html" class="cat-card-icon color-4">
+        <a href="#" class="cat-card-icon color-4">
             <div class="icon-box">
                 <img src="../icon/technical.png">
             </div>
@@ -176,14 +177,14 @@
             </div>
         </a>
 
-        <a href="other_type.html" class="cat-card-icon color-5">
-                    <div class="icon-box">
-                        <img src="../icon/heart.png">
-                    </div>
-                    <div class="cat-info">
-                        <span>อื่นๆ</span>
-                        <small>25 งาน</small>
-                    </div>
+         <a href="#" class="cat-card-icon color-5">
+            <div class="icon-box">
+                <img src="../icon/tarot.png">
+            </div>
+            <div class="cat-info">
+                <span>สายมู</span>
+                <small>25 งาน</small>
+            </div>
         </a>
     </div>
 </section>
@@ -239,8 +240,8 @@
     </footer>
     
 
-    <script src="profile_buttom.js"></script>
-    <script src="view_post.js"></script>
-    <script src="table.js"></script>
+    <script src="/../homejs/profile_buttom.js"></script> 
+    <script src="/../homejs/view_post.js"></script>
+    <script src="/../homejs/table.js"></script>
 </body>
 </html>

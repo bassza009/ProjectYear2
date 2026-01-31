@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สร้างบัญชี</title>
+    <link rel="stylesheet" href="/../login/css/action_123.css">
+    <link rel="stylesheet" href="/../login/css/create_gen.css">
+</head>
+<body>
+    <div class="main_center">
+        <button type="button" class="back-btn" onclick="goBack()"> < </button> 
+
+        <h1>สร้างบัญชี</h1>
+
+        <div class="step-container">
+            <div class="step active" id="circle1">1</div>
+            <div class="line" id="line1"></div>
+            <div class="step" id="circle2">2</div>
+        </div> 
+        
+        <form action = '/regisGen/api' id="mainForm" method="post">
+            <div id="part1" class="set_account"> 
+                <div class="account">
+                    <label>อีเมลที่ติดต่อได้</label>
+                    <input type="email" placeholder="ระบุอีเมล" id ="email" name ="email" required>
+                    <button onclick="sendOTP()">ขอ OTP</button>
+                    <label>รหัสผ่าน</label>
+                    <input type="password" placeholder="ระบุรหัสผ่าน" id ="password" name ="password"required>
+                    <label>ยืนยันรหัสผ่าน</label>
+                    <input type="password"  placeholder="ระบุยืนยันรหัสผ่าน" id ="varifypass" name ="varifypass"required>
+                    <label>เบอร์โทรที่ติดต่อได้</label>
+                    <input type="text" placeholder="ระบุเบอร์โทร" id = "phone" name = "phone" required>
+                    
+                    <div id = "otpSection" style="display: none;">
+                    <input type="number" name="otp" id="otp"  placeholder="OTP" required>
+                    <button onclick="varifyOTP()">Varify OTP</button>
+                    <small id="otpStatus" style="color: red;"></small>
+                    </div>
+                </div>
+                <input type="hidden" id ="isOTPVarified" value="false">
+                <button type="button" class="next" onclick="goToStep(2)">ดำเนินการต่อ</button>
+            </div>
+
+            <div id="part2" class="set_profile">
+                <h3>เลือกโปรไฟล์ของคุณ</h3>
+                <p>ควรใช้ภาพถ่ายตัวจริงของคุณเห็นใบหน้าชัดเจน</p>
+                
+                <div class="img_upload_container">
+                    <label for="file-input">
+                        <div class="upload-icon" id="imagePreview">
+                            <small>คลิกเพื่อเลือกรูป</small>
+                        </div>
+                    </label>
+                    <input name = "file_input" id="file-input" type="file" accept="image/*" onchange="previewImage(event)" >
+                </div>
+
+                <div class="fron_l">
+                    <label>ชื่อที่ใช้แสดงในระบบ</label>
+                    <input type="text" placeholder="กรอกชื่อของคุณ" name = 'username' required>
+                </div>
+                <button type="submit" id="submitBtn" class="submit">สร้างบัญชี</button>            
+            </div>
+        </form> 
+    </div>
+
+    <script src="/../loginjs/action12.js"></script>
+    <script src = "/../loginjs/otp.js"></script>
+    <!-- <script>
+        document.getElementById("submitBtn").addEventListener("click", function(event) {
+        event.preventDefault(); 
+        window.location.href = '../home/home_gen.html'; 
+    });
+    </script> -->
+</body>
+</html>
