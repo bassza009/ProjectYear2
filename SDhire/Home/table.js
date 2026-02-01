@@ -41,7 +41,7 @@ function renderJobTable() {
         const displayCategory = catNames[job.category] || job.category || "เลือกหมวดหมู่";
 
         const row = `
-            <tr onclick="window.location.href='../Post/post_gen.html?id=${job.id}'"
+            <tr onclick="window.location.href='../General/Post/post_gen.html?id=${job.id}'"
                 style="cursor:pointer;">
                 <td>${job.title}</td>
                 <td>${displayCategory}</td> 

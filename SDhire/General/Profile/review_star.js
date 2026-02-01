@@ -26,13 +26,13 @@ function createReviewCardHTML(rev, index) {
         <div class="review-card">
             <img src="${rev.profilePic}" class="user-pic">
             <div class="review-content">
-                <h5>${badge}${rev.name}</h5>
+                <h5>${rev.name}</h5>
                 <div class="stars">${renderStars(rev.rating)}</div>
                 <p class="quote">${rev.comment || 'ไม่มีข้อความรีวิว'}</p> 
                 ${rev.reviewImg ? `<div class="review-images"><img src="${rev.reviewImg}"></div>` : ''}
                 <div class="review-actions">
                     <button class="action-btn ${rev.isLiked ? 'active' : ''}" onclick="handleLike('${revId}')">
-                        มีประโยชน์ 👍(<span class="like-count">${rev.likes || 0}</span>)
+                        มีประโยชน์ 👍(${rev.likes || 0})
                     </button>
                 </div>
             </div>
