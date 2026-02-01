@@ -5,14 +5,12 @@ body {
     flex-direction: column;
     min-height: 100vh; /* บังคับให้สูงเท่ากับหน้าจอพอดี */
     margin: 0;         /* ลบขอบขาวรอบๆ จอ */
-    font-family: 'Kanit', sans-serif; 
 }
 
 /* 2. ตัวคลุมเนื้อหาจะยืดพื้นที่ที่เหลือทั้งหมดเพื่อดัน footer ลงไป */
 .content-wrapper {
     flex: 1; 
 }
-
 
 header {
     display: flex;
@@ -28,12 +26,19 @@ header {
 }
 
 header h2 {
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: 600;
     color: white;
-    margin: 0;
-    padding: 0px 20px;
+}
+
+header button:hover {
+    background: whitesmoke;
+    color: #000000;
 }
 
 .profile_container {
+    
     position: relative;
 }
 
@@ -42,35 +47,40 @@ header h2 {
     gap: 10px;
 }
 
+.post_button{
+    width: 120px;
+    height: auto;
+    gap: 10px;
+    padding: 5px 10px;
+    font-size: 15px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: #8D38C9;
+    border-radius: 8px;
+    border: none;
+    transition: 0.2s;
+}
+
 .profile_button{
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     margin-right: 50px;
-    padding: 5px 20px;
+    padding: 5px 10px;
+    font-size: 15px;
     cursor: pointer;
     color: black;
     background-color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     border: none;
-    margin-right: 20px;
-    box-shadow: 0 0 20px #770b8d48;
-}
-button:hover {
-    background: #e2e2e2;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-button:active {
-    background: #acacac;
-    transform: translateY(2px);
-}
-.photo_profile img {
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
+    transition: 0.2s;
 }
 
+.photo_profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+}
  /*----------- บล็อค ข้อมูล-----------*/
  .data_box.show {
     display: flex; /* กลับมาแสดงผล */
@@ -134,7 +144,7 @@ button:active {
     cursor: pointer;
 }
 
-.b_view {
+.button_VO .b_view {
     border: 1.5px solid #8a2be2; 
     color: #8a2be2; /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
 }
@@ -154,17 +164,9 @@ button:active {
     background: #ff4d4d;
     color: white;
 }
-.b_logout:hover {
-    border: 2px solid #ff4d4d; 
-    color: #000000;
-}
 
-.img_up:hover, .post_button:hover {
-    background: #8e44ad;
-}
-.img_up:active, .post_button:active{
-    background: #acacac;
-}
+
+
 /*--------------------------------------------------------------------*/
 
 footer {  
@@ -195,3 +197,11 @@ footer {
     font-size: 14px;
 }
 
+.card-link,
+.card-link:link,
+.card-link:visited,
+.card-link:hover,
+.card-link:active {
+    color: inherit;          /* ใช้สีเดียวกับ parent */
+    text-decoration: none;   /* ลบเส้นขีด */
+}
