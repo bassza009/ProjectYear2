@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDhire</title>
+  <link rel="stylesheet" href="css/typestyle.css" >
+  <link rel="stylesheet" href="css/Tem_home_HF.css">
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+<header>        
+            <a href="/SDhire/Home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="../photo/profile_user.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="../photo/profile_user.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="../Profile/profile_user.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="/SDhire/Home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
+  <!-- ===== Page ===== -->
+  <main class="container">
+    <div class="page-wrapper">
+      <section class="main-box">
+
+        <!-- ===== Category ===== -->
+        <div class="category">
+          <div class="path" id="categoryPath">
+            ประเภทงาน : แปลภาษา &gt; ทั้งหมด
+          </div>
+
+        <div class="category-bar">
+            <button class="filter-btn">คัดกรอง</button>
+            <div class="filter-panel" id="filterPanel">
+                <div class="category-scroll">
+                    <button class="tab active" data-category="all">ทั้งหมด</button>
+                    <button class="tab" data-category="general-trans">แปลเอกสารทั่วไป</button>
+                    <button class="tab" data-category="academic">แปลบทความวิชาการ/วิจัย</button>
+                    <button class="tab" data-category="subtitle">แปลซับไตเติ้ล</button>
+                    <button class="tab" data-category="localization">แปลเว็บไซต์ (Localization)</button>
+                    <button class="tab" data-category="technical">แปลคู่มือเครื่องจักร</button>
+                    <button class="tab" data-category="literature">แปลนิยาย/การ์ตูน</button>
+                    <button class="tab" data-category="interpreter">ล่ามออนไลน์</button>
+                    <button class="tab" data-category="business">แปลจดหมายธุรกิจ/อีเมล</button>
+                    <button class="tab" data-category="transcription">ถอดความและแปล</button>
+                    <button class="tab" data-category="tourism">แปลเมนูอาหาร/ท่องเที่ยว</button>
+                    <button class="tab" data-category="other4">อืิ่นๆ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- ===== Content ===== -->
+        <div class="content">
+
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <h3>ตัวคัดกรองราคา</h3>
+            <input type="text" placeholder="งบประมาณที่คุณมีอยู่" />
+            <h3>เรียงตาม</h3>
+            <div class="price-tabs">
+                <button class="tab price active">คะแนนรีวิว</button>
+                <button class="tab price">ยอดขาย</button>
+                <button class="tab price">ราคา (ต่ำ-สูง)</button>
+                <button class="tab price">ราคา (สูง-ต่ำ)</button>
+            </div>
+          </aside>
+
+          <!-- Posts -->
+          <section class="post-area">
+            <div class="grid">
+
+              <!-- Card -->
+              <article class="card">
+                <img src="https://picsum.photos/300/180?1" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>สอนออนไลน์ภาษาอังกฤษ</p>
+                  <span class="price">เริ่มต้น 100 บาท</span>
+                </div>
+              </article>
+
+              <article class="card">
+                <img src="https://picsum.photos/300/180?2" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>400 Robux</p>
+                  <span class="price">เริ่มต้น 220 บาท</span>
+                </div>
+              </article>
+
+              <article class="card">
+                <img src="https://picsum.photos/300/180?3" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>400 Robux</p>
+                  <span class="price">เริ่มต้น 220 บาท</span>
+                </div>
+              </article>
+
+              <article class="card">
+                <img src="https://picsum.photos/300/180?4" />
+                <div class="card-body">
+                  <span class="badge">US</span>
+                  <h4>ผู้ใช้งานทั่วไป</h4>
+                  <p>400 Robux</p>
+                  <span class="price">เริ่มต้น 220 บาท</span>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+        </div>
+      </section>
+    </div>
+  </main>
+  
+  <script src="typestyle.js"></script>
+  <script src="profile_buttom.js"></script>
+</body>
+</html>

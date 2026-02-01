@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Skill</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/post_skill.css">
+    <link rel="stylesheet" href="css/Template_HF.css">
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <header>        
+            <a href="/SDhire/Home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="../photo/profile_user.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="../photo/profile_user.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="../Profile/profile_user.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="/SDhire/Home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
+            <main>
+                <div class="container">
+                    <h1>รายละเอียดงาน</h1>
+
+                    <div class="upload-area" id="uploadBtn">
+                        <div id="placeholder">
+                            <small>ภาพหน้าปกงานddddd</small><br>
+                            <small>ขนาดแนะนำ 1280*720px หรือ 16:9</small><br>
+                            <button type="button" class="img_up">อัปโหลดภาพ</button>
+                        </div>
+                        <img id="preview" src="">
+                        <input type="file" id="fileInput" hidden accept="image/*" >
+                    </div>
+
+                    <form id="jobnform">
+                        <div class="inputnamejob">
+                            <label>ชื่องาน</label>
+                            <input type="text" id="title" required placeholder="ชื่องาน">
+                        </div>
+                        <div class="form-row">
+                            <div class="inputcategory" required>
+                                <label>ประเภทงาน</label> 
+                                <select name="category" id="category">
+                                    <option alue="" disabled selected hidden>เลือกหมวดหมู่</option>
+                                    <option value="0">งานทั่วไป</option>
+                                    <option value="1">เรียนพิเศษ</option>
+                                    <option value="2">ภาพถ่าย-วิดีโอ</option>
+                                    <option value="3">ออกแบบกราฟิก</option>
+                                </select>
+                                
+                            </div>
+                            <div class="peice">
+                                <label>ราคาเริ่มต้น (บาท)</label>
+                                <input type="number" id="peice" placeholder="ระบุราคาเริ่มต้น">
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <label>รายละเอียดงาน</label>
+                            <textarea id="detail" placeholder="ระบุรายละเอียดงานของคุณ..."></textarea>
+                        </div>
+                        <div class="post_buttonS">
+                            <button type="button" class="btn-submit" onclick="submitJob()">โพสต์</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+     </div>
+        <footer>
+            <div class="footer-contact">
+                <p>ติดต่อเรา</p>
+                <p>sdhire67@gmail.com</p>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 SDhire, All right reserved</p>
+            </div>
+        </footer>
+
+        <script src="swith_PR.js"></script>
+    <script src="post_skill.js"></script>
+</body>
+</html>
+

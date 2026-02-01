@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home SDhire</title>
+
+    <link rel="stylesheet" href="css/table_job.css"> <!-- โพสต์งาน -->
+    <link rel="stylesheet" href="css/buttom_sw.css"> <!-- กดสลับงานกับโพสต์ -->
+    <link rel="stylesheet" href="css/Tem_home_HF.css"> <!-- หัวกับท้าย -->
+    <link rel="stylesheet" href="css/Tem_main.css"> <!-- ตัวเนื้อหา  -->
+</head>
+<body>
+   <div class="content-wrapper">
+        <header>        
+            <a href="../Home/home_stu.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="../Photo_new/profile_user.jpg" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="../Photo_new/profile_user.jpg" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>FirstName LastName</h1>
+                            <p>✅ สถานะ : นิสิต</p>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="../Student/Profile/profile_user.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="../Home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- --------------------------------------------------------------------------------------------------------------------- -->
+        <main>
+            <div class="hero">
+                <div class="text_recommend">
+                    <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
+                    <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
+                    พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
+                    <a href="../edit_post/post_work.html" class="btn-post">โพสต์</a>
+                </div>
+                <div class="img_right">
+                    <img src="../Photo_new/profile.png" alt="profile">
+                </div>
+            </div>
+
+            <div class="form_input">
+                <form id="searchForm"> 
+                    <img src="../icon/search.png" >    
+                    <input type="search" id="search" placeholder="ค้นหา">
+                    <button id="reset" type="reset">ล้าง</button>
+                    <button id="submit" type="submit">ค้นหา</button>
+                </form>
+            </div>
+            <section class="category-showcase">
+                <div class="cat-header">
+                    <h3>หมวดหมู่งานยอดนิยม</h3>
+                    <a href="#" class="see-more">ดูทั้งหมด <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="cat-grid">
+                    <a href="../Student/Job_type/work_trpe.html" class="cat-card-icon color-1">
+                        <div class="icon-box">
+                            <img src="../icon/package.png">
+                        </div>
+                        <div class="cat-info">
+                            <span>รับจ้างทั่วไป</span>
+                            <small>85 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/program_type.html" class="cat-card-icon color-2">
+                        <div class="icon-box">
+                            <img src="../icon/programming.png" >
+                        </div>
+                        <div class="cat-info">
+                            <span>เขียนโปรแกรม</span>
+                            <small>120 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/graphics_type.html" class="cat-card-icon color-3">
+                        <div class="icon-box">
+                            <img src="../icon/art-design.png">
+                        </div>
+                        <div class="cat-info">
+                            <span>กราฟิกดีไซน์</span>
+                            <small>85 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/video_type.html" class="cat-card-icon color-4">
+                        <div class="icon-box">
+                            <img src="../icon/video.png">
+                        </div>
+                        <div class="cat-info">
+                            <span>ตัดต่อวิดีโอ</span>
+                            <small>40 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/translate_type.html" class="cat-card-icon color-5">
+                        <div class="icon-box">
+                            <img src="../icon/language.png">
+                        </i></div>
+                        <div class="cat-info">
+                            <span>แปลภาษา</span>
+                            <small>30 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/study_type.html" class="cat-card-icon color-6">
+                        <div class="icon-box">
+                            <img src="../icon/thesis.png" >
+                        </i></div>
+                        <div class="cat-info">
+                            <span>การศึกษา</span>
+                            <small>65 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/photo_type.html" class="cat-card-icon color-1">
+                        <div class="icon-box">
+                            <img src="../icon/photo-camera.png">
+                        </i></div>
+                        <div class="cat-info">
+                            <span>ถ่ายภาพ</span>
+                            <small>25 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/music_type.html" class="cat-card-icon color-2">
+                        <div class="icon-box">
+                            <img src="../icon/music.png" >
+                        </div>
+                        <div class="cat-info">
+                            <span>ดนตรีและเสียง</span>
+                            <small>25 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/document_type.html" class="cat-card-icon color-3">
+                        <div class="icon-box">
+                            <img src="../icon/folder.png" >
+                        </div>
+                        <div class="cat-info">
+                            <span>เอกสาร</span>
+                            <small>25 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/repair_type.html" class="cat-card-icon color-4">
+                        <div class="icon-box">
+                            <img src="../icon/technical.png">
+                        </div>
+                        <div class="cat-info">
+                            <span>ซ่อมแซม</span>
+                            <small>25 งาน</small>
+                        </div>
+                    </a>
+
+                    <a href="../Student/Job_type/other_type.html" class="cat-card-icon color-5">
+                                <div class="icon-box">
+                                    <img src="../icon/heart.png">
+                                </div>
+                                <div class="cat-info">
+                                    <span>อื่นๆ</span>
+                                    <small>25 งาน</small>
+                                </div>
+                    </a>
+                </div>
+            </section>
+
+            <h3 class="section-title">งานแนะนำสำหรับคุณ</h3>
+            
+            <div class="post_sw">
+                <div class="toggle_sw">
+                    <button class="toggle_skill">โพสต์รับงาน</button>
+                    <button class="toggle_job">โพสต์งาน</button>
+                </div>
+            <div class="main_post">
+            </div>
+                <div class="post_skill">
+                    <div class="job-grid" id="jobDisplay"></div>
+                    <!-- Pagination (ต้องอยู่ตรงนี้) -->
+                    <div class="pagination" id="pagination"></div>
+                    <!-- JS จะเป็นคนสร้างปุ่ม 1 2 3 ... ให้เอง -->
+                </div>
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+                <div class="post_job">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ชื่องาน</th>
+                                    <th>ประเภท</th>
+                                    <th>งบประมาณ (บาท)</th>
+                                    <th>ลงประกาศเมื่อ</th>
+                                    <th>กำหนดส่ง</th>
+                                    <th>จัดการ</th> </tr>
+                            </thead>
+                            <tbody id="jobTableBody"></tbody>
+                        </table>
+                    </div>
+                     <!-- pagination ของโพสต์งาน -->
+                    <div class="pagination" id="jobPagination"></div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <footer>
+        <div class="footer-contact">
+            <p>ติดต่อเรา</p>
+            <p>sdhire67@gmail.com</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SDhire, All right reserved</p>
+        </div>
+    </footer>
+
+    <script src="profile_buttom.js"></script>
+    <script src="post.js"></script>
+    <script src="view_table.js"></script>
+</body>
+</html>
