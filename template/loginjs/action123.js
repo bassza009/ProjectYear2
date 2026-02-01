@@ -34,6 +34,9 @@ function goBack() {
         // ถอดสีม่วงออกจากวงกลม 3 และเส้น 2
         document.getElementById('circle3').classList.remove('active');
         document.getElementById('line2').classList.remove('active');
+    }else{
+        window.history.back()
+        return
     }
 }
  /*--------------  Create Genneral -----------------*/

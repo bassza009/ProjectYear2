@@ -11,7 +11,7 @@
     <div class="main_center">
         <button type="button" class="back-btn" onclick="goBack()"> < </button> 
 
-        <h1>สร้างโปรไฟล์</h1>
+        <h1>สร้างโปรไฟล์นิสิต</h1>
 
         <div class="step-container">
             <div class="step active" id="circle1">1</div>
@@ -21,27 +21,29 @@
             <div class="step" id="circle3">3</div>
         </div> 
         
-        <form id="mainForm">
+        <form id="mainForm" action="/registerStd/api" method="post">
                 <div id="part1" class="set_profile">
-                    <h3>เลือกโปรไฟล์ของคุณ</h3>
+                    <h3>สมัครในรูปแบบนิสิต มหาวิทยาลัยพะเยา</h3>
+                    <img src="/photo/phayaologo.png" ><br>
+                    <!--
                     <p>ควรใช้ภาพถ่ายตัวจริงของคุณเห็นใบหน้าชัดเจน</p>
-                    <form class="img_file">
+                     <form class="img_file">
                         <label for="file-input">
                             <div class="upload-icon" id="imagePreview">
                                 <small>คลิกเพื่อเลือกรูป</small>
                             </div>
                         </label>
                         <input id="file-input" type="file" accept="image/*" onchange="previewImage(event)"/>
-                    </form>
+                    </form> -->
                     <button type="button" class="next" onclick="goToStep(2)">ดำเนินการต่อ</button>
                 </div>
 
                 <div id="part2" class="set_name">
                     <div class="fron_l">
-                            <label>ชื่อที่ใช้แสดงในระบบ(ควรเป็นชื่อที่ดูเป็นทางการ)</label>
-                            <input type="text" placeholder="กรอกชื่อของคุณ">
+                            <!-- <label>ชื่อที่ใช้แสดงในระบบ(ควรเป็นชื่อที่ดูเป็นทางการ)</label>
+                            <input type="text" placeholder="กรอกชื่อของคุณ">-->
                             <label>อธิบาย</label>
-                            <textarea placeholder="อธิบายลักษณะงาน"></textarea>
+                            <textarea placeholder="อธิบายลักษณะงาน" name = "description" id = "description"></textarea>
                     </div>
                     <button type="button" class="next" onclick="goToStep(3)">ดำเนินการต่อ</button>
                 </div>
@@ -49,14 +51,14 @@
                 <div id="part3"class="set_contact">
                     <h3>ช่องทางติดต่อ</h3>
                     <div class="contact_l">
-                            <label>อีเมลที่ติดต่อได้</label>
-                            <input type="email" placeholder="ระบุอีเมล">
-                            <label>เบอร์โทรที่ติดต่อได้</label>
-                            <input type="text" placeholder="ระบุเบอร์โทร">
+                            <label>Facebook</label>
+                            <input type="text" placeholder="ระบุFacebook" id = "facebook" name="facebook">
+                            <label>Instagram</label>
+                            <input type="text" placeholder="ระบุInstagram" id = "instagram" name="instagram">
                             <label>ID Line</label>
-                            <input type="text" placeholder="ระบุ ID Line">
+                            <input type="text" placeholder="ระบุ ID Line" id = "line" name="line">
                             <label>เพิ่มลิงก์</label>
-                            <input type="text" placeholder="URL">                          
+                            <input type="text" placeholder="URL"id = "url" name="url">                          
                     </div>
                     <button type="submit" class="submit" id="submitBtn">ยืนยัน</button>
                 </div>
@@ -65,11 +67,11 @@
     </div>
 
     <script src="/../loginjs/action123.js"></script>
-    <script>
+    <!--<script>
         document.getElementById("submitBtn").addEventListener("click", function(event) {
         event.preventDefault(); 
         window.location.href = '../home/home_stu.html'; 
     });
-    </script>
+    </script>-->
 </body>
 </html>

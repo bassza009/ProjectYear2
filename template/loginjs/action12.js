@@ -1,13 +1,14 @@
 function goToStep(stepNumber) {
     
+
+    email = document.getElementById("email").value
+    password = document.getElementById("password").value
+    varifypass = document.getElementById("varifypass").value
+    phone = document.getElementById("phone").value
+    otpvarified = document.getElementById("isOTPVarified").value
     
     if (stepNumber === 2) {
-        email = document.getElementById("email").value
-        password = document.getElementById("password").value
-        varifypass = document.getElementById("varifypass").value
-        phone = document.getElementById("phone").value
-        otpvarified = document.getElementById("isOTPVarified").value
-        if(email==="" ||password ===""||varifypass === "" || phone ==="" ){
+        if(email ===""||password===''||otp ===""){
             alert("ใส่ข้อมูลให้ครบ")
             return
         }
@@ -28,24 +29,26 @@ function goToStep(stepNumber) {
     document.getElementById('part2').style.display = 'none';
 
     document.getElementById('part' + stepNumber).style.display = 'block';
-
-    
 }
 
 function goBack() {
+    
     // หาว่าตอนนี้หน้าไหนกำลังแสดงอยู่ (ดูจาก display ที่ไม่ใช่ none)
     if (document.getElementById('part2').style.display === 'block') {
         goToStep(1);
         // ถอดสีม่วงออกจากวงกลม 2 และเส้น 1
         document.getElementById('circle2').classList.remove('active');
         document.getElementById('line1').classList.remove('active');
-    } 
-    else if (document.getElementById('part3').style.display === 'block') {
-        goToStep(2);
-        // ถอดสีม่วงออกจากวงกลม 3 และเส้น 2
-        document.getElementById('circle3').classList.remove('active');
-        document.getElementById('line2').classList.remove('active');
+    }else{
+        window.location.href = "/login"
+        return
     }
+    //else if (document.getElementById('part3').style.display === 'block') {
+        //goToStep(2);
+        // ถอดสีม่วงออกจากวงกลม 3 และเส้น 2
+        //document.getElementById('circle3').classList.remove('active');
+        //document.getElementById('line2').classList.remove('active');
+    //}
 }
 
 function goBack_gen() {

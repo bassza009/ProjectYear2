@@ -24,7 +24,7 @@
                 <div class="account">
                     <label>อีเมลที่ติดต่อได้</label>
                     <input type="email" placeholder="ระบุอีเมล" id ="email" name ="email" required>
-                    <button onclick="sendOTP()">ขอ OTP</button>
+                    <button type="button" onclick="sendOTP()">ขอ OTP</button>
                     <label>รหัสผ่าน</label>
                     <input type="password" placeholder="ระบุรหัสผ่าน" id ="password" name ="password"required>
                     <label>ยืนยันรหัสผ่าน</label>
@@ -34,12 +34,14 @@
                     
                     <div id = "otpSection" style="display: none;">
                     <input type="number" name="otp" id="otp"  placeholder="OTP" required>
-                    <button onclick="varifyOTP()">Varify OTP</button>
+                    <button type="button" onclick="varifyOTP()">Varify OTP</button>
                     <small id="otpStatus" style="color: red;"></small>
                     </div>
                 </div>
+                
                 <input type="hidden" id ="isOTPVarified" value="false">
                 <button type="button" class="next" onclick="goToStep(2)">ดำเนินการต่อ</button>
+            
             </div>
 
             <div id="part2" class="set_profile">
