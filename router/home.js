@@ -83,7 +83,7 @@
             pool.query(sql,[email],(err,results,field)=>{
                 //res.json(results)
                 
-                res.render("home/home",{userdata:results[0]})
+                res.render("home/homepage",{userdata:results[0]})
             
             })
             
@@ -103,7 +103,7 @@
                 if(results[0].roles == "general"){
                     res.redirect("/general")
                 }else{
-                res.render("home/homeStu",{userdata:results[0]})}
+                res.render("home/homepage",{userdata:results[0]})}
             })
             
         }else{
