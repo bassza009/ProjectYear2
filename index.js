@@ -21,13 +21,14 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
-app.use(express.static(path.join(__dirname,"public","photo")))
-app.use(express.static(path.join(__dirname,"public")))
-app.use(express.static("Template"))
 //looking ejs file
+app.use(express.static(path.join(__dirname,"template")))
 app.set("views",path.join(__dirname,"template"))
 app.set("view engine","ejs")
 
+//app.use(express.static(path.join(__dirname,"public","photo")))
+app.use(express.static(path.join(__dirname,"public")))
+app.use(express.static("Template"))
 //create path
 const homePath = require("./router/home")
 const { Template } = require("ejs")
