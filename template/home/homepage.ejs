@@ -63,28 +63,12 @@
                     </div>
 
                     <div class="button_VO">
-<<<<<<< HEAD
-                        <% if(userdata.roles == "student"){%>
-                        <a href="/home/profilestudent/<%=userdata.ID%>">
-                            <button class="b_view">ดูโปรไฟล์</button>
-                        </a>
-                        <% } else{ %>
-                        <a href="/home/profilegeneral">
-                            <button class="b_view">ดูโปรไฟล์</button>
-                        </a>
-                        <% }  %>
-                        <a >
-                            <form action="/logout" method="POST">       
-                                <button class="b_logout" type="submit">ออกจากระบบ</button>
-                            </form> 
-                        </a> 
-=======
                         <% if(userdata.roles=="student" ){%>
-                            <a href="/home/profilestudent">
+                            <a href="/home/profilestudent/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                             <% } else{ %>
-                                <a href="/home/profilegeneral">
+                                <a href="/home/profilegeneral/<%=userdata.ID%>">
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
                                 <% } %>
@@ -93,7 +77,6 @@
                                             <button class="b_logout" type="submit">ออกจากระบบ</button>
                                         </form>
                                     </a>
->>>>>>> 2ce0f95816fe973ff73e6bf497973fd92eb8c2e8
                     </div>
                 </div>
             </div>

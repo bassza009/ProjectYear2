@@ -342,47 +342,11 @@ router.post("/logingen", (req, res) => {
 
         }
     })
-<<<<<<< HEAD
-    router.get("/home/profilestudent/:id",(req,res)=>{
+})
+router.get("/home/profilestudent/:id",(req,res)=>{
         const id = req.params.id
         const {email} = req.cookies
         sql = `SELECT * from userdata 
-=======
-})
-router.post("/loginSTD/api", (req, res) => {
-    const { email, password } = req.body
-    sql = `SELECT * from userdata where email = ?`
-    if (!email.endsWith("@up.ac.th")) {
-        return res.redirect("/login?error=104")//wrong email type
-    }
-    pool.query(sql, [email], async (err, results, fields) => {
-        if (err) {
-            console.log(err)
-            return res.redirect("/login?error=101")
-        } else {
-            if (results.length == 0) {
-                console.log(err)
-                return res.redirect("/login?error=102")//wrong password or email
-            }
-            const match_pass = await bcy.compare(password, results[0].pass_word)
-            if (match_pass) {
-                const token = jwt.sign({ email: email }, process.env.secret)
-                const id = results[0].ID
-                res.cookie("email", email, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
-                res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
-                res.cookie("id", id, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
-            } else {
-                return res.redirect("/login?error=102")
-            }
-            //res.json(results)
-            return res.redirect("/home")
-        }
-    })
-})
-router.get("/home/profilestudent", (req, res) => {
-    const { email } = req.cookies
-    sql = `SELECT * from userdata 
->>>>>>> 2ce0f95816fe973ff73e6bf497973fd92eb8c2e8
                 left join studentdata 
                 on studentdata.email = userdata.email 
                 where userdata.email = ?`
@@ -391,7 +355,6 @@ router.get("/home/profilestudent", (req, res) => {
                 on studentdata.email = userdata.email 
                 left join user_job
                 on user_job.ID = userdata.ID 
-<<<<<<< HEAD
                 where userdata.id = ?`
         
         if(!email){
@@ -413,21 +376,8 @@ router.get("/home/profilestudent", (req, res) => {
                 //res.json(results)
                     
         })     
-=======
-                where userdata.email = ?`
-    if (!email) {
-        return res.redirect("/login?error=110")//login first
-    }
-    pool.query(sql, [email], (err, results, fields) => {
-        if (err) {
-            console.log(err)
-
-        }
-        //res.json(results)
-        res.render("profile/profile", { userdata: results[0] })
->>>>>>> 2ce0f95816fe973ff73e6bf497973fd92eb8c2e8
     })
-})
+
 router.get("/home/profilegeneral", (req, res) => {
     const { email } = req.cookies
     sql = `SELECT * from userdata where email = ?`
