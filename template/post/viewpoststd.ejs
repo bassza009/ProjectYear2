@@ -48,11 +48,11 @@
                     
                     <div class="button_VO">
                         <%if(userdata.roles=="student"){%>    
-                            <a href="/home/profilestudent">
+                            <a href="/home/profilestudent/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                         <% } else{ %>
-                            <a href="/home/profilegeneral">
+                            <a href="/home/profilegeneral/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                         <%}%>
@@ -86,9 +86,9 @@
                     <div class="profile_user_card">
                         <div class="img_profile">
                         <% if(userdata.profile_image){ %>
-                            <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>">
+                            <img src= "/imageForTest/<%= post.profile_image %>" alt = "<%= post.profile_image%>">
                         <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                            <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>" alt="โปรไฟล์">
                         <% }%>   
                         </div>
                         <div class="user_info_detail">
@@ -101,7 +101,7 @@
                             <small>ราคาเริ่มต้น</small>
                             <h2 id="jobPrice">฿<%=post.budjet%></h2>
                         </div>
-                        <a href="../Profile/profile_user.html">
+                        <a href="/home/profilestudent/<%=post.ID%>">
                             <button class="btn-view-profile">ดูโปรไฟล์เต็ม</button>
                         </a>
                     </div>
@@ -109,7 +109,9 @@
                     <section class="review-section">
                         <div class="review-header">
                             <h3>คะแนนและรีวิว</h3>
-                            <button id="openReview" class="btn-write">เขียนรีวิว</button>
+                            <%if(userdata.ID!=post.ID){%>
+                                <button id="openReview" class="btn-write">เขียนรีวิว</button>
+                            <%}%>        
                         </div>
                         
                         <div class="rating-summary-card">

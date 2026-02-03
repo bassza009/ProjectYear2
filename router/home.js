@@ -369,14 +369,20 @@
             }
             })
     })
-    router.get("/home/profilestudent",(req,res)=>{
+    router.get("/home/profilestudent/:id",(req,res)=>{
+        const id = req.params.id
         const {email} = req.cookies
         sql = `SELECT * from userdata 
                 left join studentdata 
                 on studentdata.email = userdata.email 
+                where userdata.email = ?`
+        sql2 =`SELECT * from userdata 
+                left join studentdata 
+                on studentdata.email = userdata.email 
                 left join user_job
                 on user_job.ID = userdata.ID 
-                where userdata.email = ?`
+                where userdata.id = ?`
+        
         if(!email){
             return res.redirect("/login?error=110")//login first
         }
@@ -384,9 +390,17 @@
             if(err){
                 console.log(err)
                 
-            }
+            }pool.query(sql2,[id],(err,datas)=>{
+                if(err){
+                    console.log(err)
+                }
+                res.render("profile/profile",{
+                            userdata:results[0],
+                            post:datas[0]
+                        })
+            })
                 //res.json(results)
-                res.render("profile/profile",{userdata:results[0]})    
+                    
         })     
     })
     router.get("/home/profilegeneral",(req,res)=>{
