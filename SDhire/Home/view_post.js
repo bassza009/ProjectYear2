@@ -46,35 +46,42 @@ function renderJobs() {
     }
 
     let html = "";
-    pageJobs.forEach(job => {
-        const img = job.image || "https://via.placeholder.com/300x160?text=No+Image";
+    // pageJobs.forEach(job => {
+    //     const img = job.image || "https://via.placeholder.com/300x160?text=No+Image";
 
+<<<<<<< HEAD
         html += `
          <a href="../General/Post/view_post_jop.html?id=${job.id}" class="card-link">
             <div class="card">
                 <img src="${img}" class="card-img">
+=======
+    //     html += `
+    //      <a href="../Post/view_post_jop.html?id=${job.id}" class="card-link">
+    //         <div class="card">
+    //             <img src="${img}" class="card-img">
+>>>>>>> 8edef4b (sub update student profile and debug)
 
-                <div class="card-content">
-                    <div class="profile-area">
-                        <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}"
-                            class="avatar">
-                        <div>
-                            <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
-                            <small>${categoryNames[job.category] || job.category || 'ยังไม่เลือก'}</small>
-                        </div>
-                    </div>
+    //             <div class="card-content">
+    //                 <div class="profile-area">
+    //                     <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}"
+    //                         class="avatar">
+    //                     <div>
+    //                         <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
+    //                         <small>${categoryNames[job.category] || job.category || 'ยังไม่เลือก'}</small>
+    //                     </div>
+    //                 </div>
 
-                    <div class="title">${job.title}</div>
-                    <div class="desc">${job.detail || 'ไม่มีรายละเอียด'}</div>
+    //                 <div class="title">${job.title}</div>
+    //                 <div class="desc">${job.detail || 'ไม่มีรายละเอียด'}</div>
 
-                    <div class="price">
-                        <span>เริ่มต้น</span><br>
-                        <b>${Number(job.price).toLocaleString()} บาท</b>
-                    </div>
-                </div>
-            </div>
-        </a>`;
-    });
+    //                 <div class="price">
+    //                     <span>เริ่มต้น</span><br>
+    //                     <b>${Number(job.price).toLocaleString()} บาท</b>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </a>`;
+    // });
 
     display.innerHTML = html;
     renderPagination(filteredJobs.length);

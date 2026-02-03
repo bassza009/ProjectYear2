@@ -6,6 +6,7 @@
     <title>สร้างบัญชี</title>
     <link rel="stylesheet" href="/../login/css/action_123.css">
     <link rel="stylesheet" href="/../login/css/create_stu.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="main_center">
@@ -40,6 +41,17 @@
 
                 <div id="part2" class="set_name">
                     <div class="fron_l">
+                            <label for="firstname">ชื่อจริง</label>
+                            <input type="text" name="firstname" id="firstname" required>
+                            <label for="lastname">นามสกุล</label>
+                            <input type="text" name="lastname" id="lastname" required>
+                            <%const group = ['คณะเกษตรศาสตร์และทรัพยากรธรรมชาติ','คณะเทคโนโลยีสารสนเทศและการสื่อสาร','คณะนิติศาสตร์','คณะบริหารธุรกิจและนิเทศศาสตร์','คณะพยาบาลศาสตร์','คณะพลังงานและสิ่งแวดล้อม','คณะแพทยศาสตร์','คณะเภสัชศาสตร์','คณะรัฐศาสตร์และสังคมศาสตร์','คณะวิทยาศาสตร์','คณะวิทยาศาสตร์การแพทย์','คณะวิศวกรรมศาสตร์','คณะศิลปศาสตร์','คณะสถาปัตยกรรมศาสตร์และศิลปกรรมศาสตร์','คณะสหเวชศาสตร์','คณะสาธารณสุขศาสตร์','คณะทันตแพทยศาสตร์','วิทยาลัยการศึกษา']%>
+                            <label for="group">คณะของคุณ</label>
+                            <select name="group" id="group">
+                                <%group.forEach((cat)=>{%>
+                                    <option value="<%=cat%>"><%=cat%></option>
+                                <%})%>
+                                </select>
                             <!-- <label>ชื่อที่ใช้แสดงในระบบ(ควรเป็นชื่อที่ดูเป็นทางการ)</label>
                             <input type="text" placeholder="กรอกชื่อของคุณ">-->
                             <label>อธิบาย</label>
@@ -67,6 +79,7 @@
     </div>
 
     <script src="/../loginjs/action123.js"></script>
+    <script src="/../loginjs/alertox.js"></script>
     <!--<script>
         document.getElementById("submitBtn").addEventListener("click", function(event) {
         event.preventDefault(); 

@@ -32,49 +32,49 @@ function renderJobs() {
     filteredJobs = filteredJobs.reverse();
 
     // pagination slice
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const pageJobs = filteredJobs.slice(start, end);
+    // const start = (currentPage - 1) * itemsPerPage;
+    // const end = start + itemsPerPage;
+    // const pageJobs = filteredJobs.slice(start, end);
 
-    if (pageJobs.length === 0) {
-        display.innerHTML = `
-          <p style="grid-column:1/-1;text-align:center;padding:50px;color:#999;">
-            ไม่พบงาน
-          </p>`;
-        renderPagination(0);
-        return;
-    }
+    // if (pageJobs.length === 0) {
+    //     display.innerHTML = `
+    //       <p style="grid-column:1/-1;text-align:center;padding:50px;color:#999;">
+    //         ไม่พบงาน
+    //       </p>`;
+    //     renderPagination(0);
+    //     return;
+    // }
 
-    let html = "";
-    pageJobs.forEach(job => {
-        const img = job.image || "https://via.placeholder.com/300x160?text=No+Image";
+    // let html = "";
+    // pageJobs.forEach(job => {
+    //     const img = job.image || "https://via.placeholder.com/300x160?text=No+Image";
 
-        html += `
-         <a href="/Fronend_v1/post_user/view_post_user.html?id=${job.id}" class="card-link">
-            <div class="card">
-                <img src="${img}" class="card-img">
+    //     html += `
+    //      <a href="/Fronend_v1/post_user/view_post_user.html?id=${job.id}" class="card-link">
+    //         <div class="card">
+    //             <img src="${img}" class="card-img">
 
-                <div class="card-content">
-                    <div class="profile-area">
-                        <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}"
-                            class="avatar">
-                        <div>
-                            <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
-                            <small>${categoryNames[job.category] || job.category || 'ยังไม่เลือก'}</small>
-                        </div>
-                    </div>
+    //             <div class="card-content">
+    //                 <div class="profile-area">
+    //                     <img src="https://ui-avatars.com/api/?name=${job.authorName || 'User'}"
+    //                         class="avatar">
+    //                     <div>
+    //                         <b>${job.authorName || 'ผู้ใช้งานทั่วไป'}</b><br>
+    //                         <small>${categoryNames[job.category] || job.category || 'ยังไม่เลือก'}</small>
+    //                     </div>
+    //                 </div>
 
-                    <div class="title">${job.title}</div>
-                    <div class="desc">${job.detail || 'ไม่มีรายละเอียด'}</div>
+    //                 <div class="title">${job.title}</div>
+    //                 <div class="desc">${job.detail || 'ไม่มีรายละเอียด'}</div>
 
-                    <div class="price">
-                        <span>เริ่มต้น</span><br>
-                        <b>${Number(job.price).toLocaleString()} บาท</b>
-                    </div>
-                </div>
-            </div>
-        </a>`;
-    });
+    //                 <div class="price">
+    //                     <span>เริ่มต้น</span><br>
+    //                     <b>${Number(job.price).toLocaleString()} บาท</b>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </a>`;
+    // });
 
     display.innerHTML = html;
     renderPagination(filteredJobs.length);

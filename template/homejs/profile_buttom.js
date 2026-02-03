@@ -35,7 +35,7 @@ btnSkill.addEventListener('click', () => {
     btnJob.classList.remove('active');
     
     // จัดการเนื้อหา: แสดงส่วน Card และซ่อนส่วน Table
-    skillSection.style.display = 'block'; 
+    skillSection.style.display = 'grid';
     jobSection.style.display = 'none';
 });
 

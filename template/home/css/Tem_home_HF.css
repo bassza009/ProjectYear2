@@ -27,12 +27,10 @@ header {
 }
 
 header h2 {
-    margin-left: 50px;
+    margin-left: 53px;
     font-size: 30px;
     font-weight: 600;
     color: white;
-    padding: 0px 2%;
-   
 }
 
 header button:hover {
@@ -126,7 +124,13 @@ header button:hover {
     height: 55px;
     border-radius: 100%;
 }
-
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #31a24c;
+    border-radius: 50%;
+}
 .button_VO {
     width: 100%;
     display: flex;
@@ -168,7 +172,12 @@ header button:hover {
     color: white;
 }
 
-
+.post_skill{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
 
 /*--------------------------------------------------------------------*/
 

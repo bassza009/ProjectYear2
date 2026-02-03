@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Skill</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/../post/css/post_skill.css">
+    <link rel="stylesheet" href="/../post/css/Template_HF.css">
+</head>
+<body>
+
+    <div class="content-wrapper">
+        <header>        
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            
+                            <% if(userdata.profile_image){ %>
+                                <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                            <% }%>
+
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <% if(userdata.profile_image){ %>
+                            <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>">
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                        <% }%>
+                        <div class="user_name">
+                            <h1><%= userdata.firstname %><%= userdata.lastname %></h1>
+                            <small></small><span class="status-dot"></span> สถานะ : <%= userdata.roles %></small>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="/home/profilestudent">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a >
+                            <form action="/logout" method="post">    
+                                <button class="b_logout">ออกจากระบบ</button>
+                            </form>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
+            <main>
+                <div class="container">
+                    <h1>รายละเอียดงาน</h1>
+                    <%if(userdata.job_create==1){%>
+                        <form id="jobnform" action="/editPost/api" method="post" enctype="multipart/form-data">
+                    <%}else{%>
+                        <form id="jobnform" action="/post/api" method="post" enctype="multipart/form-data">
+                    <%}%>
+                        <div class="upload-area" id="uploadBtn">
+                        <div id="placeholder" style="<%= userdata.service_image ? 'display:none;' : 'display:block;' %>">
+                            <small>ภาพหน้าปกงาน</small><br>
+                            <small>ขนาดแนะนำ 1280*720px หรือ 16:9</small><br>
+                            <button type="button" class="img_up">อัปโหลดภาพ</button>
+                            </div>
+
+                            <img id="preview" 
+                                src="<%= userdata.service_image ? '/imageForTest/' + userdata.service_image : '' %>" 
+                                style="<%= userdata.service_image ? 'display:block;' : 'display:none;' %>">
+                            
+                            <input type="file" id="fileInput" name="file_input" hidden accept="image/*" >
+                        </div>
+                        
+                    
+                        <div class="inputnamejob">
+                            <label>ชื่องาน</label>
+                            <input type="text" id="title" name="title" required placeholder="ชื่องาน" value="<%=userdata.title%>">
+                        </div>
+                        <div class="form-row">
+                            <div class="inputcategory" required>
+                                <% 
+                                    const categories = ['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','สายมู'];
+                                %>
+
+                                <label for="job_type">หมวดหมู่งาน</label>
+                                <select name="job_type" id="job_type" name="'job_type" required>
+                                    <option value="" disabled <%= (!locals.job || !job.job_type) ? 'selected' : '' %>>-- กรุณาเลือกประเภทงาน --</option>
+
+                                    <% categories.forEach((cat) => { %>
+                                        <option value="<%= cat %>" 
+                                            <%= (locals.job && job.job_type === cat) ? 'selected' : '' %> >
+                                            <%= cat %>
+                                        </option>
+                                    <% }); %>
+                                </select>
+                                
+                            </div>
+                            <div class="peice">
+                                <label>ราคาเริ่มต้น (บาท)</label>
+                                <input type="number" id="peice" name = "budjet"placeholder="ระบุราคาเริ่มต้น" value="<%=userdata.budjet%>">
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <label>รายละเอียดงาน</label>
+                            <textarea id="detail" name = "description"placeholder="ระบุรายละเอียดงานของคุณ..."><%=userdata.des_Cription%></textarea>
+                        </div>
+                        <div class="post_buttonS">
+                            <%if(userdata.job_create==1){%>
+                                
+                                    <button type="submit" class="btn-submit">แก้ไข</button>
+                                   
+                            <%}else{%>
+                                
+                                    <button type="submit" class="btn-submit">โพสต์</button>
+                                
+                            <%}%>
+                        </div>
+                    </form>
+                </div>
+            </main>
+     </div>
+        <footer>
+            <div class="footer-contact">
+                <p>ติดต่อเรา</p>
+                <p>sdhire67@gmail.com</p>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 SDhire, All right reserved</p>
+            </div>
+        </footer>
+
+        <script src="/../postjs/swith_PR.js"></script>
+    <script src="/../postjs/post_skill.js"></script>
+</body>
+</html>
+

@@ -6,6 +6,7 @@
     <title>สร้างบัญชี</title>
     <link rel="stylesheet" href="/../login/css/action_123.css">
     <link rel="stylesheet" href="/../login/css/create_gen.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="main_center">
@@ -19,12 +20,12 @@
             <div class="step" id="circle2">2</div>
         </div> 
         
-        <form action = '/regisGen/api' id="mainForm" method="post">
+        <form action = '/regisGen/api' id="mainForm" method="post" enctype="multipart/form-data">
             <div id="part1" class="set_account"> 
                 <div class="account">
                     <label>อีเมลที่ติดต่อได้</label>
                     <input type="email" placeholder="ระบุอีเมล" id ="email" name ="email" required>
-                    <button type="button" onclick="sendOTP()">ขอ OTP</button>
+                    <button id = 'otp_button' type="button" onclick="sendOTP()">ขอ OTP</button>
                     <label>รหัสผ่าน</label>
                     <input type="password" placeholder="ระบุรหัสผ่าน" id ="password" name ="password"required>
                     <label>ยืนยันรหัสผ่าน</label>
@@ -34,7 +35,7 @@
                     
                     <div id = "otpSection" style="display: none;">
                     <input type="number" name="otp" id="otp"  placeholder="OTP" required>
-                    <button type="button" onclick="varifyOTP()">Varify OTP</button>
+                    <button id='otp_button'type="button" onclick="varifyOTP()">Varify OTP</button>
                     <small id="otpStatus" style="color: red;"></small>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                             <small>คลิกเพื่อเลือกรูป</small>
                         </div>
                     </label>
-                    <input name = "file_input" id="file-input" type="file" accept="image/*" onchange="previewImage(event)" >
+                    <input name = "file_input" id="file-input" type="file" accept="image/*" onchange="previewImage(event)" required>
                 </div>
 
                 <div class="fron_l">

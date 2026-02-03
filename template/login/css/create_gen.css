@@ -117,3 +117,18 @@ button.next, button.submit {
 button.next:hover, button.submit:hover { 
     background: #9333ea; 
 }
+#otp_button{
+    background: #ffffff;
+    border: 1px solid #9b59b6;
+    color: #9b59b6;
+    padding: 6px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+#otp_button:hover{
+    background: #9b59b6;
+    color:#ffffff
+}
