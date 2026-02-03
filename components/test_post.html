@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Full Test Post | SDhire</title>
+    <style>
+        body { font-family: 'Kanit', sans-serif; background: #f0f2f5; padding: 40px; }
+        .test-box { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #1a73e8; }
+        label { display: block; margin-top: 10px; font-weight: bold; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; margin-top: 20px; background: #1a73e8; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #1557b0; }
+        #log { margin-top: 15px; font-size: 13px; color: #555; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="test-box">
+    <h2>🧪 ทดสอบระบบโพสต์</h2>
+    <form id="fullTestForm">
+        <label>หัวข้องาน (job):</label>
+        <input type="text" id="job" placeholder="เช่น รับเขียนเว็บด้วย Node.js" required>
+
+        <label>ประเภทงาน (job_type):</label>
+        <select id="job_type">
+            <option value="Coding">Coding</option>
+            <option value="Graphic">Graphic</option>
+            <option value="Tutor">Tutor</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>กลุ่มผู้ใช้ (user_group):</label>
+        <input type="text" id="user_group" value="Student" placeholder="เช่น Student หรือ General">
+
+        <label>หมายเลขผู้ใช้ (user_number):</label>
+        <input type="number" id="user_number" value="1">
+
+        <label>งบประมาณ (budjet):</label>
+        <input type="number" id="budjet" placeholder="500" required>
+
+        <label>รายละเอียด (des_cription):</label>
+        <textarea id="des_cription" rows="4" placeholder="ระบุรายละเอียดงาน..."></textarea>
+
+        <button type="submit">ส่งข้อมูลไปที่ post.js</button>
+    </form>
+    <div id="log">สถานะ: รอการทดสอบ...</div>
+</div>
+
+<script>
+    document.getElementById('fullTestForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const log = document.getElementById('log');
+        log.innerText = "กำลังส่งข้อมูล...";
+
+        const payload = {
+            job: document.getElementById('job').value,
+            job_type: document.getElementById('job_type').value,
+            user_group: document.getElementById('user_group').value,
+            user_number: document.getElementById('user_number').value,
+            budjet: document.getElementById('budjet').value,
+            des_cription: document.getElementById('des_cription').value
+        };
+
+        try {
+            const response = await fetch('/api/post/create-job', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert("✅ บันทึกข้อมูลสำเร็จ!");
+                log.style.color = "green";
+                log.innerText = "บันทึกสำเร็จ: " + result.message;
+            } else {
+                alert("❌ ล้มเหลว: " + result.message);
+                log.style.color = "red";
+                log.innerText = "เกิดข้อผิดพลาด: " + result.message;
+            }
+        } catch (error) {
+            console.error(error);
+            log.style.color = "orange";
+            log.innerText = "ติดต่อ Server ไม่ได้ (ลองรัน node server.js)";
+        }
+    });
+</script>
+
+</body>
+</html>

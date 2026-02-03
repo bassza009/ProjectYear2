@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Page</title>
+    <link rel="stylesheet" href="/profile/css/style.css">
+    <link rel="stylesheet" href="/profile/css/Template_HF.css">
+    <link rel="stylesheet" href="/profile/css/review.css">
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <header>
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <% if(userdata.profile_image){ %>
+                                <img src="/imageForTest/<%= userdata.profile_image %>"
+                                    alt="<%= userdata.profile_image%>">
+                                <% } else{%>
+                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                        alt="โปรไฟล์">
+                                    <% }%>
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+
+                        <% if(userdata.profile_image){ %>
+                            <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์">
+                                <% }%>
+
+                                    <div class="user_name">
+                                        <% if(userdata.roles=="student" ) {%>
+                                            <h1>
+                                                <%= userdata.firstname %>
+                                                    <%= userdata.lastname %>
+                                            </h1>
+                                            <% }else{ %>
+                                                <h1>
+                                                    <%=userdata.username%>
+                                                </h1>
+                                                <% } %>
+                                                    <small></small><span class="status-dot"></span> สถานะ : <%=
+                                                        userdata.roles %></small>
+                                    </div>
+                    </div>
+
+                    <div class="button_VO">
+                        <% if(userdata.roles=="student" ){%>
+                            <a href="/home/profilestudent">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                            <% } else{ %>
+                                <a href="/home/profilegeneral">
+                                    <button class="b_view">ดูโปรไฟล์</button>
+                                </a>
+                                <% } %>
+                                    <a>
+                                        <form action="/logout" method="POST">
+                                            <button class="b_logout" type="submit">ออกจากระบบ</button>
+                                        </form>
+                                    </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <main>
+            <div class="profile-header">
+                <div class="avatar-wrapper">
+                    <!-- Student Profile Image -->
+                    <% if(student_user.profile_image){ %>
+                        <img src="/imageForTest/<%= student_user.profile_image %>" alt="Avatar" class="avatar-img">
+                        <% } else { %>
+                            <img src="https://ui-avatars.com/api/?name=<%= student_user.username || 'User' %>"
+                                alt="Avatar" class="avatar-img">
+                            <% } %>
+                </div>
+
+                <div class="header-info">
+                    <div class="name-rating-row">
+                        <h1 id="user-name">
+                            <%= student_user.username %>
+                        </h1>
+                    </div>
+                    <p class="status-badge">
+                        <span class="status-dot"></span> สถานะ : นิสิต
+                    </p>
+                    <p class="faculty-text">คณะ : เทคโนโลยีสารสนเทศและการสื่อสาร</p>
+                    <div class="stats-card">
+                        <!-- TODO: Add dynamic job count if available -->
+                        <span class="check-icon">✓</span> งานที่สำเร็จ : <%= student_job_count || 0 %> งาน
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-content">
+                <div class="sidebar">
+                    <section class="contact-section">
+                        <div class="section-header">
+                            <h3>ช่องทางการติดต่อ</h3>
+                        </div>
+
+                        <ul class="contact-list" id="contact-list">
+                            <li>
+                                <img class="icon" src="/icon/gmail.png" alt="gmail">
+                                <!-- Make sure icon exists in public/icon -->
+                                <span class="contact-value" id="val-email">
+                                    <%= student_user.email %>
+                                </span>
+                            </li>
+                            <li>
+                                <img src="/icon/telephone.png" alt="phone">
+                                <span class="contact-value" id="val-phone">
+                                    <%= student_user.userPhoneNumber || '-' %>
+                                </span>
+                            </li>
+                            <li>
+                                <img src="/icon/line.png" alt="line">
+                                <span class="contact-value" id="val-line">
+                                    <%= student_user.line || '-' %>
+                                </span>
+                            </li>
+                            <li>
+                                <img src="/icon/instagram.png" alt="ig">
+                                <span class="contact-value" id="val-ig">
+                                    <%= student_user.instagram || '-' %>
+                                </span>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section class="review-section">
+                        <div class="review-header">
+                            <h3>คะแนนและรีวิว</h3>
+                            <button id="openReview">เขียนรีวิว</button>
+                        </div>
+
+                        <div id="reviewModal" class="modal">
+                            <div class="modal-content">
+                                <h3>ให้คะแนนผลงาน</h3>
+                                <p id="error-msg" style="color: red; display: none; font-size: 14px;"></p>
+
+                                <form action="/general/reviewStudent" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="student_id" value="<%= student_user.ID %>">
+
+                                    <div class="star-rating">
+                                        <input type="radio" name="rating" id="rat-5" value="5"><label
+                                            for="rat-5"></label>
+                                        <input type="radio" name="rating" id="rat-4" value="4"><label
+                                            for="rat-4"></label>
+                                        <input type="radio" name="rating" id="rat-3" value="3"><label
+                                            for="rat-3"></label>
+                                        <input type="radio" name="rating" id="rat-2" value="2"><label
+                                            for="rat-2"></label>
+                                        <input type="radio" name="rating" id="rat-1" value="1"><label
+                                            for="rat-1"></label>
+                                    </div>
+
+                                    <div class="upload-section">
+                                        <label for="reviewImgInput" class="custom-file-upload">
+                                            📸 เพิ่มรูปภาพผลงาน
+                                        </label>
+                                        <input type="file" id="reviewImgInput" name="review_image" accept="image/*"
+                                            onchange="previewImage(this)">
+                                        <div id="image-preview-container"></div>
+                                    </div>
+
+                                    <textarea id="reviewText" name="review_text"
+                                        placeholder="เขียนรีวิวของคุณที่นี่..."></textarea>
+
+                                    <div class="modal-buttons">
+                                        <button type="button" id="cancelBtn">ยกเลิก</button>
+                                        <button type="submit" id="submitBtn">ตกลง</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Rating Summary -->
+                        <div class="rating-summary-card">
+                            <div class="rating-left">
+                                <h1 id="avg-score">0.0</h1>
+                                <div class="stars-display" id="avg-stars"></div>
+                                <p id="total-reviews-count">จาก 0 รีวิว</p>
+                            </div>
+                            <div class="rating-right">
+                                <div class="bar-row">
+                                    <span>5 ดาว</span>
+                                    <div class="bar-bg">
+                                        <div class="bar-fill" id="bar-5"></div>
+                                    </div>
+                                    <span class="count-text" id="count-5">0</span>
+                                </div>
+                                <!-- Add other bars as needed, keeping it simple for now -->
+                            </div>
+                        </div>
+
+                        <div class="filter-tags">
+                            <button class="tag active" onclick="filterReviews('all')">ทั้งหมด</button>
+                            <!-- Filter buttons... -->
+                        </div>
+
+                        <h3 style="margin: 0;">ความคิดเห็นที่มีประโยชน์</h3>
+                        <div id="image-gallery-preview" class="image-gallery"></div>
+                        <div id="reviewContainer" class="review-preview">
+                            <!-- Reviews will be loaded here via JS or server-side rendering -->
+                        </div>
+
+                        <!-- Full Review Modal structure (Omitted for brevity, can be added if needed) -->
+
+                    </section>
+                </div>
+
+                <div class="main-content">
+                    <h3 class="section-title">งานที่เปิดรับ</h3>
+                    <div id="job-container">
+                        <% if(student_jobs && student_jobs.length> 0) { %>
+                            <% student_jobs.forEach(function(job) { %>
+                                <div class="job-item">
+                                    <!-- Job Item Content -->
+                                    <h4>
+                                        <%= job.title %>
+                                    </h4>
+                                    <p>
+                                        <%= job.des_cription %>
+                                    </p>
+                                </div>
+                                <% }); %>
+                                    <% } else { %>
+                                        <p id="no-job-msg" style="text-align:center; color:#888; margin-top:20px;">
+                                            ยังไม่มีโพสต์งานในขณะนี้</p>
+                                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-contact">
+            <p>ติดต่อเรา</p>
+            <p>sdhire67@gmail.com</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SDhire, All right reserved</p>
+        </div>
+    </footer>
+
+
+    <script src="/homejs/profile_buttom.js"></script>
+    <script src="/profilejs/review_star.js"></script>
+    <script src="/profilejs/post_script.js"></script>
+</body>
+
+</html>
