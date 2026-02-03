@@ -20,8 +20,6 @@
 <body>
     <div class="content-wrapper">
         <header>
-    <div class="content-wrapper">
-        <header>
             <a href="/" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
             </a>
@@ -36,12 +34,7 @@
                                 <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
                                     alt="โปรไฟล์">
                             <% }%>
-                                <img src="/imageForTest/<%= userdata.profile_image %>"
-                                    alt="<%= userdata.profile_image%>">
-                                <% } else{%>
-                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                        alt="โปรไฟล์">
-                                    <% }%>
+                                
                         </div>
                         <span>Profile</span>
                     </button>
@@ -56,21 +49,18 @@
                                 <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
                                     alt="โปรไฟล์">
                                 <% }%>
-
                                     <div class="user_name">
                                         <% if(userdata.roles=="student" ) {%>
                                             <h1>
-                                                <%= userdata.firstname %>
-                                                    <%= userdata.lastname %>
+                                        <%= userdata.firstname %> <%= userdata.lastname %>      
                                             </h1>
-                                            <% }else{ %>
-                                                <h1>
-                                                    <%=userdata.username%>
-                                                </h1>
-                                                <% } %>
-                                                    <small></small><span class="status-dot"></span> สถานะ : <%=
-                                                        userdata.roles %></small>
-                                    </div>
+                                        <% }else{ %>
+                                            <h1>
+                                        <%=userdata.username%>
+                                    </h1>
+                                <% } %>
+                            <small></small><span class="status-dot"></span> สถานะ : <%=userdata.roles %></small>                  
+                        </div>
                     </div>
 
                     <div class="button_VO">

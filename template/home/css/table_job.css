@@ -1,18 +1,11 @@
-.post_job {
+.post_job{
     display: flex;
     margin-top: 15px;
-    border: 1px solid rgba(125, 125, 125, 0.912);
-    
-    /* --- ส่วนที่แก้ --- */
-    width: 90%;             /* ลดความกว้างเหลือ 90% ของพื้นที่ */
-    max-width: 1000px;      /* บังคับห้ามกว้างเกิน 1000px เด็ดขาด */
-    margin-left: auto;      /* จัดกึ่งกลางซ้าย */
-    margin-right: auto;     /* จัดกึ่งกลางขวา */
-    /* ---------------- */
-
-    border-radius: 7px;
+    border: 1px solid rgba(125, 125, 125, 0.912) ;
+    width: 100%;
+    border-radius: 7px; 
     overflow: hidden;
-    border-collapse: separate;
+    border-collapse: separate; /* เพื่อให้ทำมุมโค้งมนที่ตัวตารางได้ */
     border-spacing: 0;
 }
 
