@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <title>โพสต์งาน | SDhire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/post_work/css/post_work.css">
+    <link rel="stylesheet" href="/home/css/Tem_home_HF.css">
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <header>
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <% if(userdata.profile_image){ %>
+                                <img src="/imageForTest/<%= userdata.profile_image %>"
+                                    alt="<%= userdata.profile_image%>">
+                                <% } else{%>
+                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                        alt="โปรไฟล์">
+                                    <% }%>
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <% if(userdata.profile_image){ %>
+                            <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์">
+                                <% }%>
+                                    <div class="user_name">
+                                        <h1>
+                                            <%= userdata.username %>
+                                        </h1>
+                                        <p><span class="status-dot"></span> สถานะ : <%= userdata.roles %>
+                                        </p>
+                                    </div>
+                    </div>
+
+                    <div class="button_VO">
+                        <% if(userdata.roles=="student" ){%>
+                            <a href="/home/profilestudent">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                            <% } else{ %>
+                                <a href="/home/profilegeneral">
+                                    <button class="b_view">ดูโปรไฟล์</button>
+                                </a>
+                                <% } %>
+                                    <a>
+                                        <form action="/logout" method="POST">
+                                            <button class="b_logout" type="submit">ออกจากระบบ</button>
+                                        </form>
+                                    </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Main Card -->
+            <div class="container">
+                <h1>โพสต์งาน</h1>
+
+                <form action="/post/create-job" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>ชื่องาน</label>
+                        <input type="text" name="title" id="title" placeholder="ชื่องาน" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>อธิบายเกี่ยวกับรายละเอียดงาน</label>
+                        <textarea name="des_cription" id="detail" rows="6" required></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>ประเภท</label>
+                            <select name="job_type" id="category" required>
+                                <option value="" disabled selected hidden>เลือกหมวดหมู่</option>
+                                <option value="รับจ้างทั่วไป">รับจ้างทั่วไป</option>
+                                <option value="เขียนโปรแกรม">เขียนโปรแกรม</option>
+                                <option value="กราฟิกดีไซน์">กราฟิกดีไซน์</option>
+                                <option value="ตัดต่อวิดีโอ">ตัดต่อวิดีโอ</option>
+                                <option value="แปลภาษา">แปลภาษา</option>
+                                <option value="การศึกษา">การศึกษา</option>
+                                <option value="ถ่ายภาพ">ถ่ายภาพ</option>
+                                <option value="ดนตรีและเสียง">ดนตรีและเสียง</option>
+                                <option value="เอกสาร">เอกสาร</option>
+                                <option value="ซ่อมแซม">ซ่อมแซม</option>
+                                <option value="สายมู">สายมู</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>งบประมาณ (บาท)</label>
+                            <input type="number" name="budjet" id="price" placeholder="ระบุงบประมาณ" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>อัปโหลดรูปภาพ (ถ้ามี)</label>
+                        <input type="file" name="service_image" accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn-post">โพสต์</button>
+                </form>
+
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-contact">
+            <p>ติดต่อเรา</p>
+            <p>sdhire67@gmail.com</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SDhire, All right reserved</p>
+        </div>
+    </footer>
+
+    <script src="/homejs/profile_buttom.js"></script>
+</body>
+
+</html>

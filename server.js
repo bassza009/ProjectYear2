@@ -140,6 +140,7 @@ app.post("/login", (req,res)=>{
         }
     })
 })
+
 app.get("/dashboard",(req,res)=>{
     if(!req.session.userid){
       res.redirect('/?error=103') //login first  
@@ -281,6 +282,9 @@ app.get("/change_data",(req,res)=>{
     }
     res.sendFile(path.join(__dirname,"components","change_data.html"))
 })
+
+const postRouter = require('./router/post'); 
+app.use('/api/post', postRouter);
 
 app.listen(port,()=>{
     console.log("Server is running....")

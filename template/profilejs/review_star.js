@@ -33,7 +33,7 @@ function loadReviews(filter, showAll = false) {
 
     reviews.forEach((rev) => {
         // สร้าง ID จำลองหากไม่มี เพื่อใช้อ้างอิงการ Like/Reply
-        const revId = rev.id || rev.name + rev.comment; 
+        const revId = rev.id || rev.name + rev.comment;
 
         const html = `
                     <div class="review-card">
@@ -73,7 +73,7 @@ function loadReviews(filter, showAll = false) {
 function handleLike(revId) {
     // 1. ดึงข้อมูลจาก LocalStorage
     let reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
-    
+
     // 2. หา Index ของรีวิวที่ถูกกด
     const index = reviews.findIndex(r => {
         const currentId = r.id ? String(r.id) : (r.name + r.comment).trim();
@@ -102,7 +102,7 @@ function handleLike(revId) {
         // หากไม่อยากโหลดใหม่ทั้งหน้า (Render ใหม่) ให้เขียนฟังก์ชันอัปเดตเฉพาะจุด
         // แต่ถ้า loadReviews ทำงานถูกต้อง การเรียกใช้จะช่วยให้ข้อมูลจัดเรียงใหม่ได้
         if (typeof loadReviews === 'function') {
-            loadReviews(currentFilter || 'ทั้งหมด'); 
+            loadReviews(currentFilter || 'ทั้งหมด');
         } else {
             // กรณีไม่มีฟังก์ชัน loadReviews ให้ใช้วิธี reload หน้า (ชั่วคราว)
             location.reload();
@@ -163,7 +163,7 @@ function updateReviewStats() {
     });
 
     const avgScore = total > 0 ? (sum / total).toFixed(1) : "0.0";
-    
+
     if (document.getElementById('total-reviews-count')) document.getElementById('total-reviews-count').innerText = `จาก ${total} รีวิว`;
     if (document.getElementById('avg-score')) document.getElementById('avg-score').innerText = avgScore;
     if (document.getElementById('avg-stars')) document.getElementById('avg-stars').innerHTML = renderStars(avgScore);
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewContainer = document.getElementById('reviewContainer');
 
     if (typeof loadReviews === 'function') {
-        loadReviews('all'); 
+        loadReviews('all');
     } else {
         updateReviewUI();
     }
@@ -211,7 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (submitBtn) {
         submitBtn.onclick = (e) => {
-            e.preventDefault(); 
+
+            e.preventDefault();
 
             const text = document.getElementById('reviewText').value;
             const ratingInput = document.querySelector('input[name="rating"]:checked');
@@ -240,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     comment: text,
                     reviewImg: base64Img,
                     likes: 0,
-                    isLiked: false, 
+                    isLiked: false,
                     replies: [],
                     timestamp: new Date().getTime()
                 };
@@ -251,9 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // --- แก้ปัญหาการเด้งซ้ำตรงนี้ ---
                 closeAndReset(); // 1. ปิด Modal และล้างค่าฟอร์มก่อน
-                
+
                 // 2. ใช้ replace เพื่อโหลดหน้าใหม่โดยไม่ค้างสถานะ Modal เดิม
-                window.location.replace(window.location.href); 
+                window.location.replace(window.location.href);
             };
 
             if (imgFile) {
