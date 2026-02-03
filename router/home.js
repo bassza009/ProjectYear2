@@ -120,6 +120,147 @@ router.get("/home", (req, res) => {
             } pool.query(sql2, (err, resultsjob, fields) => {
                 if (err) {
                     console.log(err)
+                }pool.query(sql2,(err,resultsjob,fields)=>{
+                    if(err){
+                        console.log(err)
+                    }pool.query(sql,(err,counts,fields)=>{
+                        job_count = {}
+                        if(counts){
+                            counts.forEach((jobs)=>{
+                                job_count[jobs.job_type] = jobs.num_ber
+                            })
+                        }pool.query(sql3,(err,data)=>{
+                            console.log(err)
+                            //res.json(results)
+                            //res.json(resultsjob)
+                            //res.json(job_count)
+                            //res.json(data)
+                            
+                            res.render("home/homepage",{
+                                userdata:results[0],
+                                job:resultsjob,
+                                jobcount:job_count,
+                                order:data
+                            })
+                        
+                        })
+                            
+                        })
+                    }      
+                )
+            })  
+        }else{
+        
+        res.redirect("/login")}
+    })
+                } pool.query(sql, (err, counts, fields) => {
+                    job_count = {}
+                    if (counts) {
+                        counts.forEach((jobs) => {
+                            job_count[jobs.job_type] = jobs.num_ber
+                        })
+                    } pool.query(sql3, (err, data) => {
+                        console.log(err)
+                        //res.json(results)
+                        //res.json(resultsjob)
+                        //res.json(job_count)
+                        //res.json(data)
+                        res.render("home/homepage", {
+                            userdata: results[0],
+                            job: resultsjob,
+                            jobcount: job_count,
+                            order: data
+                        })
+
+                    })
+
+                })
+            }
+            )
+        })
+    } else {
+        res.redirect("/login")
+    }
+})
+
+router.get("/student", (req, res) => {
+    const email = req.cookies.email
+    if (!email.endsWith("@up.ac.th")) {
+        return res.redirect("/login?error=109")//login only student
+    }
+    sql = `SELECT * from userdata where email = ?`
+    if (req.cookies.email) {
+        pool.query(sql, [email], (err, results, field) => {
+            //res.json(results)
+            if (results[0].roles == "general") {
+                res.redirect("/general")
+            } else {
+                res.render("home/homepage", { userdata: results[0] })
+            }
+        })
+
+    } else {
+        res.redirect("/login")
+    }
+})
+
+    router.get("/general",(req,res)=>{
+        const email = req.cookies.email
+        
+        sql = `SELECT * from userdata 
+              where email = ?`
+        if(req.cookies.email){
+            pool.query(sql,[email],(err,results,field)=>{
+                //res.json(results)
+                if(results[0].roles === "student"){
+                    res.redirect("/student")
+                }else{
+                res.render("home/homeGen",{userdata:results[0]})}
+            })
+                
+        }else{
+            console.log(err)
+            res.redirect("login")
+        }
+        
+    })
+
+    router.get("/general/regisGen",(req,res)=>{
+        res.render("login/createGen")
+    })
+    router.post("/regisGen/api",upload.single("file_input"),async(req,res)=>{
+        const {email,password,phone,username} = req.body
+        const hash_pass = await bcy.hash(password,10)
+        
+        if(email.endsWith("@up.ac.th")){
+            const token = jwt.sign({email:email},process.env.secret)
+            res.cookie("emailRegis",email,{maxAge: 24*60*60*1000,httpOnly:true})
+            res.cookie("phoneRegis",phone,{maxAge: 24*60*60*1000})
+            res.cookie("usernameRegis",username,{maxAge: 24*60*60*1000})
+            res.cookie("passwordRegis",hash_pass,{maxAge: 24*60*60*1000,httpOnly:true})
+            res.cookie("file_inputRegis",req.file.filename,{maxAge: 24*60*60*1000,httpOnly:true})
+            
+            res.cookie("token",token,{maxAge: 24*60*60*1000,httpOnly:true})
+            return res.redirect("/student/regisStu")
+        }
+        sql =`insert into userdata (email,pass_word,userPhoneNumber,profile_image,username,roles)
+                values(?,?,?,?,?,"general")`
+        sql2 =`insert into userdata (email,pass_word,userPhoneNumber,username,roles)
+                values(?,?,?,?,?,"general")`
+        //const hash_pass = await bcy.hash(password,10)
+        if(req.file){
+             const picture_file = req.file.filename
+            pool.query(sql,[email,hash_pass,phone,picture_file,username],(err,results,fields)=>{
+           
+            if(err){
+                if(err.errno==1062){
+                    console.log(err)
+                    return res.redirect("/general/regisGen?error=104")//This email already exist    
+                }
+                console.log(err)
+            } pool.query(sql2, (err, resultsjob, fields) => {
+                if (err) {
+                    console.log(err)
                 } pool.query(sql, (err, counts, fields) => {
                     job_count = {}
                     if (counts) {

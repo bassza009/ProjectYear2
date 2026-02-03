@@ -12,9 +12,14 @@
     <link rel="stylesheet" href="/../home/css/Tem_main.css"> <!-- ตัวเนื้อหา  -->
 
 
+
+
 </head>
 
+
 <body>
+    <div class="content-wrapper">
+        <header>
     <div class="content-wrapper">
         <header>
             <a href="/" style="text-decoration: none; color: inherit;">
@@ -25,6 +30,12 @@
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <% if(userdata.profile_image){ %>
+                                <img src="/imageForTest/<%= userdata.profile_image %>"
+                                    alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์">
+                            <% }%>
                                 <img src="/imageForTest/<%= userdata.profile_image %>"
                                     alt="<%= userdata.profile_image%>">
                                 <% } else{%>
@@ -90,10 +101,15 @@
                     <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
                         พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
                     <% if(userdata.roles=="student" ){ %>
+                        พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
+                    <% if(userdata.roles=="student" ){ %>
                         <a href="/student/post_skill" class="btn-post">โพสต์</a>
                         <% } else {%>
                             <a href="/post/create" class="btn-post">โพสต์</a>
                             <% } %>
+                    <% } else {%>
+                            <a href="/post/create" class="btn-post">โพสต์</a>
+                    <% } %>
                 </div>
                 <div class="img_right">
                     <img src="../photo/profile.png" alt="profile">
