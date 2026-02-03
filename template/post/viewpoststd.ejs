@@ -31,64 +31,42 @@
                     <span>Profile</span>
                 </button>
             </div>
-
             <div class="data_box" id="myDropdown">
-                <div class="user_infor">
-                    <% if(userdata.profile_image){ %>
-                        <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                        <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                alt="โปรไฟล์">
-                            <% }%>
-                                <div class="user_name">
-                                    <%if(userdata.roles=="student"){%>
-                                        <h1>
-                                            <%=userdata.firstname%>
-                                                <%=userdata.lastname%>
-                                        </h1>
-                                        <%}else{%>
-                                            <h1>
-                                                <%=userdata.username%>
-                                            </h1>
-                                            <%}%>
-                                                <p>✅ สถานะ : <%=userdata.roles%>
-                                                </p>
-                                </div>
-                </div>
-
-                <div class="data_box" id="myDropdown">
                     <div class="user_infor">
+                        
                         <% if(userdata.profile_image){ %>
-                            <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>">
+                                <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>" >
                         <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
-                        <% }%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                        <% }%>  
                         <div class="user_name">
-                            <%if(userdata.roles=="student"){%>
-                                <h1><%=userdata.firstname%> <%=userdata.lastname%></h1>
-                            <%}else{%>
-                                <h1><%=userdata.username%></h1>
-                            <%}%>
-                            <p>✅ สถานะ : <%=userdata.roles%></p>
+                            <h1><%=userdata.firstname%> <%=userdata.lastname%></h1>
+                            <span class="status-dot"></span>สถานะ : <%= userdata.roles %>  
                         </div>
                     </div>
                     
                     <div class="button_VO">
-                        <%if(userdata.roles=="student"){%>    
-                            <a href="/home/profilestudent/<%=userdata.ID%>">
-                                <button class="b_view">ดูโปรไฟล์</button>
-                            </a>
-                        <% } else{ %>
-                            <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                <button class="b_view">ดูโปรไฟล์</button>
-                            </a>
-                            <%}%>
-                                <a href="/SDhire/Home/home_login.html">
-                                    <button class="b_logout">ออกจากระบบ</button>
+                        <%if(userdata.ID!=post.ID){%>    
+                            <%if(userdata.roles=="student"){%>    
+                                <a href="/home/profilestudent/<%=userdata.ID%>">
+                                    <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
+                            <%}else{%>
+                                <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                    <button class="b_view">ดูโปรไฟล์</button>
+                                </a>
+                            <%}%>
+                        <%}%>
+
+                        <a >
+                            <form action="/logout" method="post">           
+                                <button class="b_logout">ออกจากระบบ</button>
+                            </form>
+                        </a> 
+                    </div>
                 </div>
-            </div>
         </div>
+            
     </header>
 
     <main class="content-wrapper">

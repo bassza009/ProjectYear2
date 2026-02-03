@@ -343,6 +343,39 @@ router.post("/logingen", (req, res) => {
         }
     })
 })
+router.post("/loginSTD/api", (req, res) => {
+    const { email, password } = req.body
+    if (!email.endsWith("@up.ac.th")) {
+        return res.redirect("/login?error=104")//login only general
+    }
+    sql = `SELECT * from userdata where email = ? `
+    pool.query(sql, [email], async (err, results) => {
+        if (err) {
+            console.log(err)
+            return res.redirect("/login?error=101")//account doesn't exist
+        }
+        else {
+            if (results.length == 0) {
+                console.log(err)
+                return res.redirect("/login?error=102")//wrong password or email
+            }
+            const match_pass = await bcy.compare(password, results[0].pass_word)
+            if (match_pass) {
+                const token = jwt.sign({ email: email }, process.env.secret)
+                const id = results[0].ID
+                res.cookie("email", email, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+                res.cookie("id", id, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+                res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+            } else {
+                return res.redirect("/login?error=102")
+
+            }
+            //res.json(results)
+            return res.redirect("/home")
+
+        }
+    })
+})
 router.get("/home/profilestudent/:id",(req,res)=>{
         const id = req.params.id
         const {email} = req.cookies
@@ -540,13 +573,42 @@ router.post("/student/changeAvatar", upload.single("file_input"), (req, res) => 
             return res.json({ success: "false", message: "failed to upload avatar" })
         }
         res.json({ success: "true", message: "Change avatar complete" })
-
-
     })
-
 })
-
-
+router.get("/home/filter/:job_type",(req,res)=>{
+    const {email} = req.cookies
+    const jobType = req.params.job_type
+    sql = `Select * from user_job
+            left join userdata
+            on userdata.ID = user_job.ID
+            left join studentdata
+            on studentdata.email = userdata.email
+            where job_type = ?`
+    sql2 = `Select * from user_job
+            left join userdata
+            on userdata.ID = user_job.ID
+            left join studentdata
+            on studentdata.email = userdata.email
+            where userdata.email = ?`
+    if(!email){
+        return res.redirect("/home?error=106")//login first
+    }
+    pool.query(sql2,[email],(err,results)=>{
+        if(err){
+            console.log(err)
+            res.redirect("/home?error=105")//wrong email
+        }pool.query(sql,[jobType],(err,data)=>{
+            if(err){
+                console.log(err)
+                res.redirect("/home?error=106")//input error
+            }
+            res.render("jobtype/job_type",{
+                userdata:results[0],
+                post:data
+            })
+        })
+    })
+})
 
 
 
