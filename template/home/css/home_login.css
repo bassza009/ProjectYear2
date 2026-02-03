@@ -170,7 +170,7 @@ header button:active {
 }
 .card{
     background: white;
-    border-radius: 12px;
+    border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: 0.3s;
@@ -190,18 +190,16 @@ header button:active {
    padding: 15px; 
    position: relative;
 }
-.card-content {
-    padding: 15px;
-    position: relative;
-}
+
 .profile-area {
     display: flex;
     gap: 5px;
     margin-top: -15px;
     margin-bottom: 10px;
+    
     font-family: 'Sarabun';
 }
-.avater {
+.avatar {
     width: 40px;
     height: 40px;
     margin: 10px 0;
@@ -428,7 +426,14 @@ footer {
     color:#2baf2b;
     font-family: 'Kanit';
 }
-
+.post_skill {
+    display: grid;
+    /* คำสั่งนี้จะทำให้การ์ดเรียงกัน และถ้าจอเล็กจะปัดลงมาให้อัตโนมัติ */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px;
+    padding: 15px 5%;
+    margin: 0 auto;
+}
 .card-link,
 .card-link:link,
 .card-link:visited,

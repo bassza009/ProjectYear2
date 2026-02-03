@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
             e.target.closest('.btn-post') || 
             e.target.closest('header button') || 
             e.target.closest('.card') ||      // เพิ่มการดักจับคลิกที่ Card งาน
-            e.target.closest('.post_d')       // เพิ่มการดักจับคลิกที่ Card แบบ Skill
+            e.target.closest('.post_d')   ||    // เพิ่มการดักจับคลิกที่ Card แบบ Skill
+            e.target.closest('.cat-card-icon') 
         ) {
             e.preventDefault();
             e.stopPropagation();

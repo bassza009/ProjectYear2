@@ -1,0 +1,295 @@
+/* =========================================
+   1. BASE RESET & LAYOUT
+   ========================================= */
+h1, h3, h4, h5, p, span, strong {
+    margin: 0;
+}
+
+main {
+    max-width: 1000px;
+    margin: 10px auto;
+    background: #faffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sidebar {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    background-color: #fff;
+    border-right: 1px solid #e2e2e2;
+}
+
+.main-content {
+    flex: 2;
+    min-width: 350px;
+    padding: 30px;
+    background-color: #fafafa;
+}
+
+/* =========================================
+   2. PROFILE HEADER
+   ========================================= */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 40px;
+    background: #fff;
+    border-bottom: 1px solid #e4e1e1;
+    flex-wrap: wrap;
+}
+
+.avatar-wrapper {
+    position: relative;
+}
+
+.avatar-img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #ffdeb6;
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 32px;
+    height: 32px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.name-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.status-badge {
+    margin: 5px 0;
+    color: #16a34a;
+    font-weight: 500;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.stats-card {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 5px 15px;
+    background: #fdf0e0;
+    color: #000;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   3. SIDEBAR COMPONENTS (Contact & Info)
+   ========================================= */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: #1e293b;
+    font-size: 0.9rem;
+}
+
+.contact-list img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* =========================================
+   4. JOB / WORK CARDS (Grid Layout)
+   ========================================= */
+#job-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+/* .work-card{} */
+.card-link {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+/* .work-card:hover */
+.card-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+    position: relative;
+    width: 100%;
+    height: 180px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.card-body h4 {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.work-details {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+    color: #000000;
+}
+/* จำกัดความกว้างและจัดการตัวหนังสือที่ยาวเกิน */
+.work-details li {
+    word-break: break-word;      /* ให้ตัดคำขึ้นบรรทัดใหม่เมื่อยาวเกินกรอบ */
+    overflow-wrap: break-word;   /* รองรับ Browser รุ่นใหม่ๆ */
+    line-height: 1.5;
+}
+
+.work-details strong{
+    font-size: 16px;
+    color: #000000;
+}
+/* ถ้าอยากให้รายละเอียดแสดงแค่ 2-3 บรรทัดแล้วตัดเป็น ... (Optional) */
+.job-description-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;   
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- Action Buttons in Card --- */
+.action-buttons {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    margin-top: auto;
+    box-sizing: border-box;
+}
+
+.action-buttons form{
+    flex: 1; /* ทำให้ปุ่มแต่ละปุ่มยืดเท่าๆ กันจนเต็มบล็อก */
+    padding: 10px; /* เพิ่มความสูงให้ปุ่มดูสมดุล */
+    border-radius: 8px; /* ความมนตามดีไซน์ */
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+
+.btn-edit, 
+.btn-delete 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn-edits,
+.btn-deletes
+{   
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+
+.btn-edit ,.btn-edits{
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+.btn-delete,.btn-deletes {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.btn-edit:hover { background-color: #ffeeba; }
+.btn-delete:hover { background-color: #f5c6cb; }
+.btn-edits:hover { background-color: #ffeeba; }
+.btn-deletes:hover { background-color: #f5c6cb; }
+
+/* ลบเส้นใต้จากลิงก์ของ Card */
+.card-link {
+    text-decoration: none; /* เอาเส้นขีดออก */
+    color: inherit;        /* ให้ใช้สีตัวอักษรตามปกติ ไม่เป็นสีน้ำเงิน */
+    display: block;        /* ทำให้ลิงก์ครอบคลุมพื้นที่ทั้งหมดของ Card */
+}
+
+/* ป้องกันไม่ให้มีเส้นขีดเมื่อเอาเมาส์ไปชี้ (Optional) */
+.card-link:hover {
+    text-decoration: none;
+}
