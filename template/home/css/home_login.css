@@ -406,7 +406,7 @@ footer {
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-}
+} 
 .avatar {
     width: 48px;
     height: 48px;
