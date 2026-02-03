@@ -715,9 +715,11 @@ router.get("/home/filter/:job_type",(req,res)=>{
                 console.log(err)
                 res.redirect("/home?error=106")//input error
             }
+            //res.json(data)
             res.render("jobtype/job_type",{
                 userdata:results[0],
-                post:data
+                post:data,
+                jobtype:jobType
             })
         })
     })
