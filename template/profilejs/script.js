@@ -17,7 +17,7 @@ const categoryNames = {
 
 // document.addEventListener('DOMContentLoaded', () => {
 //     // โหลดข้อมูลพื้นฐาน
-    
+
 //     updateReviewStats();
 //     loadReviews('all');
 //     displayUserJobs();
@@ -78,7 +78,7 @@ const categoryNames = {
 
 let isEditingContact = false;
 async function toggleEdit() {
-    
+
     const btn = document.getElementById('edit-btn');
     // ดึง <span> ทั้งหมดที่มีคลาส contact-value
     const fields = ['val-phone', 'val-line', 'val-ig'];
@@ -98,38 +98,38 @@ async function toggleEdit() {
         const val_phone = document.getElementById("input-val-phone")
         const val_line = document.getElementById("input-val-line")
         const val_ig = document.getElementById("input-val-ig")
-        const payload ={
-            phone:val_phone?val_phone.value:"",
-            line:val_line?val_line.value:"",
-            ig:val_ig?val_ig.value:""
+        const payload = {
+            phone: val_phone ? val_phone.value : "",
+            line: val_line ? val_line.value : "",
+            ig: val_ig ? val_ig.value : ""
         }
-        try{
-            const response = await fetch("/student/update",{
-                method:"POST",
-                headers:{"CONTENT-TYPE":"application/json"},
-                body:JSON.stringify(payload)     
+        try {
+            const response = await fetch("/student/update", {
+                method: "POST",
+                headers: { "CONTENT-TYPE": "application/json" },
+                body: JSON.stringify(payload)
             })
             const results = await response.json()
-            if(results.success){
-                fields.forEach((id)=>{
+            if (results.success) {
+                fields.forEach((id) => {
                     const input = document.getElementById(`input-${id}`)
-                    if(input){    
+                    if (input) {
                         const newval = input.value
                         const span = document.getElementById(id)
-                        span.innerText=newval||"-"
+                        span.innerText = newval || "-"
                     }
                 })
                 btn.innerText = "แก้ไข";
                 btn.classList.remove('btn-save');
                 isEditingContact = false;
-            }else{
+            } else {
                 throw new Error("Save failed")
             }
-        }catch (err){
+        } catch (err) {
             console.error(err)
 
         }
-    }  
+    }
 }
 //เพิ่มฟังก์ชันนี้เข้าไปใน document.addEventListener('DOMContentLoaded', ...) ของคุณด้วย
 function loadContactData() {
@@ -158,33 +158,68 @@ function scrollToReviews() {
         element.scrollIntoView({ behavior: "smooth" });
     }
 }
-async function edit_profile(input){
-    if(input.files && input.files[0]){
+async function edit_profile(input) {
+    if (input.files && input.files[0]) {
         const file = input.files[0]
         const img = document.getElementById("profile_")
 
 
         const render = new FileReader()
-        render.onload = function(e){
-            if(img) img.src = e.target.result //เปลี่ยนรูปเดิมเป็นรูปใหม่
+        render.onload = function (e) {
+            if (img) img.src = e.target.result //เปลี่ยนรูปเดิมเป็นรูปใหม่
         }
         render.readAsDataURL(file)
 
         const formData = new FormData()
-        formData.append("file_input",file)
-        try{
-            const response = await fetch("/student/changeAvatar",{
-                method : "POST",
-                
-                body:formData
+        formData.append("file_input", file)
+        try {
+            const response = await fetch("/student/changeAvatar", {
+                method: "POST",
+
+                body: formData
             })
             const result = await response.json()
-            if(result.success){
+            if (result.success) {
                 console.log("upload avatar complete")
-            }else{
+            } else {
                 //error
             }
-        }catch(error){
+        } catch (error) {
+            console.error(error)
+
+        }
+
+    }
+
+}
+
+async function edit_profile_gen(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0]
+        const img = document.getElementById("profile_")
+
+
+        const render = new FileReader()
+        render.onload = function (e) {
+            if (img) img.src = e.target.result //เปลี่ยนรูปเดิมเป็นรูปใหม่
+        }
+        render.readAsDataURL(file)
+
+        const formData = new FormData()
+        formData.append("file_input", file)
+        try {
+            const response = await fetch("/general/changeAvatar", {
+                method: "POST",
+
+                body: formData
+            })
+            const result = await response.json()
+            if (result.success) {
+                console.log("upload avatar complete")
+            } else {
+                console.error("upload failed:", result.message)
+            }
+        } catch (error) {
             console.error(error)
 
         }

@@ -39,9 +39,9 @@ router.get('/create', (req, res) => {
     });
 });
 
-// API to create job post
-router.post('/create-job', upload.single('service_image'), (req, res) => {
-    const { title, job_type, budjet, des_cription } = req.body;
+// API to create job post for general users
+router.post('/create-job', (req, res) => {
+    const { title, job_type, budjet, des_cription, deadline } = req.body;
     const email = req.cookies.email;
 
     if (!email) {
@@ -61,20 +61,20 @@ router.post('/create-job', upload.single('service_image'), (req, res) => {
         }
 
         const userId = userResults[0].ID;
-        const imageName = req.file ? req.file.filename : null;
 
         // Debug: Log received data
         console.log("Received form data:", req.body);
         console.log("job_type:", job_type);
         console.log("title:", title);
         console.log("budjet:", budjet);
+        console.log("deadline:", deadline);
 
-        // Insert into user_job table - NOTE: Column name is JOb_type in DB, not job_type
-        const sql = `INSERT INTO user_job 
-                     (ID, JOb_type, title, budjet, des_Cription, service_image, job_create) 
+        // Insert into general_orders table
+        const sql = `INSERT INTO general_orders 
+                     (general_id, orderType, title, budjet, des_cript, deadline, post_date) 
                      VALUES (?, ?, ?, ?, ?, ?, NOW())`;
 
-        const values = [userId, job_type, title, budjet, des_cription, imageName];
+        const values = [userId, job_type, title, budjet, des_cription, deadline];
 
         console.log("SQL Query:", sql);
         console.log("Values to insert:", values);
@@ -87,10 +87,10 @@ router.post('/create-job', upload.single('service_image'), (req, res) => {
                 return res.status(500).send("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
             }
 
-            console.log("บันทึกเรียบร้อย! ID:", result.insertId);
+            console.log("บันทึกเรียบร้อย! Order ID:", result.insertId);
 
             // Verify what was actually saved
-            const verifySql = `SELECT * FROM user_job WHERE job_id = ?`;
+            const verifySql = `SELECT * FROM general_orders WHERE order_ID = ?`;
             pool.query(verifySql, [result.insertId], (verifyErr, verifyResult) => {
                 if (!verifyErr && verifyResult.length > 0) {
                     console.log("ข้อมูลที่บันทึกจริงในDB:", verifyResult[0]);

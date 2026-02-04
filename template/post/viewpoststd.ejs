@@ -32,41 +32,45 @@
                 </button>
             </div>
             <div class="data_box" id="myDropdown">
-                    <div class="user_infor">
-                        
-                        <% if(userdata.profile_image){ %>
-                                <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>" >
-                        <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
-                        <% }%>  
-                        <div class="user_name">
-                            <h1><%=userdata.firstname%> <%=userdata.lastname%></h1>
-                            <span class="status-dot"></span>สถานะ : <%= userdata.roles %>  
-                        </div>
-                    </div>
-                    
-                    <div class="button_VO">
-                        <%if(userdata.ID!=post.ID){%>    
-                            <%if(userdata.roles=="student"){%>    
-                                <a href="/home/profilestudent/<%=userdata.ID%>">
-                                    <button class="b_view">ดูโปรไฟล์</button>
-                                </a>
-                            <%}else{%>
-                                <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                    <button class="b_view">ดูโปรไฟล์</button>
-                                </a>
-                            <%}%>
-                        <%}%>
+                <div class="user_infor">
 
-                        <a >
-                            <form action="/logout" method="post">           
-                                <button class="b_logout">ออกจากระบบ</button>
-                            </form>
-                        </a> 
-                    </div>
+                    <% if(userdata.profile_image){ %>
+                        <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                alt="โปรไฟล์">
+                            <% }%>
+                                <div class="user_name">
+                                    <h1>
+                                        <%=userdata.firstname%>
+                                            <%=userdata.lastname%>
+                                    </h1>
+                                    <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
+                                </div>
                 </div>
+
+                <div class="button_VO">
+
+                    <%if(userdata.roles=="student"){%>
+                        <a href="/home/profilestudent/<%=userdata.ID%>">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <%}else{%>
+                            <a href="/home/profilegeneral">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                            <%}%>
+
+
+                                <a>
+                                    <form action="/logout" method="post">
+                                        <button class="b_logout">ออกจากระบบ</button>
+                                    </form>
+                                </a>
+                </div>
+            </div>
         </div>
-            
+
     </header>
 
     <main class="content-wrapper">
@@ -93,11 +97,12 @@
                 <div class="sticky-sidebar">
                     <div class="profile_user_card">
                         <div class="img_profile">
-                        <% if(userdata.profile_image){ %>
-                            <img src= "/imageForTest/<%= post.profile_image %>" alt = "<%= post.profile_image%>">
-                        <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>" alt="โปรไฟล์">
-                        <% }%>   
+                            <% if(userdata.profile_image){ %>
+                                <img src="/imageForTest/<%= post.profile_image %>" alt="<%= post.profile_image%>">
+                                <% } else{%>
+                                    <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>"
+                                        alt="โปรไฟล์">
+                                    <% }%>
                         </div>
                         <div class="user_info_detail">
                             <h1>
@@ -125,7 +130,7 @@
                             <h3>คะแนนและรีวิว</h3>
                             <%if(userdata.ID!=post.ID){%>
                                 <button id="openReview" class="btn-write">เขียนรีวิว</button>
-                            <%}%>        
+                                <%}%>
                         </div>
 
                         <div class="rating-summary-card">

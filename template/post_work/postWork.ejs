@@ -73,7 +73,7 @@
             <div class="container">
                 <h1>โพสต์งาน</h1>
 
-                <form action="/post/create-job" method="POST" enctype="multipart/form-data">
+                <form action="/post/create-job" method="POST">
                     <div class="form-group">
                         <label>ชื่องาน</label>
                         <input type="text" name="title" id="title" placeholder="ชื่องาน" required>
@@ -110,8 +110,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label>อัปโหลดรูปภาพ (ถ้ามี)</label>
-                        <input type="file" name="service_image" accept="image/*">
+                        <label>กำหนดส่งงาน</label>
+                        <input type="date" name="deadline" id="deadline" required>
                     </div>
 
                     <button type="submit" class="btn-post">โพสต์</button>

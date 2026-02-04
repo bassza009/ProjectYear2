@@ -30,11 +30,11 @@
                             <% if(userdata.profile_image){ %>
                                 <img src="/imageForTest/<%= userdata.profile_image %>"
                                     alt="<%= userdata.profile_image%>">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                    alt="โปรไฟล์">
-                            <% }%>
-                                
+                                <% } else{%>
+                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                        alt="โปรไฟล์">
+                                    <% }%>
+
                         </div>
                         <span>Profile</span>
                     </button>
@@ -52,15 +52,17 @@
                                     <div class="user_name">
                                         <% if(userdata.roles=="student" ) {%>
                                             <h1>
-                                        <%= userdata.firstname %> <%= userdata.lastname %>      
+                                                <%= userdata.firstname %>
+                                                    <%= userdata.lastname %>
                                             </h1>
-                                        <% }else{ %>
-                                            <h1>
-                                        <%=userdata.username%>
-                                    </h1>
-                                <% } %>
-                            <small></small><span class="status-dot"></span> สถานะ : <%=userdata.roles %></small>                  
-                        </div>
+                                            <% }else{ %>
+                                                <h1>
+                                                    <%=userdata.username%>
+                                                </h1>
+                                                <% } %>
+                                                    <small></small><span class="status-dot"></span> สถานะ :
+                                                    <%=userdata.roles %></small>
+                                    </div>
                     </div>
 
                     <div class="button_VO">
@@ -69,7 +71,7 @@
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                             <% } else{ %>
-                                <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                <a href="/home/profilegeneral">
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
                                 <% } %>
@@ -91,15 +93,10 @@
                     <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
                         พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
                     <% if(userdata.roles=="student" ){ %>
-                        พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
-                    <% if(userdata.roles=="student" ){ %>
                         <a href="/student/post_skill" class="btn-post">โพสต์</a>
                         <% } else {%>
                             <a href="/post/create" class="btn-post">โพสต์</a>
                             <% } %>
-                    <% } else {%>
-                            <a href="/post/create" class="btn-post">โพสต์</a>
-                    <% } %>
                 </div>
                 <div class="img_right">
                     <img src="../photo/profile.png" alt="profile">
@@ -272,23 +269,32 @@
                             <a href="/home/viewStdPost/<%= job.job_id %>" class="card-link">
                                 <div class="card">
                                     <% if(job.service_image){ %>
-                                        <img src="/imageForTest/<%= job.service_image %>" alt="<%= job.service_image%>"class="card-img">       
-                                    <% }else{%>
-                                        <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"alt="โปรไฟล์" class="card-img">     
-                                    <% }%>
-                                        <div class="card-content">
-                                            <div class="profile-area">
+                                        <img src="/imageForTest/<%= job.service_image %>" alt="<%= job.service_image%>"
+                                            class="card-img">
+                                        <% }else{%>
+                                            <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
+                                                alt="โปรไฟล์" class="card-img">
+                                            <% }%>
+                                                <div class="card-content">
+                                                    <div class="profile-area">
 
-                                                <% if(job.profile_image){ %>
-                                                    <img src="/imageForTest/<%= job.profile_image %>"alt="<%= userdata.profile_image%>" class="avatar">                                                               
-                                                <% } else{%>
-                                                    <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"alt="โปรไฟล์" class="avatar"> 
-                                                <% }%>
-                                                    <div>
-                                                        <font style="font-size: 20px;"><b><%= job.firstname %> <%= job.lastname %></b><br></font>    
-                                                            <small><%= job.job_type %> </small>
-                                                    </div>                        
-                                                </div>                       
+                                                        <% if(job.profile_image){ %>
+                                                            <img src="/imageForTest/<%= job.profile_image %>"
+                                                                alt="<%= userdata.profile_image%>" class="avatar">
+                                                            <% } else{%>
+                                                                <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
+                                                                    alt="โปรไฟล์" class="avatar">
+                                                                <% }%>
+                                                                    <div>
+                                                                        <font style="font-size: 20px;"><b>
+                                                                                <%= job.firstname %>
+                                                                                    <%= job.lastname %>
+                                                                            </b><br></font>
+                                                                        <small>
+                                                                            <%= job.job_type %>
+                                                                        </small>
+                                                                    </div>
+                                                    </div>
                                                     <div class="title">
                                                         <%= job.title %>
                                                     </div>
@@ -302,12 +308,12 @@
                                                         </b>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    <%})%>
+                                </div>
+                            </a>
+                            <%})%>
                                 <%}else{%>
                                     <p>no job right now</p>
-                                <%}%>
+                                    <%}%>
                 </div>
                 <div class="pagination" id="pagination"></div>
                 <!-- --------------------------------------------------------------------------------------------------------------------- -->
@@ -333,16 +339,17 @@
                                                 <%=orders.title%>
                                             </td>
                                             <td>
-                                                <%=orders.title%>
+                                                <%=orders.orderType%>
                                             </td>
                                             <td>
                                                 <%=Number(orders.budjet).toLocaleString()%>
                                             </td>
                                             <td>
-                                                <%=orders.post_date%>
+                                                <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
                                             </td>
                                             <td>
-                                                <%=orders.deadline || "-" %>
+                                                <%=orders.deadline ? new
+                                                    Date(orders.deadline).toLocaleDateString('th-TH') : "-" %>
                                             </td>
                                             <td>-</td>
                                         </tr>
