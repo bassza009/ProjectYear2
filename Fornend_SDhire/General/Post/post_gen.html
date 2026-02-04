@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>รายละเอียดงาน | SDhire</title>
+
+    <link rel="stylesheet" href="css/post_gen.css">
+    <link rel="stylesheet" href="../Profile/css/Template_HF.css">
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>        
+            <a href="/Fornend_SDhire/Home/home_gen.html" style="text-decoration: none; color: inherit;">
+                <h2>SDhire</h2>
+            </a>
+            <div class="profile_container">
+                <div class="buttom_header">
+                    <button type="button" class="profile_button" onclick="toggleDropdown()">
+                        <div class="photo_profile">
+                            <img src="../photo/user.webp" alt="โปรไฟล์">
+                        </div>
+                        <span>Profile</span>
+                    </button>
+                </div>
+
+                <div class="data_box" id="myDropdown">
+                    <div class="user_infor">
+                        <img src="../photo/user.webp" alt="โปรไฟล์" >
+                        <div class="user_name">
+                            <h1>User Name</h1>
+                        </div>
+                    </div>
+                    
+                    <div class="button_VO">
+                        <a href="../Profile/profile_gen.html">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <a href="/SDhire/Home/home_login.html" >           
+                            <button class="b_logout">ออกจากระบบ</button>
+                        </a> 
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <div class="page-wrapper">
+                <section class="profile-header-card">
+                    <div class="header-main-info">
+                        <div class="company-logo">
+                            <img src="../photo/user.webp" alt="Logo">
+                        </div>
+                        <div class="user-details">
+                            <h1>User Name</h1>
+                        </div>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <a href="../Profile/profile_gen.html" class="btn-view-profile">ดูโปรไฟล์</a>
+                    </div>
+                </section>
+
+                <div class="profile-content-grid">
+                    <div class="content-left">
+                        <article class="info-section">
+                            <h3>ประกาศงานล่าสุด</h3>
+                            <div class="job-list">
+                                <div class="job-item">
+                                    <div class="job-info">
+                                        <h1 class="job-link">ชื่องาน</h1>
+                                        <span>ประเภทงาน :</span><br>
+                                        <span>รายละเอียดงาน </span><br>
+                                        <p class="job-meta">โพสต์งานเมื่อ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <aside class="content-right">
+                        <div class="stats-card">
+                            <h3>ข้อมูลการจ้างงาน</h3>
+                            <div class="stats-item">
+                                <span>กำหนดส่ง</span>
+                                <strong>-</strong>
+                            </div>
+                            <div class="stats-item">
+                                <span>งบประมาณ</span>
+                                <strong>0 บาท</strong>
+                            </div>
+                            <div class="stats-item">
+                                <span>จ้างงานสำเร็จ</span>
+                                <strong>0 ครั้ง</strong>
+                            </div>
+                        </div>
+
+                        <div class="stats-card">
+                            <div class="comment-header-row">
+                                <h3>ความคิดเห็น</h3>
+                                <button class="btn-view-all" onclick="openAllComments()">อ่านทั้งหมด</button>
+                            </div>
+                            
+                            <div id="commentContainer"></div>
+
+                            <div class="comment-action">
+                                <button class="btn-comment" onclick="openCommentModal()">
+                                    ✍️ แสดงความคิดเห็น...
+                                </button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="commentModal" class="modal-overlay">
+        <div class="modal-window mini-modal">
+            <div class="modal-header">
+                <h3>เขียนความคิดเห็น</h3>
+                <span class="close-modal" onclick="closeCommentModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <textarea id="commentText" placeholder="พิมพ์ข้อความของคุณ..." rows="4"></textarea>
+                <button class="btn-send" onclick="submitComment()">ส่งข้อความ</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="allCommentsModal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>ความคิดเห็นทั้งหมด</h3>
+                <span class="close-modal" onclick="closeAllComments()">&times;</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-contact">
+            <p>ติดต่อเรา</p>
+            <p>sdhire67@gmail.com</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SDhire, All right reserved</p>
+        </div>
+    </footer>
+
+    <script src="../Profile/swith_PR.js"></script>
+    <script src="comment.js"></script>
+</body>
+</html>

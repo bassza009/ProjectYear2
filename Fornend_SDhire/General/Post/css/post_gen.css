@@ -1,0 +1,262 @@
+/* =========================================
+   1. โครงสร้างหลัก (Global & Layout)
+   ========================================= */
+
+
+main.container {
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+/* =========================================
+   2. ส่วนหัวโปรไฟล์ (Profile Header Card)
+   ========================================= */
+.profile-header-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.header-main-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.company-logo img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #7c3aed;
+}
+
+/* คลาสคลุมชื่อ */
+.user-details {
+    min-width: 0; /* สำคัญมาก: ช่วยให้ flex child หดตัวได้ไม่เสียรูป */
+    flex: 1;      /* ให้ขยายเต็มพื้นที่ที่เหลือ */
+}
+
+.user-details h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #1e293b;
+    
+    /* แก้การเสียรูป */
+    white-space: nowrap;      /* ไม่ขึ้นบรรทัดใหม่ */
+    text-overflow: ellipsis;  /* แสดงเป็น ... เมื่อชื่อยาวเกินพื้นที่ */
+    max-width: 100%;          /* ไม่ให้กว้างเกินตัวแม่ */
+    display: block;
+}
+
+
+/* ป้องกันปุ่มโดนบีบ */
+.header-actions {
+    flex-shrink: 0; /* ห้ามปุ่มหด */
+    margin-left: 15px;
+}
+.btn-view-profile {
+    text-decoration: none;
+    color: #7c3aed;
+    border: 1.5px solid #7c3aed;
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-view-profile:hover {
+    background: #7c3aed;
+    color: white;
+}
+
+/* =========================================
+   3. การแบ่งคอลัมน์ (Content Grid)
+   ========================================= */
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px; /* ซ้ายกว้าง ขวาแคบ */
+    gap: 25px;
+    align-items: start;
+}
+
+/* =========================================
+   4. ฝั่งซ้าย: รายละเอียดงาน (Job Section)
+   ========================================= */
+.info-section {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.info-section h3 {
+    font-size: 1.2rem;
+    color: #334155;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-left: 15px;
+}
+
+.job-item {
+    padding: 20px;
+    border: 1px solid #f1f5f9;
+    border-radius: 15px;
+    transition: 0.2s;
+}
+
+.job-item:hover {
+    border-color: #7c3aed;
+    background: #fdfcff;
+}
+
+.job-link {
+    font-size: 20px;
+    font-weight: 600;
+    color: #7c3aed;
+    margin: 0 0 10px 0;
+}
+
+.job-meta {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 15px;
+}
+
+/* =========================================
+   5. ฝั่งขวา: สถิติและคอมเมนต์ (Sidebar)
+   ========================================= */
+.stats-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.stats-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f8fafc;
+}
+
+.stats-item:last-child { border: none; }
+
+.stats-item span { color: #64748b; }
+.stats-item strong { color: #1e293b; font-weight: 600; }
+
+/* โซนคอมเมนต์ใน Sidebar */
+.comment-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-view-all {
+    background: none;
+    border: none;
+    color: #7c3aed;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.btn-comment {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #f5f3ff;
+    border: 1px dashed #7c3aed;
+    border-radius: 12px;
+    color: #7c3aed;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.btn-comment:hover { background: #ede9fe; }
+
+/* =========================================
+   6. ระบบ Modal (Popup เด้งเขียนรีวิว)
+   ========================================= */
+.modal-overlay {
+    display: none; /* ปิดไว้ เริ่มต้น */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-window {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-body { padding: 25px; }
+
+#commentText {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    font-family: 'Kanit', sans-serif;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+.btn-send {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-send:hover { background: #6d28d9; }
+
+.close-modal {
+    cursor: pointer;
+    font-size: 28px;
+    color: #94a3b8;
+}
