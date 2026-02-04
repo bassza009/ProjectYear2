@@ -214,14 +214,6 @@ main {
     gap: 10px;
 }
 
-.detail-box h2::before {
-    content: "";
-    width: 4px;
-    height: 20px;
-    background: #7b2cbf; /* สีม่วงตามธีม stats-card ของคุณ */
-    border-radius: 10px;
-}
-
 /* ตัวรายการโพสต์แต่ละอัน */
 .job-item {
     display: flex;
@@ -313,4 +305,71 @@ main {
 .btn-view-job:hover {
     background: #7b2cbf;
     color: #fff;
+}
+
+/* =========================================
+   5. CONTACT SECTION (เพิ่มเติม)
+   ========================================= */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px; /* เว้นระยะจากส่วน ข้อมูลความเชื่อถือ */
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.section-header h3 {
+    border-bottom: none !important; /* ลบเส้นเดิมออกเพื่อใช้เส้นของ header แทน */
+    margin-bottom: 0 !important;
+}
+
+/* ปุ่มแก้ไขขนาดเล็ก */
+.btn-small {
+    background: #f0f2f5;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #1877f2;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-small:hover {
+    background: #e4e6eb;
+}
+
+/* รายการติดต่อ */
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    transition: transform 0.2s;
+}
+
+
+/* จัดการรูปไอคอน */
+.contact-list img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: grayscale(20%); /* ให้ดูซอฟต์ลงเล็กน้อย */
+}
+
+/* ข้อความข้อมูลติดต่อ */
+.contact-value {
+    font-size: 14px;
+    color: #4b4f56;
+    word-break: break-all; /* ป้องกันข้อความยาวเกินล้นกรอบ */
 }
