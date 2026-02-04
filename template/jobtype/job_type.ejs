@@ -113,27 +113,27 @@
 
                     <!-- Sidebar -->
                     <aside class="sidebar">
-                        <% const currentType=(typeof jobtype !=='undefined' && jobtype) ? jobtype : 'all' ; %>
+                        <% const currentType=(typeof jobtype !== "undefined" && jobtype) ? jobtype : 'all' ; %>
                             <form action="/home/filter/<%=currentType%>/budget" method="get">
                                 <h3>ตัวคัดกรองราคา</h3>
                                 <input name='budget' type="text" placeholder="งบประมาณที่คุณมีอยู่"
-                                    value="<%=typeof budget !==" undefined"?budget : "" %>">
+                                    value="<%=typeof budget !=="undefined"?budget : "" %>">
                                 <h3>เรียงตาม</h3>
                                 <div class="price-tabs">
 
-                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/review' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>
                                             /review">คะแนนรีวิว</button>
-                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/count' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>
                                             /count">จำนวนงานที่รับ</button>
-                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/highlow' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>/highlow">ราคา
                                             (ต่ำ-สูง)</button>
-                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/lowhigh' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>/lowhigh">ราคา
                                             (สูง-ต่ำ)</button>
