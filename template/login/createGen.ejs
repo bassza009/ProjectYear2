@@ -18,8 +18,12 @@
             <div class="step active" id="circle1">1</div>
             <div class="line" id="line1"></div>
             <div class="step" id="circle2">2</div>
+            <div class="line" id="line2"></div>
+            <div class="step" id="circle3">3</div>
+            <div class="line" id="line3"></div>
+            <div class="step" id="circle4">4</div>
         </div> 
-        
+        <!---------------------part1-------------------->
         <form action = '/regisGen/api' id="mainForm" method="post" enctype="multipart/form-data">
             <div id="part1" class="set_account"> 
                 <div class="account">
@@ -46,8 +50,57 @@
                 <button type="button" class="next" onclick="goToStep(2)">ดำเนินการต่อ</button>
             
             </div>
-
+            <!---------------------part2-------------------->
             <div id="part2" class="set_profile">
+                <div class="std_form" id = 'std_form' >
+                    <img src="/photo/phayaologo.png" alt="phayaologo" width="150px">
+                    <h3>คุณสมัครในฐานะนิสิตมหาวิทยาลัยพะเยา</h3>
+                    <p>ควรใส่ชื่อจริงของคุณเพราะจะไม่สามารถแก้ไขได้ภายหลัง</p>
+                    <div class="fron_l">
+                        <label>ชื่อจริง(ภาษาอังกฤษ)</label>
+                        <input type="text" placeholder="กรอกชื่อจริงของคุณ" name = 'firstname' id ="firstname" >
+                        <label>นามสกุล(ภาษาอังกฤษ)</label>
+                        <input type="text" placeholder="กรอกนามสกุลของคุณ" name = 'lastname' id="lastname" >
+                        <label>ชื่อที่ใช้แสดงในระบบ</label>
+                        <input type="text" placeholder="กรอก Username ของคุณ" name = 'usernamestd' id = 'usernamestd'>
+                        <%const group = ['คณะเกษตรศาสตร์และทรัพยากรธรรมชาติ','คณะเทคโนโลยีสารสนเทศและการสื่อสาร','คณะนิติศาสตร์','คณะบริหารธุรกิจและนิเทศศาสตร์','คณะพยาบาลศาสตร์','คณะพลังงานและสิ่งแวดล้อม','คณะแพทยศาสตร์','คณะเภสัชศาสตร์','คณะรัฐศาสตร์และสังคมศาสตร์','คณะวิทยาศาสตร์','คณะวิทยาศาสตร์การแพทย์','คณะวิศวกรรมศาสตร์','คณะศิลปศาสตร์','คณะสถาปัตยกรรมศาสตร์และศิลปกรรมศาสตร์','คณะสหเวชศาสตร์','คณะสาธารณสุขศาสตร์','คณะทันตแพทยศาสตร์','วิทยาลัยการศึกษา']%>
+                        <label for="group">คณะของคุณ</label>
+                        <select name="group" id="group">
+                            <%group.forEach((cat)=>{%>
+                                <option value="<%=cat%>"><%=cat%></option>
+                            <%})%>
+                        </select>
+                    </div>
+                </div>
+                <div class = 'gen_form' id = 'gen_form'>  
+                    
+                    <h3>คุณสมัครในฐานะบุคคลทั่วไป</h3>
+                    <p>ชื่อที่ท่านกรอกจะไม่สามารถแก้ไขได้</p>  
+                    <div class="fron_l">    
+                        <label>ชื่อที่ใช้แสดงในระบบน</label>
+                        <input type="text" placeholder="กรอก Username ของคุณ" name = 'usernamegen'  id = 'usernamegen'>
+                    </div>
+                </div>
+                <button type="button" class="next" onclick="goToStep(3)">ดำเนินการต่อ</button>           
+            </div>
+            <!---------------------part3-------------------->
+            <div id="part3" class="set_profile">
+                <h3>กรอกข้อมูลติดต่อ</h3>
+                <p>ที่สามารถติดต่อได้จริง</p>
+                <div class="fron_l">
+                    <label>ID Line</label>
+                    <input type="text" placeholder="ID Line" name = "line">
+                    <label>Instagram</label>
+                    <input type="text" placeholder="Instagram" name = "ig">
+                    <label>Facebook</label>
+                    <input type="text" placeholder="Facebook" name = "facebook">
+                    <label>URL(ถ้ามี)</label>
+                    <input type="text" placeholder="URL" name = "url">
+                </div>
+                <button type="button" class="next" onclick="goToStep(4)">ดำเนินการต่อ</button>           
+            </div>
+            <!---------------------part4-------------------->
+            <div id="part4" class="set_profile">
                 <h3>เลือกโปรไฟล์ของคุณ</h3>
                 <p>ควรใช้ภาพถ่ายตัวจริงของคุณเห็นใบหน้าชัดเจน</p>
                 
@@ -57,15 +110,14 @@
                             <small>คลิกเพื่อเลือกรูป</small>
                         </div>
                     </label>
-                    <input name = "file_input" id="file-input" type="file" accept="image/*" onchange="previewImage(event)" required>
+                    <input name = "file_input" id="file-input" type="file" accept="image/*" onchange="previewImage(event)"required>
                 </div>
 
-                <div class="fron_l">
-                    <label>ชื่อที่ใช้แสดงในระบบ</label>
-                    <input type="text" placeholder="กรอกชื่อของคุณ" name = 'username' required>
-                </div>
+                
                 <button type="submit" id="submitBtn" class="submit">สร้างบัญชี</button>            
             </div>
+            
+            
         </form> 
     </div>
 

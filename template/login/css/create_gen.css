@@ -146,3 +146,43 @@ button.next:hover, button.submit:hover {
     width: 100%;
     margin-bottom: 5px;
 }
+#group {
+    width: 100%;
+    padding: 12px 15px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    
+}
+   
+/* เอฟเฟกต์ตอนเอาเมาส์ไปวาง (Hover) */
+#group:hover {
+    border-color: #a55eea; /* สีม่วงอ่อน */
+    box-shadow: 0 4px 10px rgba(165, 94, 234, 0.1);
+}
+
+/* เอฟเฟกต์ตอนกดเลือก (Focus) */
+#group:focus {
+    border-color: #8854d0; /* สีม่วงเข้ม */
+    box-shadow: 0 0 0 4px rgba(136, 84, 208, 0.15); /* เงาสีม่วงจางๆ */
+}
+
+/* จัดการตัวเลือก (Option) */
+#group option {
+    font-family: 'Kanit', sans-serif;
+    padding: 10px;
+    color: #333;
+    background-color: #fff;
+}
+
+/* (ถ้าทำได้) จัดการสีตัวเลือกเวลากดเลือก (ขึ้นอยู่กับ Browser) */
+#group option:checked {
+    background-color: #8854d0;
+    color: white;
+}
