@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,10 @@
     <link rel="stylesheet" href="/../profile/css/profile_gen.css">
     <link rel="stylesheet" href="/../profile/css/Template_HF.css">
 </head>
+
 <body>
     <div class="content-wrapper">
-        <header>        
+        <header>
             <a href="/" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
             </a>
@@ -18,10 +20,12 @@
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <% if(userdata.profile_image){ %>
-                                <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>" >
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
-                            <% }%>
+                                <img src="/imageForTest/<%= userdata.profile_image %>"
+                                    alt="<%= userdata.profile_image%>">
+                                <% } else{%>
+                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                        alt="โปรไฟล์">
+                                    <% }%>
                         </div>
                         <span>Profile</span>
                     </button>
@@ -30,47 +34,57 @@
                 <div class="data_box" id="myDropdown">
                     <div class="user_infor">
                         <% if(userdata.profile_image){ %>
-                            <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>" >
-                        <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
-                        <% }%>
-                        <div class="user_name">
-                            <h1><%=userdata.username%></h1>
-                            <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
-                        </div>
+                            <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์">
+                                <% }%>
+                                    <div class="user_name">
+                                        <h1>
+                                            <%=userdata.username%>
+                                        </h1>
+                                        <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
+                                    </div>
                     </div>
-                    
+
                     <div class="button_VO">
                         <!--<a href="../Profile/profile_gen.html">
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>-->
-                        <a  > 
-                            <form action="/logout" method="post">          
+                        <a>
+                            <form action="/logout" method="post">
                                 <button class="b_logout">ออกจากระบบ</button>
                             </form>
-                        </a> 
+                        </a>
                     </div>
                 </div>
             </div>
         </header>
- 
+
         <main class="container">
             <div class="page-wrapper">
                 <div class="profile-header">
                     <div class="avatar-wrapper">
-                        
+
                         <% if(userdata.profile_image){ %>
-                            <img src= "/imageForTest/<%= userdata.profile_image %>" alt = "<%= userdata.profile_image%>" class="avatar-img">
-                        <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์" class="avatar-img">
-                        <% }%>
-                        
-                        <button class="edit-avatar-btn">✎</button>
+                            <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>"
+                                class="avatar-img" id="profile_">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์" class="avatar-img" id="profile_">
+                                <% }%>
+
+                                    <input type="file" accept="image/*" id="avatar_upload"
+                                        onchange="edit_profile_gen(this)" style="display: none;">
+                                    <button class="edit-avatar-btn"
+                                        onclick="document.getElementById('avatar_upload').click()">✎</button>
                     </div>
-                    
+
                     <div class="header-info">
                         <div class="name-rating-row">
-                            <h1 id="user-name"><%=userdata.username%></h1>
+                            <h1 id="user-name">
+                                <%=userdata.username%>
+                            </h1>
                         </div>
                         <p class="status-badge">
                             <span class="status-dot"></span> สถานะ : <%= userdata.roles %>
@@ -79,7 +93,7 @@
                 </div>
 
                 <div class="profile-content-grid">
-                    
+
                     <aside class="sidebar-info">
                         <div class="info-card">
                             <h3>ข้อมูลความเชื่อถือ</h3>
@@ -87,59 +101,57 @@
                                 <span class="icon">💼</span>
                                 <div class="text">
                                     <p>งานที่ประกาศ</p>
-                                    <strong>24 รายการ</strong>
+                                    <strong>
+                                        <%= jobCount %> รายการ
+                                    </strong>
                                 </div>
                             </div>
 
-                            
+
                         </div>
                     </aside>
 
                     <section class="main-details">
                         <div class="detail-box">
-                            <h2>เกี่ยวกับผู้ว่าจ้าง</h2>
-                            <p>...</p>
-                        </div>
-
-                        <div class="detail-box">
-                            <h2>ประวัติการประกาศงาน</h2> <div class="job-list">
-                                <article class="job-item">
-                                    <div class="job-info">
-                                        <h1 class="job-link">รับสมัครคนช่วยย้ายของเข้าหอพัก</h1>
-                                        <p class="job-description-text">
-                                            <strong>ประเภทงาน:</strong> งานจิปาถะทั่วไป <br>
-                                            ต้องการคนช่วยยกกล่องและจัดของเล็กน้อย ประมาณ 2-3 ชั่วโมง มีรถเข็นให้ครับ
-                                        </p>
-                                        <div class="job-meta-group">
-                                            <p class="job-meta">🕒 ระยะเวลา: <span class="text-flexible">ยืดหยุ่นตามตกลง</span></p>
-                                            <p class="job-meta">📅 โพสต์เมื่อ: 2 วันที่แล้ว</p>
-                                        </div>
-                                    </div>
-                                    <div class="job-status-wrapper">
-                                        <span class="status-tag active">กำลังรับสมัคร</span>
-                                        <a href="../Post/" class="btn-view-profile" style="display: block; margin-top: 10px; font-size: 12px; text-align: center;">รายละเอียด</a>
-                                    </div>
-                                </article>
-
-                                <article class="job-item">
-                                    <div class="job-info">
-                                        <p class="job-title-closed">จ้างวาดรูปการ์ตูนล้อเลียนวันเกิด</p>
-                                        <p class="job-description-text" style="color: #94a3b8;">
-                                            <strong>ประเภทงาน:</strong> ออกแบบ / Graphic
-                                        </p>
-                                        <div class="job-meta-group">
-                                            <p class="job-meta">📅 โพสต์เมื่อ: 1 เดือนที่แล้ว</p>
-                                            <p class="job-meta">✅ จ้างงานสำเร็จ</p>
-                                        </div>
-                                    </div>
-                                    <div class="job-status-wrapper">
-                                        <span class="status-tag closed">ปิดรับสมัคร</span>
-                                    </div>
-                                </article>
+                            <h2>ประวัติการประกาศงาน</h2>
+                            <div class="job-list">
+                                <% if (jobs && jobs.length> 0) { %>
+                                    <% jobs.forEach(job=> { %>
+                                        <article class="job-item">
+                                            <div class="job-info">
+                                                <h1 class="job-link">
+                                                    <%= job.title %>
+                                                </h1>
+                                                <p class="job-description-text">
+                                                    <strong>ประเภทงาน:</strong>
+                                                    <%= job.orderType || 'ไม่ระบุ' %> <br>
+                                                        <%= job.des_cript || 'ไม่มีรายละเอียด' %>
+                                                </p>
+                                                <div class="job-meta-group">
+                                                    <p class="job-meta">💰 งบประมาณ: <%= job.budjet %> บาท</p>
+                                                    <p class="job-meta">📅 โพสต์เมื่อ: <%= new
+                                                            Date(job.post_date).toLocaleDateString('th-TH') %>
+                                                    </p>
+                                                    <% if(job.deadline) { %>
+                                                        <p class="job-meta">⏰ กำหนดส่ง: <%= new
+                                                                Date(job.deadline).toLocaleDateString('th-TH') %>
+                                                        </p>
+                                                        <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="job-status-wrapper">
+                                                <span class="status-tag active">กำลังรับสมัคร</span>
+                                            </div>
+                                        </article>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <p style="text-align: center; color: #94a3b8;">
+                                                    ยังไม่มีประวัติการประกาศงาน</p>
+                                                <% } %>
                             </div>
                         </div>
                     </section>
-                    
+
                 </div>
             </div>
         </main>
@@ -153,7 +165,9 @@
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
-<script src="/../profilejs/post_work.js"></script>
-<script src="/../profilejs/swith_PR.js"></script>
+    <script src="/../profilejs/script.js"></script>
+    <script src="/../profilejs/post_work.js"></script>
+    <script src="/../profilejs/swith_PR.js"></script>
 </body>
+
 </html>

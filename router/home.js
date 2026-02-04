@@ -145,7 +145,7 @@ router.get("/home", (req, res) => {
 
                     // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
                     res.render("home/homepage", {
-                        userdata: results[0] || {}, 
+                        userdata: results[0] || {},
                         job: resultsjob,
                         jobcount: job_count,
                         order: data
@@ -177,56 +177,57 @@ router.get("/student", (req, res) => {
     }
 })
 
-    router.get("/general",(req,res)=>{
-        const email = req.cookies.email
-        
-        sql = `SELECT * from userdata 
-              where email = ?`
-        if(req.cookies.email){
-            pool.query(sql,[email],(err,results,field)=>{
-                //res.json(results)
-                if(results[0].roles === "student"){
-                    res.redirect("/student")
-                }else{
-                res.render("home/homeGen",{userdata:results[0]})}
-            })
-                
-        }else{
-            console.log(err)
-            res.redirect("login")
-        }
-        
-    })
+router.get("/general", (req, res) => {
+    const email = req.cookies.email
 
-    router.get("/general/regisGen",(req,res)=>{
-        res.render("login/createGen")
-    })
-    router.post("/regisGen/api",upload.single("file_input"),async(req,res)=>{
-        const {email,password,phone,username} = req.body
-        const hash_pass = await bcy.hash(password,10)
-        
-        if(email.endsWith("@up.ac.th")){
-            const token = jwt.sign({email:email},process.env.secret)
-            res.cookie("emailRegis",email,{maxAge: 24*60*60*1000,httpOnly:true})
-            res.cookie("phoneRegis",phone,{maxAge: 24*60*60*1000})
-            res.cookie("usernameRegis",username,{maxAge: 24*60*60*1000})
-            res.cookie("passwordRegis",hash_pass,{maxAge: 24*60*60*1000,httpOnly:true})
-            res.cookie("file_inputRegis",req.file.filename,{maxAge: 24*60*60*1000,httpOnly:true})
-            
-            res.cookie("token",token,{maxAge: 24*60*60*1000,httpOnly:true})
-            return res.redirect("/student/regisStu")
-        }
-        sql =`insert into userdata (email,pass_word,userPhoneNumber,profile_image,username,roles)
+    sql = `SELECT * from userdata 
+              where email = ?`
+    if (req.cookies.email) {
+        pool.query(sql, [email], (err, results, field) => {
+            //res.json(results)
+            if (results[0].roles === "student") {
+                res.redirect("/student")
+            } else {
+                res.render("home/homeGen", { userdata: results[0] })
+            }
+        })
+
+    } else {
+        console.log(err)
+        res.redirect("login")
+    }
+
+})
+
+router.get("/general/regisGen", (req, res) => {
+    res.render("login/createGen")
+})
+router.post("/regisGen/api", upload.single("file_input"), async (req, res) => {
+    const { email, password, phone, username } = req.body
+    const hash_pass = await bcy.hash(password, 10)
+
+    if (email.endsWith("@up.ac.th")) {
+        const token = jwt.sign({ email: email }, process.env.secret)
+        res.cookie("emailRegis", email, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+        res.cookie("phoneRegis", phone, { maxAge: 24 * 60 * 60 * 1000 })
+        res.cookie("usernameRegis", username, { maxAge: 24 * 60 * 60 * 1000 })
+        res.cookie("passwordRegis", hash_pass, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+        res.cookie("file_inputRegis", req.file.filename, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+
+        res.cookie("token", token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true })
+        return res.redirect("/student/regisStu")
+    }
+    sql = `insert into userdata (email,pass_word,userPhoneNumber,profile_image,username,roles)
                 values(?,?,?,?,?,"general")`
-        sql2 =`insert into userdata (email,pass_word,userPhoneNumber,username,roles)
+    sql2 = `insert into userdata (email,pass_word,userPhoneNumber,username,roles)
                 values(?,?,?,?,?,"general")`
-        //const hash_pass = await bcy.hash(password,10)
-        if(req.file){
-             const picture_file = req.file.filename
-            pool.query(sql,[email,hash_pass,phone,picture_file,username],(err,results,fields)=>{
-           
-            if(err){
-                if(err.errno==1062){
+    //const hash_pass = await bcy.hash(password,10)
+    if (req.file) {
+        const picture_file = req.file.filename
+        pool.query(sql, [email, hash_pass, phone, picture_file, username], (err, results, fields) => {
+
+            if (err) {
+                if (err.errno == 1062) {
                     console.log(err)
                     return res.redirect("/general/regisGen?error=104")//This email already exist    
                 }
@@ -490,50 +491,72 @@ router.post("/loginSTD/api", (req, res) => {
         }
     })
 })
-router.get("/home/profilestudent/:id",(req,res)=>{
-        const id = req.params.id
-        const {email} = req.cookies
-        sql = `SELECT * from userdata 
+router.get("/home/profilestudent/:id", (req, res) => {
+    const id = req.params.id
+    const { email } = req.cookies
+    sql = `SELECT * from userdata 
                 left join studentdata 
                 on studentdata.email = userdata.email 
                 where userdata.email = ?`
-        sql2 =`SELECT * from userdata 
+    sql2 = `SELECT * from userdata 
                 left join studentdata 
                 on studentdata.email = userdata.email 
                 left join user_job
                 on user_job.ID = userdata.ID 
                 where userdata.id = ?`
-        
-        if(!email){
-            return res.redirect("/login?error=110")//login first
-        }
-        pool.query(sql,[email],(err,results,fields)=>{
-            if(err){
-                console.log(err)
-                
-            }pool.query(sql2,[id],(err,datas)=>{
-                if(err){
-                    console.log(err)
-                }
-                res.render("profile/profile",{
-                            userdata:results[0],
-                            post:datas[0]
-                        })
-            })
-                //res.json(results)
-                    
-        })     
-    })
 
-router.get("/home/profilegeneral", (req, res) => {
-    const { email } = req.cookies
-    sql = `SELECT * from userdata where email = ?`
     if (!email) {
         return res.redirect("/login?error=110")//login first
     }
     pool.query(sql, [email], (err, results, fields) => {
-        //res.json(results[0])
-        res.render("profile/profilegen", { userdata: results[0] })
+        if (err) {
+            console.log(err)
+
+        } pool.query(sql2, [id], (err, datas) => {
+            if (err) {
+                console.log(err)
+            }
+            res.render("profile/profile", {
+                userdata: results[0],
+                post: datas[0]
+            })
+        })
+        //res.json(results)
+
+    })
+})
+
+router.get("/home/profilegeneral", (req, res) => {
+    const { email } = req.cookies
+
+    const sql1 = `SELECT * from userdata where email = ?`
+    const sql2 = `SELECT * FROM general_orders WHERE general_id = ? ORDER BY post_date DESC`
+
+    if (!email) {
+        return res.redirect("/login?error=110")//login first
+    }
+
+    pool.query(sql1, [email], (err, results, fields) => {
+        if (err) {
+            console.error(err)
+            return res.redirect("/login")
+        }
+
+        const userId = results[0].ID
+
+        // Fetch job postings for this user
+        pool.query(sql2, [userId], (err, jobs) => {
+            if (err) {
+                console.error("Error fetching jobs:", err)
+                jobs = []
+            }
+
+            res.render("profile/profilegen", {
+                userdata: results[0],
+                jobs: jobs || [],
+                jobCount: jobs ? jobs.length : 0
+            })
+        })
     })
 })
 router.get("/student/post_skill", upload.single("file_input"), (req, res) => {
@@ -689,8 +712,24 @@ router.post("/student/changeAvatar", upload.single("file_input"), (req, res) => 
         res.json({ success: "true", message: "Change avatar complete" })
     })
 })
-router.get("/home/filter/:job_type",(req,res)=>{
-    const {email} = req.cookies
+
+router.post("/general/changeAvatar", upload.single("file_input"), (req, res) => {
+    const { email } = req.cookies
+    const filename = req.file.filename
+    const sql = `update userdata
+            set profile_image = ?
+            where email = ?`
+    pool.query(sql, [filename, email], (err, results) => {
+        if (err) {
+            console.log(err)
+            return res.json({ success: false, message: "failed to upload avatar" })
+        }
+        res.json({ success: true, message: "Change avatar complete" })
+    })
+})
+
+router.get("/home/filter/:job_type", (req, res) => {
+    const { email } = req.cookies
     const jobType = req.params.job_type
 
     sql = `Select * from user_job
@@ -706,32 +745,32 @@ router.get("/home/filter/:job_type",(req,res)=>{
             left join studentdata
             on studentdata.email = userdata.email
             where userdata.email = ?`
-    if(!email){
+    if (!email) {
         return res.redirect("/home?error=106")//login first
     }
-    pool.query(sql2,[email],(err,results)=>{
-        if(err){
+    pool.query(sql2, [email], (err, results) => {
+        if (err) {
             console.log(err)
             res.redirect("/home?error=105")//wrong email
-        }pool.query(sql,[jobType],(err,data)=>{
-            if(err){
+        } pool.query(sql, [jobType], (err, data) => {
+            if (err) {
                 console.log(err)
                 res.redirect("/home?error=106")//input error
             }
             //res.json(data)
-            res.render("jobtype/job_type",{
-                userdata:results[0],
-                post:data,
-                jobtype:jobType
+            res.render("jobtype/job_type", {
+                userdata: results[0],
+                post: data,
+                jobtype: jobType
             })
         })
     })
 })
-router.get("/home/filter/:job_type/budget",(req,res)=>{
-    const {email} = req.cookies
+router.get("/home/filter/:job_type/budget", (req, res) => {
+    const { email } = req.cookies
     const jobType = req.params.job_type
     const budget = req.query.budget
-    if(budget==""){
+    if (budget == "") {
         return res.redirect(`/home/filter/${jobType}`)
     }
     sql = `Select * from user_job
@@ -741,43 +780,43 @@ router.get("/home/filter/:job_type/budget",(req,res)=>{
             on studentdata.email = userdata.email
             where user_job.job_type = ? and user_job.budjet < ?
             `
-            
+
     sql2 = `Select * from user_job
             right join userdata
             on userdata.ID = user_job.ID
             left join studentdata
             on studentdata.email = userdata.email
             where userdata.email = ?`
-    if(!email){
+    if (!email) {
         return res.redirect("/home?error=106")//login first
     }
-    pool.query(sql2,[email],(err,results)=>{
-        if(err){
+    pool.query(sql2, [email], (err, results) => {
+        if (err) {
             console.log(err)
             res.redirect("/home?error=105")//wrong email
-        }pool.query(sql,[jobType,budget],(err,data)=>{
-            if(err){
+        } pool.query(sql, [jobType, budget], (err, data) => {
+            if (err) {
                 console.log(err)
                 res.redirect("/home?error=106")//input error
             }
             //res.json(data)
-            
-            res.render("jobtype/job_type",{
-                userdata:results[0],
-                post:data,
-                jobtype:jobType,
-                budget:budget,
-                currentUrl:req.originalUrl
+
+            res.render("jobtype/job_type", {
+                userdata: results[0],
+                post: data,
+                jobtype: jobType,
+                budget: budget,
+                currentUrl: req.originalUrl
             })
         })
     })
 })
-router.get("/home/filter/:job_type/:sort",(req,res)=>{
-    const {email} = req.cookies
+router.get("/home/filter/:job_type/:sort", (req, res) => {
+    const { email } = req.cookies
     const jobType = req.params.job_type
     const sort = req.params.sort
     const budget = req.query.budget
-    
+
     sql = `Select * from user_job
             left join userdata
             on userdata.ID = user_job.ID
@@ -792,34 +831,34 @@ router.get("/home/filter/:job_type/:sort",(req,res)=>{
             on studentdata.email = userdata.email
             where userdata.email = ?`
     let store = [email]
-    if(budget){
+    if (budget) {
         sql += ` and user_job.budjet < ?`
         store.push(budget)
     }
-    if(sort=="highlow"){
-        sql +=` order by user_job.budjet asc`
-    }else if(sort=="lowhigh"){
-        sql +=` order by user_job.budjet desc`
+    if (sort == "highlow") {
+        sql += ` order by user_job.budjet asc`
+    } else if (sort == "lowhigh") {
+        sql += ` order by user_job.budjet desc`
     }
-    if(!email){
+    if (!email) {
         return res.redirect("/home?error=106")//login first
     }
-    pool.query(sql2,store,(err,results)=>{
-        if(err){
+    pool.query(sql2, store, (err, results) => {
+        if (err) {
             console.log(err)
             res.redirect("/home?error=105")//wrong email
-        }pool.query(sql,[jobType,budget],(err,data)=>{
-            if(err){
+        } pool.query(sql, [jobType, budget], (err, data) => {
+            if (err) {
                 console.log(err)
                 res.redirect("/home?error=106")//input error
             }
             //res.json(data)
-            res.render("jobtype/job_type",{
-                userdata:results[0],
-                post:data,
-                jobtype:jobType,
-                budget:budget,
-                currentUrl:req.originalUrl
+            res.render("jobtype/job_type", {
+                userdata: results[0],
+                post: data,
+                jobtype: jobType,
+                budget: budget,
+                currentUrl: req.originalUrl
             })
         })
     })
