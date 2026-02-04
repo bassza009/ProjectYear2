@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SDhire</title>
   <link rel="stylesheet" href="/../jobtype/css/typestyle.css" >
+  
   <link rel="stylesheet" href="/../jobtype/css/Tem_home_HF.css">
-  <link rel="stylesheet" href="/../jobtype/css/home_logic.css">
+
 </head>
 <body>
 
@@ -74,9 +75,23 @@
         <!-- ===== Category ===== -->
         <div class="category">
           <div class="path" id="categoryPath">
-            ประเภทงาน : <a href="/home/filter/<%=jobtype%>"><%=jobtype%></a> &gt; <a href="/home">ทั้งหมด</a>
+            ประเภทงาน : <a href="/home/filter/<%=jobtype%>"><%=jobtype%></a> 
           </div>
-
+          <div class="category-bar">
+            <button class="filter-btn">คัดกรอง</button>
+            <%const category=['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','สายมู']%>
+            <div class="filter-panel" id="filterPanel">
+                <div class="category-scroll">
+                    
+                    <%category.forEach((type)=>{%>
+                        <a href="/home/filter/<%=type%>">
+                            <button class="tab <%=jobtype === type ? "active":""%>"data-category="all"><%=type%></button>
+                        </a>    
+                    <%})%>
+                </div>
+            </div>
+        </div>
+    </div>
         
 
         <!-- ===== Content ===== -->
@@ -84,15 +99,23 @@
 
           <!-- Sidebar -->
           <aside class="sidebar">
-            <h3>ตัวคัดกรองราคา</h3>
-            <input type="text" placeholder="งบประมาณที่คุณมีอยู่" />
-            <h3>เรียงตาม</h3>
-            <div class="price-tabs">
-                <button class="tab price">คะแนนรีวิว</button>
-                <button class="tab price">จำนวนงานที่รับ</button>
-                <button class="tab price">ราคา (ต่ำ-สูง)</button>
-                <button class="tab price">ราคา (สูง-ต่ำ)</button>
-            </div>
+            <% 
+                const currentType = (typeof jobtype !== 'undefined' && jobtype) ? jobtype : 'all'; 
+                
+            %>
+            <form action="/home/filter/<%=currentType%>/budget" method="get">
+                <h3>ตัวคัดกรองราคา</h3>
+                <input name ='budget' type="text" placeholder="งบประมาณที่คุณมีอยู่" value="<%=typeof budget !=="undefined"?budget : ""%>">
+                <h3>เรียงตาม</h3>
+                <div class="price-tabs">
+                    
+                    <button class="tab price <%=(typeof currentUrl !=="undefined"&& currentUrl.includes('/home/filter/' + currentType + '/review'))?"active":""%>" type="submit" formaction="/home/filter/<%=currentType%>/review">คะแนนรีวิว</button>
+                    <button class="tab price <%=(typeof currentUrl !=="undefined"&& currentUrl.includes('/home/filter/' + currentType + '/count'))?"active":""%>" type="submit" formaction="/home/filter/<%=currentType%>/count">จำนวนงานที่รับ</button>
+                    <button class="tab price <%=(typeof currentUrl !=="undefined"&& currentUrl.includes('/home/filter/' + currentType + '/highlow'))?"active":""%>" type="submit" formaction="/home/filter/<%=currentType%>/highlow">ราคา (ต่ำ-สูง)</button>
+                    <button class="tab price <%=(typeof currentUrl !=="undefined"&& currentUrl.includes('/home/filter/' + currentType + '/lowhigh'))?"active":""%>" type="submit" formaction="/home/filter/<%=currentType%>/lowhigh">ราคา (สูง-ต่ำ)</button>
+                    <button class = "button-price"type="submit" >ค้นหา(ถ้าใส่แค่ราคา)</button>
+                </div>
+            </form>
           </aside>
 
           <!-- Posts -->
@@ -111,10 +134,14 @@
                                     <% }%>
                                         <div class="card-content">
                                             <div class="profile-area">
-
+                                                    <% if(job.profile_image){ %>
+                                                        <img src="/imageForTest/<%= job.profile_image %>"alt="<%= job.profile_image%>"class="avatar">            
+                                                    <% } else{%>
+                                                        <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"alt="โปรไฟล์"class="avatar">
+                                                    <% }%>  
                                                 
-                                                    <div>
-                                                        <font style="font-size: 20px;"><b><%= job.username %></b><br></font>    
+                                                    <div class="name_tag">
+                                                        <font style="font-size: 20px;"><b><%= job.firstname %> <%= job.lastname %></b><br></font>    
                                                             <small><%= job.job_type %> </small>
                                                     </div>                        
                                                 </div>                       
@@ -148,8 +175,8 @@
     </div>
   </main>
   
-  <script src="/../profile_buttom.js"></script>
-  <script src="/../typestyle.js"></script>
+  
+  <script src="/../jobtypejs/typestyle.js"></script>
   <script src="/../homejs/profile_buttom.js"></script>
 </body>
 </html>

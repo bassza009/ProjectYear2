@@ -156,7 +156,7 @@ main {
 }
 .card{
     background: white;
-    border-radius: 13px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: 0.3s;
@@ -183,7 +183,7 @@ main {
 .profile-area {
     display: flex;
     gap: 5px;
-    margin-top: -15px;
+    margin-top: -10px;
     margin-bottom: 10px;
     font-family: 'Sarabun';
 }

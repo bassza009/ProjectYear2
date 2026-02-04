@@ -691,6 +691,7 @@ router.post("/student/changeAvatar", upload.single("file_input"), (req, res) => 
 router.get("/home/filter/:job_type",(req,res)=>{
     const {email} = req.cookies
     const jobType = req.params.job_type
+
     sql = `Select * from user_job
             left join userdata
             on userdata.ID = user_job.ID
@@ -698,7 +699,7 @@ router.get("/home/filter/:job_type",(req,res)=>{
             on studentdata.email = userdata.email
             where job_type = ?`
     sql2 = `Select * from user_job
-            left join userdata
+            right join userdata
             on userdata.ID = user_job.ID
             left join studentdata
             on studentdata.email = userdata.email
@@ -720,6 +721,101 @@ router.get("/home/filter/:job_type",(req,res)=>{
                 userdata:results[0],
                 post:data,
                 jobtype:jobType
+            })
+        })
+    })
+})
+router.get("/home/filter/:job_type/budget",(req,res)=>{
+    const {email} = req.cookies
+    const jobType = req.params.job_type
+    const budget = req.query.budget
+    if(budget==""){
+        return res.redirect(`/home/filter/${jobType}`)
+    }
+    sql = `Select * from user_job
+            left join userdata
+            on userdata.ID = user_job.ID
+            left join studentdata
+            on studentdata.email = userdata.email
+            where user_job.job_type = ? and user_job.budjet < ?`
+            
+    sql2 = `Select * from user_job
+            right join userdata
+            on userdata.ID = user_job.ID
+            left join studentdata
+            on studentdata.email = userdata.email
+            where userdata.email = ?`
+    if(!email){
+        return res.redirect("/home?error=106")//login first
+    }
+    pool.query(sql2,[email],(err,results)=>{
+        if(err){
+            console.log(err)
+            res.redirect("/home?error=105")//wrong email
+        }pool.query(sql,[jobType,budget],(err,data)=>{
+            if(err){
+                console.log(err)
+                res.redirect("/home?error=106")//input error
+            }
+            //res.json(data)
+            
+            res.render("jobtype/job_type",{
+                userdata:results[0],
+                post:data,
+                jobtype:jobType,
+                budget:budget,
+                currentUrl:req.originalUrl
+            })
+        })
+    })
+})
+router.get("/home/filter/:job_type/:sort",(req,res)=>{
+    const {email} = req.cookies
+    const jobType = req.params.job_type
+    const sort = req.params.sort
+    const budget = req.query.budget
+    
+    sql = `Select * from user_job
+            left join userdata
+            on userdata.ID = user_job.ID
+            left join studentdata
+            on studentdata.email = userdata.email
+            where job_type = ? `
+    sql2 = `Select * from user_job
+            right join userdata
+            on userdata.ID = user_job.ID
+            left join studentdata
+            on studentdata.email = userdata.email
+            where userdata.email = ?`
+    let store = [email]
+    if(budget){
+        sql += ` and user_job.budjet < ?`
+        store.push(budget)
+    }
+    if(sort=="highlow"){
+        sql +=` order by user_job.budjet asc`
+    }else if(sort=="lowhigh"){
+        sql +=` order by user_job.budjet desc`
+    }
+    if(!email){
+        return res.redirect("/home?error=106")//login first
+    }
+    pool.query(sql2,store,(err,results)=>{
+        if(err){
+            console.log(err)
+            res.redirect("/home?error=105")//wrong email
+        }pool.query(sql,[jobType,budget],(err,data)=>{
+            if(err){
+                console.log(err)
+                res.redirect("/home?error=106")//input error
+            }
+            //res.json(data)
+            res.render("jobtype/job_type",{
+                userdata:results[0],
+                post:data,
+                jobtype:jobType,
+                budget:budget,
+                currentUrl:req.originalUrl
             })
         })
     })

@@ -102,6 +102,20 @@
   white-space: nowrap;
   transition: all 0.2s ease;
 }
+.button-price{
+  background: #eeeded;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 100px;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.button-price:hover{
+  background: #c6c6c6;
+}
 
 .tab.active {
   background: #9b59b6;
@@ -168,22 +182,12 @@
   box-shadow: 0 5px 12px rgba(0,0,0,0.08);
 }
 
-.card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
 
 .card-body {
   padding: 12px;
 }
 
-.badge {
-  font-size: 12px;
-  background: #eee;
-  padding: 3px 8px;
-  border-radius: 10px;
-}
+
 
 .price {
   color: #2ca24c;

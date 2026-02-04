@@ -1,3 +1,4 @@
+//const url = require("url")
 document.addEventListener("DOMContentLoaded", () => {
 
   const categoryPath = document.getElementById("categoryPath");
@@ -10,15 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
   function setActiveCategory(category, label) {
 
     // active tab
-    categoryTabs.forEach(t => t.classList.remove("active"));
-    categoryTabs.forEach(t => {
-      if (t.dataset.category === category) {
-        t.classList.add("active");
-      }
-    });
+    // categoryTabs.forEach(t => t.classList.remove("active"));
+    // categoryTabs.forEach(t => {
+    //   if (t.dataset.category === category) {
+    //     t.classList.add("active");
+    //   }
+    // });
+    // const path =window.location.pathname
+    // const segment = path.split("/")
+    // const jobType = segment.pop()
 
+    // const 
     // path ด้านบน
-    categoryPath.innerHTML = `ประเภทงาน : ติวเตอร์ &gt; ${label}`;
+    //categoryPath.innerHTML = `ประเภทงาน : ติวเตอร์ &gt; ${label}`;
 
     // (อนาคต) ใส่ logic กรอง card ได้ตรงนี้
     // filterCards(category);

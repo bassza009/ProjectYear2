@@ -272,32 +272,23 @@
                             <a href="/home/viewStdPost/<%= job.job_id %>" class="card-link">
                                 <div class="card">
                                     <% if(job.service_image){ %>
-                                        <img src="/imageForTest/<%= job.service_image %>" alt="<%= job.service_image%>"
-                                            class="card-img">
-                                        <% } else{%>
-                                            <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
-                                                alt="โปรไฟล์" class="card-img">
-                                            <% }%>
-                                                <div class="card-content">
-                                                    <div class="profile-area">
+                                        <img src="/imageForTest/<%= job.service_image %>" alt="<%= job.service_image%>"class="card-img">       
+                                    <% }else{%>
+                                        <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"alt="โปรไฟล์" class="card-img">     
+                                    <% }%>
+                                        <div class="card-content">
+                                            <div class="profile-area">
 
-                                                        <% if(job.profile_image){ %>
-                                                            <img src="/imageForTest/<%= job.profile_image %>"
-                                                                alt="<%= userdata.profile_image%>" class="avatar">
-                                                            <% } else{%>
-                                                                <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
-                                                                    alt="โปรไฟล์" class="avatar">
-                                                                <% }%>
-
-                                                                    <div>
-                                                                        <font style="font-size: 20px;"><b>
-                                                                                <%= job.username %>
-                                                                            </b><br></font>
-                                                                        <small>
-                                                                            <%= job.job_type %>
-                                                                        </small>
-                                                                    </div>
-                                                    </div>
+                                                <% if(job.profile_image){ %>
+                                                    <img src="/imageForTest/<%= job.profile_image %>"alt="<%= userdata.profile_image%>" class="avatar">                                                               
+                                                <% } else{%>
+                                                    <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"alt="โปรไฟล์" class="avatar"> 
+                                                <% }%>
+                                                    <div>
+                                                        <font style="font-size: 20px;"><b><%= job.firstname %> <%= job.lastname %></b><br></font>    
+                                                            <small><%= job.job_type %> </small>
+                                                    </div>                        
+                                                </div>                       
                                                     <div class="title">
                                                         <%= job.title %>
                                                     </div>
@@ -311,12 +302,12 @@
                                                         </b>
                                                     </div>
                                                 </div>
-                                </div>
-                            </a>
-                            <% }) %>
-                                <% } else { %>
+                                            </div>
+                                        </a>
+                                    <%})%>
+                                <%}else{%>
                                     <p>no job right now</p>
-                                    <% } %>
+                                <%}%>
                 </div>
                 <div class="pagination" id="pagination"></div>
                 <!-- --------------------------------------------------------------------------------------------------------------------- -->

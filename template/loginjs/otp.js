@@ -13,7 +13,7 @@ function sendOTP(){
     .then(data=>{
         alert(data.message)
         if(data.success){
-            document.getElementById("otpSection").style.display="block"
+            document.getElementById("otpSection").style.display="flex"
         }
     })
 }
