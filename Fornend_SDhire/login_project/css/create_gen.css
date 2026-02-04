@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif; 
+}
+
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
+    color: #333;
+    margin: 0;
+    background: url(../photo/background_logo_SDhire.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.main_center {
+    background: white;
+    width: 90%;
+    max-width: 800px;
+    min-height: 750px;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
+    text-align: center;
+}
+
+.back-btn {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover { 
+    color: #9b4dca; 
+}
+
+/* Form Styles */
+.account, .fron_l {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.set_profile {
+    display: none;
+}
+
+/* Image Upload Circle */
+.img_upload_container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.upload-icon {
+    width: 180px;
+    height: 180px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.upload-icon small {
+    text-decoration: underline;
+    color: #5D5D5D;
+}
+
+#file-input { 
+    display: none; 
+}
+
+/* Buttons */
+button.next, button.submit {
+    background: #a855f7;
+    color: white;
+    border: none;
+    padding: 15px 80px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button.next:hover, button.submit:hover { 
+    background: #9333ea; 
+}
