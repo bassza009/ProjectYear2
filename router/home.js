@@ -245,64 +245,6 @@ router.get("/general", (req, res) => {
 
 })
 
-
-router.get("/student/regisStu", (req, res) => {
-    res.render("login/createStu")
-})
-router.post("/registerStd/api", (req, res) => {
-    const email = req.cookies.emailRegis
-    const password = req.cookies.passwordRegis
-    const username = req.cookies.usernameRegis
-    const file_input = req.cookies.file_inputRegis
-    const phone = req.cookies.phoneRegis
-    const stdID = email.split("@")[0]
-    const { description, facebook, instagram, line, url, firstname, lastname, group } = req.body
-    const upperFirstName = (firstname || "").toUpperCase()
-    const upperLastName = (lastname || "").toUpperCase()
-    sqlUserData = `insert into userdata(email,pass_word,username,userPhoneNumber,profile_image,roles)
-                        values(?,?,?,?,?,"student")`
-    sqlStudent = `insert into studentdata(studentID,facebook,instagram,line,URL,des_cription,email,firstname,lastname,Sgroup)
-                        values(?,?,?,?,?,?,?,?,?,?)`
-    if (!email) {
-        res.clearCookie("token")
-        res.clearCookie("emailRegis")
-        res.clearCookie("usernameRegis")
-        res.clearCookie("passwordRegis")
-        res.clearCookie("phoneRegis")
-        res.clearCookie("file_inputRegis")
-        return res.redirect("/login")
-    } else {
-        pool.query(sqlUserData, [email, password, username, phone, file_input], (err, results, field) => {
-            if (err) {
-                if (err.errno == 1062) {
-                    console.log(err)
-                    return res.redirect("/general/regisGen?error=104")//This email already exist 
-                }
-                console.log(err)
-                console.log(err)
-                return res.redirect("/general/regisGen?error=103")//can't register
-
-            } pool.query(sqlStudent, [stdID, facebook, instagram, line, url, description, email, upperFirstName, upperLastName, group], (err, results, fields) => {
-                if (err) {
-                    console.log(err)
-                    return res.redirect("/student/regisStu?error=106")//can't access studentdata
-                }
-                res.redirect("/login")
-            })
-        })
-    }
-})
-
-router.post("/clear-regis-cookies", (req, res) => {
-    res.clearCookie("emailRegis");
-    res.clearCookie("phoneRegis");
-    res.clearCookie("usernameRegis");
-    res.clearCookie("passwordRegis");
-    res.clearCookie("file_inputRegis");
-    res.clearCookie("token");
-    res.status(200).send("Cookies Cleared");
-});
-
 router.get("/login", (req, res) => {
     const email = req.cookies.email
     if (email) {
