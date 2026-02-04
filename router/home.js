@@ -114,7 +114,8 @@ router.get("/home", (req, res) => {
                   WHERE userdata.email = ?`;
     const sql2 = `SELECT * FROM user_job 
                   LEFT JOIN userdata ON user_job.ID = userdata.ID
-                  LEFT JOIN studentdata ON userdata.email = studentdata.email`;
+                  LEFT JOIN studentdata ON userdata.email = studentdata.email
+                  limit 0 ,8`;
     const sql_count = `SELECT DISTINCT job_type, COUNT(job_type) AS num_ber FROM user_job
                        GROUP BY job_type`;
     const sql3 = `SELECT * from general_orders`;
@@ -697,7 +698,8 @@ router.get("/home/filter/:job_type",(req,res)=>{
             on userdata.ID = user_job.ID
             left join studentdata
             on studentdata.email = userdata.email
-            where job_type = ?`
+            where job_type = ?
+            `
     sql2 = `Select * from user_job
             right join userdata
             on userdata.ID = user_job.ID
@@ -737,7 +739,8 @@ router.get("/home/filter/:job_type/budget",(req,res)=>{
             on userdata.ID = user_job.ID
             left join studentdata
             on studentdata.email = userdata.email
-            where user_job.job_type = ? and user_job.budjet < ?`
+            where user_job.job_type = ? and user_job.budjet < ?
+            `
             
     sql2 = `Select * from user_job
             right join userdata
@@ -780,7 +783,8 @@ router.get("/home/filter/:job_type/:sort",(req,res)=>{
             on userdata.ID = user_job.ID
             left join studentdata
             on studentdata.email = userdata.email
-            where job_type = ? `
+            where job_type = ? 
+            `
     sql2 = `Select * from user_job
             right join userdata
             on userdata.ID = user_job.ID

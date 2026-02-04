@@ -46,7 +46,7 @@
                     </div>
                     
                     <div class="button_VO">
-                        <%if(userdata.ID!=post.ID){%>    
+                            
                             <%if(userdata.roles=="student"){%>    
                                 <a href="/home/profilestudent/<%=userdata.ID%>">
                                     <button class="b_view">ดูโปรไฟล์</button>
@@ -56,7 +56,7 @@
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
                             <%}%>
-                        <%}%>
+                       
 
                         <a >
                             <form action="/logout" method="post">           

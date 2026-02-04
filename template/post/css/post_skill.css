@@ -2,11 +2,12 @@
 .container {
     max-width: 1384px;
     height: 1200px;
-    width: 90%;
+    width: 75%;
     margin: 40px auto; 
     background-color: white;
     padding: 40px;
     border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(212, 212, 212, 1);
    
     
 }
