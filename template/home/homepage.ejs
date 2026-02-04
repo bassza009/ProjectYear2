@@ -91,15 +91,10 @@
                     <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
                         พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
                     <% if(userdata.roles=="student" ){ %>
-                        พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
-                    <% if(userdata.roles=="student" ){ %>
                         <a href="/student/post_skill" class="btn-post">โพสต์</a>
-                        <% } else {%>
-                            <a href="/post/create" class="btn-post">โพสต์</a>
-                            <% } %>
                     <% } else {%>
-                            <a href="/post/create" class="btn-post">โพสต์</a>
-                    <% } %>
+                        <a href="/post/create" class="btn-post">โพสต์</a>
+                    <% } %>   
                 </div>
                 <div class="img_right">
                     <img src="../photo/profile.png" alt="profile">
