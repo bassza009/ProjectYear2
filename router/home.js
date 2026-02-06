@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken")
 const cookie = require("cookie-parser")
 const multer = require("multer")
 const mailer = require("nodemailer")
+const { start } = require("repl")
 
 
 router.use(express.json())
@@ -67,88 +68,122 @@ router.post("/verifyOTP", (req, res) => {
 })
 
 router.get("/", (req, res) => {
+    let startpage = req.query.startpage||1
     sql2 = `select * from user_job left join userdata on 
-                userdata.ID = user_job.ID`
+                userdata.ID = user_job.ID `
     sql = `SELECT DISTINCT job_type,COUNT(job_type) AS num_ber FROM user_job
-                GROUP BY job_type `
+                GROUP BY job_type`
+    limitsql =``
+    if(startpage<=1){
+        startpage=1
+    }
+    
     if (req.cookies.email) {
         res.redirect("/home")
-    } else pool.query(sql2, (err, results) => {
+    } else pool.query(sql, (err, resultsjob) => {
+        let jobCount = {}
+        let total_job = 0
         if (err) {
-            console.log(err)
-        } pool.query(sql, (err, resultsjob) => {
+            console.log(err) 
+            //res.json(resultsjob)
+        }
+        if (resultsjob) {
+            resultsjob.forEach((job) => {
+                jobCount[job.job_type] = job.num_ber
+                total_job+=job.num_ber
+            })
+            let totalpage = Math.ceil(total_job/8)
+            
+            if(startpage<1||((startpage>0)&&(startpage>totalpage))){
+                
+                startpage=1
+            }
+            offset = (startpage-1)*8
+            limit =`limit ${offset},8`
+            sql2+=limit    
+        }
+            
+         pool.query(sql2, (err, results) => {
             if (err) {
                 console.log(err)
             }
-            let jobCount = {}
-            //res.json(resultsjob)
-            if (resultsjob) {
-                resultsjob.forEach((job) => {
-                    jobCount[job.job_type] = job.num_ber
-                })
-            }
-            //res.json(jobCount)
+            
+            //res.json({totalpost:total_job})
             res.render("home/homeLogin", {
                 userdata: jobCount,
-                job: results
+                job: results,
+                totalpost:total_job,
+                currentPage:startpage
             })
         })
         //res.json(results)
-
     })
-
-
-
-
 })
 
 router.get("/home", (req, res) => {
     const email = req.cookies.email;
-
+    let startpage = req.query.startpage||1
+    if(startpage<=1){
+        startpage=1
+    }
     if (!email) {
         return res.redirect("/login");
     }
 
-    const sql1 = `SELECT * from userdata 
+    sql1 = `SELECT * from userdata 
                   LEFT JOIN studentdata ON studentdata.email = userdata.email
                   WHERE userdata.email = ?`;
-    const sql2 = `SELECT * FROM user_job 
+    sql2 = `SELECT * FROM user_job 
                   LEFT JOIN userdata ON user_job.ID = userdata.ID
                   LEFT JOIN studentdata ON userdata.email = studentdata.email
-                  limit 0 ,8`;
-    const sql_count = `SELECT DISTINCT job_type, COUNT(job_type) AS num_ber FROM user_job
+                  `;
+    sql_count = `SELECT DISTINCT job_type, COUNT(job_type) AS num_ber FROM user_job
                        GROUP BY job_type`;
-    const sql3 = `SELECT * from general_orders`;
-
+    sql3 = `SELECT * from general_orders`;
+    
+    let limit=``
     // เริ่ม Query 1
     pool.query(sql1, [email], (err, results) => {
         if (err) { return console.log(err); }
-
+        
         // เริ่ม Query 2
-        pool.query(sql2, (err, resultsjob) => {
+        pool.query(sql3, (err,data) => {
             if (err) { return console.log(err); }
 
             // เริ่ม Query 3 (Count)
             pool.query(sql_count, (err, counts) => {
                 if (err) { return console.log(err); }
-
+                
                 let job_count = {};
+                let total_job = 0 
                 if (counts) {
                     counts.forEach((jobs) => {
                         job_count[jobs.job_type] = jobs.num_ber;
+                        total_job += jobs.num_ber
+                        
                     });
                 }
-
+                totalpage = Math.ceil(total_job/8)
+                if(startpage==""||startpage<1||startpage>totalpage){
+                    limit = `limit 0,8`
+                    startpage=1
+                }else{
+                    limit = `limit ${startpage*8-8},8` 
+                }
+        
+        sql2+=limit
                 // เริ่ม Query 4
-                pool.query(sql3, (err, data) => {
+                pool.query(sql2, (err, resultsjob) => {
                     if (err) { return console.log(err); }
-
+                    //res.json(total_job)
                     // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
                     res.render("home/homepage", {
                         userdata: results[0] || {},
                         job: resultsjob,
                         jobcount: job_count,
-                        order: data
+                        order: data,
+                        totalpost:total_job,
+                        currentPage:startpage
                     });
                 });
             });
@@ -559,37 +594,73 @@ router.post("/general/changeAvatar", upload.single("file_input"), (req, res) => 
 router.get("/home/filter/:job_type", (req, res) => {
     const { email } = req.cookies
     const jobType = req.params.job_type
+    
+    // ใช้ชื่อเดิม: startpage
+    let startpage = parseInt(req.query.startpage) || 1
+    if (startpage < 1) startpage = 1
 
-    sql = `Select * from user_job
-            left join userdata
-            on userdata.ID = user_job.ID
-            left join studentdata
-            on studentdata.email = userdata.email
-            where job_type = ?
-            `
-    sql2 = `Select * from user_job
-            right join userdata
-            on userdata.ID = user_job.ID
-            left join studentdata
-            on studentdata.email = userdata.email
-            where userdata.email = ?`
+    // ใช้ชื่อเดิม: sql2 (ดึงข้อมูล User)
+    let sql2 = `SELECT * FROM user_job
+                RIGHT JOIN userdata ON userdata.ID = user_job.ID
+                LEFT JOIN studentdata ON studentdata.email = userdata.email
+                WHERE userdata.email = ?`
+
+    // ตัวแปรใหม่: sqlCount (ต้องเพิ่มเพื่อใช้นับจำนวนงานทั้งหมด)
+    let sqlCount = `SELECT COUNT(*) AS total FROM user_job WHERE job_type = ?`
+
+    // ใช้ชื่อเดิม: sql (ดึงข้อมูลงาน Job)
+    let sql = `SELECT * FROM user_job
+               LEFT JOIN userdata ON userdata.ID = user_job.ID
+               LEFT JOIN studentdata ON studentdata.email = userdata.email
+               WHERE job_type = ?`
+
     if (!email) {
-        return res.redirect("/home?error=106")//login first
+        return res.redirect("/home?error=106")
     }
+
+    // เริ่ม Query 1: sql2 (User) -> เก็บผลใน results
     pool.query(sql2, [email], (err, results) => {
         if (err) {
             console.log(err)
-            res.redirect("/home?error=105")//wrong email
-        } pool.query(sql, [jobType], (err, data) => {
+            return res.redirect("/home?error=105")
+        }
+
+        // เริ่ม Query 2: sqlCount (นับจำนวน) -> เก็บผลใน countResult
+        pool.query(sqlCount, [jobType], (err, countResult) => {
             if (err) {
                 console.log(err)
-                res.redirect("/home?error=106")//input error
+                return res.redirect("/home?error=106")
             }
-            //res.json(data)
-            res.render("jobtype/job_type", {
-                userdata: results[0],
-                post: data,
-                jobtype: jobType
+
+            // คำนวณ Pagination
+            const totalpost = countResult[0].total
+            const totalpage = Math.ceil(totalpost / 8)
+
+            if (startpage > totalpage && totalpage > 0) {
+                startpage = 1
+            }
+
+            const offset = (startpage - 1) * 8
+            
+            // เติม Limit ใส่ sql ตัวเดิม
+            sql += ` LIMIT ${offset}, 8`
+
+            // เริ่ม Query 3: sql (Job) -> เก็บผลใน data
+            pool.query(sql, [jobType], (err, data) => {
+                if (err) {
+                    console.log(err)
+                    return res.redirect("/home?error=106")
+                }
+
+                res.render("jobtype/job_type", {
+                    userdata: results[0], // ใช้ results ตัวเดิม
+                    post: data,           // ใช้ data ตัวเดิม
+                    jobtype: jobType,
+                    totalpost: totalpost, // ส่งค่าจำนวนงานทั้งหมดไป
+                    currentPage: startpage, // ส่งหน้าปัจจุบันไป
+                    paginationUrl: `/home/filter/${jobType}`, 
+                    budget: null
+                })
             })
         })
     })
@@ -598,43 +669,87 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
     const { email } = req.cookies
     const jobType = req.params.job_type
     const budget = req.query.budget
+    
+    // 1. แปลง startpage เป็นตัวเลข
+    let startpage = parseInt(req.query.startpage) || 1
+    if (startpage < 1) startpage = 1
+
     if (budget == "") {
         return res.redirect(`/home/filter/${jobType}`)
     }
-    sql = `Select * from user_job
-            left join userdata
-            on userdata.ID = user_job.ID
-            left join studentdata
-            on studentdata.email = userdata.email
-            where user_job.job_type = ? and user_job.budjet < ?
-            `
 
-    sql2 = `Select * from user_job
-            right join userdata
-            on userdata.ID = user_job.ID
-            left join studentdata
-            on studentdata.email = userdata.email
-            where userdata.email = ?`
+    // 2. Query เดิม: ดึงข้อมูล User (ใช้ sql2)
+    let sql2 = `Select * from user_job
+                right join userdata
+                on userdata.ID = user_job.ID
+                left join studentdata
+                on studentdata.email = userdata.email
+                where userdata.email = ?`
+
+    // 3. Query ใหม่: นับจำนวนงานทั้งหมดตามเงื่อนไข (Job Type และ Budget)
+    let sqlCount = `SELECT COUNT(*) AS total FROM user_job 
+                    WHERE job_type = ? AND budjet < ?`
+
+    // 4. Query เดิม: ดึงข้อมูลงาน (ใช้ sql)
+    let sql = `Select * from user_job
+               left join userdata
+               on userdata.ID = user_job.ID
+               left join studentdata
+               on studentdata.email = userdata.email
+               where user_job.job_type = ? and user_job.budjet < ?
+               `
+
     if (!email) {
         return res.redirect("/home?error=106")//login first
     }
+
+    // เริ่ม Query 1: sql2 (User Data) -> เก็บผลใน results
     pool.query(sql2, [email], (err, results) => {
         if (err) {
             console.log(err)
-            res.redirect("/home?error=105")//wrong email
-        } pool.query(sql, [jobType, budget], (err, data) => {
+            return res.redirect("/home?error=105")//wrong email
+        }
+
+        // เริ่ม Query 2: sqlCount (นับจำนวน) -> เก็บผลใน countResult
+        pool.query(sqlCount, [jobType, budget], (err, countResult) => {
             if (err) {
                 console.log(err)
-                res.redirect("/home?error=106")//input error
+                return res.redirect("/home?error=106")
             }
-            //res.json(data)
 
-            res.render("jobtype/job_type", {
-                userdata: results[0],
-                post: data,
-                jobtype: jobType,
-                budget: budget,
-                currentUrl: req.originalUrl
+            // คำนวณ Pagination
+            const totalpost = countResult[0].total
+            const totalpage = Math.ceil(totalpost / 8)
+
+            // เช็คว่าหน้าเกินจำนวนที่มีไหม
+            if (startpage > totalpage && totalpage > 0) {
+                startpage = 1
+            }
+
+            const offset = (startpage - 1) * 8
+            
+            // เติม Limit ใส่ sql ตัวเดิม
+            sql += ` LIMIT ${offset}, 8`
+
+            // เริ่ม Query 3: sql (Job Data) -> เก็บผลใน data
+            pool.query(sql, [jobType, budget], (err, data) => {
+                if (err) {
+                    console.log(err)
+                    return res.redirect("/home?error=106")//input error
+                }
+
+                res.render("jobtype/job_type", {
+                    paginationUrl: `/home/filter/${jobType}`, // ✅ เพิ่มบรรทัดนี้
+                    budget: null, // ส่ง null ไปกัน EJS error
+                    userdata: results[0],   // ใช้ results ตัวเดิม
+                    post: data,             // ใช้ data ตัวเดิม
+                    jobtype: jobType,
+                    budget: budget,
+                    totalpost: totalpost,   // ส่งค่าจำนวนงานทั้งหมดไป
+                    currentPage: startpage, // ส่งหน้าปัจจุบันไป
+                    currentUrl: req.originalUrl,
+                    paginationUrl: `/home/filter/${jobType}/budget`
+                })
             })
         })
     })
@@ -644,49 +759,81 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
     const jobType = req.params.job_type
     const sort = req.params.sort
     const budget = req.query.budget
+    
+    let startpage = parseInt(req.query.startpage) || 1
+    if (startpage < 1) startpage = 1
 
-    sql = `Select * from user_job
-            left join userdata
-            on userdata.ID = user_job.ID
-            left join studentdata
-            on studentdata.email = userdata.email
-            where job_type = ? 
-            `
-    sql2 = `Select * from user_job
-            right join userdata
-            on userdata.ID = user_job.ID
-            left join studentdata
-            on studentdata.email = userdata.email
-            where userdata.email = ?`
-    let store = [email]
+    let sql2 = `Select * from user_job
+                right join userdata
+                on userdata.ID = user_job.ID
+                left join studentdata
+                on studentdata.email = userdata.email
+                where userdata.email = ?`
+
+    let whereClause = ` where job_type = ? `
+    let jobParams = [jobType]
+
     if (budget) {
-        sql += ` and user_job.budjet < ?`
-        store.push(budget)
+        whereClause += ` and user_job.budjet < ?`
+        jobParams.push(budget)
     }
+
+    let sqlCount = `Select COUNT(*) AS total from user_job ` + whereClause
+
+    let sql = `Select * from user_job
+               left join userdata
+               on userdata.ID = user_job.ID
+               left join studentdata
+               on studentdata.email = userdata.email` + whereClause
+
     if (sort == "highlow") {
         sql += ` order by user_job.budjet asc`
     } else if (sort == "lowhigh") {
         sql += ` order by user_job.budjet desc`
     }
+
     if (!email) {
-        return res.redirect("/home?error=106")//login first
+        return res.redirect("/home?error=106")
     }
-    pool.query(sql2, store, (err, results) => {
+
+    pool.query(sql2, [email], (err, results) => {
         if (err) {
             console.log(err)
-            res.redirect("/home?error=105")//wrong email
-        } pool.query(sql, [jobType, budget], (err, data) => {
+            return res.redirect("/home?error=105")
+        }
+
+        pool.query(sqlCount, jobParams, (err, countResult) => {
             if (err) {
                 console.log(err)
-                res.redirect("/home?error=106")//input error
+                return res.redirect("/home?error=106")
             }
-            //res.json(data)
-            res.render("jobtype/job_type", {
-                userdata: results[0],
-                post: data,
-                jobtype: jobType,
-                budget: budget,
-                currentUrl: req.originalUrl
+
+            const totalpost = countResult[0].total
+            const totalpage = Math.ceil(totalpost / 8)
+
+            if (startpage > totalpage && totalpage > 0) {
+                startpage = 1
+            }
+
+            const offset = (startpage - 1) * 8
+            sql += ` LIMIT ${offset}, 8`
+
+            pool.query(sql, jobParams, (err, data) => {
+                if (err) {
+                    console.log(err)
+                    return res.redirect("/home?error=106")
+                }
+
+                res.render("jobtype/job_type", {
+                    userdata: results[0],
+                    post: data,
+                    jobtype: jobType,
+                    budget: budget,
+                    totalpost: totalpost,
+                    currentPage: startpage,
+                    currentUrl: req.originalUrl,
+                    paginationUrl: `/home/filter/${jobType}/${sort}`
+                })
             })
         })
     })

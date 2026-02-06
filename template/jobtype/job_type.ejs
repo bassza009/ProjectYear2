@@ -161,46 +161,62 @@
                                                         <div class="card-content">
                                                             <div class="profile-area">
                                                                 <% if(job.profile_image){ %>
-                                                                    <img src="/imageForTest/<%= job.profile_image %>"
-                                                                        alt="<%= job.profile_image%>" class="avatar">
-                                                                    <% } else{%>
-                                                                        <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
-                                                                            alt="โปรไฟล์" class="avatar">
-                                                                        <% }%>
-
-                                                                            <div class="name_tag">
-                                                                                <font style="font-size: 20px;"><b>
-                                                                                        <%= job.firstname %>
-                                                                                            <%= job.lastname %>
-                                                                                    </b><br></font>
-                                                                                <small>
-                                                                                    <%= job.job_type %>
-                                                                                </small>
-                                                                            </div>
-                                                            </div>
-                                                            <div class="title">
-                                                                <%= job.title %>
-                                                            </div>
-                                                            <div class="desc">
-                                                                <%= job.des_Cription %>
-                                                            </div>
-                                                            <div class="price">
-                                                                <span>เริ่มต้น</span><br>
-                                                                <b>
-                                                                    <%= job.budjet %> บาท
-                                                                </b>
-                                                            </div>
+                                                                    <img src="/imageForTest/<%= job.profile_image %>"alt="<%= job.profile_image%>" class="avatar">       
+                                                                <% } else{%>
+                                                                    <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"alt="โปรไฟล์" class="avatar">            
+                                                                <% }%>
+                                                        <div class="name_tag">
+                                                            <font style="font-size: 20px;"><b><%= job.firstname %> <%= job.lastname %></b><br></font>     
+                                                            <small><%= job.job_type %></small>               
                                                         </div>
+                                                    </div>
+                                                <div class="title">
+                                                    <%= job.title %>
+                                                </div>
+                                                <div class="desc">
+                                                    <%= job.des_Cription %>
+                                                </div>
+                                            <div class="price">
+                                                    <span>เริ่มต้น</span><br>
+                                                <b>
+                                                    <%= job.budjet %> บาท
+                                                </b>
+                                            </div>
                                         </div>
-                                    </a>
-                                    <%})%>
-                                        <%}else{%>
-                                            <p>no job right now</p>
-                                            <%}%>
-
-
-
+                                    </div>
+                                </a>
+                            <%})%>
+                            <%}else{%>
+                                <p>no job right now</p>
+                            <%}%>
                         </div>
+                        <%const page = Math.ceil(totalpost/8);%>
+                        <%if(post.length){%>
+                            
+                                <div class="pagination" id="pagination">    
+                                    
+                                    
+                                        <%if(currentPage>1){%>
+                                        <a href="/?startpage=<%=currentPage-1%>">   
+                                            <small><</small>
+                                        </a> 
+                                            
+                                    <%}%> 
+
+                                    <%for(i=1;i<=page;i++){%>
+                                        <a class="page-btn <%=(i==currentPage)?'active':""%>" href="<%= paginationUrl %>?startpage=<%=i%><%= (typeof budget != 'undefined' && budget) ? '&budget='+budget : '' %>">
+                                            <%=i%>
+                                        </a>
+                                    <%}%>  
+                                    <%if(currentPage!=page){%>  
+                                        <a href="/?startpage=<%=currentPage+1%>">    
+                                            <small>></small>
+                                        </a>
+                                    <%}%>
+                                    
+                                </div>
+                            
+                        <%}%>
                     </section>
 
                 </div>
