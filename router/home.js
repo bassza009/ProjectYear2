@@ -199,12 +199,13 @@ router.get("/general/regisGen", (req, res) => {
     res.render("login/createGen")
 })
 router.post("/regisGen/api", upload.single("file_input"), async (req, res) => {
-    const {email,password,phone,
+    let {email,password,phone,
         usernamestd,usernamegen,firstname,lastname,
         group,line,ig,facebook,url} = req.body
     const hash_pass = await bcy.hash(password, 10)
     const stdID = email.split("@")[0]
-    
+    firstname = firstname.toUpperCase()
+    lastname = lastname.toUpperCase()
     sql = `insert into userdata (email,pass_word,userPhoneNumber,profile_image,username,roles,line,instagram,facebook,url)` 
     sql2 = `insert into userdata (email,pass_word,userPhoneNumber,username,roles,line,instagram,facebook,url)`
     sql3 = `insert into studentdata (studentID,firstname,lastname,Sgroup,email)value(?,?,?,?,?)`

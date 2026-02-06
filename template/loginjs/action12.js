@@ -5,7 +5,11 @@ function goToStep(stepNumber) {
     varifypass = document.getElementById("varifypass").value
     phone = document.getElementById("phone").value
     otpvarified = document.getElementById("isOTPVarified").value
-    
+    firstname = document.getElementById("firstname").value
+    lastname = document.getElementById("lastname").value
+    usernamestd = document.getElementById("usernamestd").value
+    usernamegen = document.getElementById("usernamegen").value
+    group = document.getElementById("group").value
 
     std_form = document.getElementById("std_form")
     gen_form = document.getElementById("gen_form")
@@ -36,11 +40,7 @@ function goToStep(stepNumber) {
         //document.getElementById('line2').classList.add('active');
     }
     if (stepNumber === 3) {
-        firstname = document.getElementById("firstname").value
-        lastname = document.getElementById("lastname").value
-        usernamestd = document.getElementById("usernamestd").value
-        usernamegen = document.getElementById("usernamegen").value
-        group = document.getElementById("group").value
+        
         if(std_form.style.display == "block"){
             if(!engCheck(firstname)){
                 alert("ใส่ชื่อจริงภาษาอังกฤษ")
