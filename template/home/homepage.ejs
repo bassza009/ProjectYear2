@@ -104,9 +104,9 @@
             </div>
 
             <div class="form_input">
-                <form id="searchForm">
+                <form id="searchForm" action="/home/search" method="post">
                     <img src="../icon/search.png">
-                    <input type="search" id="search" placeholder="ค้นหา">
+                    <input type="search" id="search" name = 'search' placeholder="ค้นหา">
                     <button id="reset" type="reset">ล้าง</button>
                     <button id="submit" type="submit">ค้นหา</button>
                 </form>
@@ -148,7 +148,7 @@
                         <div class="cat-info">
                             <span>กราฟิกดีไซน์</span>
                             <small>
-                                <%= jobcount["กราฟิกดีไซน"]||0%> งาน
+                                <%= jobcount["กราฟิกดีไซน์"]||0%> งาน
                             </small>
                         </div>
                     </a>
@@ -245,9 +245,9 @@
                             <img src="../icon/tarot.png">
                         </div>
                         <div class="cat-info">
-                            <span>สายมู</span>
+                            <span>อื่นๆ</span>
                             <small>
-                                <%= jobcount["สายมู"]||0%> งาน
+                                <%= jobcount["อื่นๆ"]||0%> งาน
                             </small>
                         </div>
                     </a>
@@ -363,7 +363,7 @@
                             <tbody>
                                 <% if(order.length>0){ %>
                                     <% order.forEach((orders)=>{%>
-                                        <tr onclick="window.location.href='/Fronend_v1/post_user/post_gen.html?id=${orders.general_id}'"
+                                        <tr onclick="window.location.href='/home/profilegeneral/<%=orders.order_ID%>'"
                                             style="cursor:pointer;">
                                             <td>
                                                 <%=orders.title%>

@@ -177,6 +177,7 @@ router.get("/home", (req, res) => {
                     if (err) { return console.log(err); }
                     //res.json(total_job)
                     // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
+                    //res.json(data)
                     res.render("home/homepage", {
                         userdata: results[0] || {},
                         job: resultsjob,
@@ -190,7 +191,77 @@ router.get("/home", (req, res) => {
         });
     });
 });
+router.get("/home/search", (req, res) => {
+    const email = req.cookies.email;
+    let startpage = req.query.startpage || 1
+    let search = req.query.search
+    if (startpage <= 1) {
+        startpage = 1
+    }
+    if (!email) {
+        return res.redirect("/login");
+    }
 
+    sql1 = `SELECT * from userdata 
+                  LEFT JOIN studentdata ON studentdata.email = userdata.email
+                  WHERE userdata.email = ?`;
+    sql2 = `SELECT * FROM user_job 
+                  LEFT JOIN userdata ON user_job.ID = userdata.ID
+                  LEFT JOIN studentdata ON userdata.email = studentdata.email
+                  `;
+    sql_count = `SELECT DISTINCT job_type, COUNT(job_type) AS num_ber FROM user_job
+                       GROUP BY job_type`;
+    sql3 = `SELECT * from general_orders`;
+
+    let limit = ``
+    // เริ่ม Query 1
+    pool.query(sql1, [email], (err, results) => {
+        if (err) { return console.log(err); }
+
+        // เริ่ม Query 2
+        pool.query(sql3, (err, data) => {
+            if (err) { return console.log(err); }
+
+            // เริ่ม Query 3 (Count)
+            pool.query(sql_count, (err, counts) => {
+                if (err) { return console.log(err); }
+
+                let job_count = {};
+                let total_job = 0
+                if (counts) {
+                    counts.forEach((jobs) => {
+                        job_count[jobs.job_type] = jobs.num_ber;
+                        total_job += jobs.num_ber
+
+                    });
+                }
+                totalpage = Math.ceil(total_job / 8)
+                if (startpage == "" || startpage < 1 || startpage > totalpage) {
+                    limit = `limit 0,8`
+                    startpage = 1
+                } else {
+                    limit = `limit ${startpage * 8 - 8},8`
+                }
+
+                sql2 += limit
+                // เริ่ม Query 4
+                pool.query(sql2, (err, resultsjob) => {
+                    if (err) { return console.log(err); }
+                    //res.json(total_job)
+                    // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
+                    res.render("home/homepage", {
+                        userdata: results[0] || {},
+                        job: resultsjob,
+                        jobcount: job_count,
+                        order: data,
+                        totalpost: total_job,
+                        currentPage: startpage
+                    });
+                });
+            });
+        });
+    });
+});
 
 
 
@@ -390,18 +461,19 @@ router.get("/home/profilestudent/:id", (req, res) => {
     })
 })
 
-router.get("/home/profilegeneral", (req, res) => {
+router.get("/home/profilegeneral/:id", (req, res) => {
     const { email } = req.cookies
+    const id = req.params.id
 
     const sql1 = `SELECT * from userdata where email = ?`
-    const sql2 = `SELECT * FROM general_orders WHERE general_id = ? ORDER BY post_date DESC`
+    const sql2 = `SELECT * FROM general_orders WHERE order_ID = ? ORDER BY post_date DESC`
 
     if (!email) {
         return res.redirect("/login?error=110")//login first
     }
 
     pool.query(sql1, [email], (err, results, fields) => {
-        if (err) {
+        if (err) {  
             console.error(err)
             return res.redirect("/login")
         }
@@ -409,12 +481,12 @@ router.get("/home/profilegeneral", (req, res) => {
         const userId = results[0].ID
 
         // Fetch job postings for this user
-        pool.query(sql2, [userId], (err, jobs) => {
+        pool.query(sql2, [id], (err, jobs) => {
             if (err) {
                 console.error("Error fetching jobs:", err)
                 jobs = []
             }
-
+            //res.json(jobs)
             res.render("profile/profilegen", {
                 userdata: results[0],
                 jobs: jobs || [],

@@ -66,14 +66,14 @@
                 <div class="profile-header">
                     <div class="avatar-wrapper">
 
-                        <% if(userdata.profile_image){ %>
+                        <% if(userdata.ID==jobs.general_id){ %>
                             <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>"
                                 class="avatar-img" id="profile_">
                             <% } else{%>
                                 <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
                                     alt="โปรไฟล์" class="avatar-img" id="profile_">
                                 <% }%>
-
+                                <%if(userdata.general)%>
                                     <input type="file" accept="image/*" id="avatar_upload"
                                         onchange="edit_profile_gen(this)" style="display: none;">
                                     <button class="edit-avatar-btn"
