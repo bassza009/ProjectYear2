@@ -415,3 +415,71 @@ main {
 .cat-card-icon:hover .icon-box {
     transform: scale(1.1);
 }
+
+/* ปุ่มเข้าดูทั้งหมด (แยกส่วนด้านบน) */
+.view-all-wrapper {
+    display: flex;
+    justify-content: flex-end; /* ชิดขวา */
+    margin: 20px 0;
+}
+
+.btn-all-jobs {
+    background-color: transparent;
+    color: #8557A5;
+    border: 2px solid #8557A5;
+    padding: 10px 25px;
+    border-radius: 30px; /* ทรงมนยาว */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-all-jobs:hover {
+    background-color: #8557A5;
+    color: white;
+    transform: translateY(-2px); /* ลอยขึ้นเล็กน้อย */
+}
+
+/* แถบคัดกรองภายในส่วนตาราง */
+.filter-bar {
+    background: #fdfbff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0; /* มนแค่ขอบบนให้ติดกับตาราง */
+    border: 1px solid #eee;
+    border-bottom: none;
+}
+
+.filter-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    flex-grow: 1; /* ขยายช่องค้นหาให้เต็มพื้นที่ที่เหลือ */
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px; /* มนแค่ฝั่งซ้าย */
+    outline: none;
+}
+
+.btn-search {
+    background-color: #AE73D8;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 8px 8px 0; /* มนแค่ฝั่งขวา */
+    cursor: pointer;
+}
+
+/* ปรับ table-container ให้ต่อจาก filter-bar ได้สนิท */
+.table-container {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: 0;
+}

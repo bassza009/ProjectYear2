@@ -220,7 +220,63 @@ a {
 .withlink ,h4,p{
     color:#000000
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 50px;
+    font-family: 'Kanit', sans-serif;
+}                                               
 
+.page-btn {
+    display: flex;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    justify-content: center;
+    
+    align-items: center;
+    background-color: transparent;
+    color: #9b59b6;             
+    font-size: 14px;
+    
+}
+
+.page-btn:hover {
+    background-color: #e8f0fe;
+}
+a{
+    text-decoration: none;
+}
+.page-btn.active {
+    background-color: #9b59b6;
+    color: #fff;
+    font-weight: 500;
+    
+}
+
+.page-btn.prev,
+.page-btn.next {
+    font-size: 16px;
+    border-radius: 50%;
+}
+
+.page-btn:disabled {
+    color: #ccc;
+    cursor: default;
+}
+
+.page-btn:disabled:hover {
+    background-color: transparent;
+}
+
+.page-dots {
+    padding: 0 6px;
+    color: #777;
+    font-size: 14px;
+}
 /*--------------------------------------------------------------------*/
 
 footer {  
