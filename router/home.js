@@ -68,52 +68,52 @@ router.post("/verifyOTP", (req, res) => {
 })
 
 router.get("/", (req, res) => {
-    let startpage = req.query.startpage||1
+    let startpage = req.query.startpage || 1
     sql2 = `select * from user_job left join userdata on 
                 userdata.ID = user_job.ID `
     sql = `SELECT DISTINCT job_type,COUNT(job_type) AS num_ber FROM user_job
                 GROUP BY job_type`
-    limitsql =``
-    if(startpage<=1){
-        startpage=1
+    limitsql = ``
+    if (startpage <= 1) {
+        startpage = 1
     }
-    
+
     if (req.cookies.email) {
         res.redirect("/home")
     } else pool.query(sql, (err, resultsjob) => {
         let jobCount = {}
         let total_job = 0
         if (err) {
-            console.log(err) 
+            console.log(err)
             //res.json(resultsjob)
         }
         if (resultsjob) {
             resultsjob.forEach((job) => {
                 jobCount[job.job_type] = job.num_ber
-                total_job+=job.num_ber
+                total_job += job.num_ber
             })
-            let totalpage = Math.ceil(total_job/8)
-            
-            if(startpage<1||((startpage>0)&&(startpage>totalpage))){
-                
-                startpage=1
+            let totalpage = Math.ceil(total_job / 8)
+
+            if (startpage < 1 || ((startpage > 0) && (startpage > totalpage))) {
+
+                startpage = 1
             }
-            offset = (startpage-1)*8
-            limit =`limit ${offset},8`
-            sql2+=limit    
+            offset = (startpage - 1) * 8
+            limit = `limit ${offset},8`
+            sql2 += limit
         }
-            
-         pool.query(sql2, (err, results) => {
+
+        pool.query(sql2, (err, results) => {
             if (err) {
                 console.log(err)
             }
-            
+
             //res.json({totalpost:total_job})
             res.render("home/homeLogin", {
                 userdata: jobCount,
                 job: results,
-                totalpost:total_job,
-                currentPage:startpage
+                totalpost: total_job,
+                currentPage: startpage
             })
         })
         //res.json(results)
@@ -122,9 +122,9 @@ router.get("/", (req, res) => {
 
 router.get("/home", (req, res) => {
     const email = req.cookies.email;
-    let startpage = req.query.startpage||1
-    if(startpage<=1){
-        startpage=1
+    let startpage = req.query.startpage || 1
+    if (startpage <= 1) {
+        startpage = 1
     }
     if (!email) {
         return res.redirect("/login");
@@ -140,38 +140,38 @@ router.get("/home", (req, res) => {
     sql_count = `SELECT DISTINCT job_type, COUNT(job_type) AS num_ber FROM user_job
                        GROUP BY job_type`;
     sql3 = `SELECT * from general_orders`;
-    
-    let limit=``
+
+    let limit = ``
     // เริ่ม Query 1
     pool.query(sql1, [email], (err, results) => {
         if (err) { return console.log(err); }
-        
+
         // เริ่ม Query 2
-        pool.query(sql3, (err,data) => {
+        pool.query(sql3, (err, data) => {
             if (err) { return console.log(err); }
 
             // เริ่ม Query 3 (Count)
             pool.query(sql_count, (err, counts) => {
                 if (err) { return console.log(err); }
-                
+
                 let job_count = {};
-                let total_job = 0 
+                let total_job = 0
                 if (counts) {
                     counts.forEach((jobs) => {
                         job_count[jobs.job_type] = jobs.num_ber;
                         total_job += jobs.num_ber
-                        
+
                     });
                 }
-                totalpage = Math.ceil(total_job/8)
-                if(startpage==""||startpage<1||startpage>totalpage){
+                totalpage = Math.ceil(total_job / 8)
+                if (startpage == "" || startpage < 1 || startpage > totalpage) {
                     limit = `limit 0,8`
-                    startpage=1
-                }else{
-                    limit = `limit ${startpage*8-8},8` 
+                    startpage = 1
+                } else {
+                    limit = `limit ${startpage * 8 - 8},8`
                 }
-        
-        sql2+=limit
+
+                sql2 += limit
                 // เริ่ม Query 4
                 pool.query(sql2, (err, resultsjob) => {
                     if (err) { return console.log(err); }
@@ -182,8 +182,8 @@ router.get("/home", (req, res) => {
                         job: resultsjob,
                         jobcount: job_count,
                         order: data,
-                        totalpost:total_job,
-                        currentPage:startpage
+                        totalpost: total_job,
+                        currentPage: startpage
                     });
                 });
             });
@@ -199,43 +199,43 @@ router.get("/general/regisGen", (req, res) => {
     res.render("login/createGen")
 })
 router.post("/regisGen/api", upload.single("file_input"), async (req, res) => {
-    let {email,password,phone,
-        usernamestd,usernamegen,firstname,lastname,
-        group,line,ig,facebook,url} = req.body
+    let { email, password, phone,
+        usernamestd, usernamegen, firstname, lastname,
+        group, line, ig, facebook, url } = req.body
     const hash_pass = await bcy.hash(password, 10)
     const stdID = email.split("@")[0]
     firstname = firstname.toUpperCase()
     lastname = lastname.toUpperCase()
-    sql = `insert into userdata (email,pass_word,userPhoneNumber,profile_image,username,roles,line,instagram,facebook,url)` 
+    sql = `insert into userdata (email,pass_word,userPhoneNumber,profile_image,username,roles,line,instagram,facebook,url)`
     sql2 = `insert into userdata (email,pass_word,userPhoneNumber,username,roles,line,instagram,facebook,url)`
     sql3 = `insert into studentdata (studentID,firstname,lastname,Sgroup,email)value(?,?,?,?,?)`
     sqlstd = `value(?,?,?,?,?,"student",?,?,?,?)`
     sqlgen = `value(?,?,?,?,?,"general",?,?,?,?)`
     //const hash_pass = await bcy.hash(password,10)
-    const file_input=req.file.filename
-    if(email.endsWith("@up.ac.th")){
-        sql+=sqlstd
-        pool.query(sql,[email,hash_pass,phone,file_input,usernamestd,line,ig,facebook,url],(err,results)=>{
-            if(err){
+    const file_input = req.file.filename
+    if (email.endsWith("@up.ac.th")) {
+        sql += sqlstd
+        pool.query(sql, [email, hash_pass, phone, file_input, usernamestd, line, ig, facebook, url], (err, results) => {
+            if (err) {
                 console.log(err)
                 return res.redirect("/general/regisGen?error=103")//can't register
-            }pool.query(sql3,[stdID,firstname,lastname,group,email],(err,student)=>{
-                if(err){
+            } pool.query(sql3, [stdID, firstname, lastname, group, email], (err, student) => {
+                if (err) {
                     console.log(err)
                     return res.redirect("/general/regisGen?error=103")//can't register
-                }res.redirect("/login")
+                } res.redirect("/login")
             })
         })
-    }else{
-        sql+=sqlgen
-        pool.query(sql,[email,hash_pass,phone,file_input,usernamegen,line,ig,facebook,url],(err,result)=>{
-            if(err){
+    } else {
+        sql += sqlgen
+        pool.query(sql, [email, hash_pass, phone, file_input, usernamegen, line, ig, facebook, url], (err, result) => {
+            if (err) {
                 console.log(err)
                 return res.redirect("/general/regisGen?error=103")//can't register
             }
             res.redirect("/login")
         })
-    }  
+    }
 })
 
 router.get("/student", (req, res) => {
@@ -595,7 +595,7 @@ router.post("/general/changeAvatar", upload.single("file_input"), (req, res) => 
 router.get("/home/filter/:job_type", (req, res) => {
     const { email } = req.cookies
     const jobType = req.params.job_type
-    
+
     // ใช้ชื่อเดิม: startpage
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
@@ -642,7 +642,7 @@ router.get("/home/filter/:job_type", (req, res) => {
             }
 
             const offset = (startpage - 1) * 8
-            
+
             // เติม Limit ใส่ sql ตัวเดิม
             sql += ` LIMIT ${offset}, 8`
 
@@ -659,7 +659,7 @@ router.get("/home/filter/:job_type", (req, res) => {
                     jobtype: jobType,
                     totalpost: totalpost, // ส่งค่าจำนวนงานทั้งหมดไป
                     currentPage: startpage, // ส่งหน้าปัจจุบันไป
-                    paginationUrl: `/home/filter/${jobType}`, 
+                    paginationUrl: `/home/filter/${jobType}`,
                     budget: null
                 })
             })
@@ -670,7 +670,7 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
     const { email } = req.cookies
     const jobType = req.params.job_type
     const budget = req.query.budget
-    
+
     // 1. แปลง startpage เป็นตัวเลข
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
@@ -728,7 +728,7 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
             }
 
             const offset = (startpage - 1) * 8
-            
+
             // เติม Limit ใส่ sql ตัวเดิม
             sql += ` LIMIT ${offset}, 8`
 
@@ -760,7 +760,7 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
     const jobType = req.params.job_type
     const sort = req.params.sort
     const budget = req.query.budget
-    
+
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
 
@@ -1007,11 +1007,12 @@ router.get("/api/reviews/:studentId", (req, res) => {
                     sr.review_date,
                     u.username,
                     u.profile_image,
-                    u.firstname,
-                    u.lastname,
+                    sd.firstname,
+                    sd.lastname,
                     u.roles
                 FROM service_reviews sr
                 LEFT JOIN userdata u ON sr.reviewer_id = u.ID
+                LEFT JOIN studentdata sd ON u.email = sd.email
                 WHERE sr.student_id = ?
                 ORDER BY sr.review_date DESC`
 

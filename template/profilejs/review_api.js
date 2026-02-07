@@ -11,9 +11,14 @@ async function loadReviews(filter = 'all', showAll = false) {
     const container = document.getElementById('reviewContainer');
     if (!container) return;
 
-    // Get student ID from URL
-    const pathParts = window.location.pathname.split('/');
-    const studentId = pathParts[pathParts.length - 1];
+    // Get student ID: First try hidden input (most accurate), then fallback to URL
+    const studentInput = document.querySelector('input[name="student_id"]');
+    let studentId = studentInput ? studentInput.value : null;
+
+    if (!studentId) {
+        const pathParts = window.location.pathname.split('/');
+        studentId = pathParts.filter(part => part !== '').pop();
+    }
 
     try {
         const response = await fetch(`/api/reviews/${studentId}`);
@@ -41,6 +46,8 @@ async function loadReviews(filter = 'all', showAll = false) {
 function filterReviewsByType(reviews, filter) {
     if (filter === 'all') {
         return reviews;
+    } else if (filter === 'hasImage') {
+        return reviews.filter(r => r.reviewImg);
     } else if (typeof filter === 'number') {
         return reviews.filter(r => Math.round(parseFloat(r.rating)) === filter);
     }
@@ -95,6 +102,11 @@ function filterReviews(type) {
 // Update review statistics
 function updateReviewStats() {
     const { total, avgScore, counts } = reviewStats;
+
+    // Calculate image review count client-side
+    const imgCount = allReviews.filter(r => r.reviewImg).length;
+    if (document.getElementById('f-img')) document.getElementById('f-img').innerText = imgCount;
+    if (document.getElementById('mf-img')) document.getElementById('mf-img').innerText = imgCount;
 
     // Update summary
     if (document.getElementById('total-reviews-count')) {
@@ -171,3 +183,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById("error-msg")) document.getElementById("error-msg").style.display = "none";
     }
 });
+
+/* =========================================
+   IMAGE PREVIEW FUNCTION
+   ========================================= */
+function previewImage(input) {
+    const previewContainer = document.getElementById('image-preview-container');
+    if (!previewContainer) return;
+
+    previewContainer.innerHTML = '';
+    const file = input.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.style.maxWidth = '200px';
+            img.style.borderRadius = '8px';
+            img.style.marginTop = '10px';
+            previewContainer.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+    }
+}
