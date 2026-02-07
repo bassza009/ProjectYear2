@@ -66,11 +66,11 @@
                 <div class="profile-header">
                     <div class="avatar-wrapper">
 
-                        <% if(userdata.ID==jobs.general_id){ %>
-                            <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>"
+                        <% if(userdata.ID==jobs[0].general_id){ %>
+                            <img src="/imageForTest/<%= jobs[0].profile_image %>" alt="<%= jobs[0].profile_image%>"
                                 class="avatar-img" id="profile_">
                             <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                <img src="https://ui-avatars.com/api/?name=<%= jobs[0].username || 'User' %>"
                                     alt="โปรไฟล์" class="avatar-img" id="profile_">
                                 <% }%>
                                 <%if(userdata.general)%>
@@ -83,11 +83,11 @@
                     <div class="header-info">
                         <div class="name-rating-row">
                             <h1 id="user-name">
-                                <%=userdata.username%>
+                                <%=jobs[0].username%>
                             </h1>
                         </div>
                         <p class="status-badge">
-                            <span class="status-dot"></span> สถานะ : <%= userdata.roles %>
+                            <span class="status-dot"></span> สถานะ : <%= jobs[0].roles %>
                         </p>
                     </div>
                 </div>

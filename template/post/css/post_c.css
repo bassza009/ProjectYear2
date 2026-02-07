@@ -273,6 +273,7 @@
     max-height: 500px;
     overflow-y: auto;
     padding-right: 10px;
+    
 }
 
 /* Custom Scrollbar */
@@ -324,6 +325,7 @@
     position: relative;
     border: 1px solid #eef2f6;
     min-width: 0;
+    margin-left: 50px;
     /* Prevent flex overflow */
 }
 

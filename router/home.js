@@ -123,6 +123,7 @@ router.get("/", (req, res) => {
 router.get("/home", (req, res) => {
     const email = req.cookies.email;
     let startpage = req.query.startpage || 1
+
     if (startpage <= 1) {
         startpage = 1
     }
@@ -466,7 +467,10 @@ router.get("/home/profilegeneral/:id", (req, res) => {
     const id = req.params.id
 
     const sql1 = `SELECT * from userdata where email = ?`
-    const sql2 = `SELECT * FROM general_orders WHERE order_ID = ? ORDER BY post_date DESC`
+    const sql2 = `SELECT * FROM general_orders 
+                right join userdata
+                on userdata.ID = general_orders.general_id
+                WHERE general_orders.general_id = ? ORDER BY post_date DESC`
 
     if (!email) {
         return res.redirect("/login?error=110")//login first

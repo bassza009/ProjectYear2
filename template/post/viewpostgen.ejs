@@ -24,10 +24,10 @@
                     <div class="photo_profile">
                         <% if(userdata.profile_image){ %>
                             <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                    alt="โปรไฟล์">
-                                <% }%>
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                alt="โปรไฟล์">
+                        <% }%>
                     </div>
                     <span>Profile</span>
                 </button>
@@ -42,10 +42,14 @@
                                 alt="โปรไฟล์">
                             <% }%>
                                 <div class="user_name">
-                                    <h1>
-                                        <%=userdata.firstname%>
-                                            <%=userdata.lastname%>
-                                    </h1>
+                                    <%if(userdata.roles=="student"){%>    
+                                        <h1>
+                                            <%=userdata.firstname%>
+                                                <%=userdata.lastname%>
+                                        </h1>
+                                    <%}else{%>
+                                        <h1><%=userdata.username%></h1>
+                                    <%}%>    
                                     <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
                                 </div>
                 </div>
@@ -57,7 +61,7 @@
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>
                         <%}else{%>
-                            <a href="/home/profilegeneral">
+                            <a href="/home/profilegeneral/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                             <%}%>
@@ -116,37 +120,43 @@
                     <div class="comment-list">
                         <% if(comments && comments.length> 0) { %>
                             <% comments.forEach(function(comment) { %>
-                                <div class="comment-item">
-                                    <div class="comment-avatar">
-                                        <% if(comment.profile_image){ %>
-                                            <img src="/imageForTest/<%= comment.profile_image %>" alt="Profile"
-                                                class="profile-img-comment">
-                                            <% } else { %>
-                                                <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
-                                                    alt="Profile" class="profile-img-comment">
-                                                <% } %>
-                                    </div>
-                                    <div class="comment-body">
-                                        <div class="comment-meta">
-                                            <span class="comment-author">
-                                                <% if(comment.roles==='student' && comment.firstname) { %>
-                                                    <%= comment.firstname %>
-                                                        <%= comment.lastname %>
-                                                            <% } else { %>
-                                                                <%= comment.username %>
-                                                                    <% } %>
-                                                                        <span class="comment-role">
-                                                                            <%= comment.roles %>
-                                                                        </span>
-                                            </span>
-                                            <span class="comment-date">
-                                                <%= new Date(comment.created_at).toLocaleString('th-TH') %>
-                                            </span>
+                                <%if(comment.roles=="student"){%>
+                                    <a href="/home/profilestudent/<%comment.ID%>">    
+                                <%}else{%>  
+                                    <a href="/home/profilegeneral/<%comment.ID%>">
+                                <%}%>
+                                    <div class="comment-item">
+                                        <div class="comment-avatar">
+                                            <% if(comment.profile_image){ %>
+                                                <img src="/imageForTest/<%= comment.profile_image %>" alt="Profile"
+                                                    class="profile-img-comment">
+                                                <% } else { %>
+                                                    <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
+                                                        alt="Profile" class="profile-img-comment">
+                                                    <% } %>
                                         </div>
-                                        <div class="comment-text">
-                                            <%= comment.comment_text %>
+                                        <div class="comment-body">
+                                            <div class="comment-meta">
+                                                <span class="comment-author">
+                                                    <% if(comment.roles==='student' && comment.firstname) { %>
+                                                        <%= comment.firstname %>
+                                                            <%= comment.lastname %>
+                                                                <% } else { %>
+                                                                    <%= comment.username %>
+                                                                        <% } %>
+                                                                            <span class="comment-role">
+                                                                                <%= comment.roles %>
+                                                                            </span>
+                                                </span>
+                                                <span class="comment-date">
+                                                    <%= new Date(comment.created_at).toLocaleString('th-TH') %>
+                                                </span>
+                                            </div>
+                                            <div class="comment-text">
+                                                <%= comment.comment_text %>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 <% }); %>
                                     <% } else { %>
@@ -157,6 +167,7 @@
                     </div>
 
                     <!-- Comment Form -->
+                    <%if(userdata.ID!=post.general_id||post.roles!="general"){%>
                     <div class="comment-form-container">
                         <div class="comment-form-title">
                             💬 ส่งข้อความถึงผู้โพสต์
@@ -173,6 +184,7 @@
                             </button>
                         </form>
                     </div>
+                    <%}%>
                 </div>
             </div>
 
