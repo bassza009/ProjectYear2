@@ -545,12 +545,8 @@ const createCommentTableSql = `CREATE TABLE IF NOT EXISTS post_comments (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 )`
 pool.query(createCommentTableSql, (err) => {
-    // Table creation logic kept silently or removed if deemed "code check"
-    // For now I will just remove the logging part.
-    // Actually, I'll remove the whole block if the user considers it "check".
-    // But better to just remove the logs.
-    if (err) { } // console.error("Error creating post_comments table:", err)
-    else { } // console.log("post_comments table checked/created")
+    if (err) { console.error("Error creating post_comments table:", err) }
+    else { console.log("post_comments table checked/created") }
 })
 
 router.get("/home/viewGeneralPost/:id", (req, res) => {
@@ -629,6 +625,7 @@ router.post("/home/general/comment", (req, res) => {
     const sql = `INSERT INTO post_comments (order_id, user_id, comment_text) VALUES (?, ?, ?)`
     pool.query(sql, [order_id, id, comment_text], (err, result) => {
         if (err) {
+            console.log(err)
         }
         res.redirect(`/home/viewGeneralPost/${order_id}`)
     })
