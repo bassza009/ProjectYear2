@@ -10,8 +10,8 @@ const multer = require("multer")
 require("dotenv").config()
 
 const middleware = ((req, res, next) => {
-    console.log(`Request from ${new Date().toISOString()}`)
-    console.log(`Method : ${req.method} Url : ${req.url}`)
+    // console.log(`Request from ${new Date().toISOString()}`)
+    // console.log(`Method : ${req.method} Url : ${req.url}`)
     next()
 })
 //create middle-ware
@@ -39,7 +39,7 @@ app.use("/post", postPath)
 //database check
 pool.connect((err) => {
     if (err) throw err;
-    console.log('Connected to database')
+    // console.log('Connected to database')
 })
 
 // Review routes
@@ -48,7 +48,7 @@ app.get("/review", (req, res) => {
 })
 
 app.post("/review/api", (req, res) => {
-    console.log("Review submitted:", req.body);
+    // console.log("Review submitted:", req.body);
     // TODO: Save review to database
     res.redirect("/home?status=review_submitted");
 })

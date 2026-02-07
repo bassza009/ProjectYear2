@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= post.title %> - SDhire
+    </title>
+    <link rel="stylesheet" href="/post/css/Template_HF.css">
+    <link rel="stylesheet" href="/post/css/post_c.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <a href="/" style="text-decoration: none; color: inherit;">
+            <h2>SDhire</h2>
+        </a>
+        <div class="profile_container">
+            <div class="buttom_header">
+                <button type="button" class="profile_button" onclick="toggleDropdown()">
+                    <div class="photo_profile">
+                        <% if(userdata.profile_image){ %>
+                            <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์">
+                                <% }%>
+                    </div>
+                    <span>Profile</span>
+                </button>
+            </div>
+            <div class="data_box" id="myDropdown">
+                <div class="user_infor">
+
+                    <% if(userdata.profile_image){ %>
+                        <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                alt="โปรไฟล์">
+                            <% }%>
+                                <div class="user_name">
+                                    <h1>
+                                        <%=userdata.firstname%>
+                                            <%=userdata.lastname%>
+                                    </h1>
+                                    <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
+                                </div>
+                </div>
+
+                <div class="button_VO">
+
+                    <%if(userdata.roles=="student"){%>
+                        <a href="/home/profilestudent/<%=userdata.ID%>">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                        <%}else{%>
+                            <a href="/home/profilegeneral">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                            <%}%>
+
+
+                                <a>
+                                    <form action="/logout" method="post">
+                                        <button class="b_logout">ออกจากระบบ</button>
+                                    </form>
+                                </a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main class="content-wrapper">
+        <div class="event_name">
+            <h1 id="jobTitle">
+                <%=post.title%>
+            </h1>
+            <p id="jobCategory">ประเภทงาน : <%=post.orderType%>
+            </p>
+        </div>
+
+        <div class="main-container">
+            <div class="left-column">
+
+                <div class="details-content" id="jobDetail">
+                    <h3>รายละเอียดงาน</h3>
+                    <div style="white-space: pre-wrap;">
+                        <%=post.des_cript%>
+                    </div>
+                    <br>
+                    <hr>
+                    <div style="margin-top: 20px;">
+                        <p><strong>วันลงประกาศ:</strong>
+                            <%= new Date(post.post_date).toLocaleDateString('th-TH') %>
+                        </p>
+                        <p><strong>กำหนดส่งงาน:</strong>
+                            <%= post.deadline ? new Date(post.deadline).toLocaleDateString('th-TH') : "-" %>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Comment Section -->
+                <div class="details-content comment-section" id="commentSection">
+                    <div class="comment-header-row">
+                        <h3>ความคิดเห็น / สอบถามข้อมูล</h3>
+                        <span class="comment-count-badge">
+                            <%= comments ? comments.length : 0 %> ข้อความ
+                        </span>
+                    </div>
+
+                    <!-- Comment List -->
+                    <div class="comment-list">
+                        <% if(comments && comments.length> 0) { %>
+                            <% comments.forEach(function(comment) { %>
+                                <div class="comment-item">
+                                    <div class="comment-avatar">
+                                        <% if(comment.profile_image){ %>
+                                            <img src="/imageForTest/<%= comment.profile_image %>" alt="Profile"
+                                                class="profile-img-comment">
+                                            <% } else { %>
+                                                <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
+                                                    alt="Profile" class="profile-img-comment">
+                                                <% } %>
+                                    </div>
+                                    <div class="comment-body">
+                                        <div class="comment-meta">
+                                            <span class="comment-author">
+                                                <% if(comment.roles==='student' && comment.firstname) { %>
+                                                    <%= comment.firstname %>
+                                                        <%= comment.lastname %>
+                                                            <% } else { %>
+                                                                <%= comment.username %>
+                                                                    <% } %>
+                                                                        <span class="comment-role">
+                                                                            <%= comment.roles %>
+                                                                        </span>
+                                            </span>
+                                            <span class="comment-date">
+                                                <%= new Date(comment.created_at).toLocaleString('th-TH') %>
+                                            </span>
+                                        </div>
+                                        <div class="comment-text">
+                                            <%= comment.comment_text %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% } else { %>
+                                        <div class="no-comments">
+                                            ยังไม่มีความคิดเห็นในขณะนี้<br>เป็นคนแรกที่เริ่มบทสนทนา!
+                                        </div>
+                                        <% } %>
+                    </div>
+
+                    <!-- Comment Form -->
+                    <div class="comment-form-container">
+                        <div class="comment-form-title">
+                            💬 ส่งข้อความถึงผู้โพสต์
+                        </div>
+                        <form action="/home/general/comment" method="POST" class="comment-form">
+                            <input type="hidden" name="order_id" value="<%= post.order_ID %>">
+                            <div class="comment-input-wrapper">
+                                <textarea name="comment_text" rows="3" class="comment-input"
+                                    placeholder="พิมพ์ข้อความสอบถามรายละเอียด... (สุภาพและสร้างสรรค์)"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit-comment">
+                                <span>ส่งข้อความ</span> 🚀
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="sticky-sidebar">
+                    <div class="profile_user_card">
+                        <div class="img_profile">
+                            <% if(post.profile_image){ %>
+                                <img src="/imageForTest/<%= post.profile_image %>" alt="<%= post.profile_image%>">
+                                <% } else{%>
+                                    <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>"
+                                        alt="โปรไฟล์">
+                                    <% }%>
+                        </div>
+                        <div class="user_info_detail">
+                            <h1>
+                                <% if(post.firstname) { %>
+                                    <%=post.firstname%>
+                                        <%=post.lastname%>
+                                            <% } else { %>
+                                                <%=post.username%>
+                                                    <% } %>
+                            </h1>
+                            <span class="status-badge">✅ <%=post.roles%></span>
+                        </div>
+
+                        <div class="price_tag">
+                            <small>งบประมาณ</small>
+                            <h2 id="jobPrice">฿<%= Number(post.budjet).toLocaleString() %>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-contact">
+            <p>ติดต่อเรา</p>
+            <p>sdhire67@gmail.com</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SDhire, All right reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("myDropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</body>
+
+</html>

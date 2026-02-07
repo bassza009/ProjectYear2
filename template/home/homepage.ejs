@@ -309,94 +309,99 @@
                                                     </div>
                                                 </div>
                                 </div>
-                                
+
                             </a>
-                            
+
                             <%})%>
                                 <%}else{%>
                                     <p>no job right now</p>
                                     <%}%>
-                            
-                </div>
-                
-                <%const page = Math.ceil(totalpost/8);%>
-                <%if(job.length){%>
-                    
-                        <div class="pagination" id="pagination">    
-                            
-                            
-                                <%if(currentPage>1){%>
-                                <a href="/home?startpage=<%=currentPage-1%>">   
-                                    <small><</small>
-                                </a> 
-                                     
-                            <%}%> 
 
-                            <%for(i=1;i<=page;i++){%>
-                                <a class="page-btn <%=(i==currentPage)?'active':""%>" href="/home?startpage=<%=i%>">
-                                    <p ><%=i%></p>
-                                </a>
-                            <%}%>  
-                            <%if(currentPage!=page){%>  
-                                <a href="/home?startpage=<%=currentPage+1%>">    
-                                    <small>></small>
-                                </a>
-                            <%}%>
-                            
-                        </div>
-                    
-                <%}%>
-                <!-- --------------------------------------------------------------------------------------------------------------------- -->
-                <div class="post_job">
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ชื่องาน</th>
-                                    <th>ประเภท</th>
-                                    <th>งบประมาณ (บาท)</th>
-                                    <th>ลงประกาศเมื่อ</th>
-                                    <th>กำหนดส่ง</th>
-                                    <th>จัดการ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% if(order.length>0){ %>
-                                    <% order.forEach((orders)=>{%>
-                                        <tr onclick="window.location.href='/Fronend_v1/post_user/post_gen.html?id=${orders.general_id}'"
-                                            style="cursor:pointer;">
-                                            <td>
-                                                <%=orders.title%>
-                                            </td>
-                                            <td>
-                                                <%=orders.orderType%>
-                                            </td>
-                                            <td>
-                                                <%=Number(orders.budjet).toLocaleString()%>
-                                            </td>
-                                            <td>
-                                                <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
-                                            </td>
-                                            <td>
-                                                <%=orders.deadline ? new
-                                                    Date(orders.deadline).toLocaleDateString('th-TH') : "-" %>
-                                            </td>
-                                            <td>-</td>
-                                        </tr>
-                                        <%})%>
-                                            <%}else{%>
-                                                <tr>
-                                                    <td colspan="6" style="text-align:center;">
-                                                        ยังไม่มีงานที่คุณประกาศ
-                                                    </td>
-                                                </tr>
-                                                <%}%>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- pagination ของโพสต์งาน -->
-                    <div class="pagination" id="jobPagination"></div>
                 </div>
+
+                <%const page=Math.ceil(totalpost/8);%>
+                    <%if(job.length){%>
+
+                        <div class="pagination" id="pagination">
+
+
+                            <%if(currentPage>1){%>
+                                <a href="/home?startpage=<%=currentPage-1%>">
+                                    <small>
+                                        << /small>
+                                </a>
+
+                                <%}%>
+
+                                    <%for(i=1;i<=page;i++){%>
+                                        <a class="page-btn <%=(i==currentPage)?'active':""%>"
+                                            href="/home?startpage=<%=i%>">
+                                            <p>
+                                                <%=i%>
+                                            </p>
+                                        </a>
+                                        <%}%>
+                                            <%if(currentPage!=page){%>
+                                                <a href="/home?startpage=<%=currentPage+1%>">
+                                                    <small>></small>
+                                                </a>
+                                                <%}%>
+
+                        </div>
+
+                        <%}%>
+                            <!-- --------------------------------------------------------------------------------------------------------------------- -->
+                            <div class="post_job">
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>ชื่องาน</th>
+                                                <th>ประเภท</th>
+                                                <th>งบประมาณ (บาท)</th>
+                                                <th>ลงประกาศเมื่อ</th>
+                                                <th>กำหนดส่ง</th>
+                                                <th>จัดการ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(order.length>0){ %>
+                                                <% order.forEach((orders)=>{%>
+                                                    <tr onclick="window.location.href='/home/viewGeneralPost/<%= orders.order_ID %>'"
+                                                        style="cursor:pointer;">
+                                                        <td>
+                                                            <%=orders.title%>
+                                                        </td>
+                                                        <td>
+                                                            <%=orders.orderType%>
+                                                        </td>
+                                                        <td>
+                                                            <%=Number(orders.budjet).toLocaleString()%>
+                                                        </td>
+                                                        <td>
+                                                            <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
+                                                        </td>
+                                                        <td>
+                                                            <%=orders.deadline ? new
+                                                                Date(orders.deadline).toLocaleDateString('th-TH') : "-"
+                                                                %>
+                                                        </td>
+                                                        <td>-</td>
+                                                    </tr>
+                                                    <%})%>
+                                                        <%}else{%>
+                                                            <tr>
+                                                                <td colspan="6" style="text-align:center;">
+                                                                    ยังไม่มีงานที่คุณประกาศ
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- pagination ของโพสต์งาน -->
+                                <div class="pagination" id="jobPagination"></div>
+                            </div>
             </div>
         </main>
     </div>
