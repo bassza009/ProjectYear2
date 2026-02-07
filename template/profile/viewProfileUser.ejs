@@ -37,21 +37,24 @@
 
                         <% if(userdata.profile_image){ %>
                             <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                        <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"alt="โปรไฟล์">          
-                        <% }%>
-                            <div class="user_name">
-                        <% if(userdata.roles=="student" ) {%>
-                            <h1>
-                                <%= userdata.firstname %> <%= userdata.lastname %>             
-                            </h1>
-                        <% }else{ %>
-                            <h1>
-                                <%=userdata.username%>
-                            </h1>
-                        <% } %>
-                            <small></small><span class="status-dot"></span> สถานะ : <%= userdata.roles %></small>                             
-                        </div>
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์">
+                                <% }%>
+                                    <div class="user_name">
+                                        <% if(userdata.roles=="student" ) {%>
+                                            <h1>
+                                                <%= userdata.firstname %>
+                                                    <%= userdata.lastname %>
+                                            </h1>
+                                            <% }else{ %>
+                                                <h1>
+                                                    <%=userdata.username%>
+                                                </h1>
+                                                <% } %>
+                                                    <small></small><span class="status-dot"></span> สถานะ : <%=
+                                                        userdata.roles %></small>
+                                    </div>
                     </div>
 
                     <div class="button_VO">
@@ -59,16 +62,16 @@
                             <a href="/home/profilestudent">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
-                        <% } else{ %>
-                            <a href="/home/profilegeneral">
-                                <button class="b_view">ดูโปรไฟล์</button>
-                            </a>
-                        <% } %>
-                        <a>
-                            <form action="/logout" method="POST">
-                                <button class="b_logout" type="submit">ออกจากระบบ</button>
-                            </form>
-                        </a>
+                            <% } else{ %>
+                                <a href="/home/profilegeneral">
+                                    <button class="b_view">ดูโปรไฟล์</button>
+                                </a>
+                                <% } %>
+                                    <a>
+                                        <form action="/logout" method="POST">
+                                            <button class="b_logout" type="submit">ออกจากระบบ</button>
+                                        </form>
+                                    </a>
                     </div>
                 </div>
             </div>
@@ -259,7 +262,7 @@
 
 
     <script src="/homejs/profile_buttom.js"></script>
-    <script src="/profilejs/review_star.js"></script>
+    <script src="/profilejs/review_api.js"></script>
     <script src="/profilejs/post_script.js"></script>
 </body>
 

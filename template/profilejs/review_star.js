@@ -107,8 +107,6 @@ function handleLike(revId) {
             // กรณีไม่มีฟังก์ชัน loadReviews ให้ใช้วิธี reload หน้า (ชั่วคราว)
             location.reload();
         }
-    } else {
-        console.error("หา Review ID นี้ไม่เจอ:", revId);
     }
 }
 

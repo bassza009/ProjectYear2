@@ -1,0 +1,173 @@
+/* =========================================
+REVIEW SYSTEM - Using Database API
+   ========================================= */
+
+let currentFilter = 'all';
+let allReviews = [];
+let reviewStats = {};
+
+// Load reviews from API
+async function loadReviews(filter = 'all', showAll = false) {
+    const container = document.getElementById('reviewContainer');
+    if (!container) return;
+
+    // Get student ID from URL
+    const pathParts = window.location.pathname.split('/');
+    const studentId = pathParts[pathParts.length - 1];
+
+    try {
+        const response = await fetch(`/api/reviews/${studentId}`);
+        const data = await response.json();
+
+        if (data.success) {
+            allReviews = data.reviews;
+            reviewStats = data.stats;
+
+            // Update statistics display
+            updateReviewStats();
+
+            // Filter reviews
+            let reviews = filterReviewsByType(allReviews, filter);
+
+            // Render reviews
+            renderReviews(reviews, container);
+        }
+    } catch (error) {
+        container.innerHTML = '<p style="text-align:center;color:#999;padding:20px;">ไม่สามารถโหลดรีวิวได้</p>';
+    }
+}
+
+// Filter reviews by rating
+function filterReviewsByType(reviews, filter) {
+    if (filter === 'all') {
+        return reviews;
+    } else if (typeof filter === 'number') {
+        return reviews.filter(r => Math.round(parseFloat(r.rating)) === filter);
+    }
+    return reviews;
+}
+
+// Render reviews to DOM
+function renderReviews(reviews, container) {
+    if (reviews.length === 0) {
+        container.innerHTML = '<p style="text-align:center;color:#999;padding:20px;">ไม่มีรีวิวในหมวดนี้</p>';
+        return;
+    }
+
+    container.innerHTML = '';
+
+    reviews.forEach((rev) => {
+        const html = `
+            <div class="review-card">
+                <img src="${rev.profilePic}" class="user-pic">
+                <div class="review-content">
+                    <h5>${rev.name}</h5>
+                    <div class="stars">${renderStars(rev.rating)}</div>
+                    <p class="quote">${rev.comment || 'ไม่มีข้อความรีวิว'}</p>
+                    ${rev.reviewImg ? `<div class="review-images"><img src="${rev.reviewImg}" style="max-width: 200px; border-radius: 8px; margin-top: 10px;"></div>` : ''}
+                    <p style="font-size: 12px; color: #999; margin-top: 8px;">
+                        ${new Date(rev.timestamp).toLocaleDateString('th-TH')}
+                    </p>
+                </div>
+            </div>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+}
+
+// Render stars
+function renderStars(rating) {
+    let stars = '';
+    const r = Math.round(parseFloat(rating));
+    for (let i = 1; i <= 5; i++) {
+        stars += (i <= r) ? '★' : '☆';
+    }
+    return stars;
+}
+
+// Filter reviews by star rating
+function filterReviews(type) {
+    currentFilter = type;
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    if (event && event.currentTarget) event.currentTarget.classList.add('active');
+    loadReviews(type);
+}
+
+// Update review statistics
+function updateReviewStats() {
+    const { total, avgScore, counts } = reviewStats;
+
+    // Update summary
+    if (document.getElementById('total-reviews-count')) {
+        document.getElementById('total-reviews-count').innerText = `จาก ${total} รีวิว`;
+    }
+    if (document.getElementById('avg-score')) {
+        document.getElementById('avg-score').innerText = avgScore;
+    }
+    if (document.getElementById('avg-stars')) {
+        document.getElementById('avg-stars').innerHTML = renderStars(avgScore);
+    }
+
+    // Update filter tags
+    for (let i = 1; i <= 5; i++) {
+        if (document.getElementById(`f-${i}`)) {
+            document.getElementById(`f-${i}`).innerText = counts[i] || 0;
+        }
+        if (document.getElementById(`count-${i}`)) {
+            document.getElementById(`count-${i}`).innerText = counts[i] || 0;
+        }
+
+        // Update progress bars
+        const percent = total > 0 ? ((counts[i] || 0) / total) * 100 : 0;
+        if (document.getElementById(`bar-${i}`)) {
+            document.getElementById(`bar-${i}`).style.width = percent + '%';
+        }
+    }
+}
+
+/* =========================================
+   REVIEW SUBMISSION
+   ========================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('reviewModal');
+    const openBtn = document.getElementById('openReview');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Load reviews on page load
+    loadReviews('all');
+
+    // Open review modal
+    if (openBtn) {
+        openBtn.onclick = () => {
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        };
+    }
+
+    // Cancel button
+    if (cancelBtn) {
+        cancelBtn.onclick = () => {
+            closeAndReset();
+        };
+    }
+
+    // Close modal when clicking outside
+    window.onclick = (e) => {
+        if (e.target == modal) {
+            closeAndReset();
+        }
+    };
+
+    // Form submission is handled by the form action="/general/reviewStudent"
+    // No need for custom submit handler as we're using traditional form POST
+
+    function closeAndReset() {
+        if (modal) modal.style.display = 'none';
+        if (document.getElementById('reviewText')) document.getElementById('reviewText').value = "";
+        const checked = document.querySelector('input[name="rating"]:checked');
+        if (checked) checked.checked = false;
+        if (document.getElementById("error-msg")) document.getElementById("error-msg").style.display = "none";
+    }
+});

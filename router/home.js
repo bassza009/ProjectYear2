@@ -990,4 +990,96 @@ router.post("/logout", (req, res) => {
     }
 
 })
+
+// ===== REVIEW SYSTEM ROUTES =====
+
+// Submit a new review with image
+router.post("/general/reviewStudent", upload.single("review_image"), (req, res) => {
+    const { student_id, rating, review_text } = req.body
+    const { email, id } = req.cookies
+
+    if (!email || !id) {
+        return res.redirect("/login?error=110") // Login required
+    }
+
+    // Get uploaded image filename (if any)
+    const reviewImage = req.file ? req.file.filename : null
+
+    const sql = `INSERT INTO service_reviews (reviewer_id, student_id, rating, comment, review_image, review_date) 
+                 VALUES (?, ?, ?, ?, ?, NOW())`
+
+    pool.query(sql, [id, student_id, rating, review_text, reviewImage], (err, result) => {
+        if (err) {
+            console.error("Error submitting review:", err)
+            return res.status(500).json({ success: false, message: "Failed to submit review" })
+        }
+
+        // Redirect back to student profile
+        res.redirect(`/home/profilestudent/${student_id}`)
+    })
+})
+
+// Fetch reviews for a specific student
+router.get("/api/reviews/:studentId", (req, res) => {
+    const studentId = req.params.studentId
+
+    const sql = `SELECT 
+                    sr.review_id,
+                    sr.rating,
+                    sr.comment,
+                    sr.review_image,
+                    sr.review_date,
+                    u.username,
+                    u.profile_image,
+                    u.firstname,
+                    u.lastname,
+                    u.roles
+                FROM service_reviews sr
+                LEFT JOIN userdata u ON sr.reviewer_id = u.ID
+                WHERE sr.student_id = ?
+                ORDER BY sr.review_date DESC`
+
+    pool.query(sql, [studentId], (err, reviews) => {
+        if (err) {
+            console.error("Error fetching reviews:", err)
+            return res.status(500).json({ success: false, message: "Failed to fetch reviews" })
+        }
+
+        // Calculate statistics
+        const total = reviews.length
+        let sum = 0
+        let counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 }
+
+        reviews.forEach(r => {
+            const star = Math.round(parseFloat(r.rating))
+            if (counts[star] !== undefined) counts[star]++
+            sum += parseFloat(r.rating)
+        })
+
+        const avgScore = total > 0 ? (sum / total).toFixed(1) : "0.0"
+
+        res.json({
+            success: true,
+            reviews: reviews.map(r => ({
+                id: r.review_id,
+                name: r.roles === "student"
+                    ? `${r.firstname} ${r.lastname}`
+                    : r.username,
+                profilePic: r.profile_image
+                    ? `/imageForTest/${r.profile_image}`
+                    : `https://ui-avatars.com/api/?name=${encodeURIComponent(r.username || 'User')}`,
+                rating: r.rating,
+                comment: r.comment,
+                reviewImg: r.review_image ? `/imageForTest/${r.review_image}` : null,
+                timestamp: r.review_date
+            })),
+            stats: {
+                total,
+                avgScore,
+                counts
+            }
+        })
+    })
+})
+
 module.exports = router

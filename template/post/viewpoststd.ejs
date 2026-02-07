@@ -239,33 +239,37 @@
 
                     <div id="reviewModal" class="modal">
                         <div class="modal-content">
-                            <h3>เขียนรีวิวของคุณ</h3>
-                            <p id="error-msg" style="color: red; display: none; font-size: 14px; margin-bottom: 10px;">
-                            </p>
+                            <h3>ให้คะแนนผลงาน</h3>
+                            <p id="error-msg" style="color: red; display: none; font-size: 14px;"></p>
 
-                            <div class="star-rating">
-                                <input type="radio" name="rating" id="rat-5" value="5"><label for="rat-5"></label>
-                                <input type="radio" name="rating" id="rat-4" value="4"><label for="rat-4"></label>
-                                <input type="radio" name="rating" id="rat-3" value="3"><label for="rat-3"></label>
-                                <input type="radio" name="rating" id="rat-2" value="2"><label for="rat-2"></label>
-                                <input type="radio" name="rating" id="rat-1" value="1"><label for="rat-1"></label>
-                            </div>
+                            <form action="/general/reviewStudent" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="student_id" value="<%= post.ID %>">
 
-                            <div class="upload-section">
-                                <label for="reviewImgInput" class="custom-file-upload">
-                                    📸 เพิ่มรูปภาพผลงาน
-                                </label>
-                                <input type="file" id="reviewImgInput" accept="image/*" onchange="previewImage(this)"
-                                    style="display:none;">
-                                <div id="image-preview-container"></div>
-                            </div>
+                                <div class="star-rating">
+                                    <input type="radio" name="rating" id="rat-5" value="5"><label for="rat-5"></label>
+                                    <input type="radio" name="rating" id="rat-4" value="4"><label for="rat-4"></label>
+                                    <input type="radio" name="rating" id="rat-3" value="3"><label for="rat-3"></label>
+                                    <input type="radio" name="rating" id="rat-2" value="2"><label for="rat-2"></label>
+                                    <input type="radio" name="rating" id="rat-1" value="1"><label for="rat-1"></label>
+                                </div>
 
-                            <textarea id="reviewText" placeholder="บอกเล่าประสบการณ์ของคุณ..."></textarea>
+                                <div class="upload-section">
+                                    <label for="reviewImgInput" class="custom-file-upload">
+                                        📸 เพิ่มรูปภาพผลงาน
+                                    </label>
+                                    <input type="file" id="reviewImgInput" name="review_image" accept="image/*"
+                                        onchange="previewImage(this)">
+                                    <div id="image-preview-container"></div>
+                                </div>
 
-                            <div class="modal-buttons">
-                                <button id="cancelBtn" class="btn-cancel">ยกเลิก</button>
-                                <button id="submitBtn" class="btn-submit">ส่งรีวิว</button>
-                            </div>
+                                <textarea id="reviewText" name="review_text"
+                                    placeholder="เขียนรีวิวของคุณที่นี่..."></textarea>
+
+                                <div class="modal-buttons">
+                                    <button type="button" id="cancelBtn">ยกเลิก</button>
+                                    <button type="submit" id="submitBtn">ตกลง</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
 
@@ -293,7 +297,7 @@
     </script>
 
     <script src="post_detail.js"></script>
-    <script src="../Profile/review_star.js"></script>
+    <script src="/../profilejs/review_api.js"></script>
 </body>
 
 </html>
