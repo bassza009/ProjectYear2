@@ -2,24 +2,31 @@
    1. โครงสร้างหลัก (Main Layout)
    ========================================= */
 .content-wrapper {
-    max-width: 1200px;
-    min-width: 320px;
+    max-width: 1400px;
+    /* เพิ่มความกว้างสูงสุดเพื่อให้เต็มจอมากขึ้น */
+    width: 95%;
+    /* ให้ขยายเกือบเต็มจอสำหรับ notebook */
     margin: 0 auto;
     padding: 20px;
 }
 
 .main-container {
     display: flex;
-    gap: 30px;
+    gap: 25px;
+    /* ลดช่องว่างลงเล็กน้อย */
     margin-top: 20px;
 }
 
 .left-column {
-    flex: 2; /* ฝั่งซ้าย (รูปและรายละเอียด) */
+    flex: 3;
+    /* เพิ่มสัดส่วนฝั่งซ้ายให้กว้างขึ้น */
 }
 
 .right-column {
-    flex: 1; /* ฝั่งขวา (โปรไฟล์และราคา) */
+    flex: 1;
+    /* ฝั่งขวาคงที่ */
+    min-width: 300px;
+    /* กำหนดขนาดขั้นต่ำไม่ให้เล็กเกินไป */
 }
 
 /* Responsive: เมื่อจอเล็ก ให้ซ้อนกันเป็นแนวตั้ง */
@@ -48,21 +55,23 @@
 /* ส่วนรูปภาพโพสต์ */
 .img_post {
     width: 100%;
-    height: 450px; /* ล็อคความสูง */
+    height: 450px;
+    /* ล็อคความสูง */
     background-color: #eee;
     border-radius: 20px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     margin-bottom: 25px;
 }
 
 .img_post img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* รูปไม่เบี้ยว */
+    object-fit: cover;
+    /* รูปไม่เบี้ยว */
     display: block;
 }
 
@@ -72,7 +81,7 @@
     background: #fff;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .accent-bar {
@@ -86,19 +95,26 @@
 }
 
 .details-content {
-    background: #ffffff;          /* พื้นหลังสีขาว */
-    border: 1px solid #eeeeee;    /* เส้นขอบบางๆ สีเทาอ่อน */
-    border-radius: 20px;          /* ความโค้งมนของขอบ */
-    padding: 30px;                /* ระยะห่างระหว่างขอบกับตัวหนังสือ */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* เงาฟุ้งๆ รอบกรอบ */
+    background: #ffffff;
+    /* พื้นหลังสีขาว */
+    border: 1px solid #eeeeee;
+    /* เส้นขอบบางๆ สีเทาอ่อน */
+    border-radius: 20px;
+    /* ความโค้งมนของขอบ */
+    padding: 30px;
+    /* ระยะห่างระหว่างขอบกับตัวหนังสือ */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* เงาฟุ้งๆ รอบกรอบ */
     box-sizing: border-box;
     line-height: 1.8;
     color: #555;
     margin: 20px 0;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    min-height: 250px;            /* ล็อคความสูงขั้นต่ำไว้เผื่อเนื้อหาน้อย */
+    min-height: 250px;
+    /* ล็อคความสูงขั้นต่ำไว้เผื่อเนื้อหาน้อย */
 }
+
 /* =========================================
    3. ส่วน Sidebar ฝั่งขวา (Profile & Sidebar)
    ========================================= */
@@ -111,7 +127,7 @@
     padding: 25px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
 }
 
@@ -184,7 +200,7 @@
     border-radius: 20px;
     padding: 20px;
     margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .review-header h4 {
@@ -196,7 +212,8 @@
 
 /* บังคับ Modal ให้อยู่กลางจอ */
 #reviewModal.modal {
-    display: none; /* เริ่มต้นซ่อนไว้ */
+    display: none;
+    /* เริ่มต้นซ่อนไว้ */
     position: fixed !important;
     top: 0;
     left: 0;
@@ -214,6 +231,244 @@
     border-radius: 15px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* =========================================
+   5. Comment Section (Improved)
+   ========================================= */
+.comment-section {
+    margin-top: 10px;
+    padding: 20px !important;
+    /* Reduce padding */
+}
+
+.comment-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 15px;
+}
+
+.comment-header-row h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.15rem;
+    /* Slightly smaller header */
+}
+
+.comment-count-badge {
+    background: #7c3aed !important;
+    color: white !important;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.comment-list {
+    margin-top: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Custom Scrollbar */
+.comment-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.comment-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.comment-list::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.comment-list::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.comment-item {
+    display: flex;
+    gap: 15px;
+    /* Reduced gap */
+    margin-bottom: 20px;
+    animation: fadeIn 0.4s ease;
+    align-items: flex-start;
+    /* Prevent stretching, align to top */
+}
+
+.comment-avatar .profile-img-comment {
+    width: 42px;
+    /* Smaller avatar */
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid #fff;
+    display: block;
+}
+
+.comment-body {
+    flex: 1;
+    background: #f8fafc;
+    padding: 12px 16px;
+    /* Reduced padding */
+    border-radius: 0 12px 12px 12px;
+    position: relative;
+    border: 1px solid #eef2f6;
+    min-width: 0;
+    /* Prevent flex overflow */
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    /* Removed margin-top to ensure it sticks to top */
+}
+
+.comment-author {
+    font-weight: 700;
+    color: #374151;
+    font-size: 0.95rem;
+    /* Smaller font */
+    font-family: 'Kanit', sans-serif;
+}
+
+.comment-role {
+    font-size: 0.7rem;
+    color: #7c3aed;
+    background-color: #ede9fe;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+}
+
+.comment-date {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    font-family: 'Kanit', sans-serif;
+}
+
+.comment-text {
+    line-height: 1.6;
+    color: #4b5563;
+    white-space: pre-wrap;
+    font-size: 0.95rem;
+    margin: 4px 0 0 0;
+    text-align: left;
+    font-family: 'Kanit', sans-serif;
+    display: block;
+    width: 100%;
+    word-break: break-word;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 30px 20px;
+    color: #9ca3af;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px dashed #e5e7eb;
+    font-size: 0.9rem;
+}
+
+.comment-form-container {
+    margin-top: 25px;
+    background: #fff;
+    padding: 15px 0 0 0;
+    border-top: 1px dashed #e5e7eb;
+}
+
+.comment-form-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-input-wrapper {
+    position: relative;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    /* Smaller radius */
+    resize: vertical;
+    font-family: 'Kanit', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background: #f9fafb;
+    color: #1f2937;
+    box-sizing: border-box;
+    min-height: 80px;
+}
+
+.comment-input:focus {
+    border-color: #7c3aed;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.05);
+}
+
+.btn-submit-comment {
+    background: #7c3aed;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(124, 58, 237, 0.2);
+    float: right;
+    font-family: 'Kanit', sans-serif;
+}
+
+.btn-submit-comment:hover {
+    background: #6d28d9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(124, 58, 237, 0.3);
+}
+
+.btn-submit-comment:active {
+    transform: translateY(0);
+}
+
+.comment-form:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

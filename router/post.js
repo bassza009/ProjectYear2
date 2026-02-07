@@ -27,7 +27,7 @@ router.get('/create', (req, res) => {
     const sql = `SELECT * FROM userdata WHERE email = ?`;
     pool.query(sql, [email], (err, results) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
             return res.redirect('/home');
         }
 
@@ -52,7 +52,7 @@ router.post('/create-job', (req, res) => {
     const getUserSql = `SELECT ID FROM userdata WHERE email = ?`;
     pool.query(getUserSql, [email], (err, userResults) => {
         if (err) {
-            console.error("MySQL Error:", err);
+            // console.error("MySQL Error:", err);
             return res.status(500).send("Database Error");
         }
 
@@ -63,11 +63,11 @@ router.post('/create-job', (req, res) => {
         const userId = userResults[0].ID;
 
         // Debug: Log received data
-        console.log("Received form data:", req.body);
-        console.log("job_type:", job_type);
-        console.log("title:", title);
-        console.log("budjet:", budjet);
-        console.log("deadline:", deadline);
+        // console.log("Received form data:", req.body);
+        // console.log("job_type:", job_type);
+        // console.log("title:", title);
+        // console.log("budjet:", budjet);
+        // console.log("deadline:", deadline);
 
         // Insert into general_orders table
         const sql = `INSERT INTO general_orders 
@@ -76,24 +76,24 @@ router.post('/create-job', (req, res) => {
 
         const values = [userId, job_type, title, budjet, des_cription, deadline];
 
-        console.log("SQL Query:", sql);
-        console.log("Values to insert:", values);
+        // console.log("SQL Query:", sql);
+        // console.log("Values to insert:", values);
 
         pool.query(sql, values, (err, result) => {
             if (err) {
-                console.error("MySQL Error:", err);
-                console.error("SQL:", sql);
-                console.error("Values:", values);
+                // console.error("MySQL Error:", err);
+                // console.error("SQL:", sql);
+                // console.error("Values:", values);
                 return res.status(500).send("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
             }
 
-            console.log("บันทึกเรียบร้อย! Order ID:", result.insertId);
+            // console.log("บันทึกเรียบร้อย! Order ID:", result.insertId);
 
             // Verify what was actually saved
             const verifySql = `SELECT * FROM general_orders WHERE order_ID = ?`;
             pool.query(verifySql, [result.insertId], (verifyErr, verifyResult) => {
                 if (!verifyErr && verifyResult.length > 0) {
-                    console.log("ข้อมูลที่บันทึกจริงในDB:", verifyResult[0]);
+                    // console.log("ข้อมูลที่บันทึกจริงในDB:", verifyResult[0]);
                 }
                 res.redirect('/home');
             });

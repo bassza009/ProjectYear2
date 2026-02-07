@@ -607,6 +607,102 @@ router.get("/home/viewStdPost/:id", (req, res) => {
         //res.json(results) 
     })
 })
+
+// Create post_comments table if not exists
+const createCommentTableSql = `CREATE TABLE IF NOT EXISTS post_comments (
+    comment_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    user_id INT NOT NULL,
+    comment_text TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)`
+pool.query(createCommentTableSql, (err) => {
+    if (err) { console.error("Error creating post_comments table:", err) }
+    else { console.log("post_comments table checked/created") }
+})
+
+router.get("/home/viewGeneralPost/:id", (req, res) => {
+    const id = req.params.id
+    const { email } = req.cookies
+
+    // Query to get the order details + poster's user data
+    const sql = `SELECT * FROM general_orders
+                LEFT JOIN userdata ON userdata.ID = general_orders.general_id
+                WHERE general_orders.order_ID = ?`
+
+    // Query to get the current logged-in user's data (for navbar/profile display)
+    const sql2 = `SELECT * FROM userdata 
+                LEFT JOIN studentdata ON studentdata.email = userdata.email
+                WHERE userdata.email = ?`
+
+    // Query to fetch comments
+    // Join with studentdata to get firstname/lastname if available (for students)
+    const sqlComments = `SELECT pc.*, 
+                                u.username, 
+                                u.profile_image, 
+                                u.roles,
+                                sd.firstname,
+                                sd.lastname
+                        FROM post_comments pc 
+                        JOIN userdata u ON pc.user_id = u.ID 
+                        LEFT JOIN studentdata sd ON u.email = sd.email
+                        WHERE pc.order_id = ? 
+                        ORDER BY pc.created_at ASC`
+
+    if (!email) {
+        return res.redirect("/login?error=110")
+    }
+
+    pool.query(sql2, [email], (err, results) => {
+        if (err) {
+            console.log(err)
+            return res.redirect('/home?error=114')
+        }
+
+        pool.query(sql, [id], (err, data) => {
+            if (err) {
+                console.log(err)
+                return res.redirect('/home?error=114')
+            }
+
+            if (data.length === 0) {
+                return res.redirect('/home?error=114') // Post not found
+            }
+
+            // Fetch comments
+            pool.query(sqlComments, [id], (err, comments) => {
+                if (err) {
+                    comments = []
+                } else {
+                }
+
+                res.render("post/viewpostgen", {
+                    userdata: results[0],
+                    post: data[0],
+                    comments: comments
+                })
+            })
+        })
+    })
+})
+
+router.post("/home/general/comment", (req, res) => {
+    const { order_id, comment_text } = req.body
+    const { id } = req.cookies // User ID from cookie
+
+    if (!id) {
+        return res.redirect("/login")
+    }
+
+    const sql = `INSERT INTO post_comments (order_id, user_id, comment_text) VALUES (?, ?, ?)`
+    pool.query(sql, [order_id, id, comment_text], (err, result) => {
+        if (err) {
+            console.log(err)
+        }
+        res.redirect(`/home/viewGeneralPost/${order_id}`)
+    })
+})
+
 router.post("/student/deletePost", (req, res) => {
     const sql = `delete from user_job where ID = ?`
     const { email, id } = req.cookies

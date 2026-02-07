@@ -309,43 +309,48 @@
                                                     </div>
                                                 </div>
                                 </div>
-                                
+
                             </a>
-                            
+
                             <%})%>
                                 <%}else{%>
                                     <p>no job right now</p>
                                     <%}%>
-                            
-                </div>
-                
-                <%const page = Math.ceil(totalpost/8);%>
-                <%if(job.length){%>
-                    
-                        <div class="pagination" id="pagination">    
-                            
-                            
-                                <%if(currentPage>1){%>
-                                <a href="/home?startpage=<%=currentPage-1%>">   
-                                    <small><</small>
-                                </a> 
-                                     
-                            <%}%> 
 
-                            <%for(i=1;i<=page;i++){%>
-                                <a class="page-btn <%=(i==currentPage)?'active':""%>" href="/home?startpage=<%=i%>">
-                                    <p ><%=i%></p>
+                </div>
+
+                <%const page=Math.ceil(totalpost/8);%>
+                    <%if(job.length){%>
+
+                        <div class="pagination" id="pagination">
+
+
+                            <%if(currentPage>1){%>
+                                <a href="/home?startpage=<%=currentPage-1%>">
+                                    <small>
+                                        << /small>
                                 </a>
-                            <%}%>  
-                            <%if(currentPage!=page){%>  
-                                <a href="/home?startpage=<%=currentPage+1%>">    
-                                    <small>></small>
-                                </a>
-                            <%}%>
-                            
+
+                                <%}%>
+
+                                    <%for(i=1;i<=page;i++){%>
+                                        <a class="page-btn <%=(i==currentPage)?'active':""%>"
+                                            href="/home?startpage=<%=i%>">
+                                            <p>
+                                                <%=i%>
+                                            </p>
+                                        </a>
+                                        <%}%>
+                                            <%if(currentPage!=page){%>
+                                                <a href="/home?startpage=<%=currentPage+1%>">
+                                                    <small>></small>
+                                                </a>
+                                                <%}%>
+
                         </div>
-                    
-                <%}%>
+
+                        <%}%>
+                            
                 <!-- --------------------------------------------------------------------------------------------------------------------- -->
                 <div class="post_job">
                     <div class="table-container">
