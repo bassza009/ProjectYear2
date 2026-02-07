@@ -121,9 +121,9 @@
                         <% if(comments && comments.length> 0) { %>
                             <% comments.forEach(function(comment) { %>
                                 <%if(comment.roles=="student"){%>
-                                    <a href="/home/profilestudent/<%comment.ID%>">    
+                                    <a href="/home/profilestudent/<%=comment.user_id%>">    
                                 <%}else{%>  
-                                    <a href="/home/profilegeneral/<%comment.ID%>">
+                                    <a href="/home/profilegeneral/<%=comment.user_id%>">
                                 <%}%>
                                     <div class="comment-item">
                                         <div class="comment-avatar">

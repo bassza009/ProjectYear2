@@ -205,7 +205,7 @@ router.get("/home/search", (req, res) => {
 
     sql1 = `SELECT * from userdata 
                   LEFT JOIN studentdata ON studentdata.email = userdata.email
-                  WHERE userdata.email = ?`;
+                  WHERE userdata.email  = ?`;
     sql2 = `SELECT * FROM user_job 
                   LEFT JOIN userdata ON user_job.ID = userdata.ID
                   LEFT JOIN studentdata ON userdata.email = studentdata.email
@@ -213,54 +213,63 @@ router.get("/home/search", (req, res) => {
     sql_count = `SELECT DISTINCT job_type, COUNT(job_type) AS num_ber FROM user_job
                        GROUP BY job_type`;
     sql3 = `SELECT * from general_orders`;
-
-    let limit = ``
+    let like = `where( user_job.title like"%${search}%" or 
+                	userdata.username like "%${search}%" or
+                	studentdata.firstname like "%${search}%" or
+                	studentdata.lastname LIKE "%${search}%") `
+    let limit = 
     // เริ่ม Query 1
     pool.query(sql1, [email], (err, results) => {
         if (err) { return console.log(err); }
 
         // เริ่ม Query 2
-        pool.query(sql3, (err, data) => {
-            if (err) { return console.log(err); }
-
-            // เริ่ม Query 3 (Count)
-            pool.query(sql_count, (err, counts) => {
+        if(search){    
+            pool.query(sql3, (err, data) => {
                 if (err) { return console.log(err); }
 
-                let job_count = {};
-                let total_job = 0
-                if (counts) {
-                    counts.forEach((jobs) => {
-                        job_count[jobs.job_type] = jobs.num_ber;
-                        total_job += jobs.num_ber
-
-                    });
-                }
-                totalpage = Math.ceil(total_job / 8)
-                if (startpage == "" || startpage < 1 || startpage > totalpage) {
-                    limit = `limit 0,8`
-                    startpage = 1
-                } else {
-                    limit = `limit ${startpage * 8 - 8},8`
-                }
-
-                sql2 += limit
-                // เริ่ม Query 4
-                pool.query(sql2, (err, resultsjob) => {
+                // เริ่ม Query 3 (Count)
+                pool.query(sql_count, (err, counts) => {
                     if (err) { return console.log(err); }
-                    //res.json(total_job)
-                    // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
-                    res.render("home/homepage", {
-                        userdata: results[0] || {},
-                        job: resultsjob,
-                        jobcount: job_count,
-                        order: data,
-                        totalpost: total_job,
-                        currentPage: startpage
+
+                    let job_count = {};
+                    let total_job = 0
+                    if (counts) {
+                        counts.forEach((jobs) => {
+                            job_count[jobs.job_type] = jobs.num_ber;
+                            total_job += jobs.num_ber
+
+                        });
+                        totalpage = Math.ceil(total_job / 8)
+                    if (startpage == "" || startpage < 1 || startpage > totalpage) {
+                        limit = `limit 0,8`
+                        startpage = 1
+                    } else {
+                        limit = `limit ${startpage * 8 - 8},8`
+                    }
+
+                    
+                    }
+                    sql2 += like
+                    sql2 += limit
+                    // เริ่ม Query 4
+                    pool.query(sql2, (err, resultsjob) => {
+                        if (err) { return console.log(err); }
+                        //res.json(total_job)
+                        // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
+                        res.render("home/homepage", {
+                            userdata: results[0] || {},
+                            job: resultsjob,
+                            jobcount: job_count,
+                            order: data,
+                            totalpost: total_job,
+                            currentPage: startpage
+                        });
                     });
                 });
             });
-        });
+        } else{
+            res.redirect('/home')
+        }   
     });
 });
 
@@ -679,7 +688,7 @@ router.get("/home/viewGeneralPost/:id", (req, res) => {
                     comments = []
                 } else {
                 }
-
+                //res.json(comments)
                 res.render("post/viewpostgen", {
                     userdata: results[0],
                     post: data[0],
