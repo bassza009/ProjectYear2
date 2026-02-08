@@ -52,7 +52,6 @@ main {
 /*-----------------------------*/
 .form_input {
     padding: 0 5%;
-    margin-top: 15px;
 }
 
 .form_input form {
@@ -482,12 +481,8 @@ a {
 
 /* แถบคัดกรองภายในส่วนตาราง */
 .filter-bar {
-    background: #fdfbff;
     padding: 15px;
-    border-radius: 10px 10px 0 0;
     /* มนแค่ขอบบนให้ติดกับตาราง */
-    border: 1px solid #eee;
-    border-bottom: none;
 }
 
 .filter-group {
