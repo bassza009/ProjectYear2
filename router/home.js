@@ -142,13 +142,45 @@ router.get("/home", (req, res) => {
                        GROUP BY job_type`;
     sql3 = `SELECT * from general_orders`;
 
+    let tableParams = [];
+    let conditions = [];
+
+    if (req.query.table_search) {
+        conditions.push(`title LIKE ?`);
+        tableParams.push(`%${req.query.table_search}%`);
+    }
+
+    if (req.query.table_type) {
+        const typeMap = {
+            "1": "งานทั่วไป",
+            "2": "เขียนโปรแกรม",
+            "3": "กราฟิกดีไซน์",
+            "4": "ตัดต่อวิดีโอ",
+            "5": "แปลภาษา",
+            "6": "การศึกษา",
+            "7": "ถ่ายภาพ",
+            "8": "ดนตรีและเสียง",
+            "9": "เอกสาร",
+            "10": "ซ่อมแซม",
+            "11": "อื่นๆ"
+        };
+        if (typeMap[req.query.table_type]) {
+            conditions.push(`orderType = ?`);
+            tableParams.push(typeMap[req.query.table_type]);
+        }
+    }
+
+    if (conditions.length > 0) {
+        sql3 += ` WHERE ${conditions.join(" AND ")}`;
+    }
+
     let limit = ``
     // เริ่ม Query 1
     pool.query(sql1, [email], (err, results) => {
         if (err) { return console.log(err); }
 
         // เริ่ม Query 2
-        pool.query(sql3, (err, data) => {
+        pool.query(sql3, tableParams, (err, data) => {
             if (err) { return console.log(err); }
 
             // เริ่ม Query 3 (Count)
@@ -185,7 +217,9 @@ router.get("/home", (req, res) => {
                         jobcount: job_count,
                         order: data,
                         totalpost: total_job,
-                        currentPage: startpage
+                        currentPage: startpage,
+                        table_search: req.query.table_search,
+                        table_type: req.query.table_type
                     });
                 });
             });
@@ -217,60 +251,60 @@ router.get("/home/search", (req, res) => {
                 	userdata.username like "%${search}%" or
                 	studentdata.firstname like "%${search}%" or
                 	studentdata.lastname LIKE "%${search}%") `
-    let limit = 
-    // เริ่ม Query 1
-    pool.query(sql1, [email], (err, results) => {
-        if (err) { return console.log(err); }
+    let limit =
+        // เริ่ม Query 1
+        pool.query(sql1, [email], (err, results) => {
+            if (err) { return console.log(err); }
 
-        // เริ่ม Query 2
-        if(search){    
-            pool.query(sql3, (err, data) => {
-                if (err) { return console.log(err); }
-
-                // เริ่ม Query 3 (Count)
-                pool.query(sql_count, (err, counts) => {
+            // เริ่ม Query 2
+            if (search) {
+                pool.query(sql3, (err, data) => {
                     if (err) { return console.log(err); }
 
-                    let job_count = {};
-                    let total_job = 0
-                    if (counts) {
-                        counts.forEach((jobs) => {
-                            job_count[jobs.job_type] = jobs.num_ber;
-                            total_job += jobs.num_ber
-
-                        });
-                        totalpage = Math.ceil(total_job / 8)
-                    if (startpage == "" || startpage < 1 || startpage > totalpage) {
-                        limit = `limit 0,8`
-                        startpage = 1
-                    } else {
-                        limit = `limit ${startpage * 8 - 8},8`
-                    }
-
-                    
-                    }
-                    sql2 += like
-                    sql2 += limit
-                    // เริ่ม Query 4
-                    pool.query(sql2, (err, resultsjob) => {
+                    // เริ่ม Query 3 (Count)
+                    pool.query(sql_count, (err, counts) => {
                         if (err) { return console.log(err); }
-                        //res.json(total_job)
-                        // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
-                        res.render("home/homepage", {
-                            userdata: results[0] || {},
-                            job: resultsjob,
-                            jobcount: job_count,
-                            order: data,
-                            totalpost: total_job,
-                            currentPage: startpage
+
+                        let job_count = {};
+                        let total_job = 0
+                        if (counts) {
+                            counts.forEach((jobs) => {
+                                job_count[jobs.job_type] = jobs.num_ber;
+                                total_job += jobs.num_ber
+
+                            });
+                            totalpage = Math.ceil(total_job / 8)
+                            if (startpage == "" || startpage < 1 || startpage > totalpage) {
+                                limit = `limit 0,8`
+                                startpage = 1
+                            } else {
+                                limit = `limit ${startpage * 8 - 8},8`
+                            }
+
+
+                        }
+                        sql2 += like
+                        sql2 += limit
+                        // เริ่ม Query 4
+                        pool.query(sql2, (err, resultsjob) => {
+                            if (err) { return console.log(err); }
+                            //res.json(total_job)
+                            // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
+                            res.render("home/homepage", {
+                                userdata: results[0] || {},
+                                job: resultsjob,
+                                jobcount: job_count,
+                                order: data,
+                                totalpost: total_job,
+                                currentPage: startpage
+                            });
                         });
                     });
                 });
-            });
-        } else{
-            res.redirect('/home')
-        }   
-    });
+            } else {
+                res.redirect('/home')
+            }
+        });
 });
 
 
@@ -461,9 +495,31 @@ router.get("/home/profilestudent/:id", (req, res) => {
             if (err) {
                 console.log(err)
             }
-            res.render("profile/profile", {
-                userdata: results[0],
-                post: datas[0]
+
+            // Fetch Reviews with Like Count and User Like Status
+            const sqlReviews = `SELECT sr.*, 
+                                userdata.username, userdata.profile_image,
+                                sd.firstname, sd.lastname,
+                                (SELECT COUNT(*) FROM review_likes rl WHERE rl.review_id = sr.review_id) AS likes,
+                                (SELECT COUNT(*) FROM review_likes rl WHERE rl.review_id = sr.review_id AND rl.user_id = ?) AS is_liked
+                                FROM service_reviews sr
+                                LEFT JOIN userdata ON userdata.ID = sr.reviewer_id 
+                                LEFT JOIN studentdata sd ON sd.email = userdata.email
+                                WHERE sr.student_id = ? ORDER BY sr.review_date DESC`
+
+            pool.query(sqlReviews, [results[0].ID, id], (err, reviews) => {
+                if (err) {
+                    console.error("Error fetching reviews:", err)
+                    reviews = []
+                }
+                console.log(`[DEBUG] Fetched ${reviews ? reviews.length : 0} reviews from DB for student ${id}`);
+                console.log(`[DEBUG] Reviews data:`, reviews);
+
+                res.render("profile/profile", {
+                    userdata: results[0],
+                    post: datas[0],
+                    reviews: reviews || []
+                })
             })
         })
         //res.json(results)
@@ -486,24 +542,44 @@ router.get("/home/profilegeneral/:id", (req, res) => {
     }
 
     pool.query(sql1, [email], (err, results, fields) => {
-        if (err) {  
+        if (err) {
             console.error(err)
             return res.redirect("/login")
         }
 
         const userId = results[0].ID
 
-        // Fetch job postings for this user
-        pool.query(sql2, [id], (err, jobs) => {
+        // 1. Fetch Profile Owner's Data (profileUser)
+        const sqlProfileUser = `SELECT * FROM userdata WHERE ID = ?`
+
+        // 2. Fetch Profile Owner's Jobs
+        const sqlJobs = `SELECT * FROM general_orders WHERE general_id = ? ORDER BY post_date DESC`
+
+        pool.query(sqlProfileUser, [id], (err, profileUserResults) => {
             if (err) {
-                console.error("Error fetching jobs:", err)
-                jobs = []
+                console.error("Error fetching profile user:", err)
+                return res.redirect("/home")
             }
-            //res.json(jobs)
-            res.render("profile/profilegen", {
-                userdata: results[0],
-                jobs: jobs || [],
-                jobCount: jobs ? jobs.length : 0
+
+            if (profileUserResults.length === 0) {
+                return res.redirect("/home?error=user_not_found")
+            }
+
+            const profileUser = profileUserResults[0]
+
+            // Fetch job postings for this user
+            pool.query(sqlJobs, [id], (err, jobs) => {
+                if (err) {
+                    console.error("Error fetching jobs:", err)
+                    jobs = []
+                }
+
+                res.render("profile/profilegen", {
+                    userdata: results[0], // Logged-in User
+                    profileUser: profileUser, // User being viewed
+                    jobs: jobs || [],
+                    jobCount: jobs ? jobs.length : 0
+                })
             })
         })
     })
@@ -611,6 +687,15 @@ router.get("/home/viewStdPost/:id", (req, res) => {
                 console.log(err)
                 return res.redirect('/error=114')
             }
+            if (!data || data.length === 0) {
+                console.log(`[DEBUG] No post found for ID: ${id}`);
+                return res.redirect('/home?error=post_not_found');
+            }
+            if (!results || results.length === 0) {
+                console.log(`[DEBUG] User not found for email: ${email}`);
+                return res.redirect('/login');
+            }
+
             //res.json(data[0])
             res.render("post/viewpoststd", {
                 userdata: results[0],
@@ -632,6 +717,19 @@ const createCommentTableSql = `CREATE TABLE IF NOT EXISTS post_comments (
 pool.query(createCommentTableSql, (err) => {
     if (err) { console.error("Error creating post_comments table:", err) }
     else { console.log("post_comments table checked/created") }
+})
+
+// Create review_likes table if not exists
+const createReviewLikesTableSql = `CREATE TABLE IF NOT EXISTS review_likes (
+    like_id INT AUTO_INCREMENT PRIMARY KEY,
+    review_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_like (review_id, user_id)
+)`
+pool.query(createReviewLikesTableSql, (err) => {
+    if (err) { console.error("Error creating review_likes table:", err) }
+    else { console.log("review_likes table checked/created") }
 })
 
 router.get("/home/viewGeneralPost/:id", (req, res) => {
@@ -716,6 +814,50 @@ router.post("/home/general/comment", (req, res) => {
     })
 })
 
+router.post("/student/review/like", (req, res) => {
+    const { review_id } = req.body;
+    const { id } = req.cookies; // User ID from cookie
+
+    if (!id) {
+        return res.json({ success: false, message: "กรุณาเข้าสู่ระบบก่อนกดถูกใจ" });
+    }
+
+    // Check if like exists
+    const checkSql = `SELECT * FROM review_likes WHERE review_id = ? AND user_id = ?`;
+    pool.query(checkSql, [review_id, id], (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.json({ success: false, message: "เกิดข้อผิดพลาด" });
+        }
+
+        if (results.length > 0) {
+            // Un-like
+            const deleteSql = `DELETE FROM review_likes WHERE review_id = ? AND user_id = ?`;
+            pool.query(deleteSql, [review_id, id], (err) => {
+                if (err) return res.json({ success: false, message: "ไม่สามารถยกเลิกถูกใจได้" });
+
+                // Get new like count
+                const countSql = `SELECT COUNT(*) as count FROM review_likes WHERE review_id = ?`;
+                pool.query(countSql, [review_id], (err, countRes) => {
+                    res.json({ success: true, liked: false, likes: countRes[0].count });
+                });
+            });
+        } else {
+            // Like
+            const insertSql = `INSERT INTO review_likes (review_id, user_id) VALUES (?, ?)`;
+            pool.query(insertSql, [review_id, id], (err) => {
+                if (err) return res.json({ success: false, message: "ไม่สามารถกดถูกใจได้" });
+
+                // Get new like count
+                const countSql = `SELECT COUNT(*) as count FROM review_likes WHERE review_id = ?`;
+                pool.query(countSql, [review_id], (err, countRes) => {
+                    res.json({ success: true, liked: true, likes: countRes[0].count });
+                });
+            });
+        }
+    });
+});
+
 router.post("/student/deletePost", (req, res) => {
     const sql = `delete from user_job where ID = ?`
     const { email, id } = req.cookies
@@ -776,6 +918,7 @@ router.post("/general/changeAvatar", upload.single("file_input"), (req, res) => 
 router.get("/home/filter/:job_type", (req, res) => {
     const { email } = req.cookies
     const jobType = req.params.job_type
+    console.log(`[DEBUG] Accessing filter for jobType: ${jobType}`);
 
     // ใช้ชื่อเดิม: startpage
     let startpage = parseInt(req.query.startpage) || 1
@@ -805,6 +948,11 @@ router.get("/home/filter/:job_type", (req, res) => {
         if (err) {
             console.log(err)
             return res.redirect("/home?error=105")
+        }
+
+        if (!results || results.length === 0) {
+            console.log(`[DEBUG] User not found for email: ${email}`);
+            return res.redirect("/login");
         }
 
         // เริ่ม Query 2: sqlCount (นับจำนวน) -> เก็บผลใน countResult
@@ -841,7 +989,8 @@ router.get("/home/filter/:job_type", (req, res) => {
                     totalpost: totalpost, // ส่งค่าจำนวนงานทั้งหมดไป
                     currentPage: startpage, // ส่งหน้าปัจจุบันไป
                     paginationUrl: `/home/filter/${jobType}`,
-                    budget: null
+                    budget: null,
+                    currentUrl: req.originalUrl
                 })
             })
         })
@@ -1171,14 +1320,17 @@ router.post("/general/reviewStudent", upload.single("review_image"), (req, res) 
             return res.status(500).json({ success: false, message: "Failed to submit review" })
         }
 
-        // Redirect back to student profile
-        res.redirect(`/home/profilestudent/${student_id}`)
+        // Redirect back to the return_url if available, or default to home/profile
+        const returnUrl = req.body.return_url || `/home/profilestudent/${student_id}`
+        res.redirect(returnUrl)
     })
 })
 
 // Fetch reviews for a specific student
 router.get("/api/reviews/:studentId", (req, res) => {
     const studentId = req.params.studentId
+
+    const id = req.cookies.id || 0 // User ID from cookie (0 if not logged in)
 
     const sql = `SELECT 
                     sr.review_id,
@@ -1190,14 +1342,16 @@ router.get("/api/reviews/:studentId", (req, res) => {
                     u.profile_image,
                     sd.firstname,
                     sd.lastname,
-                    u.roles
+                    u.roles,
+                    (SELECT COUNT(*) FROM review_likes rl WHERE rl.review_id = sr.review_id) AS likes,
+                    (SELECT COUNT(*) FROM review_likes rl WHERE rl.review_id = sr.review_id AND rl.user_id = ?) AS is_liked
                 FROM service_reviews sr
                 LEFT JOIN userdata u ON sr.reviewer_id = u.ID
                 LEFT JOIN studentdata sd ON u.email = sd.email
                 WHERE sr.student_id = ?
-                ORDER BY sr.review_date DESC`
+                ORDER BY likes DESC, sr.review_date DESC`
 
-    pool.query(sql, [studentId], (err, reviews) => {
+    pool.query(sql, [id, studentId], (err, reviews) => {
         if (err) {
             console.error("Error fetching reviews:", err)
             return res.status(500).json({ success: false, message: "Failed to fetch reviews" })
@@ -1229,7 +1383,9 @@ router.get("/api/reviews/:studentId", (req, res) => {
                 rating: r.rating,
                 comment: r.comment,
                 reviewImg: r.review_image ? `/imageForTest/${r.review_image}` : null,
-                timestamp: r.review_date
+                timestamp: r.review_date,
+                likes: r.likes || 0,
+                isLiked: r.is_liked > 0
             })),
             stats: {
                 total,
@@ -1239,5 +1395,54 @@ router.get("/api/reviews/:studentId", (req, res) => {
         })
     })
 })
+
+// API to fetch general orders with filtering
+router.get("/api/general/orders", (req, res) => {
+    let sql = "SELECT * FROM general_orders";
+    let params = [];
+    let conditions = [];
+
+    // Search filter
+    if (req.query.table_search) {
+        conditions.push("title LIKE ?");
+        params.push(`%${req.query.table_search}%`);
+    }
+
+    // Type filter
+    if (req.query.table_type) {
+        const typeMap = {
+            "1": "งานทั่วไป",
+            "2": "เขียนโปรแกรม",
+            "3": "กราฟิกดีไซน์",
+            "4": "ตัดต่อวิดีโอ",
+            "5": "แปลภาษา",
+            "6": "การศึกษา",
+            "7": "ถ่ายภาพ",
+            "8": "ดนตรีและเสียง",
+            "9": "เอกสาร",
+            "10": "ซ่อมแซม",
+            "11": "อื่นๆ"
+        };
+        if (typeMap[req.query.table_type]) {
+            conditions.push("orderType = ?");
+            params.push(typeMap[req.query.table_type]);
+        }
+    }
+
+    if (conditions.length > 0) {
+        sql += " WHERE " + conditions.join(" AND ");
+    }
+
+    // Order by date descending (newest first)
+    sql += " ORDER BY post_date DESC";
+
+    pool.query(sql, params, (err, results) => {
+        if (err) {
+            console.error("Error fetching general orders:", err);
+            return res.status(500).json({ success: false, message: "Database error" });
+        }
+        res.json({ success: true, data: results });
+    });
+});
 
 module.exports = router

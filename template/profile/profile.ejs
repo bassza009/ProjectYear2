@@ -60,7 +60,7 @@
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
                                 <%}else{%>
-                                    <a href="/home/profilegeneral">
+                                    <a href="/home/profilegeneral/<%=userdata.ID%>">
                                         <button class="b_view">ดูโปรไฟล์</button>
                                     </a>
                                     <%}%>
@@ -322,6 +322,21 @@
         </div>
     </footer>
 
+    <!-- Safe Data Injection -->
+    <script id="server-reviews-data" type="application/json">
+        <%- JSON.stringify(reviews || []) %>
+    </script>
+
+    <script>
+        try {
+            const rawData = document.getElementById('server-reviews-data').textContent;
+            window.serverReviews = JSON.parse(rawData);
+            console.log("Server Reviews loaded (via JSON tag):", window.serverReviews);
+        } catch (e) {
+            console.error("Failed to parse review data:", e);
+            window.serverReviews = [];
+        }
+    </script>
     <script src="/../profilejs/review_star.js"></script>
     <script src="/../profilejs/swith_PR.js"></script>
     <script src="/../profilejs/script.js"></script>

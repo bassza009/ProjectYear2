@@ -71,7 +71,7 @@
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                             <% } else{ %>
-                                <a href="/home/profilegeneral">
+                                <a href="/home/profilegeneral/<%=userdata.ID%>">
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
                                 <% } %>
@@ -106,7 +106,7 @@
             <div class="form_input">
                 <form id="searchForm" action="/home/search" method="get">
                     <img src="../icon/search.png">
-                    <input type="search" id="search" name = 'search' placeholder="ค้นหา">
+                    <input type="search" id="search" name='search' placeholder="ค้นหา">
                     <button id="reset" type="reset">ล้าง</button>
                     <button id="submit" type="submit">ค้นหา</button>
                 </form>
@@ -350,58 +350,98 @@
                         </div>
 
                         <%}%>
-                            
-                <!-- --------------------------------------------------------------------------------------------------------------------- -->
-                <div class="post_job">
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ชื่องาน</th>
-                                    <th>ประเภท</th>
-                                    <th>งบประมาณ (บาท)</th>
-                                    <th>ลงประกาศเมื่อ</th>
-                                    <th>กำหนดส่ง</th>
-                                    <th>จัดการ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% if(order.length>0){ %>
-                                    <% order.forEach((orders)=>{%>
-                                        <tr onclick="window.location.href='/home/viewGeneralPost/<%=orders.order_ID%>'"
-                                            style="cursor:pointer;">
-                                            <td>
-                                                <%=orders.title%>
-                                            </td>
-                                            <td>
-                                                <%=orders.orderType%>
-                                            </td>
-                                            <td>
-                                                <%=Number(orders.budjet).toLocaleString()%>
-                                            </td>
-                                            <td>
-                                                <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
-                                            </td>
-                                            <td>
-                                                <%=orders.deadline ? new
-                                                    Date(orders.deadline).toLocaleDateString('th-TH') : "-" %>
-                                            </td>
-                                            <td>-</td>
-                                        </tr>
-                                        <%})%>
-                                            <%}else{%>
-                                                <tr>
-                                                    <td colspan="6" style="text-align:center;">
-                                                        ยังไม่มีงานที่คุณประกาศ
-                                                    </td>
-                                                </tr>
-                                                <%}%>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- pagination ของโพสต์งาน -->
-                    <div class="pagination" id="jobPagination"></div>
-                </div>
+
+                            <!-- --------------------------------------------------------------------------------------------------------------------- -->
+                            <div class="post_job">
+                                <form action="/home" method="GET" style="width: 100%;">
+                                    <input type="hidden" name="startpage" value="1">
+                                    <div class="filter-bar">
+                                        <div class="filter-group">
+                                            <div class="search-container">
+                                                <input type="text" name="table_search" class="search-input"
+                                                    placeholder="ค้นหางาน..."
+                                                    value="<%= typeof table_search !== 'undefined' ? table_search : '' %>">
+                                                <button type="submit" class="btn-search">ค้นหา</button>
+                                            </div>
+                                            <select name="table_type" class="filter-select"
+                                                style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none; cursor: pointer;">
+                                                <option value="">ทั้งหมด</option>
+                                                <option value="1" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='1' ) ? 'selected' : '' %>>งานทั่วไป</option>
+                                                <option value="2" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='2' ) ? 'selected' : '' %>>เขียนโปรแกรม</option>
+                                                <option value="3" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='3' ) ? 'selected' : '' %>>กราฟิกดีไซน์</option>
+                                                <option value="4" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='4' ) ? 'selected' : '' %>>ตัดต่อวิดีโอ</option>
+                                                <option value="5" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='5' ) ? 'selected' : '' %>>แปลภาษา</option>
+                                                <option value="6" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='6' ) ? 'selected' : '' %>>การศึกษา</option>
+                                                <option value="7" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='7' ) ? 'selected' : '' %>>ถ่ายภาพ</option>
+                                                <option value="8" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='8' ) ? 'selected' : '' %>>ดนตรีและเสียง</option>
+                                                <option value="9" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='9' ) ? 'selected' : '' %>>เอกสาร</option>
+                                                <option value="10" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='10' ) ? 'selected' : '' %>>ซ่อมแซม</option>
+                                                <option value="11" <%=(typeof table_type !=='undefined' &&
+                                                    table_type=='11' ) ? 'selected' : '' %>>อื่นๆ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>ชื่องาน</th>
+                                                <th>ประเภท</th>
+                                                <th>งบประมาณ (บาท)</th>
+                                                <th>ลงประกาศเมื่อ</th>
+                                                <th>กำหนดส่ง</th>
+                                                <th>จัดการ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(order.length>0){ %>
+                                                <% order.forEach((orders)=>{%>
+                                                    <tr onclick="window.location.href='/home/viewGeneralPost/<%=orders.order_ID%>'"
+                                                        style="cursor:pointer;">
+                                                        <td>
+                                                            <%=orders.title%>
+                                                        </td>
+                                                        <td>
+                                                            <%=orders.orderType%>
+                                                        </td>
+                                                        <td>
+                                                            <%=Number(orders.budjet).toLocaleString()%>
+                                                        </td>
+                                                        <td>
+                                                            <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
+                                                        </td>
+                                                        <td>
+                                                            <%=orders.deadline ? new
+                                                                Date(orders.deadline).toLocaleDateString('th-TH') : "-"
+                                                                %>
+                                                        </td>
+                                                        <td>-</td>
+                                                    </tr>
+                                                    <%})%>
+                                                        <%}else{%>
+                                                            <tr>
+                                                                <td colspan="6" style="text-align:center;">
+                                                                    ยังไม่มีงานที่คุณประกาศ
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- pagination ของโพสต์งาน -->
+                                <div class="pagination" id="jobPagination"></div>
+                            </div>
             </div>
         </main>
     </div>
@@ -420,7 +460,8 @@
 
     <script src="/../homejs/profile_buttom.js"></script>
     <script src="/../homejs/view_post.js"></script>
-    <script src="/../homejs/table.js"></script>
+    <script src="/../homejs/table_filter.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

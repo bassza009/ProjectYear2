@@ -65,7 +65,7 @@
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>
                         <%}else{%>
-                            <a href="/home/profilegeneral">
+                            <a href="/home/profilegeneral/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                             <%}%>
@@ -99,7 +99,8 @@
                                     <%category.forEach((type)=>{%>
                                         <a href="/home/filter/<%=type%>">
                                             <button class="tab <%=jobtype === type ? " active":""%>"data-category="all">
-                                                <%=type%></button>
+                                                <%=type%>
+                                            </button>
                                         </a>
                                         <%})%>
                                 </div>
@@ -113,27 +114,27 @@
 
                     <!-- Sidebar -->
                     <aside class="sidebar">
-                        <% const currentType=(typeof jobtype !== "undefined" && jobtype) ? jobtype : 'all' ; %>
+                        <% const currentType=(typeof jobtype !=="undefined" && jobtype) ? jobtype : 'all' ; %>
                             <form action="/home/filter/<%=currentType%>/budget" method="get">
                                 <h3>ตัวคัดกรองราคา</h3>
                                 <input name='budget' type="text" placeholder="งบประมาณที่คุณมีอยู่"
-                                    value="<%=typeof budget !=="undefined"?budget : "" %>">
+                                    value="<%=typeof budget !==" undefined"?budget : "" %>">
                                 <h3>เรียงตาม</h3>
                                 <div class="price-tabs">
 
-                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/review' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>
                                             /review">คะแนนรีวิว</button>
-                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/count' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>
                                             /count">จำนวนงานที่รับ</button>
-                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/highlow' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>/highlow">ราคา
                                             (ต่ำ-สูง)</button>
-                                    <button class="tab price <%=(typeof currentUrl !=="undefined"&&
+                                    <button class="tab price <%=(typeof currentUrl !==" undefined"&&
                                         currentUrl.includes('/home/filter/' + currentType + '/lowhigh' ))?"active":""%>"
                                         type="submit" formaction="/home/filter/<%=currentType%>/lowhigh">ราคา
                                             (สูง-ต่ำ)</button>
@@ -161,62 +162,71 @@
                                                         <div class="card-content">
                                                             <div class="profile-area">
                                                                 <% if(job.profile_image){ %>
-                                                                    <img src="/imageForTest/<%= job.profile_image %>"alt="<%= job.profile_image%>" class="avatar">       
-                                                                <% } else{%>
-                                                                    <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"alt="โปรไฟล์" class="avatar">            
-                                                                <% }%>
-                                                        <div class="name_tag">
-                                                            <font style="font-size: 20px;"><b><%= job.firstname %> <%= job.lastname %></b><br></font>     
-                                                            <small><%= job.job_type %></small>               
+                                                                    <img src="/imageForTest/<%= job.profile_image %>"
+                                                                        alt="<%= job.profile_image%>" class="avatar">
+                                                                    <% } else{%>
+                                                                        <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
+                                                                            alt="โปรไฟล์" class="avatar">
+                                                                        <% }%>
+                                                                            <div class="name_tag">
+                                                                                <font style="font-size: 20px;"><b>
+                                                                                        <%= job.firstname %>
+                                                                                            <%= job.lastname %>
+                                                                                    </b><br></font>
+                                                                                <small>
+                                                                                    <%= job.job_type %>
+                                                                                </small>
+                                                                            </div>
+                                                            </div>
+                                                            <div class="title">
+                                                                <%= job.title %>
+                                                            </div>
+                                                            <div class="desc">
+                                                                <%= job.des_Cription %>
+                                                            </div>
+                                                            <div class="price">
+                                                                <span>เริ่มต้น</span><br>
+                                                                <b>
+                                                                    <%= job.budjet %> บาท
+                                                                </b>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                <div class="title">
-                                                    <%= job.title %>
-                                                </div>
-                                                <div class="desc">
-                                                    <%= job.des_Cription %>
-                                                </div>
-                                            <div class="price">
-                                                    <span>เริ่มต้น</span><br>
-                                                <b>
-                                                    <%= job.budjet %> บาท
-                                                </b>
-                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            <%})%>
-                            <%}else{%>
-                                <p>no job right now</p>
-                            <%}%>
+                                    </a>
+                                    <%})%>
+                                        <%}else{%>
+                                            <p>no job right now</p>
+                                            <%}%>
                         </div>
-                        <%const page = Math.ceil(totalpost/8);%>
-                        <%if(post.length){%>
-                            
-                                <div class="pagination" id="pagination">    
-                                    
-                                    
-                                        <%if(currentPage>1){%>
-                                        <a href="/?startpage=<%=currentPage-1%>">   
-                                            <small><</small>
-                                        </a> 
-                                            
-                                    <%}%> 
+                        <%const page=Math.ceil(totalpost/8);%>
+                            <%if(post.length){%>
 
-                                    <%for(i=1;i<=page;i++){%>
-                                        <a class="page-btn <%=(i==currentPage)?'active':""%>" href="<%= paginationUrl %>?startpage=<%=i%><%= (typeof budget != 'undefined' && budget) ? '&budget='+budget : '' %>">
-                                            <%=i%>
+                                <div class="pagination" id="pagination">
+
+
+                                    <%if(currentPage>1){%>
+                                        <a href="/?startpage=<%=currentPage-1%>">
+                                            <small>
+                                                << /small>
                                         </a>
-                                    <%}%>  
-                                    <%if(currentPage!=page){%>  
-                                        <a href="/?startpage=<%=currentPage+1%>">    
-                                            <small>></small>
-                                        </a>
-                                    <%}%>
-                                    
+
+                                        <%}%>
+
+                                            <%for(i=1;i<=page;i++){%>
+                                                <a class="page-btn <%=(i==currentPage)?'active':""%>"
+                                                    href="<%= paginationUrl %>?startpage=<%=i%><%= (typeof budget != 'undefined' && budget) ? '&budget='+budget : '' %>">
+                                                    <%=i%>
+                                                </a>
+                                                <%}%>
+                                                    <%if(currentPage!=page){%>
+                                                        <a href="/?startpage=<%=currentPage+1%>">
+                                                            <small>></small>
+                                                        </a>
+                                                        <%}%>
+
                                 </div>
-                            
-                        <%}%>
+
+                                <%}%>
                     </section>
 
                 </div>

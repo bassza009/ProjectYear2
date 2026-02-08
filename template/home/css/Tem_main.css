@@ -2,7 +2,7 @@ main {
     max-width: 1400px;
     height: auto;
     width: 90%;
-    margin: 40px auto; 
+    margin: 40px auto;
     background-color: white;
     padding: 0;
     border-radius: 10px;
@@ -14,7 +14,7 @@ main {
     justify-content: space-between;
     padding: 0px 5%;
     background: white;
-    
+
 }
 
 .text_recommend h1 {
@@ -36,12 +36,14 @@ main {
 
 .btn-post:hover {
     background: #8e44ad;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transform: translateY(-5px);
 }
+
 .btn-post:active {
     background: #868686;
 }
+
 .img_right img {
     width: 400px;
     height: auto;
@@ -56,18 +58,18 @@ main {
 .form_input form {
     display: flex;
     align-items: center;
-    background-color: white; 
-    padding: 5px 15px; 
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
+    background-color: white;
+    padding: 5px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     margin-top: -0.25rem;
 }
 
 .form_input select {
     padding: 10px 10px;
-    color: #333; 
+    color: #333;
     border: none;
-    background: transparent; 
+    background: transparent;
     cursor: pointer;
     outline: none;
 }
@@ -75,18 +77,23 @@ main {
 .form_input input {
     padding: 10px 15px;
     border: none;
-    border-left: 1px solid #ddd; 
-    flex: 1; 
+    border-left: 1px solid #ddd;
+    flex: 1;
     outline: none;
 }
-.data_box { /* ซ่อนตอนเริ่ม */
-    display: none; 
-} 
-.data_box.show { /* แสดงเมื่อมีคลาส show */
-    display: block; 
-} 
 
-#reset, #submit {
+.data_box {
+    /* ซ่อนตอนเริ่ม */
+    display: none;
+}
+
+.data_box.show {
+    /* แสดงเมื่อมีคลาส show */
+    display: block;
+}
+
+#reset,
+#submit {
     padding: 8px 20px;
     border: none;
     border-radius: 6px;
@@ -95,7 +102,7 @@ main {
 }
 
 #reset {
-    background-color: #8e8e8e; 
+    background-color: #8e8e8e;
     color: white;
 }
 
@@ -106,7 +113,7 @@ main {
 
 
 #reset,
-#submit{
+#submit {
     color: white;
     padding: 5px 7px;
     margin-right: 5px;
@@ -126,23 +133,27 @@ main {
     transition: 0.2s;
 }
 
-#reset:hover{
+#reset:hover {
     background: red;
 }
-#submit:hover{
+
+#submit:hover {
     background: green;
 }
-#submit:active, #reset:active {
+
+#submit:active,
+#reset:active {
     background: #868686;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-/* <!-- --------------------------------------------------------------------------------------------------------------------- --> */
-.section-title { 
-    padding: 0 5%;  
-    font-size: 1.5rem; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.post_skill{
+/* <!-- --------------------------------------------------------------------------------------------------------------------- --> */
+.section-title {
+    padding: 0 5%;
+    font-size: 1.5rem;
+}
+
+.post_skill {
     padding: 0;
     margin: 0;
 }
@@ -154,32 +165,38 @@ main {
     padding: 15px 0;
     margin: 0 auto;
 }
-.card{
+
+.card {
     background: white;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     transition: 0.3s;
     border: 1px solid #eee;
 }
-.card:hover{
+
+.card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
+
 .card-img {
     width: 100%;
     height: 160px;
     object-fit: cover;
     background: #ddd;
 }
-.card-content{
-   padding: 15px; 
-   position: relative;
-}
+
 .card-content {
     padding: 15px;
     position: relative;
 }
+
+.card-content {
+    padding: 15px;
+    position: relative;
+}
+
 .profile-area {
     display: flex;
     gap: 5px;
@@ -187,12 +204,14 @@ main {
     margin-bottom: 10px;
     font-family: 'Sarabun';
 }
+
 .avater {
     width: 40px;
     height: 40px;
     margin: 10px 0;
     color: #333;
 }
+
 .title {
     font-size: 1.1rem;
     font-weight: 500;
@@ -200,6 +219,7 @@ main {
     color: #333;
     font-family: 'Sarabun';
 }
+
 .desc {
     font-size: 0.85rem;
     color: #4d4b4b;
@@ -208,6 +228,7 @@ main {
     line-height: 1.2;
     font-family: 'Prompt', sans-serif;
 }
+
 .price {
     text-align: right;
     color: #2baf2b;
@@ -216,10 +237,11 @@ main {
     margin-top: 5px;
     font-family: 'Kanit';
 }
+
 .price span {
-    font-weight:normal;
-    font-size:1rem;
-    color:#2baf2b;
+    font-weight: normal;
+    font-size: 1rem;
+    color: #2baf2b;
     font-family: 'Kanit';
 }
 
@@ -233,7 +255,7 @@ main {
     gap: 6px;
     margin-top: 50px;
     font-family: 'Kanit', sans-serif;
-}                                               
+}
 
 .page-btn {
     display: flex;
@@ -242,25 +264,27 @@ main {
     border-radius: 50%;
     border: none;
     justify-content: center;
-    
+
     align-items: center;
     background-color: transparent;
-    color: #9b59b6;             
+    color: #9b59b6;
     font-size: 14px;
-    
+
 }
 
 .page-btn:hover {
     background-color: #e8f0fe;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 .page-btn.active {
     background-color: #9b59b6;
     color: #fff;
     font-weight: 500;
-    
+
 }
 
 .page-btn.prev,
@@ -292,6 +316,7 @@ a{
     object-fit: cover;
     flex-shrink: 0;
 }
+
 .avatar {
     width: 48px;
     height: 48px;
@@ -355,19 +380,22 @@ a{
     text-decoration: none;
     transition: all 0.3s ease;
     border: 1px solid #f0f0f0;
-    height: 90px; 
+    height: 90px;
     box-sizing: border-box;
 }
-.icon-box img{
-    width: 32px;  
+
+.icon-box img {
+    width: 32px;
     height: 32px;
-    object-fit: contain; 
+    object-fit: contain;
 }
-.icon-box img, .form_input img{
+
+.icon-box img,
+.form_input img {
     padding: 10px;
-    width: 32px;  
+    width: 32px;
     height: 32px;
-    object-fit: contain; 
+    object-fit: contain;
 }
 
 
@@ -403,20 +431,99 @@ a{
 }
 
 /* ใส่สีแยกตามประเภท (Soft Colors) */
-.color-1 .icon-box { background: #e3f2fd; color: #1e88e5; } /* Blue */
-.color-2 .icon-box { background: #f3e5f5; color: #8e24aa; } /* Purple */
-.color-3 .icon-box { background: #fff3e0; color: #fb8c00; } /* Orange */
-.color-4 .icon-box { background: #e8f5e9; color: #43a047; } /* Green */
-.color-5 .icon-box { background: #ffebee; color: #e53935; } /* Red */
-.color-6 .icon-box { background: #e0f7fa; color: #00acc1; } /* Cyan */
+.color-1 .icon-box {
+    background: #e3f2fd;
+    color: #1e88e5;
+}
+
+/* Blue */
+.color-2 .icon-box {
+    background: #f3e5f5;
+    color: #8e24aa;
+}
+
+/* Purple */
+.color-3 .icon-box {
+    background: #fff3e0;
+    color: #fb8c00;
+}
+
+/* Orange */
+.color-4 .icon-box {
+    background: #e8f5e9;
+    color: #43a047;
+}
+
+/* Green */
+.color-5 .icon-box {
+    background: #ffebee;
+    color: #e53935;
+}
+
+/* Red */
+.color-6 .icon-box {
+    background: #e0f7fa;
+    color: #00acc1;
+}
+
+/* Cyan */
 
 /* Hover Effect */
 .cat-card-icon:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    border-color: #9b59b6; /* เปลี่ยนสีขอบเป็นสีธีมเมื่อชี้ */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    border-color: #9b59b6;
+    /* เปลี่ยนสีขอบเป็นสีธีมเมื่อชี้ */
 }
 
 .cat-card-icon:hover .icon-box {
     transform: scale(1.1);
+}
+
+/* แถบคัดกรองภายในส่วนตาราง */
+.filter-bar {
+    background: #fdfbff;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+    /* มนแค่ขอบบนให้ติดกับตาราง */
+    border: 1px solid #eee;
+    border-bottom: none;
+}
+
+.filter-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    flex-grow: 1;
+    /* ขยายช่องค้นหาให้เต็มพื้นที่ที่เหลือ */
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    /* มนแค่ฝั่งซ้าย */
+    outline: none;
+}
+
+.btn-search {
+    background-color: #AE73D8;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 8px 8px 0;
+    /* มนแค่ฝั่งขวา */
+    cursor: pointer;
+}
+
+/* ปรับ table-container ให้ต่อจาก filter-bar ได้สนิท */
+.table-container {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: 0;
 }
