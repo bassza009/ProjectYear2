@@ -48,9 +48,17 @@
                     </div>
 
                     <div class="button_VO">
-                        <!--<a href="../Profile/profile_gen.html">
-                            <button class="b_view">ดูโปรไฟล์</button>
-                        </a>-->
+                        <%if(userdata.ID!=profileUser.general_id){%>
+                            <%if(userdata.roles=="student"){%>    
+                                <a href="/home/profilestudent/<%=userdata.ID%>">
+                                    <button class="b_view">ดูโปรไฟล์</button>
+                                </a>
+                            <%}else if(userdata.roles=="general"){%>
+                                <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                    <button class="b_view">ดูโปรไฟล์</button>
+                                </a>
+                            <%}%>
+                        <%}%>
                         <a>
                             <form action="/logout" method="post">
                                 <button class="b_logout">ออกจากระบบ</button>
@@ -76,9 +84,11 @@
                                     <%if(userdata.general)%>
                                         <input type="file" accept="image/*" id="avatar_upload"
                                             onchange="edit_profile_gen(this)" style="display: none;">
+                                        <%if(userdata.ID==profileUser.general_id){%>
                                         <button class="edit-avatar-btn"
                                             onclick="document.getElementById('avatar_upload').click()">✎</button>
-                    </div>
+                                        <%}%>
+                                    </div>
 
                     <div class="header-info">
                         <div class="name-rating-row">
@@ -117,6 +127,7 @@
                             <div class="job-list">
                                 <% if (jobs && jobs.length> 0) { %>
                                     <% jobs.forEach(job=> { %>
+                                        <a href="/home/viewGeneralPost/<%=job.order_ID%>">
                                         <article class="job-item">
                                             <div class="job-info">
                                                 <h1 class="job-link">
@@ -143,6 +154,7 @@
                                                 <span class="status-tag active">กำลังรับสมัคร</span>
                                             </div>
                                         </article>
+                                        </a>
                                         <% }) %>
                                             <% } else { %>
                                                 <p style="text-align: center; color: #94a3b8;">

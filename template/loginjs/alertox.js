@@ -2,6 +2,7 @@ const url_param = new URLSearchParams(window.location.search)
         const error_code = url_param.get('error')
         const edit_success = url_param.get("edit_success")      //const error_element = document.getElementById('error_text')
         const post_success = url_param.get("post_success")
+        const success = url_param.get("success")
         if(error_code === "108"){
             Swal.fire({
                 icon: 'error',
@@ -46,6 +47,14 @@ const url_param = new URLSearchParams(window.location.search)
             icon: 'success',
             title: 'โพสสำเร็จ',
             text: 'โพสความสามารถของคุณถูกโพสแล้ว',
+            confirmButtonColor: 'rgb(57, 221, 51)' // สีปุ่มแดง
+            })
+    }
+    else if(success ==="102"){
+        Swal.fire({
+            icon: 'success',
+            title: 'ลบโพสสำเร็จ',
+            text: 'โพสความสามารถของคุณถูกลบแล้ว',
             confirmButtonColor: 'rgb(57, 221, 51)' // สีปุ่มแดง
             })
     }

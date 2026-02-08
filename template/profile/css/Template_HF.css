@@ -11,7 +11,9 @@ body {
 .content-wrapper {
     flex: 1; 
 }
-
+a{
+    text-decoration: none;
+}
 
 header {
     display: flex;

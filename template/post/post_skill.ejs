@@ -89,9 +89,29 @@
                                             <button type="button" class="img_up">อัปโหลดภาพ</button>
                                         </div>
 
+<<<<<<< HEAD
+                            <img id="preview" 
+                                src="<%= userdata.service_image ? '/imageForTest/' + userdata.service_image : '' %>" 
+                                style="<%= userdata.service_image ? 'display:block;' : 'display:none;' %>">
+                            
+                            <input type="file" id="fileInput" name="file_input" hidden accept="image/*" >
+                        </div>
+                        
+                    
+                        <div class="inputnamejob">
+                            <label>ชื่องาน</label>
+                            <input type="text" id="title" name="title" required placeholder="ชื่องาน" value="<%=userdata.title%>">
+                        </div>
+                        <div class="form-row">
+                            <div class="inputcategory" required>
+                                <% 
+                                    const categories = ['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','อื่นๆ'];
+                                %>
+=======
                                         <img id="preview"
                                             src="<%= userdata.service_image ? '/imageForTest/' + userdata.service_image : '' %>"
                                             style="<%= userdata.service_image ? 'display:block;' : 'display:none;' %>">
+>>>>>>> 5642b455f94dd2c3864f39a312476389e982c6c6
 
                                         <input type="file" id="fileInput" name="file_input" hidden accept="image/*">
                                     </div>
