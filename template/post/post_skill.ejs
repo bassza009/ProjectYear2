@@ -21,15 +21,11 @@
                 <div class="buttom_header">
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
-
                             <% if(userdata.profile_image){ %>
-                                <img src="/imageForTest/<%= userdata.profile_image %>"
-                                    alt="<%= userdata.profile_image%>">
-                                <% } else{%>
-                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                        alt="โปรไฟล์">
-                                    <% }%>
-
+                                <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                            <% }%>
                         </div>
                         <span>Profile</span>
                     </button>
@@ -39,18 +35,15 @@
                     <div class="user_infor">
                         <% if(userdata.profile_image){ %>
                             <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                    alt="โปรไฟล์">
-                                <% }%>
-                                    <div class="user_name">
-                                        <h1>
-                                            <%= userdata.firstname %>
-                                                <%= userdata.lastname %>
-                                        </h1>
-                                        <small></small><span class="status-dot"></span> สถานะ : <%= userdata.roles %>
-                                            </small>
-                                    </div>
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                        <% }%>
+                        <div class="user_name">
+                            <h1>
+                                <%= userdata.firstname %> <%= userdata.lastname %>
+                            </h1>
+                            <small><span class="status-dot"></span> สถานะ : <%= userdata.roles %></small>
+                        </div>
                     </div>
 
                     <div class="button_VO">
@@ -58,16 +51,16 @@
                             <a href="/home/profilestudent/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
-                            <% } else { %>
-                                <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                    <button class="b_view">ดูโปรไฟล์</button>
-                                </a>
-                                <% } %>
-                                    <a>
-                                        <form action="/logout" method="post">
-                                            <button class="b_logout">ออกจากระบบ</button>
-                                        </form>
-                                    </a>
+                        <% } else { %>
+                            <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                        <% } %>
+                        <a>
+                            <form action="/logout" method="post">
+                                <button class="b_logout">ออกจากระบบ</button>
+                            </form>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -76,92 +69,62 @@
         <main>
             <div class="container">
                 <h1>รายละเอียดงาน</h1>
-                <%if(userdata.job_create==1){%>
-                    <form id="jobnform" action="/editPost/api" method="post" enctype="multipart/form-data">
-                        <%}else{%>
-                            <form id="jobnform" action="/post/api" method="post" enctype="multipart/form-data">
-                                <%}%>
-                                    <div class="upload-area" id="uploadBtn">
-                                        <div id="placeholder"
-                                            style="<%= userdata.service_image ? 'display:none;' : 'display:block;' %>">
-                                            <small>ภาพหน้าปกงาน</small><br>
-                                            <small>ขนาดแนะนำ 1280*720px หรือ 16:9</small><br>
-                                            <button type="button" class="img_up">อัปโหลดภาพ</button>
-                                        </div>
-
-                            <img id="preview" 
-                                src="<%= userdata.service_image ? '/imageForTest/' + userdata.service_image : '' %>" 
-                                style="<%= userdata.service_image ? 'display:block;' : 'display:none;' %>">
-                            
-                            <input type="file" id="fileInput" name="file_input" hidden accept="image/*" >
-                        </div>
-                        
+                
+                <form id="jobnform" action="<%= userdata.job_create==1 ? '/editPost/api' : '/post/api' %>" method="post" enctype="multipart/form-data">
                     
-                        <div class="inputnamejob">
-                            <label>ชื่องาน</label>
-                            <input type="text" id="title" name="title" required placeholder="ชื่องาน" value="<%=userdata.title%>">
+                    <div class="upload-area" id="uploadBtn">
+                        <div id="placeholder" style="<%= userdata.service_image ? 'display:none;' : 'display:block;' %>">
+                            <small>ภาพหน้าปกงาน</small><br>
+                            <small>ขนาดแนะนำ 1280*720px หรือ 16:9</small><br>
+                            <button type="button" class="img_up" onclick="document.getElementById('fileInput').click()">อัปโหลดภาพ</button>
                         </div>
-                        <div class="form-row">
-                            <div class="inputcategory" required>
-                                <% 
-                                    const categories = ['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','อื่นๆ'];
-                                %>
 
-                                        <input type="file" id="fileInput" name="file_input" hidden accept="image/*">
-                                    </div>
+                        <img id="preview" 
+                             src="<%= userdata.service_image ? '/imageForTest/' + userdata.service_image : '' %>" 
+                             style="<%= userdata.service_image ? 'display:block;' : 'display:none;' %>">
+                        
+                        <input type="file" id="fileInput" name="file_input" hidden accept="image/*" onchange="previewImage(this)">
+                    </div>
 
+                    <div class="inputnamejob">
+                        <label>ชื่องาน</label>
+                        <input type="text" id="title" name="title" required placeholder="ชื่องาน" value="<%=userdata.title%>">
+                    </div>
 
-                                    <div class="inputnamejob">
-                                        <label>ชื่องาน</label>
-                                        <input type="text" id="title" name="title" required placeholder="ชื่องาน"
-                                            value="<%=userdata.title%>">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="inputcategory" required>
-                                            <% const
-                                                categories=['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','สายมู'];
-                                                %>
+                    <div class="form-row">
+                        <div class="inputcategory">
+                            <% const categories=['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','สายมู'];%>
+                            <label for="job_type">หมวดหมู่งาน</label>
+                            <select name="job_type" id="job_type" required>
+                                <option value="" disabled <%= (!locals.job && !userdata.job_type) ? 'selected' : '' %>>-- กรุณาเลือกประเภทงาน --</option>
+                                <% categories.forEach((cat)=> { %>
+                                    <option value="<%= cat %>" <%= (userdata.job_type === cat) ? 'selected' : '' %>>
+                                        <%= cat %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        </div>
 
-                                                <label for="job_type">หมวดหมู่งาน</label>
-                                                <select name="job_type" id="job_type" name="'job_type" required>
-                                                    <option value="" disabled <%=(!locals.job || !job.job_type)
-                                                        ? 'selected' : '' %>>-- กรุณาเลือกประเภทงาน --</option>
+                        <div class="peice">
+                            <label>ราคาเริ่มต้น (บาท)</label>
+                            <input type="number" id="peice" name="budjet" placeholder="ระบุราคาเริ่มต้น" value="<%=userdata.budjet%>">
+                        </div>
+                    </div>
 
-                                                    <% categories.forEach((cat)=> { %>
-                                                        <option value="<%= cat %>" <%=(locals.job && job.job_type===cat)
-                                                            ? 'selected' : '' %> >
-                                                            <%= cat %>
-                                                        </option>
-                                                        <% }); %>
-                                                </select>
+                    <div class="detail">
+                        <label>รายละเอียดงาน</label>
+                        <textarea id="detail" name="description" placeholder="ระบุรายละเอียดงานของคุณ..."><%=userdata.des_Cription%></textarea>
+                    </div>
 
-                                        </div>
-                                        <div class="peice">
-                                            <label>ราคาเริ่มต้น (บาท)</label>
-                                            <input type="number" id="peice" name="budjet" placeholder="ระบุราคาเริ่มต้น"
-                                                value="<%=userdata.budjet%>">
-                                        </div>
-                                    </div>
-                                    <div class="detail">
-                                        <label>รายละเอียดงาน</label>
-                                        <textarea id="detail" name="description"
-                                            placeholder="ระบุรายละเอียดงานของคุณ..."><%=userdata.des_Cription%></textarea>
-                                    </div>
-                                    <div class="post_buttonS">
-                                        <%if(userdata.job_create==1){%>
+                    <div class="post_buttonS">
+                        <button type="submit" class="btn-submit"><%= userdata.job_create==1 ? 'แก้ไข' : 'โพสต์' %></button>
+                    </div>
 
-                                            <button type="submit" class="btn-submit">แก้ไข</button>
-
-                                            <%}else{%>
-
-                                                <button type="submit" class="btn-submit">โพสต์</button>
-
-                                                <%}%>
-                                    </div>
-                            </form>
-            </div>
+                </form>
+                </div>
         </main>
     </div>
+
     <footer>
         <div class="footer-contact">
             <p>ติดต่อเรา</p>
@@ -171,18 +134,42 @@
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
-    <!--cookie-->
+
     <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
+            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้ <a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
             <div>
                 <button onclick="acceptCookies()" style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
             </div>
         </div>
     </div>
+
+    <script src="../cookie.js"></script>
     <script src="/../postjs/swith_PR.js"></script>
     <script src="/../postjs/post_skill.js"></script>
-    <script src="../cookie.js"></script>
+
+    <script>
+        function previewImage(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('preview');
+                    const placeholder = document.getElementById('placeholder');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // เพิ่มฟังก์ชันคลิกที่รูป Preview เพื่อเปลี่ยนรูปใหม่ได้
+        document.getElementById('preview').addEventListener('click', function() {
+            document.getElementById('fileInput').click();
+        });
+    </script>
+
 </body>
 
 </html>
