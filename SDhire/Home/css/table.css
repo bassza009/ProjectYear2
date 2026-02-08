@@ -1,0 +1,167 @@
+/* จัดการโครงสร้างหลักให้เนื้อหาอยู่กึ่งกลาง */
+main {
+    max-width: 1200px;      /* จำกัดความกว้างสูงสุดเพื่อให้ดูไม่แผ่จนเกินไป */
+    margin: 40px auto;      /* จัดให้อยู่กึ่งกลางหน้าจอ (auto) และห่างจาก header/footer */
+    padding: 0 20px;        /* ระยะห่างจากขอบจอซ้าย-ขวา เวลาเปิดในจอเล็ก */
+}
+
+/* ส่วนของ Filter และปุ่มประกาศงาน */
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;    /* เพิ่มระยะห่างก่อนถึงตาราง */
+}
+
+.filter-group {
+    display: flex;
+    gap: 15px;
+}
+
+/* ปรับแต่งตารางให้ดูทันสมัย */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* เพิ่มเงาให้ดูมีมิติ */
+    overflow: hidden;
+    margin-top: 0;           /* ลบ margin-top 50px เดิมออกเพราะใช้ margin ใน main แทน */
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;     /* ล็อคความกว้างคอลัมน์ตามที่กำหนด */
+}
+
+/* ไล่เฉดสีหัวตารางตามที่คุณต้องการ */
+thead {
+    background: linear-gradient(180deg, #8557A5, #AE73D8);
+}
+
+th {
+    padding: 18px 15px;
+    color: white;
+    font-size: 15px;
+    text-align: left;
+    font-weight: 500;
+}
+
+/* จัดการส่วนเนื้อหาในตาราง */
+tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+tbody tr:hover {
+    background-color: #f9f5ff; /* เปลี่ยนเป็นสีม่วงอ่อนๆ เมื่อ hover */
+}
+
+td {
+    padding: 16px 15px;
+    color: #444;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* ตัดคำแล้วมี ... */
+}
+
+/* กำหนดสัดส่วนคอลัมน์ (รวม 100%) */
+th:nth-child(1), td:nth-child(1) { width: 35%; } /* ชื่องาน */
+th:nth-child(2), td:nth-child(2) { width: 15%; } /* ประเภท */
+th:nth-child(3), td:nth-child(3) { width: 12%; } /* งบประมาณ */
+th:nth-child(4), td:nth-child(4) { width: 15%; } /* ลงประกาศเมื่อ */
+th:nth-child(5), td:nth-child(5) { width: 13%; } /* กำหนดส่ง */
+th:nth-child(6), td:nth-child(6) { width: 10%; } /* จัดการ */
+
+/* ปรับแต่ง Dropdown คัดกรอง */
+.filter-select {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    min-width: 180px;
+    font-size: 14px;
+    color: #666;
+    transition: border 0.3s;
+}
+
+.filter-select:focus {
+    border-color: #8557A5;
+    outline: none;
+}
+
+/* ปุ่มประกาศงาน */
+.btn-post-job {
+    font-size: 15px;
+    font-weight: bold;
+    background: #f9f9f9;
+    color: #9b59b6;
+    padding: 10px 24px;
+    border: 1px solid #9b59b6;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-post-job:hover {
+    background: #8e44ad;
+    color: #f9f5ff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* ===== Pagination ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 40px 0;
+    font-family: 'Kanit', sans-serif;
+}                                               
+
+.page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    color: #9b59b6;             
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.page-btn:hover {
+    background-color: #e8f0fe;
+}
+
+.page-btn.active {
+    background-color: #9b59b6;
+    color: #fff;
+    font-weight: 500;
+    cursor: default;
+}
+
+.page-btn.prev,
+.page-btn.next {
+    font-size: 16px;
+    border-radius: 50%;
+}
+
+.page-btn:disabled {
+    color: #ccc;
+    cursor: default;
+}
+
+.page-btn:disabled:hover {
+    background-color: transparent;
+}
+
+.page-dots {
+    padding: 0 6px;
+    color: #777;
+    font-size: 14px;
+}
