@@ -7,8 +7,13 @@ let allReviews = [];
 let reviewStats = {};
 
 // Load reviews from API
-async function loadReviews(filter = 'all', showAll = false) {
-    const container = document.getElementById('reviewContainer');
+async function loadReviews(filter = 'all') {
+    // Check if modal is open
+    const modal = document.getElementById('fullReviewModal');
+    const isModalOpen = modal && modal.style.display === 'flex';
+
+    const containerId = isModalOpen ? 'modalReviewList' : 'reviewContainer';
+    const container = document.getElementById(containerId);
     if (!container) return;
 
     // Get student ID: First try hidden input (most accurate), then fallback to URL
@@ -34,8 +39,22 @@ async function loadReviews(filter = 'all', showAll = false) {
             // Filter reviews
             let reviews = filterReviewsByType(allReviews, filter);
 
-            // Render reviews
-            renderReviews(reviews, container);
+            // Render logic
+            if (isModalOpen) {
+                // In modal: Show all filtered reviews
+                renderReviews(reviews, container);
+            } else {
+                // In main page: Limit to 3
+                const showAllBtn = document.getElementById('show-all-reviews-btn');
+
+                if (reviews.length > 3) {
+                    renderReviews(reviews.slice(0, 3), container);
+                    if (showAllBtn) showAllBtn.style.display = 'block';
+                } else {
+                    renderReviews(reviews, container);
+                    if (showAllBtn) showAllBtn.style.display = 'none';
+                }
+            }
         }
     } catch (error) {
         container.innerHTML = '<p style="text-align:center;color:#999;padding:20px;">ไม่สามารถโหลดรีวิวได้</p>';
@@ -148,6 +167,28 @@ function filterReviews(type) {
     loadReviews(type);
 }
 
+// Show all reviews (Open Modal)
+function showReviews() {
+    const modal = document.getElementById('fullReviewModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        // Reset filter to all when opening? Or keep current? Let's keep 'all' or current.
+        // Usually good to show 'all' initially in modal or sync with page.
+        // Let's reload to be sure we render into the modal.
+        loadReviews(currentFilter);
+    }
+}
+
+// Close reviews modal
+function closeReviews() {
+    const modal = document.getElementById('fullReviewModal');
+    if (modal) {
+        modal.style.display = 'none';
+        // Optional: reload main page reviews if needed, or just leave them.
+        // loadReviews(currentFilter); // Update main page if something changed?
+    }
+}
+
 // Update review statistics
 function updateReviewStats() {
     const { total, avgScore, counts } = reviewStats;
@@ -168,11 +209,17 @@ function updateReviewStats() {
         document.getElementById('avg-stars').innerHTML = renderStars(avgScore);
     }
 
-    // Update filter tags
+    // Update filter tags (Main Page & Modal)
     for (let i = 1; i <= 5; i++) {
+        // Main page tags
         if (document.getElementById(`f-${i}`)) {
             document.getElementById(`f-${i}`).innerText = counts[i] || 0;
         }
+        // Modal tags
+        if (document.getElementById(`mf-${i}`)) {
+            document.getElementById(`mf-${i}`).innerText = counts[i] || 0;
+        }
+
         if (document.getElementById(`count-${i}`)) {
             document.getElementById(`count-${i}`).innerText = counts[i] || 0;
         }
