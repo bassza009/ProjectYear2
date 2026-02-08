@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/../home/css/buttom_sw.css"> <!-- กดสลับงานกับโพสต์ -->
     <link rel="stylesheet" href="/../home/css/Tem_home_HF.css"> <!-- หัวกับท้าย -->
     <link rel="stylesheet" href="/../home/css/Tem_main.css"> <!-- ตัวเนื้อหา  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 
@@ -240,9 +241,9 @@
                         </div>
                     </a>
 
-                    <a href="/home/filter/สายมู" class="cat-card-icon color-5">
+                    <a href="/home/filter/อื่นๆ" class="cat-card-icon color-5">
                         <div class="icon-box">
-                            <img src="../icon/tarot.png">
+                            <img src="../icon/heart.png">
                         </div>
                         <div class="cat-info">
                             <span>อื่นๆ</span>
@@ -262,145 +263,126 @@
                     <button class="toggle_job">โพสต์งาน</button>
                 </div>
                 <div class="main_post">
-                </div>
+                
                 <div class="post_skill">
                     <% if(job.length) { %>
                         <% job.forEach((job)=>{ %>
                             <a href="/home/viewStdPost/<%= job.job_id %>" class="card-link">
                                 <div class="card">
                                     <% if(job.service_image){ %>
-                                        <img src="/imageForTest/<%= job.service_image %>" alt="<%= job.service_image%>"
-                                            class="card-img">
-                                        <% }else{%>
-                                            <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
-                                                alt="โปรไฟล์" class="card-img">
+                                        <img src="/imageForTest/<%= job.service_image %>" alt="<%= job.service_image%>" class="card-img">
+                                    <% }else{%>
+                                        <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>" alt="โปรไฟล์" class="card-img">
+                                    <% }%>
+                                    
+                                    <div class="card-content">
+                                        <div class="profile-area">
+                                            <% if(job.profile_image){ %>
+                                                <img src="/imageForTest/<%= job.profile_image %>" alt="<%= userdata.profile_image%>" class="avatar">
+                                            <% } else{%>
+                                                <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>" alt="โปรไฟล์" class="avatar">
                                             <% }%>
-                                                <div class="card-content">
-                                                    <div class="profile-area">
-
-                                                        <% if(job.profile_image){ %>
-                                                            <img src="/imageForTest/<%= job.profile_image %>"
-                                                                alt="<%= userdata.profile_image%>" class="avatar">
-                                                            <% } else{%>
-                                                                <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
-                                                                    alt="โปรไฟล์" class="avatar">
-                                                                <% }%>
-                                                                    <div>
-                                                                        <font style="font-size: 20px;"><b>
-                                                                                <%= job.firstname %>
-                                                                                    <%= job.lastname %>
-                                                                            </b><br></font>
-                                                                        <small>
-                                                                            <%= job.job_type %>
-                                                                        </small>
-                                                                    </div>
-                                                    </div>
-                                                    <div class="title">
-                                                        <%= job.title %>
-                                                    </div>
-                                                    <div class="desc">
-                                                        <%= job.des_Cription %>
-                                                    </div>
-                                                    <div class="price">
-                                                        <span>เริ่มต้น</span><br>
-                                                        <b>
-                                                            <%= job.budjet %> บาท
-                                                        </b>
-                                                    </div>
-                                                </div>
+                                            <div>
+                                                <font style="font-size: 20px;"><b><%= job.firstname %> <%= job.lastname %></b><br></font>
+                                                <small><%= job.job_type %></small>
+                                            </div>
+                                        </div>
+                                        <div class="title"><%= job.title %></div>
+                                        <div class="desc"><%= job.des_Cription %></div>
+                                        <div class="price">
+                                            <span>เริ่มต้น</span><br>
+                                            <b><%= job.budjet %> บาท</b>
+                                        </div>
+                                    </div>
                                 </div>
-
                             </a>
+                        <% }) %>
+                        
 
-                            <%})%>
-                                <%}else{%>
-                                    <p>no job right now</p>
-                                    <%}%>
-
-                </div>
-
-                <%const page=Math.ceil(totalpost/8);%>
-                    <%if(job.length){%>
-
+                    <% } else { %>
+                        <p style="text-align: center; margin-top: 20px;">no job right now</p>
+                    <% } %>
+                    
+                </div> 
+                    <% const page = Math.ceil(totalpost/8); %>
                         <div class="pagination" id="pagination">
+                            <% if(currentPage > 1){ %>
+                                <a href="/home?startpage=<%=currentPage-1%>"><small><</small></a>
+                            <% } %>
 
-
-                            <%if(currentPage>1){%>
-                                <a href="/home?startpage=<%=currentPage-1%>">
-                                    <small>
-                                        << /small>
+                            <% for(let i=1; i<=page; i++){ %>
+                                <a class="page-btn <%=(i==currentPage)?'active':''%>" href="/home?startpage=<%=i%>">
+                                    <p><%=i%></p>
                                 </a>
+                            <% } %>
 
-                                <%}%>
-
-                                    <%for(i=1;i<=page;i++){%>
-                                        <a class="page-btn <%=(i==currentPage)?'active':""%>"
-                                            href="/home?startpage=<%=i%>">
-                                            <p>
-                                                <%=i%>
-                                            </p>
-                                        </a>
-                                        <%}%>
-                                            <%if(currentPage!=page){%>
-                                                <a href="/home?startpage=<%=currentPage+1%>">
-                                                    <small>></small>
-                                                </a>
-                                                <%}%>
-
-                        </div>
-
-                        <%}%>
-                            
+                            <% if(currentPage != page){ %>
+                                <a href="/home?startpage=<%=currentPage+1%>"><small>></small></a>
+                            <% } %>
+                        </div>   
+            </div>                
                 <!-- --------------------------------------------------------------------------------------------------------------------- -->
-                <div class="post_job">
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ชื่องาน</th>
-                                    <th>ประเภท</th>
-                                    <th>งบประมาณ (บาท)</th>
-                                    <th>ลงประกาศเมื่อ</th>
-                                    <th>กำหนดส่ง</th>
-                                    <th>จัดการ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% if(order.length>0){ %>
-                                    <% order.forEach((orders)=>{%>
-                                        <tr onclick="window.location.href='/home/viewGeneralPost/<%=orders.order_ID%>'"
-                                            style="cursor:pointer;">
-                                            <td>
-                                                <%=orders.title%>
-                                            </td>
-                                            <td>
-                                                <%=orders.orderType%>
-                                            </td>
-                                            <td>
-                                                <%=Number(orders.budjet).toLocaleString()%>
-                                            </td>
-                                            <td>
-                                                <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
-                                            </td>
-                                            <td>
-                                                <%=orders.deadline ? new
-                                                    Date(orders.deadline).toLocaleDateString('th-TH') : "-" %>
-                                            </td>
-                                            <td>-</td>
-                                        </tr>
-                                        <%})%>
+                <div class="main_job">
+                    <div class="type_selection">
+                            <%const typesele = ['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','อื่นๆ']%>
+                            <select name="typeselect" id ='typeselect' onchange="filterJobType(this)">    
+                                <option value="" disabled selected>เลือกหมวดหมู่</option>
+                                <option value="all">ทั้งหมด</option> <% typesele.forEach((type)=>{ %>
+                                    <option value="<%=type%>"><%=type%></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    <div class="post_job">
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ชื่องาน</th>
+                                        <th>ประเภท</th>
+                                        <th>งบประมาณ (บาท)</th>
+                                        <th>ลงประกาศเมื่อ</th>
+                                        <th>กำหนดส่ง</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(order.length>0){ %>
+                                        <% order.forEach((orders)=>{%>
+                                            <tr onclick="window.location.href='/home/viewGeneralPost/<%=orders.order_ID%>'"
+                                                style="cursor:pointer;">
+                                                <td>
+                                                    <%=orders.title%>
+                                                </td>
+                                                <td>
+                                                    <%=orders.orderType%>
+                                                </td>
+                                                <td>
+                                                    <%=Number(orders.budjet).toLocaleString()%>
+                                                </td>
+                                                <td>
+                                                    <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
+                                                </td>
+                                                <td>
+                                                    <%=orders.deadline ? new
+                                                        Date(orders.deadline).toLocaleDateString('th-TH') : "-" %>
+                                                </td>
+                                                <td>-</td>
+                                            </tr>
+                                            <%})%>
                                             <%}else{%>
                                                 <tr>
                                                     <td colspan="6" style="text-align:center;">
                                                         ยังไม่มีงานที่คุณประกาศ
                                                     </td>
                                                 </tr>
-                                                <%}%>
-                            </tbody>
-                        </table>
+                                            <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- pagination ของโพสต์งาน -->
+                        <div class="pagination" id="jobPagination"></div>
                     </div>
-                    <!-- pagination ของโพสต์งาน -->
-                    <div class="pagination" id="jobPagination"></div>
                 </div>
             </div>
         </main>
@@ -421,7 +403,7 @@
     <script src="/../homejs/profile_buttom.js"></script>
     <script src="/../homejs/view_post.js"></script>
     <script src="/../homejs/table.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/../loginjs/alertox.js"></script>
 </body>
 
 </html>

@@ -70,7 +70,8 @@ router.post("/verifyOTP", (req, res) => {
 router.get("/", (req, res) => {
     let startpage = req.query.startpage || 1
     sql2 = `select * from user_job left join userdata on 
-                userdata.ID = user_job.ID `
+                userdata.ID = user_job.ID left join studentdata 
+                on studentdata.email = userdata.email `
     sql = `SELECT DISTINCT job_type,COUNT(job_type) AS num_ber FROM user_job
                 GROUP BY job_type`
     limitsql = ``
@@ -108,7 +109,7 @@ router.get("/", (req, res) => {
                 console.log(err)
             }
 
-            //res.json({totalpost:total_job})
+            //res.json(results)
             res.render("home/homeLogin", {
                 userdata: jobCount,
                 job: results,
@@ -123,6 +124,7 @@ router.get("/", (req, res) => {
 router.get("/home", (req, res) => {
     const email = req.cookies.email;
     let startpage = req.query.startpage || 1
+    let job_type = req.query.job_type
 
     if (startpage <= 1) {
         startpage = 1
@@ -141,7 +143,9 @@ router.get("/home", (req, res) => {
     sql_count = `SELECT DISTINCT job_type, COUNT(job_type) AS num_ber FROM user_job
                        GROUP BY job_type`;
     sql3 = `SELECT * from general_orders`;
-
+    if(job_type){
+      sql3 += ` where orderType ="${job_type}"`  
+    }
     let limit = ``
     // เริ่ม Query 1
     pool.query(sql1, [email], (err, results) => {
