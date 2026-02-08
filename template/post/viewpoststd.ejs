@@ -56,7 +56,7 @@
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>
                         <%}else{%>
-                            <a href="/home/profilegeneral">
+                            <a href="/home/profilegeneral/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                             <%}%>
@@ -244,6 +244,7 @@
 
                             <form action="/general/reviewStudent" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="student_id" value="<%= post.ID %>">
+                                <input type="hidden" name="return_url" value="/home/viewStdPost/<%= post.job_id %>">
 
                                 <div class="star-rating">
                                     <input type="radio" name="rating" id="rat-5" value="5"><label for="rat-5"></label>

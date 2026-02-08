@@ -8,7 +8,22 @@ function loadReviews(filter, showAll = false) {
     const container = document.getElementById('reviewContainer');
     if (!container) return;
 
-    let reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
+    let reviews = [];
+    if (typeof window !== 'undefined' && window.serverReviews && window.serverReviews.length > 0) {
+        reviews = window.serverReviews.map(r => ({
+            id: r.review_id,
+            name: (r.firstname && r.lastname) ? `${r.firstname} ${r.lastname}` : (r.username || 'User'),
+            profilePic: r.profile_image ? `/imageForTest/${r.profile_image}` : `https://ui-avatars.com/api/?name=${r.username || 'User'}`,
+            rating: r.rating,
+            comment: r.comment,
+            reviewImg: r.review_image ? `/imageForTest/${r.review_image}` : null,
+            likes: r.likes || 0,
+            isLiked: r.is_liked > 0, // is_liked from SQL is 0 or 1
+            replies: []
+        }));
+    } else {
+        reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
+    }
 
     // --- กรองข้อมูล ---
     if (filter === 'hasImage') {
@@ -33,7 +48,7 @@ function loadReviews(filter, showAll = false) {
 
     reviews.forEach((rev) => {
         // สร้าง ID จำลองหากไม่มี เพื่อใช้อ้างอิงการ Like/Reply
-        const revId = rev.id || rev.name + rev.comment;
+        const revId = rev.id;
 
         const html = `
                     <div class="review-card">
@@ -46,7 +61,7 @@ function loadReviews(filter, showAll = false) {
 
                             <div class="review-actions">
                                 <button class="action-btn ${rev.isLiked ? 'active' : ''}" onclick="handleLike('${revId}')">
-                                    มีประโยชน์ 👍(<span class="like-count">${rev.likes || 0}</span>)
+                                    มีประโยชน์ 👍(<span id="like-count-${revId}">${rev.likes || 0}</span>)
                                 </button>
                             </div>
 
@@ -70,43 +85,47 @@ function loadReviews(filter, showAll = false) {
 }
 
 // ระบบกด Like และบันทึกค่า
-function handleLike(revId) {
-    // 1. ดึงข้อมูลจาก LocalStorage
-    let reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
+async function handleLike(revId) {
+    if (!revId) return;
 
-    // 2. หา Index ของรีวิวที่ถูกกด
-    const index = reviews.findIndex(r => {
-        const currentId = r.id ? String(r.id) : (r.name + r.comment).trim();
-        return currentId === String(revId).trim();
-    });
+    try {
+        const response = await fetch('/student/review/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ review_id: revId })
+        });
 
-    if (index !== -1) {
-        // เช็คค่าเริ่มต้นถ้าไม่มี likes ให้เป็น 0
-        if (typeof reviews[index].likes !== 'number') {
-            reviews[index].likes = 0;
-        }
+        const result = await response.json();
 
-        // 3. Logic สลับสถานะ Like
-        if (!reviews[index].isLiked) {
-            reviews[index].likes += 1;
-            reviews[index].isLiked = true;
+        if (result.success) {
+            // Update UI directly without full reload
+            // Find the button and specific like count span
+            const likeCountSpan = document.getElementById(`like-count-${revId}`);
+            if (likeCountSpan) {
+                likeCountSpan.innerText = result.likes;
+                const btn = likeCountSpan.closest('button');
+                if (result.liked) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            }
+
+            // Also update the global reviews data to reflect change for sorting next time
+            if (window.serverReviews) {
+                const review = window.serverReviews.find(r => r.review_id == revId);
+                if (review) {
+                    review.likes = result.likes;
+                    review.is_liked = result.liked ? 1 : 0;
+                }
+            }
         } else {
-            reviews[index].likes = Math.max(0, reviews[index].likes - 1); // กันค่าติดลบ
-            reviews[index].isLiked = false;
+            alert(result.message || "เกิดข้อผิดพลาด");
         }
-
-        // 4. บันทึกกลับลง LocalStorage
-        localStorage.setItem('userReviews', JSON.stringify(reviews));
-
-        // 5. อัปเดต UI
-        // หากไม่อยากโหลดใหม่ทั้งหน้า (Render ใหม่) ให้เขียนฟังก์ชันอัปเดตเฉพาะจุด
-        // แต่ถ้า loadReviews ทำงานถูกต้อง การเรียกใช้จะช่วยให้ข้อมูลจัดเรียงใหม่ได้
-        if (typeof loadReviews === 'function') {
-            loadReviews(currentFilter || 'ทั้งหมด');
-        } else {
-            // กรณีไม่มีฟังก์ชัน loadReviews ให้ใช้วิธี reload หน้า (ชั่วคราว)
-            location.reload();
-        }
+    } catch (err) {
+        console.error("Like error:", err);
     }
 }
 
@@ -115,8 +134,9 @@ function postComment(btn, revId) {
     const input = btn.previousElementSibling;
     if (input.value.trim() === "") return;
 
+    // For now keeping local storage for comments as originally requested only like was db
     let reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
-    const index = reviews.findIndex(r => (r.id || r.name + r.comment) === revId);
+    const index = reviews.findIndex(r => r.id == revId);
 
     if (index !== -1) {
         if (!reviews[index].replies) reviews[index].replies = [];
@@ -148,7 +168,22 @@ function filterReviews(type) {
 
 // ฟังก์ชันอัปเดตสถิติและตัวเลข Summary
 function updateReviewStats() {
-    const reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
+    let reviews = [];
+    if (typeof window !== 'undefined' && window.serverReviews && window.serverReviews.length > 0) {
+        reviews = window.serverReviews.map(r => ({
+            id: r.review_id,
+            name: (r.firstname && r.lastname) ? `${r.firstname} ${r.lastname}` : (r.username || 'User'),
+            profilePic: r.profile_image ? `/imageForTest/${r.profile_image}` : `https://ui-avatars.com/api/?name=${r.username || 'User'}`,
+            rating: r.rating,
+            comment: r.comment,
+            reviewImg: r.review_image ? `/imageForTest/${r.review_image}` : null,
+            likes: r.likes || 0,
+            isLiked: false,
+            replies: []
+        }));
+    } else {
+        reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
+    }
     const total = reviews.length;
     let counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, hasImage: 0 };
     let sum = 0;
@@ -284,6 +319,12 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.innerText = "ส่งรีวิว";
         }
     }
+});
+
+// Initialize reviews on page load
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof updateReviewStats === 'function') updateReviewStats();
+    if (typeof loadReviews === 'function') loadReviews('all');
 });
 
 //localStorage.clear();

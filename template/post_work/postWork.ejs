@@ -50,11 +50,11 @@
 
                     <div class="button_VO">
                         <% if(userdata.roles=="student" ){%>
-                            <a href="/home/profilestudent">
+                            <a href="/home/profilestudent/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
                             <% } else{ %>
-                                <a href="/home/profilegeneral">
+                                <a href="/home/profilegeneral/<%=userdata.ID%>">
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
                                 <% } %>

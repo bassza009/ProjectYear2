@@ -1,0 +1,487 @@
+/* =========================================
+   1. GLOBAL & LAYOUT
+   ========================================= */
+main {
+    max-width: 1200px;
+    width: 95%;
+    margin: 20px auto 0 auto;
+    flex: 1;
+    background: #faffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    padding: 40px 20px;
+}
+
+.page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* =========================================
+   2. PROFILE HEADER (ชื่อคลาสตรงกับ HTML)
+   ========================================= */
+.profile-header-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    display: flex;
+    /* จัดเรียงข้อมูลกะปุ่มดูโปรไฟล์แยกซ้าย-ขวา */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-main-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.company-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    /* ทรงกลมตาม CSS ล่าสุดของคุณ */
+    overflow: hidden;
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+}
+
+.company-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* คลาสใหม่ที่ตรงกับ HTML */
+.user-details h1 {
+    font-size: 26px;
+    margin: 0;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+/* ตกแต่งปุ่มดูโปรไฟล์ ในส่วน header-actions */
+.btn-view-profile {
+    text-decoration: none;
+    color: #4f46e5;
+    border: 1.5px solid #4f46e5;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-view-profile:hover {
+    background: #4f46e5;
+    color: white;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+}
+
+/* =========================================
+   3. CONTENT GRID (ส่วนเนื้อหางาน)
+   ========================================= */
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 25px;
+}
+
+.info-section {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+}
+
+.info-section h3 {
+    margin: 0 0 15px 0;
+    font-size: 18px;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 12px;
+}
+
+/* รายการงาน (Job Item) */
+.job-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.job-item:hover {
+    background: #fbfcfe;
+    border-color: #cbd5e1;
+}
+
+/* ปรับหัวข้อชื่องานให้เด่น (คลาส .job-link ใน HTML) */
+.job-link {
+    font-size: 20px;
+    font-weight: 600;
+    color: #4f46e5;
+    margin: 0 0 10px 0;
+}
+
+.job-info span {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.job-meta {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-top: 15px;
+}
+
+/* =========================================
+   4. SIDEBAR (ส่วนสถิติและกำหนดส่ง)
+   ========================================= */
+.stats-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    position: sticky;
+    top: 20px;
+}
+
+.stats-card h3 {
+    font-size: 16px;
+    color: #475569;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stats-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+.stats-item span {
+    color: #64748b;
+}
+
+.stats-item strong {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.text-green {
+    color: #10b981 !important;
+}
+
+/* =========================================
+   MODAL OVERLAY (พื้นหลังมืด)
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* พื้นหลังดำโปร่งแสง */
+    display: none;
+    /* ซ่อนไว้เริ่มต้น */
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+    /* เอฟเฟกต์เบลอพื้นหลัง */
+    padding: 20px;
+}
+
+/* =========================================
+   MODAL WINDOW (กล่องข้อความ)
+   ========================================= */
+.modal-window {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    animation: modalBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* =========================================
+   MODAL HEADER & BODY
+   ========================================= */
+.modal-header {
+    padding: 18px 25px;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.close-modal {
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    transition: 0.2s;
+}
+
+.close-modal:hover {
+    color: #ff4d4d;
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+/* =========================================
+   INPUT & BUTTONS
+   ========================================= */
+#commentText {
+    width: 100%;
+    border: 1.5px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 15px;
+    resize: none;
+    outline: none;
+    transition: 0.3s;
+    background: #f9f9f9;
+    box-sizing: border-box;
+}
+
+#commentText:focus {
+    border-color: #28a745;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.1);
+}
+
+.btn-send {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    background: #218838;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* =========================================
+   COMMENT ITEM STYLE (ในหน้าหลักและ Modal)
+   ========================================= */
+.comment-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.comment-item:hover {
+    background: #fcfcfc;
+}
+
+.comment-item h4 {
+    color: #333;
+    font-weight: 500;
+}
+
+.comment-item p {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ปรับแต่ง Scrollbar ใน Modal อ่านทั้งหมด */
+#fullCommentList {
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+#fullCommentList::-webkit-scrollbar {
+    width: 6px;
+}
+
+#fullCommentList::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 10px;
+}
+
+/* ปุ่มอ่านทั้งหมด */
+.btn-view-all {
+    font-size: 13px;
+    color: #007bff;
+    transition: 0.2s;
+}
+
+.btn-view-all:hover {
+    color: #0056b3;
+    text-shadow: 0 0 1px rgba(0, 123, 255, 0.2);
+}
+
+/* การจัดวางหัวข้อคอมเมนต์ */
+.comment-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-view-all {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    font-family: 'Kanit', sans-serif;
+}
+
+/* ปุ่มเรียก Modal หน้าหลัก */
+.comment-action {
+    margin-top: 15px;
+}
+
+.btn-comment {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    background: #f8f9fa;
+    font-family: 'Kanit', sans-serif;
+    text-align: left;
+    color: #666;
+    transition: 0.2s;
+}
+
+.btn-comment:hover {
+    background: #f0f0f0;
+}
+
+/* พื้นที่แสดงรายการคอมเมนต์ */
+.scrollable-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Modal Windows */
+.mini-modal {
+    max-width: 400px;
+}
+
+#commentText {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-family: 'Kanit', sans-serif;
+    resize: none;
+}
+
+.btn-send {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    background: #218838;
+}
+
+/* =========================================
+   5. RESPONSIVE (MEDIA QUERIES)
+   ========================================= */
+@media screen and (max-width: 1024px) {
+    .profile-content-grid {
+        grid-template-columns: 1fr;
+        /* Stack columns on smaller notebooks/tablets */
+    }
+
+    .stats-card {
+        position: static;
+        margin-top: 20px;
+    }
+
+    .info-section,
+    .stats-card,
+    .profile-header-card {
+        padding: 20px;
+    }
+
+    .company-logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .user-details h1 {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-main-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-header-card {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .btn-view-profile {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+}

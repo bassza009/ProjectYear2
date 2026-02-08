@@ -72,6 +72,13 @@ function renderReviews(reviews, container) {
                     <div class="stars">${renderStars(rev.rating)}</div>
                     <p class="quote">${rev.comment || 'ไม่มีข้อความรีวิว'}</p>
                     ${rev.reviewImg ? `<div class="review-images"><img src="${rev.reviewImg}" style="max-width: 200px; border-radius: 8px; margin-top: 10px;"></div>` : ''}
+                    
+                    <div class="review-actions" style="margin-top: 10px;">
+                        <button class="action-btn ${rev.isLiked ? 'active' : ''}" onclick="handleLike('${rev.id}')" style="background: none; border: 1px solid #ddd; padding: 5px 10px; border-radius: 20px; cursor: pointer; transition: all 0.3s; color: #666;">
+                            มีประโยชน์ 👍(<span id="like-count-${rev.id}">${rev.likes || 0}</span>)
+                        </button>
+                    </div>
+
                     <p style="font-size: 12px; color: #999; margin-top: 8px;">
                         ${new Date(rev.timestamp).toLocaleDateString('th-TH')}
                     </p>
@@ -79,6 +86,48 @@ function renderReviews(reviews, container) {
             </div>`;
         container.insertAdjacentHTML('beforeend', html);
     });
+}
+
+// Handle Like Button Click
+async function handleLike(revId) {
+    if (!revId) return;
+
+    try {
+        const response = await fetch('/student/review/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ review_id: revId })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Update UI directly
+            const likeCountSpan = document.getElementById(`like-count-${revId}`);
+            if (likeCountSpan) {
+                likeCountSpan.innerText = result.likes;
+                const btn = likeCountSpan.closest('button');
+                if (result.liked) {
+                    btn.classList.add('active');
+                    btn.style.color = '#007bff';
+                    btn.style.borderColor = '#007bff';
+                    btn.style.background = '#e6f2ff';
+                } else {
+                    btn.classList.remove('active');
+                    btn.style.color = '#666';
+                    btn.style.borderColor = '#ddd';
+                    btn.style.background = 'none';
+                }
+            }
+        } else {
+            // If failed (e.g. not logged in), show message
+            if (result.message) alert(result.message);
+        }
+    } catch (err) {
+        console.error("Like error:", err);
+    }
 }
 
 // Render stars
