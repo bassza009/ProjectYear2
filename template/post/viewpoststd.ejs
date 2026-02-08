@@ -41,10 +41,15 @@
                                 alt="โปรไฟล์">
                             <% }%>
                                 <div class="user_name">
-                                    <h1>
-                                        <%=userdata.firstname%>
-                                            <%=userdata.lastname%>
-                                    </h1>
+                                    <%if(userdata.roles=="student"){%>      
+                                        <h1>
+                                            <%=userdata.firstname%> <%=userdata.lastname%>       
+                                        </h1>
+                                    <%}else{%>
+                                        <h1>
+                                            <%=userdata.username%>      
+                                        </h1>
+                                    <%}%>
                                     <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
                                 </div>
                 </div>

@@ -77,57 +77,89 @@ const categoryNames = {
    ========================================= */
 
 let isEditingContact = false;
-async function toggleEdit() {
 
+async function toggleEdit() {
     const btn = document.getElementById('edit-btn');
-    // ดึง <span> ทั้งหมดที่มีคลาส contact-value
     const fields = ['val-phone', 'val-line', 'val-ig'];
 
     if (!isEditingContact) {
-        // --- เปลี่ยนเป็นโหมดแก้ไข (Input) ---
+        // --- โหมดแก้ไข: เปลี่ยน Text เป็น Input ---
         fields.forEach(id => {
             const span = document.getElementById(id);
-            const currentValue = span.innerText;
-            span.innerHTML = `<input type="text" id="input-${id}" value="${currentValue}" style="width:100%;">`;
+            if(span) {
+                // .trim() เพื่อตัดช่องว่างหัวท้ายออก
+                const currentValue = span.innerText.trim(); 
+                // สร้าง Input
+                span.innerHTML = `<input type="text" id="input-${id}" value="${currentValue === '-' ? '' : currentValue}" style="width:100%; box-sizing: border-box;">`;
+            }
         });
+        
         btn.innerText = "บันทึก";
-        btn.classList.add('btn-save'); // เพิ่ม class เพื่อเปลี่ยนสีปุ่ม (ถ้ามี CSS)
+        btn.classList.add('btn-save');
         isEditingContact = true;
-    } else {
 
-        const val_phone = document.getElementById("input-val-phone")
-        const val_line = document.getElementById("input-val-line")
-        const val_ig = document.getElementById("input-val-ig")
+    } else {
+        // --- โหมดบันทึก: ส่งข้อมูลไปหลังบ้าน ---
+        
+        // ดึงค่าจาก Input ที่เราสร้างไว้
+        const phoneInput = document.getElementById("input-val-phone");
+        const lineInput = document.getElementById("input-val-line");
+        const igInput = document.getElementById("input-val-ig");
+
         const payload = {
-            phone: val_phone ? val_phone.value : "",
-            line: val_line ? val_line.value : "",
-            ig: val_ig ? val_ig.value : ""
-        }
+            phone: phoneInput ? phoneInput.value.trim() : "",
+            line: lineInput ? lineInput.value.trim() : "",
+            ig: igInput ? igInput.value.trim() : ""
+        };
+
+        console.log("Sending Payload:", payload); // เช็คค่าที่นี่ก่อนส่ง
+
         try {
             const response = await fetch("/student/update", {
                 method: "POST",
-                headers: { "CONTENT-TYPE": "application/json" },
+                headers: { "Content-Type": "application/json" }, // แก้เป็น Content-Type ตัวพิมพ์ใหญ่ตามมาตรฐาน
                 body: JSON.stringify(payload)
-            })
-            const results = await response.json()
-            if (results.success) {
+            });
+
+            const result = await response.json();
+            
+            if (result.success) {
+                // อัปเดตหน้าเว็บถ้ารับค่า success
+                Swal.fire({
+                    icon: 'success',
+                    title: 'บันทึกสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                // เปลี่ยน Input กลับเป็น Text (Span)
                 fields.forEach((id) => {
-                    const input = document.getElementById(`input-${id}`)
-                    if (input) {
-                        const newval = input.value
-                        const span = document.getElementById(id)
-                        span.innerText = newval || "-"
+                    const input = document.getElementById(`input-${id}`);
+                    const span = document.getElementById(id);
+                    if (input && span) {
+                        const newVal = input.value;
+                        span.innerHTML = newVal ? newVal : "-";
                     }
-                })
+                });
+
                 btn.innerText = "แก้ไข";
                 btn.classList.remove('btn-save');
                 isEditingContact = false;
+
             } else {
-                throw new Error("Save failed")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'บันทึกไม่สำเร็จ',
+                    text: result.message || 'เกิดข้อผิดพลาด'
+                });
             }
         } catch (err) {
-            console.error(err)
-
+            console.error("Fetch Error:", err);
+            Swal.fire({
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาด',
+                text: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้'
+            });
         }
     }
 }

@@ -568,12 +568,12 @@ router.get("/home/profilegeneral/:id", (req, res) => {
             const profileUser = profileUserResults[0]
 
             // Fetch job postings for this user
-            pool.query(sqlJobs, [id], (err, jobs) => {
+            pool.query(sql2, [id], (err, jobs) => {
                 if (err) {
                     console.error("Error fetching jobs:", err)
                     jobs = []
                 }
-
+                //res.json(jobs)
                 res.render("profile/profilegen", {
                     userdata: results[0], // Logged-in User
                     profileUser: profileUser, // User being viewed
@@ -872,20 +872,40 @@ router.post("/student/deletePost", (req, res) => {
     })
 })
 router.post("/student/update", (req, res) => {
-    const { email } = req.cookies
-    const { phone, line, ig } = req.body
-    sql = `update userdata 
-            right join studentdata
-            on studentdata.email = userdata.email
-            set userPhoneNumber = ?,line = ?,instagram = ?
-            where studentdata.email = ?`
+    const { email } = req.cookies;
+    const { phone, line, ig } = req.body;
+
+    // 1. เช็คก่อนว่ามี Email หรือไม่
+    if (!email) {
+        console.log("Error: No email in cookies");
+        return res.json({ success: false, message: "No login session" });
+    }
+
+    console.log("Updating for:", email);
+    console.log("Data:", { phone, line, ig });
+
+    // 2. ปรับ SQL ให้ชัวร์ขึ้น (ใช้ JOIN แบบปกติ)
+    const sql = `UPDATE userdata 
+                 JOIN studentdata ON userdata.email = studentdata.email
+                 SET userdata.userPhoneNumber = ?, userdata.line = ?, userdata.instagram = ?
+                 WHERE userdata.email = ?`;
+
     pool.query(sql, [phone, line, ig, email], (err, results) => {
         if (err) {
-            console.log(err)
-            return res.json({ success: "false", messege: "Edit false" })//edit failed
-        } res.json({ success: "true" })
-    })
-})
+            console.error("SQL Error:", err);
+            return res.json({ success: false, message: "Database error" });
+        }
+
+        // 3. เช็คว่ามีการแก้ไขข้อมูลจริงๆ ไหม
+        if (results.affectedRows === 0) {
+            console.log("No rows updated. Email might not exist.");
+            return res.json({ success: false, message: "User not found or data is same" });
+        }
+
+        console.log("Update Success!");
+        res.json({ success: true });
+    });
+});
 
 router.post("/student/changeAvatar", upload.single("file_input"), (req, res) => {
     const { email } = req.cookies
