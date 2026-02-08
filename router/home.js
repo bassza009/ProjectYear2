@@ -37,7 +37,7 @@ const transport = mailer.createTransport({
 let otpStore = {}
 
 router.post("/send-otp", (req, res) => {
-    console.log("ข้อมูลที่ได้รับจากหน้าเว็บ:", req.body);
+    // console.log("ข้อมูลที่ได้รับจากหน้าเว็บ:", req.body);
     const { email } = req.body
     const otp = Math.floor(100000 + Math.random() * 900000)
     otpStore[email] = otp
@@ -512,8 +512,8 @@ router.get("/home/profilestudent/:id", (req, res) => {
                     console.error("Error fetching reviews:", err)
                     reviews = []
                 }
-                console.log(`[DEBUG] Fetched ${reviews ? reviews.length : 0} reviews from DB for student ${id}`);
-                console.log(`[DEBUG] Reviews data:`, reviews);
+                // console.log(`[DEBUG] Fetched ${reviews ? reviews.length : 0} reviews from DB for student ${id}`);
+                // console.log(`[DEBUG] Reviews data:`, reviews);
 
                 res.render("profile/profile", {
                     userdata: results[0],
@@ -688,11 +688,11 @@ router.get("/home/viewStdPost/:id", (req, res) => {
                 return res.redirect('/error=114')
             }
             if (!data || data.length === 0) {
-                console.log(`[DEBUG] No post found for ID: ${id}`);
+                // console.log(`[DEBUG] No post found for ID: ${id}`);
                 return res.redirect('/home?error=post_not_found');
             }
             if (!results || results.length === 0) {
-                console.log(`[DEBUG] User not found for email: ${email}`);
+                // console.log(`[DEBUG] User not found for email: ${email}`);
                 return res.redirect('/login');
             }
 
@@ -716,7 +716,8 @@ const createCommentTableSql = `CREATE TABLE IF NOT EXISTS post_comments (
 )`
 pool.query(createCommentTableSql, (err) => {
     if (err) { console.error("Error creating post_comments table:", err) }
-    else { console.log("post_comments table checked/created") }
+    else { // console.log("post_comments table checked/created") 
+    }
 })
 
 // Create review_likes table if not exists
@@ -729,7 +730,8 @@ const createReviewLikesTableSql = `CREATE TABLE IF NOT EXISTS review_likes (
 )`
 pool.query(createReviewLikesTableSql, (err) => {
     if (err) { console.error("Error creating review_likes table:", err) }
-    else { console.log("review_likes table checked/created") }
+    else { // console.log("review_likes table checked/created") 
+    }
 })
 
 router.get("/home/viewGeneralPost/:id", (req, res) => {
@@ -918,7 +920,7 @@ router.post("/general/changeAvatar", upload.single("file_input"), (req, res) => 
 router.get("/home/filter/:job_type", (req, res) => {
     const { email } = req.cookies
     const jobType = req.params.job_type
-    console.log(`[DEBUG] Accessing filter for jobType: ${jobType}`);
+    // console.log(`[DEBUG] Accessing filter for jobType: ${jobType}`);
 
     // ใช้ชื่อเดิม: startpage
     let startpage = parseInt(req.query.startpage) || 1
@@ -951,7 +953,7 @@ router.get("/home/filter/:job_type", (req, res) => {
         }
 
         if (!results || results.length === 0) {
-            console.log(`[DEBUG] User not found for email: ${email}`);
+            // console.log(`[DEBUG] User not found for email: ${email}`);
             return res.redirect("/login");
         }
 

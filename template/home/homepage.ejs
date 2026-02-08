@@ -335,25 +335,13 @@
                                         </a>
                                         <% } %>
 
-                                            <%}%>
-
-                                                <%for(i=1;i<=page;i++){%>
-                                                    <a class="page-btn <%=(i==currentPage)?'active':""%>"
-                                                        href="/home?startpage=<%=i%>">
-                                                        <p>
-                                                            <%=i%>
-                                                        </p>
-                                                    </a>
-                                                    <%}%>
-                                                        <%if(currentPage!=page){%>
-                                                            <a href="/home?startpage=<%=currentPage+1%>">
-                                                                <small>></small>
-                                                            </a>
-                                                            <%}%>
+                                            <%if(currentPage!=page){%>
+                                                <a href="/home?startpage=<%=currentPage+1%>">
+                                                    <small>></small>
+                                                </a>
+                                                <%}%>
 
                         </div>
-
-                        <%}%>
 
                             <!-- --------------------------------------------------------------------------------------------------------------------- -->
                             <div class="post_job">
