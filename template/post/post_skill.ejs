@@ -89,7 +89,6 @@
                                             <button type="button" class="img_up">อัปโหลดภาพ</button>
                                         </div>
 
-<<<<<<< HEAD
                             <img id="preview" 
                                 src="<%= userdata.service_image ? '/imageForTest/' + userdata.service_image : '' %>" 
                                 style="<%= userdata.service_image ? 'display:block;' : 'display:none;' %>">
@@ -107,11 +106,6 @@
                                 <% 
                                     const categories = ['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','อื่นๆ'];
                                 %>
-=======
-                                        <img id="preview"
-                                            src="<%= userdata.service_image ? '/imageForTest/' + userdata.service_image : '' %>"
-                                            style="<%= userdata.service_image ? 'display:block;' : 'display:none;' %>">
->>>>>>> 5642b455f94dd2c3864f39a312476389e982c6c6
 
                                         <input type="file" id="fileInput" name="file_input" hidden accept="image/*">
                                     </div>
@@ -177,9 +171,18 @@
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
-
+    <!--cookie-->
+    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
+            <div>
+                <button onclick="acceptCookies()" style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
+            </div>
+        </div>
+    </div>
     <script src="/../postjs/swith_PR.js"></script>
     <script src="/../postjs/post_skill.js"></script>
+    <script src="../cookie.js"></script>
 </body>
 
 </html>

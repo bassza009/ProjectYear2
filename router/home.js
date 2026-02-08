@@ -1232,62 +1232,7 @@ router.get("/home/viewStudentProfile/:id", (req, res) => {
 });
 
 
-router.get("/showdata", (req, res) => {
-    pool.query(`SELECT * from userdata `, (err, rows, fields) => {
-        if (err) {
-            throw err
 
-        }
-        //res.json(rows)
-        res.render("showdata", { userdata: rows })
-    })
-
-})
-
-router.get("/showindivi", (req, res) => {
-    pool.query(`SELECT * from userdata`, (err, rows, field) => {
-        if (err) throw err
-        res.render("showindivi", { userdata: rows })
-    })
-
-})
-router.post("/indivi/api", (req, res) => {
-    const id = req.body.id
-    pool.query(`SELECT * from userdata where ID = ?`, [id], (err, rows, fields) => {
-        if (err) {
-            throw err
-        }
-        //res.json(rows)
-        res.render("showindivi", { userdata: rows[0] })
-    })
-})
-router.get("/register", (req, res) => {
-    res.render("register")
-})
-router.post("/register/api", upload.single("picture"), async (req, res) => {
-    const { username, email, phone, password } = req.body
-
-    if (!req.file) {
-        return res.redirect("/register?error=uploadfile")
-    }
-    const picture = req.file.filename
-    sql = `INSERT INTO userdata (username,email,userPhoneNumber,pass_word,profile_image)
-                    VALUES (?,?,?,?,?)`
-    bcy.hash(password, 12, (err, hash) => {
-        if (err) {
-            console.log(err)
-            res.redirect('/register?error=101')
-        } else {
-            pool.query(sql, [username, email, phone, hash, picture], (err, result) => {
-                if (err) {
-                    console.log(err)
-
-                }
-                res.redirect("/showindivi?success_register")
-            })
-        }
-    })
-})
 router.post("/logout", (req, res) => {
     const email = req.cookies.email
     if (email) {
