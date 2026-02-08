@@ -3,7 +3,6 @@
     flex-direction: column;
     /* เรียงแนวตั้ง */
     margin-top: 15px;
-    border: 1px solid rgba(125, 125, 125, 0.912);
     width: 100%;
     border-radius: 7px;
     overflow: hidden;
