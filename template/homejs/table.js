@@ -107,3 +107,15 @@ function renderJobPagination(totalItems) {
 // โหลดหน้าแล้วแสดงทันที
 // ===============================
 document.addEventListener("DOMContentLoaded", renderJobTable);
+function filterJobType(selectObject) {
+    const value = selectObject.value;
+    
+    if (value === 'all') {
+        // กรณีเลือกทั้งหมด ให้กลับไปหน้า Home ปกติ หรือหน้า Search ว่างๆ
+        window.location.href = '/home'; 
+    } else {
+        // ส่งค่าไปแบบ Query String (?job_type=...)
+        // window.location.href จะทำการเปลี่ยนหน้าเว็บทันที
+        window.location.href = `/home?job_type=${encodeURIComponent(value)}`;
+    }
+}

@@ -25,8 +25,8 @@ window.onclick = function(event) {
 // 1. ประกาศตัวแปรอ้างอิงถึงปุ่มและส่วนเนื้อหา
 const btnSkill = document.querySelector('.toggle_skill');
 const btnJob = document.querySelector('.toggle_job');
-const skillSection = document.querySelector('.post_skill');
-const jobSection = document.querySelector('.post_job');
+const skillSection = document.querySelector('.main_post');
+const jobSection = document.querySelector('.main_job');
 
 // 2. ฟังก์ชันสลับไปหน้า "โพสต์รับงาน" (แสดง Card)
 btnSkill.addEventListener('click', () => {

@@ -55,7 +55,7 @@
                 <div class="std_form" id = 'std_form' >
                     <img src="/photo/phayaologo.png" alt="phayaologo" width="150px">
                     <h3>คุณสมัครในฐานะนิสิตมหาวิทยาลัยพะเยา</h3>
-                    <p>ควรใส่ชื่อจริงของคุณเพราะจะไม่สามารถแก้ไขได้ภายหลัง</p>
+                    <p>ควรใส่ข้อมูลจริงของคุณเพราะจะไม่สามารถแก้ไขได้ภายหลัง</p>
                     <div class="fron_l">
                         <label>ชื่อจริง(ภาษาอังกฤษ)</label>
                         <input type="text" placeholder="กรอกชื่อจริงของคุณ" name = 'firstname' id ="firstname" >
@@ -66,6 +66,7 @@
                         <%const group = ['คณะเกษตรศาสตร์และทรัพยากรธรรมชาติ','คณะเทคโนโลยีสารสนเทศและการสื่อสาร','คณะนิติศาสตร์','คณะบริหารธุรกิจและนิเทศศาสตร์','คณะพยาบาลศาสตร์','คณะพลังงานและสิ่งแวดล้อม','คณะแพทยศาสตร์','คณะเภสัชศาสตร์','คณะรัฐศาสตร์และสังคมศาสตร์','คณะวิทยาศาสตร์','คณะวิทยาศาสตร์การแพทย์','คณะวิศวกรรมศาสตร์','คณะศิลปศาสตร์','คณะสถาปัตยกรรมศาสตร์และศิลปกรรมศาสตร์','คณะสหเวชศาสตร์','คณะสาธารณสุขศาสตร์','คณะทันตแพทยศาสตร์','วิทยาลัยการศึกษา']%>
                         <label for="group">คณะของคุณ</label>
                         <select name="group" id="group">
+                            <option>เลือกคณะของคุณ</option>
                             <%group.forEach((cat)=>{%>
                                 <option value="<%=cat%>"><%=cat%></option>
                             <%})%>
@@ -123,6 +124,7 @@
 
     <script src="/../loginjs/action12.js"></script>
     <script src = "/../loginjs/otp.js"></script>
+    <script src="../loginjs/alertox.js"></script>
     <!-- <script>
         document.getElementById("submitBtn").addEventListener("click", function(event) {
         event.preventDefault(); 

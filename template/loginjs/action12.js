@@ -13,22 +13,39 @@ function goToStep(stepNumber) {
 
     std_form = document.getElementById("std_form")
     gen_form = document.getElementById("gen_form")
-    std_form.style.display = "none"
-    gen_form.style.display = "none"
+    
     if (stepNumber === 2) {
         
         if(email ===""||password===''||otp ===""){
-            alert("ใส่ข้อมูลให้ครบ")
+            Swal.fire({
+                icon: 'error',
+                title: 'ไม่สามารถไปหน้าต่อไปได้',
+                text: 'โปรดใส่ข้อมูลของคุณให้ครบถ้วน',
+                confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
             return
         }
         if(varifypass != password){
-            alert("password not match")
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'ไม่สามารถไปหน้าต่อไปได้',
+                text: 'รหัสผ่านไม่ตรงกัน',
+                confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
             return
         }
         if(otpvarified === "false"){
-            alert("OTP not varified")
+            Swal.fire({
+                icon: 'error',
+                title: 'ไม่สามารถไปหน้าต่อไปได้',
+                text: 'OTPยังไม่ถูกยืนยัน',
+                confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
             return
         }
+        std_form.style.display = "none"
+        gen_form.style.display = "none"
         if(email.endsWith("@up.ac.th")){
             std_form.style.display = "block"
         }else{
@@ -36,30 +53,52 @@ function goToStep(stepNumber) {
         }
         document.getElementById('circle2').classList.add('active');
         document.getElementById('line1').classList.add('active');
+        
         //document.getElementById('circle3').classList.add('active');
         //document.getElementById('line2').classList.add('active');
     }
     if (stepNumber === 3) {
         
         if(std_form.style.display == "block"){
+            if(firstname==""||lastname==""||usernamestd==""||group==""){
+            Swal.fire({
+                icon: 'error',
+                title: 'ไม่สามารถไปหน้าต่อไปได้',
+                text: 'โปรดใส่ข้อมูลของคุณให้ครบถ้วน',
+                confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
+            return
+            }
             if(!engCheck(firstname)){
-                alert("ใส่ชื่อจริงภาษาอังกฤษ")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถไปหน้าต่อไปได้',
+                    text: 'โปรดใส่ชื่อจริงภาษาอังกฤษ',
+                    confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
                 std_form.style.display = "block"
                 return
             }
             if(!engCheck(lastname)){
-                alert("ใส่นามสกุลจริงภาษาอังกฤษ")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถไปหน้าต่อไปได้',
+                    text: 'โปรดใส่นามสกุลภาษาอังกฤษ',
+                    confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
                 std_form.style.display = "block"
                 return
                 
             }
-            if(firstname==""||lastname==""||usernamestd==""||group==""){
-            alert("ใส่ข้อมูลให้ครบ")
-            return
-            }
+            
         }else if(gen_form.style.display=="block"){
             if(usernamegen==""){
-            alert("ใส่ข้อมูลให้ครบ")
+            Swal.fire({
+                icon: 'error',
+                title: 'ไม่สามารถไปหน้าต่อไปได้',
+                text: 'โปรดใส่ข้อมูลของคุณให้ครบถ้วน',
+                confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
             return
             }
         }

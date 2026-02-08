@@ -1,7 +1,14 @@
 function sendOTP(){
     const email = document.getElementById("email").value
     if(!email){
-        return alert("ใส่ email ก่อน")
+        Swal.fire({
+                icon: "error",
+                title: "OTP status",
+                text: "ใส่ email",
+                confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
+        //alert(data.message)
+        return 
     }
     fetch("/send-otp",{
         method : "POST",
@@ -11,9 +18,24 @@ function sendOTP(){
     })
     .then(res=>res.json())
     .then(data=>{
-        alert(data.message)
+        
+        
         if(data.success){
+            Swal.fire({
+                icon: "success",
+                title: "OTP status",
+                text: data.message,
+                confirmButtonColor: 'rgb(65, 221, 51)' // สีปุ่มแดง
+            })
             document.getElementById("otpSection").style.display="flex"
+        }else if(data.error){
+            Swal.fire({
+                icon: "error",
+                title: "OTP status",
+                text: data.message,
+                confirmButtonColor: 'rgb(221, 51, 51)' // สีปุ่มแดง
+            })
+
         }
     })
 }
