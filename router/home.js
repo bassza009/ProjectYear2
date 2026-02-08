@@ -29,8 +29,8 @@ const upload = multer({ storage: storage })
 const transport = mailer.createTransport({
     service: "gmail",
     auth: {
-        user: "bsspawat@gmail.com",
-        pass: "cgkr kjae zada syeu"
+        user: "sdhire67@gmail.com",
+        pass: "zxut yxub pkvn umzz"
     }
 })
 
@@ -42,7 +42,7 @@ router.post("/send-otp", (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000)
     otpStore[email] = otp
     const emailOption = {
-        from: `Pawat Support <bsspawat@gmail.com>`,
+        from: `SDhire Support <sdhire67@gmail.com>`,
         to: email,
         subject: "OTP - รหัสยืนยันตัวตน - SDhire",
         html: `<h3>รหัสยืนยันของคุณคือ: <b style="color: #5d2e86; font-size: 24px;">${otp}</b></h3>
@@ -480,10 +480,10 @@ router.get("/home/profilegeneral/:id", (req, res) => {
     const id = req.params.id
 
     const sql1 = `SELECT * from userdata where email = ?`
-    const sql2 = `SELECT * FROM general_orders 
-                right join userdata
+    const sql2 = `SELECT * FROM userdata
+                left join general_orders
                 on userdata.ID = general_orders.general_id
-                WHERE general_orders.general_id = ? ORDER BY post_date DESC`
+                WHERE userdata.ID = ? ORDER BY post_date DESC`
 
     if (!email) {
         return res.redirect("/login?error=110")//login first
@@ -728,7 +728,7 @@ router.post("/student/deletePost", (req, res) => {
             console.log(err)
             return res.redirect('/home/profilestudent?error=115')//delete fail
         }
-        res.redirect("/home/profilestudent?success=102")
+        res.redirect(`/home/profilestudent/${id}?success=102`)
     })
 })
 router.post("/student/update", (req, res) => {
