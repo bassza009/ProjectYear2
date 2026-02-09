@@ -151,7 +151,9 @@ main {
     padding: 0 5%;
     font-size: 1.5rem;
 }
-
+.main_post_home{
+    padding: 0 5%;
+}
 .post_skill {
     padding: 0;
     margin: 0;
