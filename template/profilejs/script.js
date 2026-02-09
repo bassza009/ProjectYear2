@@ -86,21 +86,21 @@ async function toggleEdit() {
         // --- โหมดแก้ไข: เปลี่ยน Text เป็น Input ---
         fields.forEach(id => {
             const span = document.getElementById(id);
-            if(span) {
+            if (span) {
                 // .trim() เพื่อตัดช่องว่างหัวท้ายออก
-                const currentValue = span.innerText.trim(); 
+                const currentValue = span.innerText.trim();
                 // สร้าง Input
                 span.innerHTML = `<input type="text" id="input-${id}" value="${currentValue === '-' ? '' : currentValue}" style="width:100%; box-sizing: border-box;">`;
             }
         });
-        
+
         btn.innerText = "บันทึก";
         btn.classList.add('btn-save');
         isEditingContact = true;
 
     } else {
         // --- โหมดบันทึก: ส่งข้อมูลไปหลังบ้าน ---
-        
+
         // ดึงค่าจาก Input ที่เราสร้างไว้
         const phoneInput = document.getElementById("input-val-phone");
         const lineInput = document.getElementById("input-val-line");
@@ -122,7 +122,7 @@ async function toggleEdit() {
             });
 
             const result = await response.json();
-            
+
             if (result.success) {
                 // อัปเดตหน้าเว็บถ้ารับค่า success
                 Swal.fire({
@@ -179,9 +179,10 @@ function loadContactData() {
    ========================================= */
 
 // ฟังก์ชันเปิดแสดงรีวิวทั้งหมด
-function showFullReviews() {
-    loadReviews(currentFilter, true);
-}
+// ฟังก์ชันเปิดแสดงรีวิวทั้งหมด managed in review_star.js now
+// function showFullReviews() {
+//     loadReviews(currentFilter, true);
+// }
 
 // ฟังก์ชันเลื่อนหน้าจอไปที่ส่วนรีวิว (แถมให้เผื่ออยากใช้)
 function scrollToReviews() {

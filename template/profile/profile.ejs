@@ -46,16 +46,17 @@
                                     alt="โปรไฟล์">
                                 <% }%>
                                     <div class="user_name">
-                                        <%if(userdata.roles=="student"){%>    
+                                        <%if(userdata.roles=="student"){%>
                                             <h1>
-                                                <%=userdata.firstname%> <%=userdata.lastname%>       
+                                                <%=userdata.firstname%>
+                                                    <%=userdata.lastname%>
                                             </h1>
-                                        <%}else{%>
-                                            <h1>
-                                                <%=userdata.username%>      
-                                            </h1>
-                                        <%}%>
-                                        <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
+                                            <%}else{%>
+                                                <h1>
+                                                    <%=userdata.username%>
+                                                </h1>
+                                                <%}%>
+                                                    <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
                                     </div>
                     </div>
 
@@ -65,18 +66,18 @@
                                 <a href="/home/profilestudent/<%=userdata.ID%>">
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
-                            <%}else{%>
-                                <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                    <button class="b_view">ดูโปรไฟล์</button>
-                                </a>
-                            <%}%>
-                        <%}%>
+                                <%}else{%>
+                                    <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                        <button class="b_view">ดูโปรไฟล์</button>
+                                    </a>
+                                    <%}%>
+                                        <%}%>
 
-                        <a>
-                            <form action="/logout" method="post">
-                                <button class="b_logout">ออกจากระบบ</button>
-                            </form>
-                        </a>
+                                            <a>
+                                                <form action="/logout" method="post">
+                                                    <button class="b_logout">ออกจากระบบ</button>
+                                                </form>
+                                            </a>
                     </div>
                 </div>
             </div>
@@ -90,23 +91,24 @@
                     <% if(userdata.profile_image){ %>
                         <img src="/imageForTest/<%= post.profile_image %>" alt="<%= post.profile_image%>"
                             class="avatar-img" id="profile_">
-                    <% } else{%>
-                        <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>" alt="โปรไฟล์"
-                            class="avatar-img" id="profile_">
-                    <% }%>
-                    <%if(userdata.ID==post.ID){%>
-                        <input type="file" accept="image/*" id="avatar_upload" onchange="edit_profile(this)"
-                            style="display: none;">
-                        <button class="edit-avatar-btn"
-                            onclick="document.getElementById('avatar_upload').click()">✎</button>
-                    <%}%>
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>" alt="โปรไฟล์"
+                                class="avatar-img" id="profile_">
+                            <% }%>
+                                <%if(userdata.ID==post.ID){%>
+                                    <input type="file" accept="image/*" id="avatar_upload" onchange="edit_profile(this)"
+                                        style="display: none;">
+                                    <button class="edit-avatar-btn"
+                                        onclick="document.getElementById('avatar_upload').click()">✎</button>
+                                    <%}%>
                 </div>
 
                 <div class="header-info">
                     <div class="name-rating-row">
                         <h1 id="user-name">
-                            <%=post.firstname%> <%=post.lastname%>
-                                
+                            <%=post.firstname%>
+                                <%=post.lastname%>
+
                         </h1>
                     </div>
                     <p class="status-badge">
@@ -194,6 +196,38 @@
                                 <div class="modal-buttons">
                                     <button id="cancelBtn">ยกเลิก</button>
                                     <button id="submitBtn">ตกลง</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Full Reviews Modal -->
+                        <div id="allReviewsModal" class="modal-overlay">
+                            <div class="modal-window">
+                                <div class="modal-header">
+                                    <div style="display: flex; gap: 15px; align-items: center;">
+                                        <h3>รีวิวทั้งหมด</h3>
+                                        <!-- Tags Filter inside Modal -->
+                                        <div class="filter-tags" style="margin-bottom: 0;">
+                                            <button class="tag active"
+                                                onclick="filterModalReviews('all')">ทั้งหมด</button>
+                                            <button class="tag" onclick="filterModalReviews('hasImage')">มีรูปภาพ (<span
+                                                    id="m-f-img">0</span>)</button>
+                                            <button class="tag" onclick="filterModalReviews(5)">5 ดาว (<span
+                                                    id="m-f-5">0</span>)</button>
+                                            <button class="tag" onclick="filterModalReviews(4)">4 ดาว (<span
+                                                    id="m-f-4">0</span>)</button>
+                                            <button class="tag" onclick="filterModalReviews(3)">3 ดาว (<span
+                                                    id="m-f-3">0</span>)</button>
+                                            <button class="tag" onclick="filterModalReviews(2)">2 ดาว (<span
+                                                    id="m-f-2">0</span>)</button>
+                                            <button class="tag" onclick="filterModalReviews(1)">1 ดาว (<span
+                                                    id="m-f-1">0</span>)</button>
+                                        </div>
+                                    </div>
+                                    <span class="close-modal" onclick="closeAllReviewsModal()">&times;</span>
+                                </div>
+                                <div class="modal-body" id="allReviewsContainer">
+                                    <!-- Reviews will be injected here -->
                                 </div>
                             </div>
                         </div>
@@ -328,11 +362,15 @@
         </div>
     </footer>
     <!--cookie-->
-    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
+    <div id="cookie-banner"
+        style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy"
+                    style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
             <div>
-                <button onclick="acceptCookies()" style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
+                <button onclick="acceptCookies()"
+                    style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
             </div>
         </div>
     </div>

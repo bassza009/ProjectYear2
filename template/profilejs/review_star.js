@@ -144,12 +144,126 @@ function postComment(btn, revId) {
         localStorage.setItem('userReviews', JSON.stringify(reviews));
         input.value = "";
         loadReviews(currentFilter);
+        // If modal is open, reload modal reviews too
+        if (document.getElementById('allReviewsModal') && document.getElementById('allReviewsModal').style.display === 'flex') {
+            loadModalReviews(currentModalFilter);
+        }
     }
 }
 
 function toggleCommentInput(btn) {
     const commentArea = btn.closest('.review-content').querySelector('.comment-area');
     commentArea.style.display = (commentArea.style.display === 'none' || commentArea.style.display === '') ? 'block' : 'none';
+}
+
+/* =========================================
+   FULL REVIEWS MODAL LOGIC
+   ========================================= */
+let currentModalFilter = 'all';
+
+function showFullReviews() {
+    const modal = document.getElementById('allReviewsModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        loadModalReviews('all');
+        updateModalStats(); // Update counts in modal filter buttons
+    }
+}
+
+function closeAllReviewsModal() {
+    const modal = document.getElementById('allReviewsModal');
+    if (modal) modal.style.display = 'none';
+}
+
+function filterModalReviews(type) {
+    currentModalFilter = type;
+    const modalTags = document.querySelectorAll('#allReviewsModal .tag');
+    modalTags.forEach(t => t.classList.remove('active'));
+
+    // Find the tag inside the modal that was clicked (approximate match by text or onclick attr)
+    // Simpler: use event.currentTarget if passed, or just re-render active class based on type
+    if (event && event.currentTarget) event.currentTarget.classList.add('active');
+
+    loadModalReviews(type);
+}
+
+function loadModalReviews(filter) {
+    const container = document.getElementById('allReviewsContainer');
+    if (!container) return;
+
+    let reviews = [];
+    if (typeof window !== 'undefined' && window.serverReviews && window.serverReviews.length > 0) {
+        reviews = window.serverReviews.map(r => ({
+            id: r.review_id,
+            name: (r.firstname && r.lastname) ? `${r.firstname} ${r.lastname}` : (r.username || 'User'),
+            profilePic: r.profile_image ? `/imageForTest/${r.profile_image}` : `https://ui-avatars.com/api/?name=${r.username || 'User'}`,
+            rating: r.rating,
+            comment: r.comment,
+            reviewImg: r.review_image ? `/imageForTest/${r.review_image}` : null,
+            likes: r.likes || 0,
+            isLiked: r.is_liked > 0,
+            replies: []
+        }));
+    } else {
+        reviews = JSON.parse(localStorage.getItem('userReviews')) || [];
+    }
+
+    // --- Filter ---
+    if (filter === 'hasImage') {
+        reviews = reviews.filter(r => r.reviewImg);
+    } else if (filter !== 'all') {
+        reviews = reviews.filter(r => Math.round(parseFloat(r.rating)) === filter);
+    }
+
+    // --- Sort ---
+    reviews.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+
+    container.innerHTML = reviews.length ? '' : '<p style="text-align:center;color:#999;padding:20px;">ไม่มีรีวิวในหมวดนี้</p>';
+
+    reviews.forEach((rev) => {
+        const revId = rev.id;
+        const html = `
+                    <div class="review-card">
+                        <img src="${rev.profilePic}" class="user-pic">
+                        <div class="review-content">
+                            <h5>${rev.name}</h5>
+                            <div class="stars">${renderStars(rev.rating)}</div>
+                            <p class="quote">${rev.comment || 'ไม่มีข้อความรีวิว'}</p> 
+                            ${rev.reviewImg ? `<div class="review-images"><img src="${rev.reviewImg}"></div>` : ''}
+
+                            <div class="review-actions">
+                                <button class="action-btn ${rev.isLiked ? 'active' : ''}" onclick="handleLike('${revId}')">
+                                    มีประโยชน์ 👍(<span id="modal-like-count-${revId}">${rev.likes || 0}</span>)
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+}
+
+function updateModalStats() {
+    let reviews = [];
+    if (typeof window !== 'undefined' && window.serverReviews && window.serverReviews.length > 0) {
+        // ... (Reuse parsing logic or just pass raw length if okay)
+        // Better to reuse the parsing logic to be consistent
+        reviews = window.serverReviews.map(r => ({
+            rating: r.rating,
+            reviewImg: r.review_image
+        }));
+    }
+    // ... logic same as updateReviewStats but target m-f-* IDs
+    let counts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, hasImage: 0 };
+    reviews.forEach(r => {
+        let star = Math.round(parseFloat(r.rating));
+        if (counts[star] !== undefined) counts[star]++;
+        if (r.reviewImg) counts.hasImage++;
+    });
+
+    if (document.getElementById('m-f-img')) document.getElementById('m-f-img').innerText = counts.hasImage;
+    for (let i = 1; i <= 5; i++) {
+        if (document.getElementById(`m-f-${i}`)) document.getElementById(`m-f-${i}`).innerText = counts[i];
+    }
 }
 
 function renderStars(r) {

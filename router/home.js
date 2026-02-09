@@ -568,7 +568,7 @@ router.get("/home/profilegeneral/:id", (req, res) => {
             const profileUser = profileUserResults[0]
 
             // Fetch job postings for this user
-            pool.query(sql2, [id], (err, jobs) => {
+            pool.query(sqlJobs, [id], (err, jobs) => {
                 if (err) {
                     console.error("Error fetching jobs:", err)
                     jobs = []
@@ -789,6 +789,7 @@ router.get("/home/viewGeneralPost/:id", (req, res) => {
                 } else {
                 }
                 //res.json(comments)
+                console.log("[DEBUG] ViewGeneralPost data[0]:", data[0]);
                 res.render("post/viewpostgen", {
                     userdata: results[0],
                     post: data[0],
@@ -936,6 +937,47 @@ router.post("/general/changeAvatar", upload.single("file_input"), (req, res) => 
         res.json({ success: true, message: "Change avatar complete" })
     })
 })
+
+router.post("/general/update", (req, res) => {
+    const { email } = req.cookies
+    // รับค่าจาก frontend (Facebook เพิ่มมาด้วย)
+    const { phone, line, ig, facebook } = req.body
+
+    const sql = `UPDATE userdata 
+                 SET userPhoneNumber = ?, line = ?, instagram = ?, facebook = ?
+                 WHERE email = ?`
+
+    pool.query(sql, [phone, line, ig, facebook, email], (err, results) => {
+        if (err) {
+            console.error("Update Gen Contact Error:", err)
+            return res.json({ success: false, message: "User update failed" })
+        }
+        res.json({ success: true, message: "Update complete" })
+    })
+})
+
+router.post("/general/closeJob", (req, res) => {
+    const { order_id } = req.body;
+    const { id } = req.cookies; // User ID from cookie
+
+    if (!order_id || !id) {
+        return res.json({ success: false, message: "Invalid request" });
+    }
+
+    // Delete the order entirely
+    const sql = `DELETE FROM general_orders WHERE order_ID = ? AND general_id = ?`;
+
+    pool.query(sql, [order_id, id], (err, results) => {
+        if (err) {
+            console.error("Delete Job Error:", err);
+            return res.json({ success: false, message: "Failed to delete job" });
+        }
+        if (results.affectedRows === 0) {
+            return res.json({ success: false, message: "Job not found or unauthorized" });
+        }
+        res.json({ success: true, message: "Job deleted successfully" });
+    });
+});
 
 router.get("/home/filter/:job_type", (req, res) => {
     const { email } = req.cookies
