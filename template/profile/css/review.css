@@ -255,6 +255,7 @@
 }
 
 .review-content h5 {
+    margin: 0;
     margin-bottom: 3px;
     font-weight: 600;
     color: #1e293b;
@@ -263,7 +264,7 @@
 .quote {
     font-size: 0.95rem;
     color: #475569;
-    line-height: 1.5;
+    line-height: 1;
 }
 
 .review-images img {
