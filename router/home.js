@@ -1091,7 +1091,7 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
                on userdata.ID = user_job.ID
                left join studentdata
                on studentdata.email = userdata.email
-               where user_job.job_type = ? and user_job.budjet < ?
+               where user_job.job_type = ? and user_job.budjet <= ?
                `
 
     if (!email) {
