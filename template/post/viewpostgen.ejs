@@ -130,6 +130,76 @@
                             </div>
                         </div>
                     </article>
+
+
+                    <article class="info-section" style="margin-top: 20px;">
+                        <h3>ความคิดเห็น <span style="font-size: 14px; color: #666; font-weight: normal;">(<%= comments ?
+                                    comments.length : 0 %>)</span></h3>
+                        <div class="job-list">
+                            <div class="job-item" style="display: block;">
+                                <% if(comments && comments.length> 0) { %>
+                                    <% comments.slice(0, 4).forEach(function(comment) { %>
+                                        <div class="comment-item"
+                                            style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                                            <a href="<%= comment.roles === 'student' ? '/home/profilestudent/' + comment.user_id : '/home/profilegeneral/' + comment.user_id %>"
+                                                style="text-decoration: none; color: inherit;">
+                                                <div
+                                                    style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                                    <div
+                                                        style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden;">
+                                                        <% if(comment.profile_image){ %>
+                                                            <img src="/imageForTest/<%= comment.profile_image %>"
+                                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                                            <% } else { %>
+                                                                <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
+                                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                                                <% } %>
+                                                    </div>
+                                                    <div>
+                                                        <h4 style="font-size: 15px; margin: 0;">
+                                                            <% if(comment.roles==='student' && comment.firstname) { %>
+                                                                <%= comment.firstname %>
+                                                                    <% } else { %>
+                                                                        <%= comment.username %>
+                                                                            <% } %>
+                                                        </h4>
+                                                        <span style="font-size: 12px; color: #999;">
+                                                            <%= new Date(comment.created_at).toLocaleString('th-TH') %>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <p style="font-size: 14px; margin: 5px 0 0 0; padding-left: 50px;">
+                                                <%= comment.comment_text %>
+                                            </p>
+                                        </div>
+                                        <% }); %>
+
+                                            <% if(comments.length> 4) { %>
+                                                <button onclick="openAllCommentsModal()"
+                                                    style="width: 100%; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; margin-bottom: 15px; color: #666;">
+                                                    ดูความคิดเห็นทั้งหมด (<%= comments.length %>)
+                                                </button>
+                                                <% } %>
+
+                                                    <% } else { %>
+                                                        <div style="text-align: center; color: #999; padding: 20px;">
+                                                            ยังไม่มีความคิดเห็น
+                                                        </div>
+                                                        <% } %>
+
+                                                            <%if(userdata.ID!=post.general_id||post.roles!="general"){%>
+                                                                <div class="comment-action" style="margin-top: 15px;">
+                                                                    <button class="btn-comment"
+                                                                        onclick="openCommentModal()"
+                                                                        style="width: 100%; padding: 12px; background: #9b59b6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">
+                                                                        ✍️ เขียนความคิดเห็น...
+                                                                    </button>
+                                                                </div>
+                                                                <%}%>
+                            </div>
+                        </div>
+                    </article>
                 </div>
 
                 <!-- 3. Right Content (Stats & Comments) -->
@@ -188,72 +258,6 @@
                                             </div>
                                             <% } %>
 
-                                                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
-
-                                                <!-- Comments Section inside Stats Card -->
-                                                <div class="comment-header-row">
-                                                    <h3>ความคิดเห็น</h3>
-                                                    <span style="font-size: 12px; color: #666;">
-                                                        <%= comments ? comments.length : 0 %> ข้อความ
-                                                    </span>
-                                                </div>
-
-                                                <div class="scrollable-list" id="commentContainer">
-                                                    <% if(comments && comments.length> 0) { %>
-                                                        <% comments.forEach(function(comment) { %>
-                                                            <div class="comment-item">
-                                                                <a href="<%= comment.roles === 'student' ? '/home/profilestudent/' + comment.user_id : '/home/profilegeneral/' + comment.user_id %>"
-                                                                    style="text-decoration: none; color: inherit;">
-                                                                    <div
-                                                                        style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-                                                                        <div
-                                                                            style="width: 30px; height: 30px; border-radius: 50%; overflow: hidden;">
-                                                                            <% if(comment.profile_image){ %>
-                                                                                <img src="/imageForTest/<%= comment.profile_image %>"
-                                                                                    style="width: 100%; height: 100%; object-fit: cover;">
-                                                                                <% } else { %>
-                                                                                    <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
-                                                                                        style="width: 100%; height: 100%; object-fit: cover;">
-                                                                                    <% } %>
-                                                                        </div>
-                                                                        <div>
-                                                                            <h4 style="font-size: 14px; margin: 0;">
-                                                                                <% if(comment.roles==='student' &&
-                                                                                    comment.firstname) { %>
-                                                                                    <%= comment.firstname %>
-                                                                                        <% } else { %>
-                                                                                            <%= comment.username %>
-                                                                                                <% } %>
-                                                                            </h4>
-                                                                            <span style="font-size: 10px; color: #999;">
-                                                                                <%= new
-                                                                                    Date(comment.created_at).toLocaleString('th-TH')
-                                                                                    %>
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <p style="font-size: 13px; margin: 0;">
-                                                                    <%= comment.comment_text %>
-                                                                </p>
-                                                            </div>
-                                                            <% }); %>
-                                                                <% } else { %>
-                                                                    <div
-                                                                        style="text-align: center; color: #999; padding: 20px; font-size: 13px;">
-                                                                        ยังไม่มีความคิดเห็น
-                                                                    </div>
-                                                                    <% } %>
-                                                </div>
-
-                                                <%if(userdata.ID!=post.general_id||post.roles!="general"){%>
-                                                    <div class="comment-action">
-                                                        <button class="btn-comment" onclick="openCommentModal()">
-                                                            ✍️ แสดงความคิดเห็น...
-                                                        </button>
-                                                    </div>
-                                                    <%}%>
-                    </div>
                 </aside>
             </div>
         </div>
@@ -273,6 +277,55 @@
                         required></textarea>
                     <button type="submit" class="btn-send">ส่งข้อความ</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Comments Modal -->
+    <div id="allCommentsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-window"
+            style="max-width: 600px; width: 90%; max-height: 80vh; display: flex; flex-direction: column;">
+            <div class="modal-header">
+                <h3>ความคิดเห็นทั้งหมด (<%= comments ? comments.length : 0 %>)</h3>
+                <span class="close-modal" onclick="closeAllCommentsModal()">&times;</span>
+            </div>
+            <div class="modal-body" style="overflow-y: auto; flex: 1; padding: 20px;">
+                <% if(comments && comments.length> 0) { %>
+                    <% comments.forEach(function(comment) { %>
+                        <div class="comment-item"
+                            style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                            <a href="<%= comment.roles === 'student' ? '/home/profilestudent/' + comment.user_id : '/home/profilegeneral/' + comment.user_id %>"
+                                style="text-decoration: none; color: inherit;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                    <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden;">
+                                        <% if(comment.profile_image){ %>
+                                            <img src="/imageForTest/<%= comment.profile_image %>"
+                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                            <% } else { %>
+                                                <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                                <% } %>
+                                    </div>
+                                    <div>
+                                        <h4 style="font-size: 15px; margin: 0;">
+                                            <% if(comment.roles==='student' && comment.firstname) { %>
+                                                <%= comment.firstname %>
+                                                    <% } else { %>
+                                                        <%= comment.username %>
+                                                            <% } %>
+                                        </h4>
+                                        <span style="font-size: 12px; color: #999;">
+                                            <%= new Date(comment.created_at).toLocaleString('th-TH') %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                            <p style="font-size: 14px; margin: 5px 0 0 0; padding-left: 50px;">
+                                <%= comment.comment_text %>
+                            </p>
+                        </div>
+                        <% }); %>
+                            <% } %>
             </div>
         </div>
     </div>
@@ -316,10 +369,24 @@
         }
 
         // Close modal when clicking outside
+        // All Comments Modal Logic
+        function openAllCommentsModal() {
+            document.getElementById('allCommentsModal').style.display = 'flex';
+        }
+
+        function closeAllCommentsModal() {
+            document.getElementById('allCommentsModal').style.display = 'none';
+        }
+
+        // Close all comments modal when clicking outside
         window.onclick = function (event) {
             var modal = document.getElementById('commentModal');
+            var allCommentsModal = document.getElementById('allCommentsModal');
             if (event.target == modal) {
                 closeCommentModal();
+            }
+            if (event.target == allCommentsModal) {
+                closeAllCommentsModal();
             }
         }
     </script>
