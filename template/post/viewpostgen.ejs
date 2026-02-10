@@ -44,7 +44,10 @@
                         <%}else{%>
                             <h1><%=userdata.username%></h1>
                         <%}%>
-                        <small><span class="status-dot"></span> สถานะ : <%= userdata.roles %></small>
+                        <p class="status-text">
+                            <span class="status-dot"></span> 
+                            <span>สถานะ : <%= userdata.roles %></span>
+                        </p>
                     </div>
                 </div>
 
@@ -87,7 +90,10 @@
                                 <%=post.username%>
                             <% } %>
                         </h1>
-                        <p style="color: #64748b; margin-top: 5px;">✅ สถานะ : <%=post.roles%></p>
+                        <p style="font-size:medium; color: #64748b; margin-top: 5px;" class="status-text">
+                            <span class="status-dot"></span> 
+                            <span>สถานะ : <%= userdata.roles %></span>
+                        </p>
                     </div>
                 </div>
 
