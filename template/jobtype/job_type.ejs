@@ -84,27 +84,40 @@
 
                 <!-- ===== Category ===== -->
                 <div class="category">
-                    <div class="path" id="categoryPath">
-                        ประเภทงาน : <a href="/home/filter/<%=jobtype%>">
-                            <%=jobtype%>
-                        </a>
-                    </div>
-                    <div class="category-bar">
-                        <button class="filter-btn">คัดกรอง</button>
-                        <%const
-                            category=['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','อื่นๆ']%>
+                    <div class="zone1">
+                        <div class="path" id="categoryPath">
+                            ประเภทงาน : <a href="/home/filter/<%=jobtype%>">
+                                <%=jobtype%>
+                            </a>
+                        </div>
+                        <div class="category-bar">
+                            <button class="filter-btn">คัดกรอง</button>
+                            <%const category=['รับจ้างทั่วไป','เขียนโปรแกรม','กราฟิกดีไซน์','ตัดต่อวิดีโอ','แปลภาษา','การศึกษา','ถ่ายภาพ','ดนตรีและเสียง','เอกสาร','ซ่อมแซม','อื่นๆ']%>
                             <div class="filter-panel" id="filterPanel">
                                 <div class="category-scroll">
 
                                     <%category.forEach((type)=>{%>
                                         <a href="/home/filter/<%=type%>">
-                                            <button class="tab <%=jobtype === type ? " active":""%>"data-category="all">
-                                                <%=type%>
-                                            </button>
+                                        <button class="tab <%=jobtype === type ? " active":""%>"data-category="all">
+                                            <%=type%>
+                                        </button>
                                         </a>
-                                        <%})%>
+                                    <%})%>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="zone2">
+                        <div class="form_input">
+                            <form id="searchForm" action="/home/filter/<%=(typeof jobtype !=='undefined'&&jobtype)?jobtype:'all'%>" method="get">
+                                <img src="/../icon/search.png">
+                                <% if(typeof budget !== 'undefined' && budget){ %>
+                                    <input type="hidden" name="budget" value="<%= budget %>">
+                                <% } %>  
+                                <input type="search" id="search" name='search' value="<%=(typeof search!=='undefined')?search:""%>" placeholder="ค้นหา"> 
+                                
+                            </form>
+                        </div>
                     </div>
                 </div>
 
@@ -118,7 +131,10 @@
                             <form action="/home/filter/<%=currentType%>/budget" method="get">
                                 <h3>ตัวคัดกรองราคา</h3>
                                 <input name='budget' type="text" placeholder="งบประมาณที่คุณมีอยู่"
-                                    value="<%=typeof budget !==" undefined"?budget : "" %>">
+                                    value="<%=typeof budget !=='undefined'?budget : "" %>">
+                                
+                                <input type="hidden" name="search"
+                                    value="<%=typeof search !=='undefined'?search : "" %>">
                                 <h3>เรียงตาม</h3>
                                 <div class="price-tabs">
 

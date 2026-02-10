@@ -18,18 +18,25 @@
 }
 
 /* ===== Category ===== */
+
 .path {
   font-size: 14px;
   color: #555;
   margin-bottom: 10px;
 }
 
+.category{
+  display:flex;
+  gap:170px;
+  
+  justify-items: center;
+}
 .category-bar {
   display: flex;
   gap: 12px;
   align-items: center;
   margin-bottom: 5px;
-  position: relative; /* ⭐ สำคัญ: ปุ่มไม่ขยับ */
+  position: static; /* ⭐ สำคัญ: ปุ่มไม่ขยับ */
 }
 
 /* ===== Filter Button ===== */
@@ -56,7 +63,7 @@
   position: absolute;        /* ⭐ ลอย ไม่ดัน layout */
   top: 80%;
   left: 0;
-  width: 100%;
+  width: 720px;
   background: #fff;
   padding: 14px;
   border-radius: 14px;

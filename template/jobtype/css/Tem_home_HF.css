@@ -309,6 +309,104 @@ a {
     font-size: 14px;
 }
 
+.form_input {
+    padding: 0 5%;
+}
+
+.form_input form {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 5px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: -0.25rem;
+}
+
+.form_input select {
+    padding: 10px 10px;
+    color: #333;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.form_input input {
+    padding: 10px 15px;
+    border: none;
+    border-left: 1px solid #ddd;
+    flex: 1;
+    outline: none;
+}
+#reset,
+#submit {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#reset {
+    background-color: #8e8e8e;
+    color: white;
+}
+
+#submit {
+    background-color: #9b59b6;
+    color: white;
+}
+
+
+#reset,
+#submit {
+    color: white;
+    padding: 5px 7px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 70px;
+}
+
+#reset {
+    background: #b0acac;
+    transition: 0.2s;
+}
+
+#submit {
+    background: #9602ac;
+    transition: 0.2s;
+}
+
+#reset:hover {
+    background: red;
+}
+
+#submit:hover {
+    background: green;
+}
+
+#submit:active,
+#reset:active {
+    background: #868686;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.icon-box img,
+.form_input img {
+    padding: 10px;
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+.zone1{
+    position: relative;
+    width: auto;
+}
+.zone2{
+    flex:1
+}
 /*--------------------------------------------------------------------*/
 
 footer {

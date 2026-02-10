@@ -982,12 +982,19 @@ router.post("/general/closeJob", (req, res) => {
 router.get("/home/filter/:job_type", (req, res) => {
     const { email } = req.cookies
     const jobType = req.params.job_type
+    const search = req.query.search
     // console.log(`[DEBUG] Accessing filter for jobType: ${jobType}`);
 
     // ใช้ชื่อเดิม: startpage
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
-
+    const searchKeyWord=`"%${search}%"`
+    const like =` AND ((studentdata.firstname LIKE ${searchKeyWord})or
+							(studentdata.lastname LIKE ${searchKeyWord})or
+							(user_job.title LIKE ${searchKeyWord}))`
+    
+    
+        
     // ใช้ชื่อเดิม: sql2 (ดึงข้อมูล User)
     let sql2 = `SELECT * FROM user_job
                 RIGHT JOIN userdata ON userdata.ID = user_job.ID
@@ -1002,6 +1009,9 @@ router.get("/home/filter/:job_type", (req, res) => {
                LEFT JOIN userdata ON userdata.ID = user_job.ID
                LEFT JOIN studentdata ON studentdata.email = userdata.email
                WHERE job_type = ?`
+    if(search){
+        sql += like
+    }
 
     if (!email) {
         return res.redirect("/home?error=106")
@@ -1054,7 +1064,8 @@ router.get("/home/filter/:job_type", (req, res) => {
                     currentPage: startpage, // ส่งหน้าปัจจุบันไป
                     paginationUrl: `/home/filter/${jobType}`,
                     budget: null,
-                    currentUrl: req.originalUrl
+                    currentUrl: req.originalUrl,
+                    search:search
                 })
             })
         })
@@ -1154,10 +1165,14 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
     const jobType = req.params.job_type
     const sort = req.params.sort
     const budget = req.query.budget
+    const search = req.query.search
 
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
-
+    searchKeyWord = `"%${search}%"`
+    const like = ` AND ((studentdata.firstname LIKE ${searchKeyWord})or
+						(studentdata.lastname LIKE ${searchKeyWord})or
+						(user_job.title LIKE ${searchKeyWord}))`
     let sql2 = `Select * from user_job
                 right join userdata
                 on userdata.ID = user_job.ID
@@ -1175,16 +1190,25 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
 
     let sqlCount = `Select COUNT(*) AS total from user_job ` + whereClause
 
-    let sql = `Select * from user_job
+    let sql = `Select *,AVG(service_reviews.rating) as avgrating from user_job
                left join userdata
                on userdata.ID = user_job.ID
                left join studentdata
-               on studentdata.email = userdata.email` + whereClause
-
+               on studentdata.email = userdata.email
+               left join service_reviews 
+               on service_reviews.student_id = userdata.ID
+               ${whereClause} 
+               group by userdata.ID`
+               
+    if(search){
+        sql += like
+    }
     if (sort == "highlow") {
         sql += ` order by user_job.budjet asc`
     } else if (sort == "lowhigh") {
         sql += ` order by user_job.budjet desc`
+    }else if (sort == 'review'){
+        sql += ` order by avgrating desc`
     }
 
     if (!email) {
