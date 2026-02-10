@@ -139,7 +139,12 @@ function scrollToReviews() {
     }
 }
 
-
+// ตัวอย่างที่มักจะผิด
+router.get('/profile/:id', async (req, res) => {
+    const user = await User.findById(req.params.id);
+    // ตรวจสอบตรงนี้ว่า user.profile_image มีค่าตรงกับในฐานข้อมูลไหม?
+    res.render('profile', { profileUser: user, userdata: req.session.user });
+});
 
 
 
