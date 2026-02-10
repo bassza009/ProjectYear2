@@ -227,7 +227,13 @@ footer {
     margin: 0;
     font-size: 14px;
 }
-
+.card-link{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
 .card-link,
 .card-link:link,
 .card-link:visited,

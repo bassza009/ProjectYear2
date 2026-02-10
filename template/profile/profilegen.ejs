@@ -5,28 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile_General</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <link rel="stylesheet" href="/../profile/css/profile_gen.css">
     <link rel="stylesheet" href="/../profile/css/Template_HF.css">
 </head>
 
 <body>
     <div class="content-wrapper">
+        
         <header>
             <a href="/" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
             </a>
+            
             <div class="profile_container">
                 <div class="buttom_header">
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <% if(userdata.profile_image){ %>
-                                <img src="/imageForTest/<%= userdata.profile_image %>"
-                                    alt="<%= userdata.profile_image%>">
-                                <% } else{%>
-                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                        alt="โปรไฟล์">
-                                    <% }%>
+                                <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                            <% }%>
                         </div>
                         <span>Profile</span>
                     </button>
@@ -57,17 +59,18 @@
                                 <a href="/home/profilestudent/<%=userdata.ID%>">
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
-                                <%}else if(userdata.roles=="general" ){%>
-                                    <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                        <button class="b_view">ดูโปรไฟล์</button>
-                                    </a>
-                                    <%}%>
-                                        <%}%>
-                                            <a>
-                                                <form action="/logout" method="post">
-                                                    <button class="b_logout">ออกจากระบบ</button>
-                                                </form>
-                                            </a>
+                            <%}else if(userdata.roles=="general" ){%>
+                                <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                    <button class="b_view">ดูโปรไฟล์</button>
+                                </a>
+                            <%}%>
+                        <%}%>
+                        
+                        <a>
+                            <form action="/logout" method="post">
+                                <button class="b_logout">ออกจากระบบ</button>
+                            </form>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -75,29 +78,24 @@
 
         <main class="container">
             <div class="page-wrapper">
+                
                 <div class="profile-header">
                     <div class="avatar-wrapper">
                         <% if(profileUser.profile_image){ %>
-                            <img src="/imageForTest/<%= profileUser.profile_image %>"
-                                alt="<%= profileUser.profile_image%>" class="avatar-img" id="profile_">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= profileUser.username || 'User' %>"
-                                    alt="โปรไฟล์" class="avatar-img" id="profile_">
-                                <% }%>
-                                    <%if(userdata.general)%>
-                                        <input type="file" accept="image/*" id="avatar_upload"
-                                            onchange="edit_profile_gen(this)" style="display: none;">
-                                        <%if(userdata.ID==profileUser.ID){%>
-                                            <button class="edit-avatar-btn"
-                                                onclick="document.getElementById('avatar_upload').click()">✎</button>
-                                            <%}%>
+                            <img src="/imageForTest/<%= profileUser.profile_image %>" alt="<%= profileUser.profile_image%>" class="avatar-img" id="profile_">
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= profileUser.username || 'User' %>" alt="โปรไฟล์" class="avatar-img" id="profile_">
+                        <% }%>
+
+                        <%if(userdata.ID==profileUser.ID){%>
+                            <input type="file" accept="image/*" id="avatar_upload" onchange="edit_profile_gen(this)" style="display: none;">
+                            <button class="edit-avatar-btn" onclick="document.getElementById('avatar_upload').click()">✎</button>
+                        <%}%>
                     </div>
 
                     <div class="header-info">
                         <div class="name-rating-row">
-                            <h1 id="user-name">
-                                <%=profileUser.username%>
-                            </h1>
+                            <h1 id="user-name"><%=profileUser.username%></h1>
                         </div>
                         <p class="status-badge">
                             <span class="status-dot"></span> สถานะ : <%= profileUser.roles %>
@@ -114,36 +112,27 @@
                                 <span class="icon">💼</span>
                                 <div class="text">
                                     <p>งานที่ประกาศ</p>
-                                    <strong>
-                                        <%= jobCount %> รายการ
-                                    </strong>
+                                    <strong><%= jobCount %> รายการ</strong>
                                 </div>
                             </div>
-
-
                         </div>
-
 
                         <div class="info-card" style="margin-top: 20px; padding: 20px;">
                             <div class="section-header">
                                 <h3>ข้อมูลติดต่อ</h3>
                                 <% if(userdata.ID==profileUser.ID){ %>
                                     <button onclick="toggleEditGen()" id="edit-btn-gen" class="btn-small">แก้ไข</button>
-                                    <% } %>
+                                <% } %>
                             </div>
 
                             <ul class="contact-list">
                                 <li>
                                     <span class="icon">📧</span>
-                                    <span class="contact-value" id="val-email">
-                                        <%= profileUser.email || "-" %>
-                                    </span>
+                                    <span class="contact-value" id="val-email"><%= profileUser.email || "-" %></span>
                                 </li>
                                 <li>
                                     <span class="icon">📞</span>
-                                    <span class="contact-value" id="val-phone">
-                                        <%= profileUser.userPhoneNumber || "-" %>
-                                    </span>
+                                    <span class="contact-value" id="val-phone"><%= profileUser.userPhoneNumber || "-" %></span>
                                 </li>
                                 <li>
                                     <img src="/../icon/line.png" alt="line">
@@ -154,22 +143,18 @@
                                 <li>
                                     <img src="/../icon/facebook.png" alt="facebook">
                                     <span class="contact-value" id="val-facebook">
-                                        <%= (profileUser.facebook && profileUser.facebook !="null" ) ?
-                                            profileUser.facebook : "-" %>
+                                        <%= (profileUser.facebook && profileUser.facebook !="null" ) ? profileUser.facebook : "-" %>
                                     </span>
                                 </li>
                                 <li>
                                     <img src="/../icon/instagram.png" alt="ig">
                                     <span class="contact-value" id="val-ig">
-                                        <%= (profileUser.instagram && profileUser.instagram !="null" ) ?
-                                            profileUser.instagram : "-" %>
+                                        <%= (profileUser.instagram && profileUser.instagram !="null" ) ? profileUser.instagram : "-" %>
                                     </span>
                                 </li>
                             </ul>
                         </div>
                     </aside>
-
-
 
                     <section class="main-details">
                         <div class="detail-box">
@@ -178,30 +163,24 @@
                                 <% if (jobs && jobs.length> 0) { %>
                                     <% jobs.forEach(job=> { %>
                                         <article class="job-item">
-                                            <a href="/home/viewGeneralPost/<%=job.order_ID%>"
-                                                style="text-decoration: none; color: inherit; flex-grow: 1;">
+                                            <a href="/home/viewGeneralPost/<%=job.order_ID%>" style="text-decoration: none; color: inherit; flex-grow: 1;">
                                                 <div class="job-info">
-                                                    <h1 class="job-link">
-                                                        <%= job.title %>
-                                                    </h1>
+                                                    <h1 class="job-link"><%= job.title %></h1>
                                                     <p class="job-description-text">
                                                         <strong>ประเภทงาน:</strong>
                                                         <%= job.orderType || 'ไม่ระบุ' %> <br>
-                                                            <%= job.des_cript || 'ไม่มีรายละเอียด' %>
+                                                        <%= job.des_cript || 'ไม่มีรายละเอียด' %>
                                                     </p>
                                                     <div class="job-meta-group">
                                                         <p class="job-meta">💰 งบประมาณ: <%= job.budjet %> บาท</p>
-                                                        <p class="job-meta">📅 โพสต์เมื่อ: <%= new
-                                                                Date(job.post_date).toLocaleDateString('th-TH') %>
-                                                        </p>
+                                                        <p class="job-meta">📅 โพสต์เมื่อ: <%= new Date(job.post_date).toLocaleDateString('th-TH') %></p>
                                                         <% if(job.deadline) { %>
-                                                            <p class="job-meta">⏰ กำหนดส่ง: <%= new
-                                                                    Date(job.deadline).toLocaleDateString('th-TH') %>
-                                                            </p>
-                                                            <% } %>
+                                                            <p class="job-meta">⏰ กำหนดส่ง: <%= new Date(job.deadline).toLocaleDateString('th-TH') %></p>
+                                                        <% } %>
                                                     </div>
                                                 </div>
                                             </a>
+                                            
                                             <div class="job-status-wrapper">
                                                 <% if (job.status==='closed' ) { %>
                                                     <span class="status-tag closed"
@@ -217,21 +196,19 @@
                                                                 <% } %>
                                             </div>
                                         </article>
-                                        <% }) %>
-                                            <% } else { %>
-                                                <p style="text-align: center; color: #94a3b8;">
-                                                    ยังไม่มีประวัติการประกาศงาน</p>
-                                                <% } %>
+                                    <% }) %>
+                                <% } else { %>
+                                    <p style="text-align: center; color: #94a3b8;">ยังไม่มีประวัติการประกาศงาน</p>
+                                <% } %>
                             </div>
                         </div>
-
-
                     </section>
 
                 </div>
             </div>
         </main>
     </div>
+
     <footer>
         <div class="footer-contact">
             <p>ติดต่อเรา</p>
@@ -241,20 +218,17 @@
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
-    <!--cookie-->
-    <div id="cookie-banner"
-        style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
-        <div
-            style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy"
-                    style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
+
+    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
             <div>
-                <button onclick="acceptCookies()"
-                    style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
+                <button onclick="acceptCookies()" style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
             </div>
         </div>
     </div>
-    <script src="../cookie.js"></script>
+
+    <script src="/../cookie.js"></script>
     <script src="/../profilejs/script.js"></script>
     <script src="/../profilejs/post_work.js"></script>
     <script src="/../profilejs/swith_PR.js"></script>
@@ -298,13 +272,14 @@
             }
         }
 
+        // Edit Contact Info Function
         let isEditingContactGen = false;
         async function toggleEditGen() {
             const btn = document.getElementById('edit-btn-gen');
             const fields = ['val-phone', 'val-line', 'val-facebook', 'val-ig'];
 
             if (!isEditingContactGen) {
-                // Edit Mode
+                // Edit Mode: Change text to inputs
                 fields.forEach(id => {
                     const span = document.getElementById(id);
                     if (span) {
@@ -317,7 +292,7 @@
                 btn.classList.add('btn-save');
                 isEditingContactGen = true;
             } else {
-                // Save Mode
+                // Save Mode: Send data to server
                 const phoneInput = document.getElementById("input-val-phone");
                 const lineInput = document.getElementById("input-val-line");
                 const fbInput = document.getElementById("input-val-facebook");
@@ -346,7 +321,7 @@
                             timer: 1500
                         });
 
-                        // Revert to text
+                        // Revert inputs back to text spans
                         fields.forEach(id => {
                             const input = document.getElementById(`input-${id}`);
                             const span = document.getElementById(id);

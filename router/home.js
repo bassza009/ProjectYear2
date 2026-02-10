@@ -125,6 +125,7 @@ router.get("/home", (req, res) => {
     const email = req.cookies.email;
     let startpage = req.query.startpage || 1
     let job_type = req.query.job_type
+    const search = req.query.search
 
     if (startpage <= 1) {
         startpage = 1
@@ -219,7 +220,8 @@ router.get("/home", (req, res) => {
                         totalpost: total_job,
                         currentPage: startpage,
                         table_search: req.query.table_search,
-                        table_type: req.query.table_type
+                        table_type: req.query.table_type,
+                        search:search
                     });
                 });
             });
@@ -981,13 +983,21 @@ router.post("/general/closeJob", (req, res) => {
 
 router.get("/home/filter/:job_type", (req, res) => {
     const { email } = req.cookies
-    const jobType = req.params.job_type
+    const jobType = req.params.job_type.trim()
+    const search = req.query.search
+    const budget = req.query.budget
     // console.log(`[DEBUG] Accessing filter for jobType: ${jobType}`);
 
     // ใช้ชื่อเดิม: startpage
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
-
+    const searchKeyWord=`"%${search}%"`
+    const like =` AND ((studentdata.firstname LIKE ${searchKeyWord})or(studentdata.lastname LIKE ${searchKeyWord})or(user_job.title LIKE ${searchKeyWord}))`
+							
+							
+    
+    
+        
     // ใช้ชื่อเดิม: sql2 (ดึงข้อมูล User)
     let sql2 = `SELECT * FROM user_job
                 RIGHT JOIN userdata ON userdata.ID = user_job.ID
@@ -1002,6 +1012,9 @@ router.get("/home/filter/:job_type", (req, res) => {
                LEFT JOIN userdata ON userdata.ID = user_job.ID
                LEFT JOIN studentdata ON studentdata.email = userdata.email
                WHERE job_type = ?`
+    if(search){
+        sql += like
+    }
 
     if (!email) {
         return res.redirect("/home?error=106")
@@ -1054,7 +1067,9 @@ router.get("/home/filter/:job_type", (req, res) => {
                     currentPage: startpage, // ส่งหน้าปัจจุบันไป
                     paginationUrl: `/home/filter/${jobType}`,
                     budget: null,
-                    currentUrl: req.originalUrl
+                    currentUrl: req.originalUrl,
+                    search:search,
+                    budget:budget
                 })
             })
         })
@@ -1062,8 +1077,14 @@ router.get("/home/filter/:job_type", (req, res) => {
 })
 router.get("/home/filter/:job_type/budget", (req, res) => {
     const { email } = req.cookies
-    const jobType = req.params.job_type
+    const jobType = req.params.job_type.trim()
     const budget = req.query.budget
+    const search = req.query.search.trim()
+
+    const searchKeyWord=`"%${search}%"`
+    const like =` AND ((studentdata.firstname LIKE ${searchKeyWord})or
+							(studentdata.lastname LIKE ${searchKeyWord})or
+							(user_job.title LIKE ${searchKeyWord}))`
 
     // 1. แปลง startpage เป็นตัวเลข
     let startpage = parseInt(req.query.startpage) || 1
@@ -1097,7 +1118,9 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
     if (!email) {
         return res.redirect("/home?error=106")//login first
     }
-
+    if(search){
+        sql += like
+    }
     // เริ่ม Query 1: sql2 (User Data) -> เก็บผลใน results
     pool.query(sql2, [email], (err, results) => {
         if (err) {
@@ -1143,7 +1166,8 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
                     totalpost: totalpost,   // ส่งค่าจำนวนงานทั้งหมดไป
                     currentPage: startpage, // ส่งหน้าปัจจุบันไป
                     currentUrl: req.originalUrl,
-                    paginationUrl: `/home/filter/${jobType}/budget`
+                    paginationUrl: `/home/filter/${jobType}/budget`,
+                    search:search
                 })
             })
         })
@@ -1151,20 +1175,29 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
 })
 router.get("/home/filter/:job_type/:sort", (req, res) => {
     const { email } = req.cookies
-    const jobType = req.params.job_type
-    const sort = req.params.sort
+    const jobType = req.params.job_type.trim()
+    const sort = req.params.sort.trim()
     const budget = req.query.budget
+    const search = req.query.search.trim()
 
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
 
+    // 1. สร้างเงื่อนไข Search (LIKE)
+    let like = ""
+    if (search) {
+        const searchKeyWord = `"%${search}%"`
+        like = ` AND ((studentdata.firstname LIKE ${searchKeyWord}) 
+                 OR (studentdata.lastname LIKE ${searchKeyWord}) 
+                 OR (user_job.title LIKE ${searchKeyWord}))`
+    }
+
     let sql2 = `Select * from user_job
-                right join userdata
-                on userdata.ID = user_job.ID
-                left join studentdata
-                on studentdata.email = userdata.email
+                right join userdata on userdata.ID = user_job.ID
+                left join studentdata on studentdata.email = userdata.email
                 where userdata.email = ?`
 
+    // 2. สร้าง Where Clause หลัก (รวม Type + Budget + Search)
     let whereClause = ` where job_type = ? `
     let jobParams = [jobType]
 
@@ -1173,18 +1206,30 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
         jobParams.push(budget)
     }
 
-    let sqlCount = `Select COUNT(*) AS total from user_job ` + whereClause
+    if (search) {
+        whereClause += like 
+    }
 
-    let sql = `Select * from user_job
-               left join userdata
-               on userdata.ID = user_job.ID
-               left join studentdata
-               on studentdata.email = userdata.email` + whereClause
+    // 3. SQL นับจำนวนหน้า (ต้อง JOIN ด้วย ไม่งั้นหาชื่อคนไม่เจอ)
+    let sqlCount = `Select COUNT(*) AS total from user_job 
+                    left join userdata on userdata.ID = user_job.ID
+                    left join studentdata on studentdata.email = userdata.email
+                    ` + whereClause
+
+    // 4. SQL ดึงข้อมูลจริง (ใช้ whereClause ตัวเดียวกัน)
+    let sql = `Select *, AVG(service_reviews.rating) as avgrating from user_job
+               left join userdata on userdata.ID = user_job.ID
+               left join studentdata on studentdata.email = userdata.email
+               left join service_reviews on service_reviews.student_id = userdata.ID
+               ${whereClause} 
+               group by user_job.job_id` 
 
     if (sort == "highlow") {
         sql += ` order by user_job.budjet asc`
     } else if (sort == "lowhigh") {
         sql += ` order by user_job.budjet desc`
+    } else if (sort == 'review') {
+        sql += ` order by avgrating desc`
     }
 
     if (!email) {
@@ -1227,7 +1272,8 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
                     totalpost: totalpost,
                     currentPage: startpage,
                     currentUrl: req.originalUrl,
-                    paginationUrl: `/home/filter/${jobType}/${sort}`
+                    paginationUrl: `/home/filter/${jobType}/${sort}`,
+                    search: search // 
                 })
             })
         })

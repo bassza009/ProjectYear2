@@ -169,6 +169,9 @@ main {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -192,6 +195,9 @@ main {
 .card-content {
     padding: 15px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .card-content {
@@ -236,8 +242,9 @@ main {
     color: #2baf2b;
     font-size: 1.1rem;
     padding: 5px;
-    margin-top: 5px;
+    margin-top: auto;
     font-family: 'Kanit';
+    
 }
 
 .price span {

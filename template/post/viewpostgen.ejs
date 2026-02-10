@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= post.title %> - SDhire
-    </title>
+    <title><%= post.title %> - SDhire</title>
 
     <link rel="stylesheet" href="/post/css/Template_HF.css">
     <link rel="stylesheet" href="/post/css/post_gen.css">
@@ -24,35 +22,30 @@
                     <div class="photo_profile">
                         <% if(userdata.profile_image){ %>
                             <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                    alt="โปรไฟล์">
-                                <% }%>
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                        <% }%>
                     </div>
                     <span>Profile</span>
                 </button>
             </div>
+
             <div class="data_box" id="myDropdown">
                 <div class="user_infor">
                     <% if(userdata.profile_image){ %>
                         <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                        <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                alt="โปรไฟล์">
-                            <% }%>
-                                <div class="user_name">
-                                    <%if(userdata.roles=="student"){%>
-                                        <h1>
-                                            <%=userdata.firstname%>
-                                                <%=userdata.lastname%>
-                                        </h1>
-                                        <%}else{%>
-                                            <h1>
-                                                <%=userdata.username%>
-                                            </h1>
-                                            <%}%>
-                                                <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
-                                </div>
+                    <% } else{%>
+                        <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                    <% }%>
+                    
+                    <div class="user_name">
+                        <%if(userdata.roles=="student"){%>
+                            <h1><%=userdata.firstname%> <%=userdata.lastname%></h1>
+                        <%}else{%>
+                            <h1><%=userdata.username%></h1>
+                        <%}%>
+                        <small><span class="status-dot"></span> สถานะ : <%= userdata.roles %></small>
+                    </div>
                 </div>
 
                 <div class="button_VO">
@@ -60,16 +53,15 @@
                         <a href="/home/profilestudent/<%=userdata.ID%>">
                             <button class="b_view">ดูโปรไฟล์</button>
                         </a>
-                        <%}else{%>
-                            <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                <button class="b_view">ดูโปรไฟล์</button>
-                            </a>
-                            <%}%>
-                                <a>
-                                    <form action="/logout" method="post">
-                                        <button class="b_logout">ออกจากระบบ</button>
-                                    </form>
-                                </a>
+                    <%}else{%>
+                        <a href="/home/profilegeneral/<%=userdata.ID%>">
+                            <button class="b_view">ดูโปรไฟล์</button>
+                        </a>
+                    <%}%>
+                    
+                    <form action="/logout" method="post" style="display: inline;">
+                        <button class="b_logout">ออกจากระบบ</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -77,28 +69,25 @@
 
     <main class="container">
         <div class="page-wrapper">
-            <!-- 1. Profile Header Card -->
+            
             <section class="profile-header-card">
                 <div class="header-main-info">
                     <div class="company-logo">
                         <% if(post.profile_image){ %>
                             <img src="/imageForTest/<%= post.profile_image %>" alt="<%= post.profile_image%>">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>"
-                                    alt="โปรไฟล์">
-                                <% }%>
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>" alt="โปรไฟล์">
+                        <% }%>
                     </div>
                     <div class="user-details">
                         <h1>
                             <% if(post.firstname) { %>
-                                <%=post.firstname%>
-                                    <%=post.lastname%>
-                                        <% } else { %>
-                                            <%=post.username%>
-                                                <% } %>
+                                <%=post.firstname%> <%=post.lastname%>
+                            <% } else { %>
+                                <%=post.username%>
+                            <% } %>
                         </h1>
-                        <p style="color: #64748b; margin-top: 5px;">✅ สถานะ : <%=post.roles%>
-                        </p>
+                        <p style="color: #64748b; margin-top: 5px;">✅ สถานะ : <%=post.roles%></p>
                     </div>
                 </div>
 
@@ -108,60 +97,47 @@
             </section>
 
             <div class="profile-content-grid">
-                <!-- 2. Left Content (Job Info) -->
+                
                 <div class="content-left">
                     <article class="info-section">
                         <h3>รายละเอียดงาน</h3>
                         <div class="job-list">
                             <div class="job-item">
                                 <div class="job-info" style="width: 100%;">
-                                    <h1 class="job-link">
-                                        <%=post.title%>
-                                    </h1>
+                                    <h1 class="job-link"><%=post.title%></h1>
                                     <span>ประเภทงาน : <%=post.orderType%></span><br>
-                                    <div
-                                        style="margin-top: 15px; white-space: pre-wrap; color: #333; line-height: 1.6;">
+                                    <div style="margin-top: 15px; white-space: pre-wrap; color: #333; line-height: 1.6;">
                                         <%=post.des_cript%>
                                     </div>
-                                    <p class="job-meta">โพสต์เมื่อ: <%= new
-                                            Date(post.post_date).toLocaleDateString('th-TH') %>
-                                    </p>
+                                    <p class="job-meta">โพสต์เมื่อ: <%= new Date(post.post_date).toLocaleDateString('th-TH') %></p>
                                 </div>
                             </div>
                         </div>
                     </article>
 
-
                     <article class="info-section" style="margin-top: 20px;">
-                        <h3>ความคิดเห็น <span style="font-size: 14px; color: #666; font-weight: normal;">(<%= comments ?
-                                    comments.length : 0 %>)</span></h3>
+                        <h3>ความคิดเห็น <span style="font-size: 14px; color: #666; font-weight: normal;">(<%= comments ? comments.length : 0 %>)</span></h3>
                         <div class="job-list">
                             <div class="job-item" style="display: block;">
-                                <% if(comments && comments.length> 0) { %>
+                                <% if(comments && comments.length > 0) { %>
                                     <% comments.slice(0, 4).forEach(function(comment) { %>
-                                        <div class="comment-item"
-                                            style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
-                                            <a href="<%= comment.roles === 'student' ? '/home/profilestudent/' + comment.user_id : '/home/profilegeneral/' + comment.user_id %>"
-                                                style="text-decoration: none; color: inherit;">
-                                                <div
-                                                    style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-                                                    <div
-                                                        style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden;">
+                                        <div class="comment-item" style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                                            <a href="<%= comment.roles === 'student' ? '/home/profilestudent/' + comment.user_id : '/home/profilegeneral/' + comment.user_id %>" style="text-decoration: none; color: inherit;">
+                                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                                    <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden;">
                                                         <% if(comment.profile_image){ %>
-                                                            <img src="/imageForTest/<%= comment.profile_image %>"
-                                                                style="width: 100%; height: 100%; object-fit: cover;">
-                                                            <% } else { %>
-                                                                <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
-                                                                    style="width: 100%; height: 100%; object-fit: cover;">
-                                                                <% } %>
+                                                            <img src="/imageForTest/<%= comment.profile_image %>" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        <% } else { %>
+                                                            <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        <% } %>
                                                     </div>
                                                     <div>
                                                         <h4 style="font-size: 15px; margin: 0;">
                                                             <% if(comment.roles==='student' && comment.firstname) { %>
                                                                 <%= comment.firstname %>
-                                                                    <% } else { %>
-                                                                        <%= comment.username %>
-                                                                            <% } %>
+                                                            <% } else { %>
+                                                                <%= comment.username %>
+                                                            <% } %>
                                                         </h4>
                                                         <span style="font-size: 12px; color: #999;">
                                                             <%= new Date(comment.created_at).toLocaleString('th-TH') %>
@@ -173,45 +149,38 @@
                                                 <%= comment.comment_text %>
                                             </p>
                                         </div>
-                                        <% }); %>
+                                    <% }); %>
 
-                                            <% if(comments.length> 4) { %>
-                                                <button onclick="openAllCommentsModal()"
-                                                    style="width: 100%; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; margin-bottom: 15px; color: #666;">
-                                                    ดูความคิดเห็นทั้งหมด (<%= comments.length %>)
-                                                </button>
-                                                <% } %>
+                                    <% if(comments.length > 4) { %>
+                                        <button onclick="openAllCommentsModal()" style="width: 100%; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; margin-bottom: 15px; color: #666;">
+                                            ดูความคิดเห็นทั้งหมด (<%= comments.length %>)
+                                        </button>
+                                    <% } %>
 
-                                                    <% } else { %>
-                                                        <div style="text-align: center; color: #999; padding: 20px;">
-                                                            ยังไม่มีความคิดเห็น
-                                                        </div>
-                                                        <% } %>
+                                <% } else { %>
+                                    <div style="text-align: center; color: #999; padding: 20px;">
+                                        ยังไม่มีความคิดเห็น
+                                    </div>
+                                <% } %>
 
-                                                            <%if(userdata.ID!=post.general_id||post.roles!="general"){%>
-                                                                <div class="comment-action" style="margin-top: 15px;">
-                                                                    <button class="btn-comment"
-                                                                        onclick="openCommentModal()"
-                                                                        style="width: 100%; padding: 12px; background: #9b59b6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">
-                                                                        ✍️ เขียนความคิดเห็น...
-                                                                    </button>
-                                                                </div>
-                                                                <%}%>
+                                <%if(userdata.ID!=post.general_id || post.roles!="general"){%>
+                                    <div class="comment-action" style="margin-top: 15px;">
+                                        <button class="btn-comment" onclick="openCommentModal()" style="width: 100%; padding: 12px; background: #9b59b6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">
+                                            ✍️ เขียนความคิดเห็น...
+                                        </button>
+                                    </div>
+                                <%}%>
                             </div>
                         </div>
                     </article>
                 </div>
 
-                <!-- 3. Right Content (Stats & Comments) -->
                 <aside class="content-right">
                     <div class="stats-card">
                         <h3>ข้อมูลการจ้างงาน</h3>
-
                         <div class="stats-item">
                             <span>กำหนดส่ง</span>
-                            <strong>
-                                <%= post.deadline ? new Date(post.deadline).toLocaleDateString('th-TH') : "-" %>
-                            </strong>
+                            <strong><%= post.deadline ? new Date(post.deadline).toLocaleDateString('th-TH') : "-" %></strong>
                         </div>
                         <div class="stats-item">
                             <span>งบประมาณ</span>
@@ -223,47 +192,40 @@
                         <h3>ข้อมูลติดต่อ</h3>
                         <div class="stats-item">
                             <span>อีเมล</span>
-                            <strong style="font-size: 14px; word-break: break-all;">
-                                <%= post.email %>
-                            </strong>
+                            <strong style="font-size: 14px; word-break: break-all;"><%= post.email %></strong>
                         </div>
                         <div class="stats-item">
                             <span>เบอร์โทรศัพท์</span>
-                            <strong>
-                                <%= post.userPhoneNumber %>
-                            </strong>
+                            <strong><%= post.userPhoneNumber %></strong>
                         </div>
+                        
                         <% if(post.line && post.line !="-" ){ %>
                             <div class="stats-item">
                                 <span>Line</span>
-                                <strong>
-                                    <%= post.line %>
-                                </strong>
+                                <strong><%= post.line %></strong>
                             </div>
-                            <% } %>
-                                <% if(post.facebook && post.facebook !="-" ){ %>
-                                    <div class="stats-item">
-                                        <span>Facebook</span>
-                                        <strong>
-                                            <%= post.facebook %>
-                                        </strong>
-                                    </div>
-                                    <% } %>
-                                        <% if(post.instagram && post.instagram !="-" ){ %>
-                                            <div class="stats-item">
-                                                <span>Instagram</span>
-                                                <strong>
-                                                    <%= post.instagram %>
-                                                </strong>
-                                            </div>
-                                            <% } %>
-
+                        <% } %>
+                        
+                        <% if(post.facebook && post.facebook !="-" ){ %>
+                            <div class="stats-item">
+                                <span>Facebook</span>
+                                <strong><%= post.facebook %></strong>
+                            </div>
+                        <% } %>
+                        
+                        <% if(post.instagram && post.instagram !="-" ){ %>
+                            <div class="stats-item">
+                                <span>Instagram</span>
+                                <strong><%= post.instagram %></strong>
+                            </div>
+                        <% } %>
+                    </div>
                 </aside>
+
             </div>
         </div>
     </main>
 
-    <!-- Comment Modal -->
     <div id="commentModal" class="modal-overlay">
         <div class="modal-window mini-modal">
             <div class="modal-header">
@@ -273,46 +235,39 @@
             <div class="modal-body">
                 <form action="/home/general/comment" method="POST">
                     <input type="hidden" name="order_id" value="<%= post.order_ID %>">
-                    <textarea id="commentText" name="comment_text" placeholder="พิมพ์ข้อความของคุณ..." rows="4"
-                        required></textarea>
+                    <textarea id="commentText" name="comment_text" placeholder="พิมพ์ข้อความของคุณ..." rows="4" required></textarea>
                     <button type="submit" class="btn-send">ส่งข้อความ</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- All Comments Modal -->
     <div id="allCommentsModal" class="modal-overlay" style="display: none;">
-        <div class="modal-window"
-            style="max-width: 600px; width: 90%; max-height: 80vh; display: flex; flex-direction: column;">
+        <div class="modal-window" style="max-width: 600px; width: 90%; max-height: 80vh; display: flex; flex-direction: column;">
             <div class="modal-header">
                 <h3>ความคิดเห็นทั้งหมด (<%= comments ? comments.length : 0 %>)</h3>
                 <span class="close-modal" onclick="closeAllCommentsModal()">&times;</span>
             </div>
             <div class="modal-body" style="overflow-y: auto; flex: 1; padding: 20px;">
-                <% if(comments && comments.length> 0) { %>
+                <% if(comments && comments.length > 0) { %>
                     <% comments.forEach(function(comment) { %>
-                        <div class="comment-item"
-                            style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
-                            <a href="<%= comment.roles === 'student' ? '/home/profilestudent/' + comment.user_id : '/home/profilegeneral/' + comment.user_id %>"
-                                style="text-decoration: none; color: inherit;">
+                        <div class="comment-item" style="border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 15px;">
+                            <a href="<%= comment.roles === 'student' ? '/home/profilestudent/' + comment.user_id : '/home/profilegeneral/' + comment.user_id %>" style="text-decoration: none; color: inherit;">
                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
                                     <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden;">
                                         <% if(comment.profile_image){ %>
-                                            <img src="/imageForTest/<%= comment.profile_image %>"
-                                                style="width: 100%; height: 100%; object-fit: cover;">
-                                            <% } else { %>
-                                                <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>"
-                                                    style="width: 100%; height: 100%; object-fit: cover;">
-                                                <% } %>
+                                            <img src="/imageForTest/<%= comment.profile_image %>" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <% } else { %>
+                                            <img src="https://ui-avatars.com/api/?name=<%= comment.username || 'User' %>" style="width: 100%; height: 100%; object-fit: cover;">
+                                        <% } %>
                                     </div>
                                     <div>
                                         <h4 style="font-size: 15px; margin: 0;">
                                             <% if(comment.roles==='student' && comment.firstname) { %>
                                                 <%= comment.firstname %>
-                                                    <% } else { %>
-                                                        <%= comment.username %>
-                                                            <% } %>
+                                            <% } else { %>
+                                                <%= comment.username %>
+                                            <% } %>
                                         </h4>
                                         <span style="font-size: 12px; color: #999;">
                                             <%= new Date(comment.created_at).toLocaleString('th-TH') %>
@@ -324,8 +279,8 @@
                                 <%= comment.comment_text %>
                             </p>
                         </div>
-                        <% }); %>
-                            <% } %>
+                    <% }); %>
+                <% } %>
             </div>
         </div>
     </div>
@@ -339,27 +294,24 @@
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
-    <!--cookie-->
-    <div id="cookie-banner"
-        style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
-        <div
-            style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy"
-                    style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
+
+    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
             <div>
-                <button onclick="acceptCookies()"
-                    style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
+                <button onclick="acceptCookies()" style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
             </div>
         </div>
     </div>
-    <script src="../cookie.js"></script>
+
+    <script src="/../cookie.js"></script>
     <script>
         function toggleDropdown() {
             var dropdown = document.getElementById("myDropdown");
             dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
         }
 
-        // Modal Logic
+        // --- Comment Modal ---
         function openCommentModal() {
             document.getElementById('commentModal').style.display = 'flex';
         }
@@ -368,8 +320,7 @@
             document.getElementById('commentModal').style.display = 'none';
         }
 
-        // Close modal when clicking outside
-        // All Comments Modal Logic
+        // --- All Comments Modal ---
         function openAllCommentsModal() {
             document.getElementById('allCommentsModal').style.display = 'flex';
         }
@@ -378,7 +329,7 @@
             document.getElementById('allCommentsModal').style.display = 'none';
         }
 
-        // Close all comments modal when clicking outside
+        // Close modal when clicking outside
         window.onclick = function (event) {
             var modal = document.getElementById('commentModal');
             var allCommentsModal = document.getElementById('allCommentsModal');
