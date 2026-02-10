@@ -197,6 +197,9 @@ header button:hover {
 
 .card-content {
     margin: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .name_tag {
