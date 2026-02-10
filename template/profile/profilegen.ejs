@@ -74,7 +74,7 @@
             <div class="page-wrapper">
                 <div class="profile-header">
                     <div class="avatar-wrapper">
-                        <% if(userdata.ID==profileUser.ID){ %>
+                        <% if(profileUser.profile_image){ %>
                             <img src="/imageForTest/<%= profileUser.profile_image %>"
                                 alt="<%= profileUser.profile_image%>" class="avatar-img" id="profile_">
                             <% } else{%>
