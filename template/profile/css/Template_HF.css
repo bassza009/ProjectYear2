@@ -36,7 +36,6 @@ header h2 {
 }
 
 header button:hover {
-    transform: scale(1.1);
     background: whitesmoke;
     color: #000000;
 }
@@ -128,6 +127,22 @@ header button:hover {
     border-radius: 100%;
 }
 
+.user_name {
+    display: flex;       /* เปิดการจัดเรียงแนวนอน */
+    flex-direction: column; /* เรียงจากบนลงล่าง (ชื่ออยู่บน สถานะอยู่ล่าง) */
+    gap: 5px;            /* ระยะห่างระหว่างชื่อกับบรรทัดสถานะ */
+}
+
+.status-text {
+    display: flex;          /* บังคับให้ลูกๆ (จุดกับข้อความ) เรียงแถวเดียวกัน */
+    align-items: center;    /* จัดให้กึ่งกลางแนวตั้งตรงกันเป๊ะ */
+    margin: 0;              /* ล้างค่า Margin ของ p ที่อาจทำให้กระโดด */
+    font-size: 14px;
+    color: #666;
+}
+
+
+
 .button_VO {
     width: 100%;
     display: flex;
@@ -199,3 +214,13 @@ footer {
     font-size: 14px;
 }
 
+/*จุดเขียหน้าสถานะ*/
+.status-dot {
+    display: block;          /* เปลี่ยนเป็น block เพราะมี flex คุมข้างบนแล้ว */
+    width: 8px;
+    height: 8px;
+    background: #31a24c;     /* สีจุดเขียวสด */
+    border-radius: 50%;
+    margin-right: 8px;       /* ระยะห่างระหว่างจุดกับตัวหนังสือ */
+    flex-shrink: 0;          /* กันไม่ให้จุดโดนบีบจนเบี้ยว */
+}

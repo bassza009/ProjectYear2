@@ -93,12 +93,6 @@ main {
     margin-bottom: 8px;
 }
 
-.status-dot {
-    width: 10px;
-    height: 10px;
-    background: #31a24c;
-    border-radius: 50%;
-}
 
 .faculty-text {
     color: #4b4f56;
@@ -289,8 +283,9 @@ main {
 }
 
 .status-tag.active {
-    background: #e7f3ff;
+    background: #ffffff;
     color: #1877f2;
+    border: 1px solid #1877f2;
 }
 
 .status-tag.closed {
@@ -331,6 +326,7 @@ main {
     font-size: 18px;
     color: #1c1e21;
     margin: 0;
+    border: none;
 }
 
 .contact-list {
@@ -348,15 +344,10 @@ main {
     font-size: 0.95rem;
 }
 
-.contact-list .icon {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f0f2f5;
-    border-radius: 8px;
-    font-size: 1.2rem;
+.contact-list img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
 }
 
 .contact-list .contact-value {
@@ -391,4 +382,21 @@ main {
 .btn-save:hover {
     background: #6a26a3;
     color: white;
+}
+
+.btn-smaller{
+    margin-top: 10px;
+    background-color: #ffffff; 
+    color: rgb(255, 0, 0);
+    border: 1px solid #ff0000;
+    cursor: pointer; 
+    padding: 5px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.btn-smaller:hover{
+    background: #ff0000;
+    color: #ffffff;
 }

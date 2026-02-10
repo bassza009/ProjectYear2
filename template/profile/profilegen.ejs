@@ -44,7 +44,10 @@
                                         <h1>
                                             <%=userdata.username%>
                                         </h1>
-                                        <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
+                                        <p class="status-text">
+                                            <span class="status-dot"></span> 
+                                            <span>สถานะ : <%= userdata.roles %></span>
+                                        </p>
                                     </div>
                     </div>
 
@@ -143,20 +146,20 @@
                                     </span>
                                 </li>
                                 <li>
-                                    <span class="icon" style="color: #06c755;">L</span>
+                                    <img src="/../icon/line.png" alt="line">
                                     <span class="contact-value" id="val-line">
                                         <%= (profileUser.line && profileUser.line !="null" ) ? profileUser.line : "-" %>
                                     </span>
                                 </li>
                                 <li>
-                                    <span class="icon" style="color: #1877f2;">F</span>
+                                    <img src="/../icon/facebook.png" alt="facebook">
                                     <span class="contact-value" id="val-facebook">
                                         <%= (profileUser.facebook && profileUser.facebook !="null" ) ?
                                             profileUser.facebook : "-" %>
                                     </span>
                                 </li>
                                 <li>
-                                    <span class="icon" style="color: #E1306C;">Ig</span>
+                                    <img src="/../icon/instagram.png" alt="ig">
                                     <span class="contact-value" id="val-ig">
                                         <%= (profileUser.instagram && profileUser.instagram !="null" ) ?
                                             profileUser.instagram : "-" %>
@@ -206,8 +209,7 @@
                                                     <% } else { %>
                                                         <span class="status-tag active">กำลังรับสมัคร</span>
                                                         <% if(userdata.ID==profileUser.ID) { %>
-                                                            <button class="btn-small date-badge"
-                                                                style="background-color: #EF4444; color: white; border: none; cursor: pointer; margin-top: 5px;"
+                                                            <button class="btn-smaller date-badge"
                                                                 onclick="closeJob('<%= job.order_ID %>')">
                                                                 ปิดรับสมัคร
                                                             </button>

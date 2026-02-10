@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Job - SDhire</title>
     <link rel="stylesheet" href="/../post/css/Template_HF.css">
-    <link rel="stylesheet" href="/../post/css/post_c.css">
+    <link rel="stylesheet" href="/../post/css/post_stu.css">
     <link rel="stylesheet" href="/../profile/css/review.css">
 
 </head>
@@ -50,7 +50,10 @@
                                             <%=userdata.username%>      
                                         </h1>
                                     <%}%>
-                                    <span class="status-dot"></span>สถานะ : <%= userdata.roles %>
+                                    <p class="status-text">
+                                        <span class="status-dot"></span> 
+                                        <span>สถานะ : <%= userdata.roles %></span>
+                                    </p>
                                 </div>
                 </div>
 
@@ -114,7 +117,9 @@
                                 <%=post.firstname%>
                                     <%=post.lastname%>
                             </h1>
-                            <span class="status-badge">✅ <%=post.roles%></span>
+                            <span class="status-badge"> 
+                                <span class="status-dot"></span> <%=post.roles%>
+                            </span>
                             <p class="faculty-text">
                                 <%=post.Sgroup%>
                             </p>
