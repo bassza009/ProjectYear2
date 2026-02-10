@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>โพสต์งาน | SDhire</title>
-  
+
   <link rel="stylesheet" href="css/post_work.css">
   <link rel="stylesheet" href="css/Template_HF.css">
 </head>
@@ -47,9 +47,9 @@
                   <button class="b_view">ดูโปรไฟล์</button>
                 </a>
                 <% } %>
-                  <a href="/logout">
-                    <button class="b_logout">ออกจากระบบ</button>
-                  </a>
+                  <form action="/logout" method="post" style="display: inline;">
+                    <button class="b_logout" type="submit">ออกจากระบบ</button>
+                  </form>
           </div>
         </div>
       </div>
@@ -107,16 +107,19 @@
       <p>© 2025 SDhire, All right reserved</p>
     </div>
   </footer>
-<!--cookie-->
-    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
-            <div>
-                <button onclick="acceptCookies()" style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
-            </div>
-        </div>
+  <!--cookie-->
+  <div id="cookie-banner"
+    style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+      <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy"
+          style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
+      <div>
+        <button onclick="acceptCookies()"
+          style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
+      </div>
     </div>
-    <script src="../cookie.js"></script>
+  </div>
+  <script src="../cookie.js"></script>
   <script src="post_table.js"></script>
   <script src="swith_PR.js"></script>
 </body>

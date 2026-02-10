@@ -148,6 +148,11 @@ header button:hover {
     /* เอาเส้นใต้ของลิงก์ออก */
 }
 
+.button_VO form {
+    flex: 1;
+    display: flex;
+}
+
 .button_VO button {
     width: 100%;
     flex: 1;

@@ -1,15 +1,16 @@
-
 /* 1. จัดการโครงสร้างหน้าเว็บทั้งหมด */
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* บังคับให้สูงเท่ากับหน้าจอพอดี */
-    margin: 0;         /* ลบขอบขาวรอบๆ จอ */
+    min-height: 100vh;
+    /* บังคับให้สูงเท่ากับหน้าจอพอดี */
+    margin: 0;
+    /* ลบขอบขาวรอบๆ จอ */
 }
 
 /* 2. ตัวคลุมเนื้อหาจะยืดพื้นที่ที่เหลือทั้งหมดเพื่อดัน footer ลงไป */
 .content-wrapper {
-    flex: 1; 
+    flex: 1;
 }
 
 header {
@@ -20,10 +21,11 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 75px;    
+    height: 75px;
     top: 0px;
     left: 0px;
-    z-index: 1000; /* เพิ่มตัวนี้เพื่อให้ Header ลอยทับทุกอย่าง */
+    z-index: 1000;
+    /* เพิ่มตัวนี้เพื่อให้ Header ลอยทับทุกอย่าง */
 }
 
 header h2 {
@@ -39,16 +41,16 @@ header button:hover {
 }
 
 .profile_container {
-    
+
     position: relative;
 }
 
-.buttom_header{
-    display: flex; 
+.buttom_header {
+    display: flex;
     gap: 10px;
 }
 
-.post_button{
+.post_button {
     width: 120px;
     height: auto;
     gap: 10px;
@@ -62,7 +64,7 @@ header button:hover {
     transition: 0.2s;
 }
 
-.profile_button{
+.profile_button {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -82,11 +84,14 @@ header button:hover {
     height: 35px;
     border-radius: 100%;
 }
- /*----------- บล็อค ข้อมูล-----------*/
- .data_box.show {
-    display: flex; /* กลับมาแสดงผล */
+
+/*----------- บล็อค ข้อมูล-----------*/
+.data_box.show {
+    display: flex;
+    /* กลับมาแสดงผล */
 }
-.data_box{
+
+.data_box {
     display: none;
     flex-direction: column;
     gap: 10px;
@@ -104,22 +109,24 @@ header button:hover {
     z-index: 100;
 }
 
-.user_infor{
+.user_infor {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
 }
-.user_infor h1{
+
+.user_infor h1 {
     margin: 0;
     font-size: 20px;
 }
-.user_infor p{
+
+.user_infor p {
     margin: 0;
     font-size: 15px;
 }
 
-.user_infor img{
+.user_infor img {
     width: 55px;
     height: 55px;
     border-radius: 100%;
@@ -132,13 +139,20 @@ header button:hover {
 }
 
 .button_VO a {
-    flex: 1; 
-    text-decoration: none; /* เอาเส้นใต้ของลิงก์ออก */
+    flex: 1;
+    text-decoration: none;
+    /* เอาเส้นใต้ของลิงก์ออก */
 }
 
-.button_VO button{
+.button_VO form {
+    flex: 1;
+    display: flex;
+}
+
+.button_VO button {
     width: 100%;
-    flex: 1;          /* สั่งให้ปุ่มทั้งสองมีความกว้างเท่ากันเป๊ะ */
+    flex: 1;
+    /* สั่งให้ปุ่มทั้งสองมีความกว้างเท่ากันเป๊ะ */
     padding: 10px;
     border-radius: 8px;
     background: white;
@@ -146,8 +160,9 @@ header button:hover {
 }
 
 .button_VO .b_view {
-    border: 1.5px solid #8a2be2; 
-    color: #8a2be2; /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
+    border: 1.5px solid #8a2be2;
+    color: #8a2be2;
+    /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
 }
 
 .button_VO .b_view:hover {
@@ -158,7 +173,8 @@ header button:hover {
 /* ตกแต่งสีปุ่มออกจากระบบ */
 .button_VO .b_logout {
     border: 1.5px solid #ff4d4d;
-    color: #ff4d4d; /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
+    color: #ff4d4d;
+    /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
 }
 
 .button_VO .b_logout:hover {
@@ -166,35 +182,43 @@ header button:hover {
     color: white;
 }
 
-.card:hover{
+.card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     transition: 0.2s;
 }
+
 .card-img {
     width: 100%;
     height: 160px;
     object-fit: cover;
     background: #ddd;
 }
-.card-content{
+
+.card-content {
     margin: 5px;
 }
-.name_tag{
+
+.name_tag {
     margin-top: 10px;
 }
+
 .profile-area {
     display: flex;
     gap: 5px;
     margin-top: -15px;
     margin-bottom: 10px;
     font-family: 'Sarabun';
-    
+
 }
-.title,.desc,.price{
+
+.title,
+.desc,
+.price {
     margin-left: 10px;
     margin-right: 10px;
 }
+
 .avatar {
     margin-left: 10px;
     width: 35px;
@@ -203,6 +227,7 @@ header button:hover {
     object-fit: cover;
     flex-shrink: 0;
 }
+
 .price {
     text-align: right;
     color: #2baf2b;
@@ -211,15 +236,19 @@ header button:hover {
     margin-top: 5px;
     font-family: 'Kanit';
 }
+
 a {
-    text-decoration: none;    
+    text-decoration: none;
     color: #000000;
 }
 
 
-.withlink ,h4,p{
-    color:#000000
+.withlink,
+h4,
+p {
+    color: #000000
 }
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -227,7 +256,7 @@ a {
     gap: 6px;
     margin-top: 50px;
     font-family: 'Kanit', sans-serif;
-}                                               
+}
 
 .page-btn {
     display: flex;
@@ -236,25 +265,27 @@ a {
     border-radius: 50%;
     border: none;
     justify-content: center;
-    
+
     align-items: center;
     background-color: transparent;
-    color: #9b59b6;             
+    color: #9b59b6;
     font-size: 14px;
-    
+
 }
 
 .page-btn:hover {
     background-color: #e8f0fe;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 .page-btn.active {
     background-color: #9b59b6;
     color: #fff;
     font-weight: 500;
-    
+
 }
 
 .page-btn.prev,
@@ -277,9 +308,10 @@ a{
     color: #777;
     font-size: 14px;
 }
+
 /*--------------------------------------------------------------------*/
 
-footer {  
+footer {
     margin-top: 50px;
     bottom: 0;
     background: linear-gradient(135deg, #8557A5, #AE73D8);
@@ -299,7 +331,8 @@ footer {
 
 .footer-bottom {
     padding: 10px 0;
-    border-top: 2px solid rgba(85, 82, 82, 0.2); /* เส้นแบ่งบางๆ */
+    border-top: 2px solid rgba(85, 82, 82, 0.2);
+    /* เส้นแบ่งบางๆ */
 }
 
 .footer-bottom p {
@@ -312,6 +345,8 @@ footer {
 .card-link:visited,
 .card-link:hover,
 .card-link:active {
-    color: inherit;          /* ใช้สีเดียวกับ parent */
-    text-decoration: none;   /* ลบเส้นขีด */
+    color: inherit;
+    /* ใช้สีเดียวกับ parent */
+    text-decoration: none;
+    /* ลบเส้นขีด */
 }

@@ -1,15 +1,16 @@
-
 /* 1. จัดการโครงสร้างหน้าเว็บทั้งหมด */
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* บังคับให้สูงเท่ากับหน้าจอพอดี */
-    margin: 0;         /* ลบขอบขาวรอบๆ จอ */
+    min-height: 100vh;
+    /* บังคับให้สูงเท่ากับหน้าจอพอดี */
+    margin: 0;
+    /* ลบขอบขาวรอบๆ จอ */
 }
 
 /* 2. ตัวคลุมเนื้อหาจะยืดพื้นที่ที่เหลือทั้งหมดเพื่อดัน footer ลงไป */
 .content-wrapper {
-    flex: 1; 
+    flex: 1;
 }
 
 header {
@@ -20,10 +21,11 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 75px;    
+    height: 75px;
     top: 0px;
     left: 0px;
-    z-index: 1000; /* เพิ่มตัวนี้เพื่อให้ Header ลอยทับทุกอย่าง */
+    z-index: 1000;
+    /* เพิ่มตัวนี้เพื่อให้ Header ลอยทับทุกอย่าง */
 }
 
 header h2 {
@@ -39,16 +41,16 @@ header button:hover {
 }
 
 .profile_container {
-    
+
     position: relative;
 }
 
-.buttom_header{
-    display: flex; 
+.buttom_header {
+    display: flex;
     gap: 10px;
 }
 
-.post_button{
+.post_button {
     width: 120px;
     height: auto;
     gap: 10px;
@@ -62,7 +64,7 @@ header button:hover {
     transition: 0.2s;
 }
 
-.profile_button{
+.profile_button {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -82,11 +84,14 @@ header button:hover {
     height: 35px;
     border-radius: 100%;
 }
- /*----------- บล็อค ข้อมูล-----------*/
- .data_box.show {
-    display: flex; /* กลับมาแสดงผล */
+
+/*----------- บล็อค ข้อมูล-----------*/
+.data_box.show {
+    display: flex;
+    /* กลับมาแสดงผล */
 }
-.data_box{
+
+.data_box {
     display: none;
     flex-direction: column;
     gap: 10px;
@@ -104,26 +109,29 @@ header button:hover {
     z-index: 100;
 }
 
-.user_infor{
+.user_infor {
     display: flex;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
 }
-.user_infor h1{
+
+.user_infor h1 {
     margin: 0;
     font-size: 20px;
 }
-.user_infor p{
+
+.user_infor p {
     margin: 0;
     font-size: 15px;
 }
 
-.user_infor img{
+.user_infor img {
     width: 55px;
     height: 55px;
     border-radius: 100%;
 }
+
 .status-dot {
     display: inline-block;
     width: 10px;
@@ -131,6 +139,7 @@ header button:hover {
     background: #31a24c;
     border-radius: 50%;
 }
+
 .button_VO {
     width: 100%;
     display: flex;
@@ -138,13 +147,20 @@ header button:hover {
 }
 
 .button_VO a {
-    flex: 1; 
-    text-decoration: none; /* เอาเส้นใต้ของลิงก์ออก */
+    flex: 1;
+    text-decoration: none;
+    /* เอาเส้นใต้ของลิงก์ออก */
 }
 
-.button_VO button{
+.button_VO form {
+    flex: 1;
+    display: flex;
+}
+
+.button_VO button {
     width: 100%;
-    flex: 1;          /* สั่งให้ปุ่มทั้งสองมีความกว้างเท่ากันเป๊ะ */
+    flex: 1;
+    /* สั่งให้ปุ่มทั้งสองมีความกว้างเท่ากันเป๊ะ */
     padding: 10px;
     border-radius: 8px;
     background: white;
@@ -152,8 +168,9 @@ header button:hover {
 }
 
 .button_VO .b_view {
-    border: 1.5px solid #8a2be2; 
-    color: #8a2be2; /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
+    border: 1.5px solid #8a2be2;
+    color: #8a2be2;
+    /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
 }
 
 .button_VO .b_view:hover {
@@ -164,7 +181,8 @@ header button:hover {
 /* ตกแต่งสีปุ่มออกจากระบบ */
 .button_VO .b_logout {
     border: 1.5px solid #ff4d4d;
-    color: #ff4d4d; /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
+    color: #ff4d4d;
+    /* เปลี่ยนสีตัวอักษรให้เข้ากับขอบ */
 }
 
 .button_VO .b_logout:hover {
@@ -172,7 +190,7 @@ header button:hover {
     color: white;
 }
 
-.post_skill{
+.post_skill {
     display: grid;
     width: 100%;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -181,7 +199,7 @@ header button:hover {
 
 /*--------------------------------------------------------------------*/
 
-footer {  
+footer {
     margin-top: 50px;
     bottom: 0;
     background: linear-gradient(135deg, #8557A5, #AE73D8);
@@ -201,7 +219,8 @@ footer {
 
 .footer-bottom {
     padding: 10px 0;
-    border-top: 2px solid rgba(85, 82, 82, 0.2); /* เส้นแบ่งบางๆ */
+    border-top: 2px solid rgba(85, 82, 82, 0.2);
+    /* เส้นแบ่งบางๆ */
 }
 
 .footer-bottom p {
@@ -214,6 +233,8 @@ footer {
 .card-link:visited,
 .card-link:hover,
 .card-link:active {
-    color: inherit;          /* ใช้สีเดียวกับ parent */
-    text-decoration: none;   /* ลบเส้นขีด */
+    color: inherit;
+    /* ใช้สีเดียวกับ parent */
+    text-decoration: none;
+    /* ลบเส้นขีด */
 }
