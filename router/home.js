@@ -1169,7 +1169,7 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
     let jobParams = [jobType]
 
     if (budget) {
-        whereClause += ` and user_job.budjet < ?`
+        whereClause += ` and user_job.budjet <= ?`
         jobParams.push(budget)
     }
 
