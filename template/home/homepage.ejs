@@ -6,36 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home SDhire</title>
 
-    <link rel="stylesheet" href="/../home/css/table_job.css"> <!-- โพสต์งาน -->
-    <link rel="stylesheet" href="/../home/css/buttom_sw.css"> <!-- กดสลับงานกับโพสต์ -->
-    <link rel="stylesheet" href="/../home/css/Tem_home_HF.css"> <!-- หัวกับท้าย -->
-    <link rel="stylesheet" href="/../home/css/Tem_main.css"> <!-- ตัวเนื้อหา  -->
+    <link rel="stylesheet" href="/../home/css/table_job.css"> 
+    <link rel="stylesheet" href="/../home/css/buttom_sw.css"> 
+    <link rel="stylesheet" href="/../home/css/Tem_home_HF.css"> 
+    <link rel="stylesheet" href="/../home/css/Tem_main.css"> 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-
 </head>
 
-
 <body>
-    <div class="content-wrapper">
+    <div class="content-wrapper">   
+        
         <header>
             <a href="/" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
             </a>
+            
             <div class="profile_container">
                 <div class="buttom_header">
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <% if(userdata.profile_image){ %>
-                                <img src="/imageForTest/<%= userdata.profile_image %>"
-                                    alt="<%= userdata.profile_image%>">
-                                <% } else{%>
-                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                        alt="โปรไฟล์">
-                                    <% }%>
-
+                                <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                            <% }%>
                         </div>
                         <span>Profile</span>
                     </button>
@@ -43,27 +37,20 @@
 
                 <div class="data_box" id="myDropdown">
                     <div class="user_infor">
-
                         <% if(userdata.profile_image){ %>
                             <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
-                                    alt="โปรไฟล์">
-                                <% }%>
-                                    <div class="user_name">
-                                        <% if(userdata.roles=="student" ) {%>
-                                            <h1>
-                                                <%= userdata.firstname %>
-                                                    <%= userdata.lastname %>
-                                            </h1>
-                                            <% }else{ %>
-                                                <h1>
-                                                    <%=userdata.username%>
-                                                </h1>
-                                                <% } %>
-                                                    <small></small><span class="status-dot"></span> สถานะ :
-                                                    <%=userdata.roles %></small>
-                                    </div>
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
+                        <% }%>
+                        
+                        <div class="user_name">
+                            <% if(userdata.roles=="student" ) {%>
+                                <h1><%= userdata.firstname %> <%= userdata.lastname %></h1>
+                            <% }else{ %>
+                                <h1><%=userdata.username%></h1>
+                            <% } %>
+                            <small><span class="status-dot"></span> สถานะ : <%=userdata.roles %></small>
+                        </div>
                     </div>
 
                     <div class="button_VO">
@@ -71,33 +58,32 @@
                             <a href="/home/profilestudent/<%=userdata.ID%>">
                                 <button class="b_view">ดูโปรไฟล์</button>
                             </a>
-                            <% } else{ %>
-                                <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                    <button class="b_view">ดูโปรไฟล์</button>
-                                </a>
-                                <% } %>
-                                    <a>
-                                        <form action="/logout" method="POST">
-                                            <button class="b_logout" type="submit">ออกจากระบบ</button>
-                                        </form>
-                                    </a>
+                        <% } else{ %>
+                            <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                <button class="b_view">ดูโปรไฟล์</button>
+                            </a>
+                        <% } %>
+                        
+                        <form action="/logout" method="POST">
+                            <button class="b_logout" type="submit">ออกจากระบบ</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- --------------------------------------------------------------------------------------------------------------------- -->
         <main>
             <div class="hero">
                 <div class="text_recommend">
                     <h1>พื้นที่รวมงานฟรีแลนซ์<br>สำหรับเด็กมหาลัย</h1>
                     <p>รวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง<br>
-                        พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
+                       พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</p>
+                    
                     <% if(userdata.roles=="student" ){ %>
                         <a href="/student/post_skill" class="btn-post">โพสต์</a>
-                        <% } else {%>
-                            <a href="/post/create" class="btn-post">โพสต์</a>
-                            <% } %>
+                    <% } else {%>
+                        <a href="/post/create" class="btn-post">โพสต์</a>
+                    <% } %>
                 </div>
                 <div class="img_right">
                     <img src="../photo/profile.png" alt="profile">
@@ -112,6 +98,7 @@
                     <button id="submit" type="submit">ค้นหา</button>
                 </form>
             </div>
+
             <section class="category-showcase">
                 <div class="cat-header">
                     <h3>หมวดหมู่งานยอดนิยม</h3>
@@ -120,136 +107,90 @@
 
                 <div class="cat-grid">
                     <a href="/home/filter/รับจ้างทั่วไป" class="cat-card-icon color-1">
-                        <div class="icon-box">
-                            <img src="../icon/package.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/package.png"></div>
                         <div class="cat-info">
                             <span>รับจ้างทั่วไป</span>
-                            <small>
-                                <%= jobcount["รับจ้างทั่วไป"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["รับจ้างทั่วไป"]||0%> งาน</small>
                         </div>
                     </a>
+                    
                     <a href="/home/filter/เขียนโปรแกรม" class="cat-card-icon color-2">
-                        <div class="icon-box">
-                            <img src="../icon/programming.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/programming.png"></div>
                         <div class="cat-info">
                             <span>เขียนโปรแกรม</span>
-                            <small>
-                                <%= jobcount["เขียนโปรแกรม"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["เขียนโปรแกรม"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/กราฟิกดีไซน์" class="cat-card-icon color-3">
-                        <div class="icon-box">
-                            <img src="../icon/art-design.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/art-design.png"></div>
                         <div class="cat-info">
                             <span>กราฟิกดีไซน์</span>
-                            <small>
-                                <%= jobcount["กราฟิกดีไซน์"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["กราฟิกดีไซน์"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/ตัดต่อวิดีโอ" class="cat-card-icon color-4">
-                        <div class="icon-box">
-                            <img src="../icon/video.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/video.png"></div>
                         <div class="cat-info">
                             <span>ตัดต่อวิดีโอ</span>
-                            <small>
-                                <%= jobcount["ตัดต่อวิดีโอ"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["ตัดต่อวิดีโอ"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/แปลภาษา" class="cat-card-icon color-5">
-                        <div class="icon-box">
-                            <img src="../icon/language.png">
-                            </i>
-                        </div>
+                        <div class="icon-box"><img src="../icon/language.png"></div>
                         <div class="cat-info">
                             <span>แปลภาษา</span>
-                            <small>
-                                <%= jobcount["แปลภาษา"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["แปลภาษา"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/การศึกษา" class="cat-card-icon color-6">
-                        <div class="icon-box">
-                            <img src="../icon/thesis.png">
-                            </i>
-                        </div>
+                        <div class="icon-box"><img src="../icon/thesis.png"></div>
                         <div class="cat-info">
                             <span>การศึกษา</span>
-                            <small>
-                                <%= jobcount["การศึกษา"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["การศึกษา"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/ถ่ายภาพ" class="cat-card-icon color-1">
-                        <div class="icon-box">
-                            <img src="../icon/photo-camera.png">
-                            </i>
-                        </div>
+                        <div class="icon-box"><img src="../icon/photo-camera.png"></div>
                         <div class="cat-info">
                             <span>ถ่ายภาพ</span>
-                            <small>
-                                <%= jobcount["ถ่ายภาพ"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["ถ่ายภาพ"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/ดนตรีและเสียง" class="cat-card-icon color-2">
-                        <div class="icon-box">
-                            <img src="../icon/music.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/music.png"></div>
                         <div class="cat-info">
                             <span>ดนตรี และเสียง</span>
-                            <small>
-                                <%= jobcount["ดนตรีและเสียง"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["ดนตรีและเสียง"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/เอกสาร" class="cat-card-icon color-3">
-                        <div class="icon-box">
-                            <img src="../icon/folder.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/folder.png"></div>
                         <div class="cat-info">
                             <span>เอกสาร</span>
-                            <small>
-                                <%= jobcount["เอกสาร"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["เอกสาร"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/ซ่อมแซม" class="cat-card-icon color-4">
-                        <div class="icon-box">
-                            <img src="../icon/technical.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/technical.png"></div>
                         <div class="cat-info">
                             <span>ซ่อมแซม</span>
-                            <small>
-                                <%= jobcount["ซ่อมแซม"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["ซ่อมแซม"]||0%> งาน</small>
                         </div>
                     </a>
 
                     <a href="/home/filter/อื่นๆ" class="cat-card-icon color-5">
-                        <div class="icon-box">
-                            <img src="../icon/heart.png">
-                        </div>
+                        <div class="icon-box"><img src="../icon/heart.png"></div>
                         <div class="cat-info">
                             <span>อื่นๆ</span>
-                            <small>
-                                <%= jobcount["อื่นๆ"]||0%> งาน
-                            </small>
+                            <small><%= jobcount["อื่นๆ"]||0%> งาน</small>
                         </div>
                     </a>
                 </div>
@@ -262,184 +203,133 @@
                     <button class="toggle_skill">โพสต์รับงาน</button>
                     <button class="toggle_job">โพสต์งาน</button>
                 </div>
-                <div class="main_post">
 
+                <div class="main_post">
                     <div class="post_skill">
                         <% if(job.length) { %>
                             <% job.forEach((job)=>{ %>
                                 <a href="/home/viewStdPost/<%= job.job_id %>" class="card-link">
                                     <div class="card">
                                         <% if(job.service_image){ %>
-                                            <img src="/imageForTest/<%= job.service_image %>"
-                                                alt="<%= job.service_image%>" class="card-img">
-                                            <% }else{%>
-                                                <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
-                                                    alt="โปรไฟล์" class="card-img">
+                                            <img src="/imageForTest/<%= job.service_image %>" alt="<%= job.service_image%>" class="card-img">
+                                        <% }else{%>
+                                            <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>" alt="โปรไฟล์" class="card-img">
+                                        <% }%>
+
+                                        <div class="card-content">
+                                            <div class="profile-area">
+                                                <% if(job.profile_image){ %>
+                                                    <img src="/imageForTest/<%= job.profile_image %>" alt="<%= userdata.profile_image%>" class="avatar">
+                                                <% } else{%>
+                                                    <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>" alt="โปรไฟล์" class="avatar">
                                                 <% }%>
-
-                                                    <div class="card-content">
-                                                        <div class="profile-area">
-                                                            <% if(job.profile_image){ %>
-                                                                <img src="/imageForTest/<%= job.profile_image %>"
-                                                                    alt="<%= userdata.profile_image%>" class="avatar">
-                                                                <% } else{%>
-                                                                    <img src="https://ui-avatars.com/api/?name=<%= job.username || 'User' %>"
-                                                                        alt="โปรไฟล์" class="avatar">
-                                                                    <% }%>
-                                                                        <div>
-                                                                            <font style="font-size: 20px;"><b>
-                                                                                    <%= job.firstname %>
-                                                                                        <%= job.lastname %>
-                                                                                </b><br></font>
-                                                                            <small>
-                                                                                <%= job.job_type %>
-                                                                            </small>
-                                                                        </div>
-                                                        </div>
-                                                        <div class="title">
-                                                            <%= job.title %>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <%= job.des_Cription %>
-                                                        </div>
-                                                        <div class="price">
-                                                            <span>เริ่มต้น</span><br>
-                                                            <b>
-                                                                <%= job.budjet %> บาท
-                                                            </b>
-                                                        </div>
-                                                    </div>
-                                    </div>
-                                </a>
-                                <% }) %>
-
-
-                                    <% } else { %>
-                                        <p style="text-align: center; margin-top: 20px;">no job right now</p>
-                                        <% } %>
-
-                    </div>
-                    <% const page=Math.ceil(totalpost/8); %>
-                        <div class="pagination" id="pagination">
-                            <% if(currentPage> 1){ %>
-                                <a href="/home?startpage=<%=currentPage-1%>"><small>
-                                        << /small></a>
-                                <% } %>
-
-                                    <% for(let i=1; i<=page; i++){ %>
-                                        <a class="page-btn <%=(i==currentPage)?'active':''%>"
-                                            href="/home?startpage=<%=i%>">
-                                            <p>
-                                                <%=i%>
-                                            </p>
-                                        </a>
-                                        <% } %>
-
-                                            <%if(currentPage!=page){%>
-                                                <a href="/home?startpage=<%=currentPage+1%>">
-                                                    <small>></small>
-                                                </a>
-                                                <%}%>
-
-                        </div>
-
-                            <!-- --------------------------------------------------------------------------------------------------------------------- -->
-                            <div class="post_job">
-                                <form action="/home" method="GET" style="width: 100%;">
-                                    <input type="hidden" name="startpage" value="1">
-                                    <div class="filter-bar">
-                                        <div class="filter-group">
-                                            <div class="search-container">
-                                                <input type="text" name="table_search" class="search-input"
-                                                    placeholder="ค้นหางาน..."
-                                                    value="<%= typeof table_search !== 'undefined' ? table_search : '' %>">
-                                                <button type="submit" class="btn-search">ค้นหา</button>
+                                                <div>
+                                                    <font style="font-size: 20px;"><b><%= job.firstname %> <%= job.lastname %></b><br></font>
+                                                    <small><%= job.job_type %></small>
+                                                </div>
                                             </div>
-                                            <select name="table_type" class="filter-select"
-                                                style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none; cursor: pointer;">
-                                                <option value="">ทั้งหมด</option>
-                                                <option value="1" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='1' ) ? 'selected' : '' %>>งานทั่วไป</option>
-                                                <option value="2" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='2' ) ? 'selected' : '' %>>เขียนโปรแกรม</option>
-                                                <option value="3" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='3' ) ? 'selected' : '' %>>กราฟิกดีไซน์</option>
-                                                <option value="4" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='4' ) ? 'selected' : '' %>>ตัดต่อวิดีโอ</option>
-                                                <option value="5" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='5' ) ? 'selected' : '' %>>แปลภาษา</option>
-                                                <option value="6" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='6' ) ? 'selected' : '' %>>การศึกษา</option>
-                                                <option value="7" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='7' ) ? 'selected' : '' %>>ถ่ายภาพ</option>
-                                                <option value="8" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='8' ) ? 'selected' : '' %>>ดนตรีและเสียง</option>
-                                                <option value="9" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='9' ) ? 'selected' : '' %>>เอกสาร</option>
-                                                <option value="10" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='10' ) ? 'selected' : '' %>>ซ่อมแซม</option>
-                                                <option value="11" <%=(typeof table_type !=='undefined' &&
-                                                    table_type=='11' ) ? 'selected' : '' %>>อื่นๆ</option>
-                                            </select>
+                                            <div class="title"><%= job.title %></div>
+                                            <div class="desc"><%= job.des_Cription %></div>
+                                            <div class="price">
+                                                <span>เริ่มต้น</span><br>
+                                                <b><%= job.budjet %> บาท</b>
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
-                                <div class="table-container">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>ชื่องาน</th>
-                                                <th>ประเภท</th>
-                                                <th>งบประมาณ (บาท)</th>
-                                                <th>ลงประกาศเมื่อ</th>
-                                                <th>กำหนดส่ง</th>
-                                                <th>จัดการ</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% if(order.length>0){ %>
-                                                <% order.forEach((orders)=>{%>
-                                                    <tr onclick="window.location.href='/home/viewGeneralPost/<%=orders.order_ID%>'"
-                                                        style="cursor:pointer;">
-                                                        <td>
-                                                            <%=orders.title%>
-                                                        </td>
-                                                        <td>
-                                                            <%=orders.orderType%>
-                                                        </td>
-                                                        <td>
-                                                            <%=Number(orders.budjet).toLocaleString()%>
-                                                        </td>
-                                                        <td>
-                                                            <%=new Date(orders.post_date).toLocaleDateString('th-TH')%>
-                                                        </td>
-                                                        <td>
-                                                            <%=orders.deadline ? new
-                                                                Date(orders.deadline).toLocaleDateString('th-TH') : "-"
-                                                                %>
-                                                        </td>
-                                                        <td>-</td>
-                                                    </tr>
-                                                    <%})%>
-                                                        <%}else{%>
-                                                            <tr>
-                                                                <td colspan="6" style="text-align:center;">
-                                                                    ยังไม่มีงานที่คุณประกาศ
-                                                                </td>
-                                                            </tr>
-                                                            <%}%>
-                                        </tbody>
-                                    </table>
+                                </a>
+                            <% }) %>
+                        <% } else { %>
+                            <p style="text-align: center; margin-top: 20px;">no job right now</p>
+                        <% } %>
+                    </div>
+
+                    <% const page=Math.ceil(totalpost/8); %>
+                    <div class="pagination" id="pagination">
+                        <% if(currentPage> 1){ %>
+                            <a href="/home?startpage=<%=currentPage-1%>"><small><</small></a>
+                        <% } %>
+
+                        <% for(let i=1; i<=page; i++){ %>
+                            <a class="page-btn <%=(i==currentPage)?'active':''%>" href="/home?startpage=<%=i%>">
+                                <p><%=i%></p>
+                            </a>
+                        <% } %>
+
+                        <%if(currentPage!=page){%>
+                            <a href="/home?startpage=<%=currentPage+1%>"><small>></small></a>
+                        <%}%>
+                    </div>
+
+                    <div class="post_job">
+                        <form action="/home" method="GET" style="width: 100%;">
+                            <input type="hidden" name="startpage" value="1">
+                            <div class="filter-bar">
+                                <div class="filter-group">
+                                    <div class="search-container">
+                                        <input type="text" name="table_search" class="search-input"
+                                            placeholder="ค้นหางาน..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+                                        <button type="submit" class="btn-search">ค้นหา</button>
+                                    </div>
+                                    <select name="table_type" class="filter-select"
+                                        style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none; cursor: pointer;">
+                                        <option value="">ทั้งหมด</option>
+                                        <option value="1" <%=(typeof table_type !=='undefined' && table_type=='1' ) ? 'selected' : '' %>>งานทั่วไป</option>
+                                        <option value="2" <%=(typeof table_type !=='undefined' && table_type=='2' ) ? 'selected' : '' %>>เขียนโปรแกรม</option>
+                                        <option value="3" <%=(typeof table_type !=='undefined' && table_type=='3' ) ? 'selected' : '' %>>กราฟิกดีไซน์</option>
+                                        <option value="4" <%=(typeof table_type !=='undefined' && table_type=='4' ) ? 'selected' : '' %>>ตัดต่อวิดีโอ</option>
+                                        <option value="5" <%=(typeof table_type !=='undefined' && table_type=='5' ) ? 'selected' : '' %>>แปลภาษา</option>
+                                        <option value="6" <%=(typeof table_type !=='undefined' && table_type=='6' ) ? 'selected' : '' %>>การศึกษา</option>
+                                        <option value="7" <%=(typeof table_type !=='undefined' && table_type=='7' ) ? 'selected' : '' %>>ถ่ายภาพ</option>
+                                        <option value="8" <%=(typeof table_type !=='undefined' && table_type=='8' ) ? 'selected' : '' %>>ดนตรีและเสียง</option>
+                                        <option value="9" <%=(typeof table_type !=='undefined' && table_type=='9' ) ? 'selected' : '' %>>เอกสาร</option>
+                                        <option value="10" <%=(typeof table_type !=='undefined' && table_type=='10' ) ? 'selected' : '' %>>ซ่อมแซม</option>
+                                        <option value="11" <%=(typeof table_type !=='undefined' && table_type=='11' ) ? 'selected' : '' %>>อื่นๆ</option>
+                                    </select>
                                 </div>
-                                <!-- pagination ของโพสต์งาน -->
-                                <div class="pagination" id="jobPagination"></div>
                             </div>
+                        </form>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ชื่องาน</th>
+                                        <th>ประเภท</th>
+                                        <th>งบประมาณ (บาท)</th>
+                                        <th>ลงประกาศเมื่อ</th>
+                                        <th>กำหนดส่ง</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(order.length>0){ %>
+                                        <% order.forEach((orders)=>{%>
+                                            <tr onclick="window.location.href='/home/viewGeneralPost/<%=orders.order_ID%>'" style="cursor:pointer;">
+                                                <td><%=orders.title%></td>
+                                                <td><%=orders.orderType%></td>
+                                                <td><%=Number(orders.budjet).toLocaleString()%></td>
+                                                <td><%=new Date(orders.post_date).toLocaleDateString('th-TH')%></td>
+                                                <td><%=orders.deadline ? new Date(orders.deadline).toLocaleDateString('th-TH') : "-"%></td>
+                                                <td>-</td>
+                                            </tr>
+                                        <%})%>
+                                    <%}else{%>
+                                        <tr>
+                                            <td colspan="6" style="text-align:center;">ยังไม่มีงานที่คุณประกาศ</td>
+                                        </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="pagination" id="jobPagination"></div>
+                    </div>
 
                 </div>
+            </div>
         </main>
     </div>
 
-    <!-- --------------------------------------------------------------------------------------------------------------------- -->
     <footer>
         <div class="footer-contact">
             <p>ติดต่อเรา</p>
@@ -449,7 +339,7 @@
             <p>© 2025 SDhire, All right reserved</p>
         </div>
     </footer>
-    <!--cookie-->
+
     <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
             <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
@@ -460,11 +350,9 @@
     </div>
 
     <script src="/../homejs/profile_buttom.js"></script>
-    <script src="../cookie.js"></script>
+    <script src="/../cookie.js"></script>
     <script src="/../homejs/view_post.js"></script>
     <script src="/../homejs/table_filter.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -125,6 +125,7 @@ router.get("/home", (req, res) => {
     const email = req.cookies.email;
     let startpage = req.query.startpage || 1
     let job_type = req.query.job_type
+    const search = req.query.search
 
     if (startpage <= 1) {
         startpage = 1
@@ -219,7 +220,8 @@ router.get("/home", (req, res) => {
                         totalpost: total_job,
                         currentPage: startpage,
                         table_search: req.query.table_search,
-                        table_type: req.query.table_type
+                        table_type: req.query.table_type,
+                        search:search
                     });
                 });
             });
