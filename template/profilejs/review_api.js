@@ -83,9 +83,19 @@ function renderReviews(reviews, container) {
     container.innerHTML = '';
 
     reviews.forEach((rev) => {
+        // Determine profile link based on role
+        let profileLink = '#';
+        if (rev.role === 'student') {
+            profileLink = `/home/profilestudent/${rev.reviewerId}`;
+        } else {
+            profileLink = `/home/profilegeneral/${rev.reviewerId}`;
+        }
+
         const html = `
             <div class="review-card">
-                <img src="${rev.profilePic}" class="user-pic">
+                <a href="${profileLink}" style="text-decoration:none;">
+                    <img src="${rev.profilePic}" class="user-pic">
+                </a>
                 <div class="review-content">
                     <h5>${rev.name}</h5>
                     <div class="stars">${renderStars(rev.rating)}</div>

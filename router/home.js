@@ -498,7 +498,7 @@ router.get("/home/profilestudent/:id", (req, res) => {
 
             // Fetch Reviews with Like Count and User Like Status
             const sqlReviews = `SELECT sr.*, 
-                                userdata.username, userdata.profile_image,
+                                userdata.username, userdata.profile_image, userdata.roles,
                                 sd.firstname, sd.lastname,
                                 (SELECT COUNT(*) FROM review_likes rl WHERE rl.review_id = sr.review_id) AS likes,
                                 (SELECT COUNT(*) FROM review_likes rl WHERE rl.review_id = sr.review_id AND rl.user_id = ?) AS is_liked
@@ -1343,6 +1343,7 @@ router.get("/api/reviews/:studentId", (req, res) => {
 
     const sql = `SELECT 
                     sr.review_id,
+                    sr.reviewer_id,
                     sr.rating,
                     sr.comment,
                     sr.review_image,
@@ -1383,6 +1384,8 @@ router.get("/api/reviews/:studentId", (req, res) => {
             success: true,
             reviews: reviews.map(r => ({
                 id: r.review_id,
+                reviewerId: r.reviewer_id,
+                role: r.roles,
                 name: r.roles === "student"
                     ? `${r.firstname} ${r.lastname}`
                     : r.username,

@@ -12,6 +12,8 @@ function loadReviews(filter, showAll = false) {
     if (typeof window !== 'undefined' && window.serverReviews && window.serverReviews.length > 0) {
         reviews = window.serverReviews.map(r => ({
             id: r.review_id,
+            reviewerId: r.reviewer_id,
+            role: r.roles,
             name: (r.firstname && r.lastname) ? `${r.firstname} ${r.lastname}` : (r.username || 'User'),
             profilePic: r.profile_image ? `/imageForTest/${r.profile_image}` : `https://ui-avatars.com/api/?name=${r.username || 'User'}`,
             rating: r.rating,
@@ -49,10 +51,19 @@ function loadReviews(filter, showAll = false) {
     reviews.forEach((rev) => {
         // สร้าง ID จำลองหากไม่มี เพื่อใช้อ้างอิงการ Like/Reply
         const revId = rev.id;
+        // Determine profile link based on role
+        let profileLink = '#';
+        if (rev.role === 'student') {
+            profileLink = `/home/profilestudent/${rev.reviewerId}`;
+        } else {
+            profileLink = `/home/profilegeneral/${rev.reviewerId}`;
+        }
 
         const html = `
                     <div class="review-card">
-                        <img src="${rev.profilePic}" class="user-pic">
+                        <a href="${profileLink}" style="text-decoration:none;">
+                            <img src="${rev.profilePic}" class="user-pic">
+                        </a>
                         <div class="review-content">
                             <h5>${rev.name}</h5>
                             <div class="stars">${renderStars(rev.rating)}</div>
@@ -195,6 +206,8 @@ function loadModalReviews(filter) {
     if (typeof window !== 'undefined' && window.serverReviews && window.serverReviews.length > 0) {
         reviews = window.serverReviews.map(r => ({
             id: r.review_id,
+            reviewerId: r.reviewer_id,
+            role: r.roles,
             name: (r.firstname && r.lastname) ? `${r.firstname} ${r.lastname}` : (r.username || 'User'),
             profilePic: r.profile_image ? `/imageForTest/${r.profile_image}` : `https://ui-avatars.com/api/?name=${r.username || 'User'}`,
             rating: r.rating,
@@ -222,9 +235,19 @@ function loadModalReviews(filter) {
 
     reviews.forEach((rev) => {
         const revId = rev.id;
+        // Determine profile link based on role
+        let profileLink = '#';
+        if (rev.role === 'student') {
+            profileLink = `/home/profilestudent/${rev.reviewerId}`;
+        } else {
+            profileLink = `/home/profilegeneral/${rev.reviewerId}`;
+        }
+
         const html = `
                     <div class="review-card">
-                        <img src="${rev.profilePic}" class="user-pic">
+                        <a href="${profileLink}" style="text-decoration:none;">
+                            <img src="${rev.profilePic}" class="user-pic">
+                        </a>
                         <div class="review-content">
                             <h5>${rev.name}</h5>
                             <div class="stars">${renderStars(rev.rating)}</div>
