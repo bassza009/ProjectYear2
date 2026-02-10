@@ -1083,7 +1083,7 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
 
     // 3. Query ใหม่: นับจำนวนงานทั้งหมดตามเงื่อนไข (Job Type และ Budget)
     let sqlCount = `SELECT COUNT(*) AS total FROM user_job 
-                    WHERE job_type = ? AND budjet < ?`
+                    WHERE job_type = ? AND budjet <= ?`
 
     // 4. Query เดิม: ดึงข้อมูลงาน (ใช้ sql)
     let sql = `Select * from user_job
