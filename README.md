@@ -36,6 +36,20 @@
     </table>
     <hr>
     sec.2 <b>แนะนำวิธีการเข้าและลงmodule</b>
+    <h3>1.Clone project</h1>
+    ```
+    gh repo clone https://github.com/bassza009/ProjectYear2.git 
+    ```
+    <h3>2.ติดตั้ง Modules</h1>
+    เข้าถึง Folder project
+    <br>
+    ```
+    cd ProjectYear2 
+    ```
+    <br>
+    ```
+    npm i 
+    ```
     <hr>
     sec.3 <b>คู่มือการใช้เว็ปไซต์</b>
     <a href=""></a>
