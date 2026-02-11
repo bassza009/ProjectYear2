@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="/../profile/css/Template_HF.css">
     <link rel="stylesheet" href="/../profile/css/review.css">
     <link rel="stylesheet" href="/../profile/css/profile_gen.css">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="content-wrapper">
-        
+
         <header>
             <a href="/" style="text-decoration: none; color: inherit;">
                 <h2>SDhire</h2>
@@ -27,10 +27,12 @@
                     <button type="button" class="profile_button" onclick="toggleDropdown()">
                         <div class="photo_profile">
                             <% if(userdata.profile_image){ %>
-                                <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                            <% } else{%>
-                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
-                            <% }%>
+                                <img src="/imageForTest/<%= userdata.profile_image %>"
+                                    alt="<%= userdata.profile_image%>">
+                                <% } else{%>
+                                    <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                        alt="โปรไฟล์">
+                                    <% }%>
                         </div>
                         <span>Profile</span>
                     </button>
@@ -40,21 +42,27 @@
                     <div class="user_infor">
                         <% if(userdata.profile_image){ %>
                             <img src="/imageForTest/<%= userdata.profile_image %>" alt="<%= userdata.profile_image%>">
-                        <% } else{%>
-                            <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>" alt="โปรไฟล์">
-                        <% }%>
-                        
-                        <div class="user_name">
-                            <%if(userdata.roles=="student"){%>
-                                <h1><%=userdata.firstname%> <%=userdata.lastname%></h1>
-                            <%}else{%>
-                                <h1><%=userdata.username%></h1>
-                            <%}%>
-                            <p class="status-text">
-                                <span class="status-dot"></span> 
-                                <span>สถานะ : <%= userdata.roles %></span>
-                            </p>
-                        </div>
+                            <% } else{%>
+                                <img src="https://ui-avatars.com/api/?name=<%= userdata.username || 'User' %>"
+                                    alt="โปรไฟล์">
+                                <% }%>
+
+                                    <div class="user_name">
+                                        <%if(userdata.roles=="student"){%>
+                                            <h1>
+                                                <%=userdata.firstname%>
+                                                    <%=userdata.lastname%>
+                                            </h1>
+                                            <%}else{%>
+                                                <h1>
+                                                    <%=userdata.username%>
+                                                </h1>
+                                                <%}%>
+                                                    <p class="status-text">
+                                                        <span class="status-dot"></span>
+                                                        <span>สถานะ : <%= userdata.roles %></span>
+                                                    </p>
+                                    </div>
                     </div>
 
                     <div class="button_VO">
@@ -63,78 +71,92 @@
                                 <a href="/home/profilestudent/<%=userdata.ID%>">
                                     <button class="b_view">ดูโปรไฟล์</button>
                                 </a>
-                            <%}else{%>
-                                <a href="/home/profilegeneral/<%=userdata.ID%>">
-                                    <button class="b_view">ดูโปรไฟล์</button>
-                                </a>
-                            <%}%>
-                        <%}%>
+                                <%}else{%>
+                                    <a href="/home/profilegeneral/<%=userdata.ID%>">
+                                        <button class="b_view">ดูโปรไฟล์</button>
+                                    </a>
+                                    <%}%>
+                                        <%}%>
 
-                        <form action="/logout" method="post">
-                            <button class="b_logout">ออกจากระบบ</button>
-                        </form>
+                                            <form action="/logout" method="post">
+                                                <button class="b_logout">ออกจากระบบ</button>
+                                            </form>
                     </div>
                 </div>
             </div>
         </header>
 
         <main>
-            
+
             <div class="profile-header">
                 <div class="avatar-wrapper">
                     <% if(userdata.profile_image){ %>
-                        <img src="/imageForTest/<%= post.profile_image %>" alt="<%= post.profile_image%>" class="avatar-img" id="profile_">
-                    <% } else{%>
-                        <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>" alt="โปรไฟล์" class="avatar-img" id="profile_">
-                    <% }%>
-                    
-                    <%if(userdata.ID==post.ID){%>
-                        <input type="file" accept="image/*" id="avatar_upload" onchange="edit_profile(this)" style="display: none;">
-                        <button class="edit-avatar-btn" onclick="document.getElementById('avatar_upload').click()">✎</button>
-                    <%}%>
+                        <img src="/imageForTest/<%= post.profile_image %>" alt="<%= post.profile_image%>"
+                            class="avatar-img" id="profile_">
+                        <% } else{%>
+                            <img src="https://ui-avatars.com/api/?name=<%= post.username || 'User' %>" alt="โปรไฟล์"
+                                class="avatar-img" id="profile_">
+                            <% }%>
+
+                                <%if(userdata.ID==post.ID){%>
+                                    <input type="file" accept="image/*" id="avatar_upload" onchange="edit_profile(this)"
+                                        style="display: none;">
+                                    <button class="edit-avatar-btn"
+                                        onclick="document.getElementById('avatar_upload').click()">✎</button>
+                                    <%}%>
                 </div>
 
                 <div class="header-info">
                     <div class="name-rating-row">
                         <h1 id="user-name">
-                            <%=post.firstname%> <%=post.lastname%>
+                            <%=post.firstname%>
+                                <%=post.lastname%>
                         </h1>
                     </div>
                     <p class="status-badge">
                         <span class="status-dot"></span> สถานะ : <%= post.roles %>
                     </p>
-                    <p class="faculty-text">คณะ : <%= post.Sgroup %></p>
+                    <p class="faculty-text">คณะ : <%= post.Sgroup %>
+                    </p>
                 </div>
             </div>
 
             <div class="profile-content">
-                
+
                 <div class="sidebar">
-                    
+
                     <section class="contact-section">
                         <div class="section-header">
                             <h3>ช่องทางการติดต่อ</h3>
                             <%if(userdata.ID==post.ID){%>
                                 <button onclick="toggleEdit()" id="edit-btn" class="btn-small">แก้ไข</button>
-                            <%}%>
+                                <%}%>
                         </div>
 
                         <ul class="contact-list" id="contact-list">
                             <li>
                                 <img class="icon" src="/../icon/gmail.png" alt="gmail">
-                                <span class="contact-value" id="val-email"><%= post.email %></span>
+                                <span class="contact-value" id="val-email">
+                                    <%= post.email %>
+                                </span>
                             </li>
                             <li>
                                 <img class="icon" src="/../icon/telephone.png" alt="phone">
-                                <span class="contact-value" id="val-phone"><%= post.userPhoneNumber %></span>
+                                <span class="contact-value" id="val-phone">
+                                    <%= post.userPhoneNumber %>
+                                </span>
                             </li>
                             <li>
                                 <img class="icon" src="/../icon/line.png" alt="line">
-                                <span class="contact-value" id="val-line"><%= post.line %></span>
+                                <span class="contact-value" id="val-line">
+                                    <%= post.line %>
+                                </span>
                             </li>
                             <li>
                                 <img class="icon" src="/../icon/instagram.png" alt="ig">
-                                <span class="contact-value" id="val-ig"><%= post.instagram %></span>
+                                <span class="contact-value" id="val-ig">
+                                    <%= post.instagram %>
+                                </span>
                             </li>
                         </ul>
                     </section>
@@ -162,7 +184,8 @@
                                     <label for="reviewImgInput" class="custom-file-upload">
                                         📸 เพิ่มรูปภาพผลงาน
                                     </label>
-                                    <input type="file" id="reviewImgInput" accept="image/*" onchange="previewImage(this)">
+                                    <input type="file" id="reviewImgInput" accept="image/*"
+                                        onchange="previewImage(this)">
                                     <div id="image-preview-container"></div>
                                 </div>
 
@@ -171,6 +194,40 @@
                                 <div class="modal-buttons">
                                     <button id="cancelBtn">ยกเลิก</button>
                                     <button id="submitBtn">ตกลง</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal สำหรับดูรีวิวทั้งหมด -->
+                        <!-- Modal สำหรับดูรีวิวทั้งหมด (Updated Style) -->
+                        <div id="allReviewsModal" class="modal-overlay" style="display: none;">
+                            <div class="modal-window">
+                                <div class="modal-header" style="justify-content: space-between; align-items: center;">
+                                    <h3 style="margin: 0; min-width: max-content; margin-right: 20px;">รีวิวทั้งหมด</h3>
+
+                                    <div class="filter-tags modal-filters"
+                                        style="margin-bottom: 0; flex: 1; justify-content: flex-start;">
+                                        <button class="tag active" onclick="filterModalReviews('all')">ทั้งหมด</button>
+                                        <button class="tag" onclick="filterModalReviews('hasImage')">มีรูปภาพ (<span
+                                                id="m-f-img">0</span>)</button>
+                                        <button class="tag" onclick="filterModalReviews(5)">5 ดาว (<span
+                                                id="m-f-5">0</span>)</button>
+                                        <button class="tag" onclick="filterModalReviews(4)">4 ดาว (<span
+                                                id="m-f-4">0</span>)</button>
+                                        <button class="tag" onclick="filterModalReviews(3)">3 ดาว (<span
+                                                id="m-f-3">0</span>)</button>
+                                        <button class="tag" onclick="filterModalReviews(2)">2 ดาว (<span
+                                                id="m-f-2">0</span>)</button>
+                                        <button class="tag" onclick="filterModalReviews(1)">1 ดาว (<span
+                                                id="m-f-1">0</span>)</button>
+                                    </div>
+
+                                    <button class="close-modal-btn" onclick="closeAllReviewsModal()"
+                                        style="background: none; border: none; font-size: 28px; cursor: pointer; color: #999; margin-left: 10px;">&times;</button>
+                                </div>
+
+                                <div id="allReviewsContainer" class="modal-body">
+                                    <!-- Reviews will be injected here -->
                                 </div>
                             </div>
                         </div>
@@ -185,27 +242,37 @@
                             <div class="rating-right">
                                 <div class="bar-row">
                                     <span>5 ดาว</span>
-                                    <div class="bar-bg"><div class="bar-fill" id="bar-5"></div></div>
+                                    <div class="bar-bg">
+                                        <div class="bar-fill" id="bar-5"></div>
+                                    </div>
                                     <span class="count-text" id="count-5">0</span>
                                 </div>
                                 <div class="bar-row">
                                     <span>4 ดาว</span>
-                                    <div class="bar-bg"><div class="bar-fill" id="bar-4"></div></div>
+                                    <div class="bar-bg">
+                                        <div class="bar-fill" id="bar-4"></div>
+                                    </div>
                                     <span class="count-text" id="count-4">0</span>
                                 </div>
                                 <div class="bar-row">
                                     <span>3 ดาว</span>
-                                    <div class="bar-bg"><div class="bar-fill" id="bar-3"></div></div>
+                                    <div class="bar-bg">
+                                        <div class="bar-fill" id="bar-3"></div>
+                                    </div>
                                     <span class="count-text" id="count-3">0</span>
                                 </div>
                                 <div class="bar-row">
                                     <span>2 ดาว</span>
-                                    <div class="bar-bg"><div class="bar-fill" id="bar-2"></div></div>
+                                    <div class="bar-bg">
+                                        <div class="bar-fill" id="bar-2"></div>
+                                    </div>
                                     <span class="count-text" id="count-2">0</span>
                                 </div>
                                 <div class="bar-row">
                                     <span>1 ดาว</span>
-                                    <div class="bar-bg"><div class="bar-fill" id="bar-1"></div></div>
+                                    <div class="bar-bg">
+                                        <div class="bar-fill" id="bar-1"></div>
+                                    </div>
                                     <span class="count-text" id="count-1">0</span>
                                 </div>
                             </div>
@@ -213,7 +280,8 @@
 
                         <div class="filter-tags">
                             <button class="tag active" onclick="filterReviews('all')">ทั้งหมด</button>
-                            <button class="tag" onclick="filterReviews('hasImage')">มีรูปภาพ (<span id="f-img">0</span>)</button>
+                            <button class="tag" onclick="filterReviews('hasImage')">มีรูปภาพ (<span
+                                    id="f-img">0</span>)</button>
                             <button class="tag" onclick="filterReviews(5)">5 ดาว (<span id="f-5">0</span>)</button>
                             <button class="tag" onclick="filterReviews(4)">4 ดาว (<span id="f-4">0</span>)</button>
                             <button class="tag" onclick="filterReviews(3)">3 ดาว (<span id="f-3">0</span>)</button>
@@ -226,7 +294,7 @@
                         <div id="reviewContainer" class="review-preview"></div>
                         <button id="show-all-reviews-btn" class="btn-view-more" onclick="showFullReviews()">
                             ดูรีวิวทั้งหมด
-                        </button>              
+                        </button>
                     </section>
                 </div>
 
@@ -239,15 +307,22 @@
                                     <img src="/./imageForTest/<%=post.service_image%>" alt='service image'>
                                 </div>
                                 <div class="card-body">
-                                    <h4><%= post.title %></h4>
+                                    <h4>
+                                        <%= post.title %>
+                                    </h4>
                                     <ul class="work-details">
-                                        <li><strong>ประเภทงาน:</strong> <%= post.job_type || 'ยังไม่เลือก' %></li>
-                                        <li><strong>ราคา:</strong> <%=post.budjet%> บาท</li>
+                                        <li><strong>ประเภทงาน:</strong>
+                                            <%= post.job_type || 'ยังไม่เลือก' %>
+                                        </li>
+                                        <li><strong>ราคา:</strong>
+                                            <%=post.budjet%> บาท
+                                        </li>
                                         <li class="job-description-text">
-                                            <strong>รายละเอียด:</strong> <%=post.des_Cription%>
+                                            <strong>รายละเอียด:</strong>
+                                            <%=post.des_Cription%>
                                         </li>
                                     </ul>
-                                    
+
                                     <%if(userdata.ID==post.ID){%>
                                         <div class="action-buttons">
                                             <form action="/student/post_skill" class="btn-edit" method="get">
@@ -257,14 +332,14 @@
                                                 <button type="submit" class="btn-deletes">🗑️ ลบ</button>
                                             </form>
                                         </div>
-                                    <%}%>
+                                        <%}%>
                                 </div>
                             </a>
-                        <% } else {%>
-                            <p id="no-job-msg" style="text-align:center; color:#888; margin-top:20px;">
-                                ยังไม่มีโพสต์งานของคุณในขณะนี้
-                            </p>
-                        <% } %>
+                            <% } else {%>
+                                <p id="no-job-msg" style="text-align:center; color:#888; margin-top:20px;">
+                                    ยังไม่มีโพสต์งานของคุณในขณะนี้
+                                </p>
+                                <% } %>
                     </div>
                 </div>
 
@@ -273,7 +348,7 @@
     </div>
 
 
-    
+
     <footer>
         <div class="footer-contact">
             <p>ติดต่อเรา</p>
@@ -284,17 +359,21 @@
         </div>
     </footer>
 
-    <div id="cookie-banner" style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
-        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
-            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy" style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
+    <div id="cookie-banner"
+        style="display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 9999;">
+        <div
+            style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <p style="margin: 0; color: #333;">เว็บไซต์นี้มีใช้คุกกี้<a href="/policy"
+                    style="color: #9b59b6;">อ่านเพิ่มเติม</a></p>
             <div>
-                <button onclick="acceptCookies()" style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
+                <button onclick="acceptCookies()"
+                    style="background: #9b59b6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ยอมรับ</button>
             </div>
         </div>
     </div>
 
     <script src="../cookie.js"></script>
-    
+
     <script id="server-reviews-data" type="application/json">
         <%- JSON.stringify(reviews || []) %>
     </script>
