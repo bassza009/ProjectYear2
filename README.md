@@ -53,7 +53,7 @@
         <li>ทำการ add และใส่ username,password ตามที่ต้องการ(จะพ่วงไปกับขั้นตอนที่4ใหญ่)</li>
         <li>เพิ่มสิทธิ์เข้าถึงให้สามารถเข้าถึง database SDhire</li>
     </ol>
-    <h3>4.ตั้งค่า Enviroment Varibel</h3>  
+    <h3>4.ตั้งค่า Enviroment Varible</h3>  
     <ol>
         <li>เข้าไฟล์ .env</li>
         <li>กรอกข้อมูล user และ pass จะต้องตรงกับหัวข้อ3.5
