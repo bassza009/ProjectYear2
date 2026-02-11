@@ -169,7 +169,7 @@
                                     </div>
                                 <% } %>
 
-                                <%if(userdata.ID!=post.general_id || post.roles!="general"){%>
+                                <%if(userdata.ID!=post.general_id && userdata.roles=="student"){%>
                                     <div class="comment-action" style="margin-top: 15px;">
                                         <button class="btn-comment" onclick="openCommentModal()" style="width: 100%; padding: 12px; background: #9b59b6; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;">
                                             ✍️ เขียนความคิดเห็น...

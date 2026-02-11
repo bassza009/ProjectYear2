@@ -138,7 +138,7 @@
                     <section class="review-section">
                         <div class="review-header">
                             <h3>คะแนนและรีวิว</h3>
-                            <%if(userdata.ID!=post.ID){%>
+                            <%if(userdata.ID!=post.ID&&userdata.roles!="student"){%>
                                 <button id="openReview" class="btn-write">เขียนรีวิว</button>
                                 <%}%>
                         </div>
