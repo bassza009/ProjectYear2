@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const typeSelect = document.querySelector('select[name="table_type"]');
     const tableBody = document.querySelector('.table-container tbody');
     const form = document.querySelector('.post_job form');
+    const paginationContainer = document.getElementById('jobPagination');
+
+    let currentPage = 1;
 
     // Prevent default form submission
     if (form) {
@@ -20,7 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Immediate fetch on select change
-    typeSelect.addEventListener('change', fetchOrders);
+    typeSelect.addEventListener('change', () => {
+        currentPage = 1; // Reset to page 1 on filter change
+        fetchOrders();
+    });
 
     function fetchOrders() {
         const search = searchInput.value;
@@ -30,12 +36,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const url = new URL('/api/general/orders', window.location.origin);
         if (search) url.searchParams.append('table_search', search);
         if (type) url.searchParams.append('table_type', type);
+        url.searchParams.append('page', currentPage);
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    updateTable(data.data);
+                    updateTable(data.data, data.pagination);
                 } else {
                     console.error('Error fetching data:', data.message);
                 }
@@ -43,8 +50,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Fetch error:', error));
     }
 
-    function updateTable(orders) {
+    function updateTable(orders, pagination) {
         tableBody.innerHTML = '';
+
+        // Render Pagination if available
+        if (pagination) {
+            renderPagination(pagination);
+        }
 
         if (orders.length === 0) {
             tableBody.innerHTML = `
@@ -84,5 +96,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
             tableBody.appendChild(tr);
         });
+    }
+
+    function renderPagination(pagination) {
+        paginationContainer.innerHTML = '';
+        const { currentPage: page, totalPage } = pagination;
+
+        if (totalPage <= 1) return;
+
+        // Prev Button
+        if (page > 1) {
+            const prev = document.createElement('a');
+            prev.href = '#';
+            prev.innerHTML = '<small><</small>';
+            prev.onclick = (e) => {
+                e.preventDefault();
+                currentPage = page - 1;
+                fetchOrders();
+            };
+            paginationContainer.appendChild(prev);
+        }
+
+        // Page Numbers
+        for (let i = 1; i <= totalPage; i++) {
+            const btn = document.createElement('a');
+            btn.href = '#';
+            btn.className = `page-btn ${i === page ? 'active' : ''}`;
+            btn.innerHTML = `<p>${i}</p>`;
+            btn.onclick = (e) => {
+                e.preventDefault();
+                currentPage = i;
+                fetchOrders();
+            };
+            paginationContainer.appendChild(btn);
+        }
+
+        // Next Button
+        if (page < totalPage) {
+            const next = document.createElement('a');
+            next.href = '#';
+            next.innerHTML = '<small>></small>';
+            next.onclick = (e) => {
+                e.preventDefault();
+                currentPage = page + 1;
+                fetchOrders();
+            };
+            paginationContainer.appendChild(next);
+        }
     }
 });

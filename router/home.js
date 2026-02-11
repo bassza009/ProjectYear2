@@ -154,7 +154,7 @@ router.get("/home", (req, res) => {
 
     if (req.query.table_type) {
         const typeMap = {
-            "1": "งานทั่วไป",
+            "1": "รับจ้างทั่วไป",
             "2": "เขียนโปรแกรม",
             "3": "กราฟิกดีไซน์",
             "4": "ตัดต่อวิดีโอ",
@@ -166,7 +166,11 @@ router.get("/home", (req, res) => {
             "10": "ซ่อมแซม",
             "11": "อื่นๆ"
         };
-        if (typeMap[req.query.table_type]) {
+        if (req.query.table_type === "1") {
+            conditions.push(`(orderType = ? OR orderType = ?)`);
+            tableParams.push("งานทั่วไป");
+            tableParams.push("รับจ้างทั่วไป");
+        } else if (typeMap[req.query.table_type]) {
             conditions.push(`orderType = ?`);
             tableParams.push(typeMap[req.query.table_type]);
         }
@@ -180,48 +184,75 @@ router.get("/home", (req, res) => {
     pool.query(sql1, [email], (err, results) => {
         if (err) { return console.log(err); }
 
-        // เริ่ม Query 2
-        pool.query(sql3, tableParams, (err, data) => {
-            if (err) { return console.log(err); }
+        // คำนวณ Pagination สำหรับ Job Table (general_orders)
+        let jobPage = parseInt(req.query.jobPage) || 1;
+        if (jobPage < 1) jobPage = 1;
+        const jobLimit = 10;
+        const jobOffset = (jobPage - 1) * jobLimit;
 
-            // เริ่ม Query 3 (Count)
-            pool.query(sql_count, (err, counts) => {
+        // Query นับจำนวนงานทั้งหมด
+        let sql3_count = `SELECT COUNT(*) as total FROM general_orders`;
+        if (conditions.length > 0) {
+            sql3_count += ` WHERE ${conditions.join(" AND ")}`;
+        }
+
+        // Query ดึงงานตามหน้า
+        if (conditions.length > 0) {
+            sql3 += ` WHERE ${conditions.join(" AND ")}`; // sql3 เดิมไม่มี WHERE ต้องเติมให้ถูก
+        }
+        sql3 += ` ORDER BY post_date DESC LIMIT ${jobLimit} OFFSET ${jobOffset}`;
+
+        pool.query(sql3_count, tableParams, (err, countResult) => {
+            if (err) { return console.log(err); }
+            const totalJobCount = countResult[0].total;
+
+            // เริ่ม Query 2 (Jobs for Table)
+            pool.query(sql3, tableParams, (err, data) => {
                 if (err) { return console.log(err); }
 
-                let job_count = {};
-                let total_job = 0
-                if (counts) {
-                    counts.forEach((jobs) => {
-                        job_count[jobs.job_type] = jobs.num_ber;
-                        total_job += jobs.num_ber
-
-                    });
-                }
-                totalpage = Math.ceil(total_job / 8)
-                if (startpage == "" || startpage < 1 || startpage > totalpage) {
-                    limit = `limit 0,8`
-                    startpage = 1
-                } else {
-                    limit = `limit ${startpage * 8 - 8},8`
-                }
-
-                sql2 += limit
-                // เริ่ม Query 4
-                pool.query(sql2, (err, resultsjob) => {
+                // เริ่ม Query 3 (Count for Post View - เดิม)
+                pool.query(sql_count, (err, counts) => {
                     if (err) { return console.log(err); }
-                    //res.json(total_job)
-                    // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
-                    //res.json(data)
-                    res.render("home/homepage", {
-                        userdata: results[0] || {},
-                        job: resultsjob,
-                        jobcount: job_count,
-                        order: data,
-                        totalpost: total_job,
-                        currentPage: startpage,
-                        table_search: req.query.table_search,
-                        table_type: req.query.table_type,
-                        search:search
+
+                    let job_count = {};
+                    let total_job = 0
+                    if (counts) {
+                        counts.forEach((jobs) => {
+                            job_count[jobs.job_type] = jobs.num_ber;
+                            total_job += jobs.num_ber
+                        });
+                    }
+                    totalpage = Math.ceil(total_job / 8)
+                    if (startpage == "" || startpage < 1 || startpage > totalpage) {
+                        limit = `limit 0,8`
+                        startpage = 1
+                    } else {
+                        limit = `limit ${startpage * 8 - 8},8`
+                    }
+
+                    sql2 += limit
+                    // เริ่ม Query 4
+                    pool.query(sql2, (err, resultsjob) => {
+                        if (err) { return console.log(err); }
+                        //res.json(total_job)
+                        // ส่งข้อมูลไป Render ครั้งเดียวที่ท้ายสุด
+                        //res.json(data)
+                        res.render("home/homepage", {
+                            userdata: results[0] || {},
+                            job: resultsjob,
+                            jobcount: job_count,
+                            order: data,
+                            totalpost: total_job,
+                            currentPage: startpage, // Page ของ Post View (grid ด้านบน)
+                            table_search: req.query.table_search,
+                            table_type: req.query.table_type,
+                            search: search,
+
+                            // Pagination Data for Job Table
+                            currentJobPage: jobPage,
+                            totalJobPage: Math.ceil(totalJobCount / jobLimit),
+                            totalJobCount: totalJobCount
+                        });
                     });
                 });
             });
@@ -991,13 +1022,13 @@ router.get("/home/filter/:job_type", (req, res) => {
     // ใช้ชื่อเดิม: startpage
     let startpage = parseInt(req.query.startpage) || 1
     if (startpage < 1) startpage = 1
-    const searchKeyWord=`"%${search}%"`
-    const like =` AND ((studentdata.firstname LIKE ${searchKeyWord})or(studentdata.lastname LIKE ${searchKeyWord})or(user_job.title LIKE ${searchKeyWord}))`
-							
-							
-    
-    
-        
+    const searchKeyWord = `"%${search}%"`
+    const like = ` AND ((studentdata.firstname LIKE ${searchKeyWord})or(studentdata.lastname LIKE ${searchKeyWord})or(user_job.title LIKE ${searchKeyWord}))`
+
+
+
+
+
     // ใช้ชื่อเดิม: sql2 (ดึงข้อมูล User)
     let sql2 = `SELECT * FROM user_job
                 RIGHT JOIN userdata ON userdata.ID = user_job.ID
@@ -1012,7 +1043,7 @@ router.get("/home/filter/:job_type", (req, res) => {
                LEFT JOIN userdata ON userdata.ID = user_job.ID
                LEFT JOIN studentdata ON studentdata.email = userdata.email
                WHERE job_type = ?`
-    if(search){
+    if (search) {
         sql += like
     }
 
@@ -1068,8 +1099,8 @@ router.get("/home/filter/:job_type", (req, res) => {
                     paginationUrl: `/home/filter/${jobType}`,
                     budget: null,
                     currentUrl: req.originalUrl,
-                    search:search,
-                    budget:budget
+                    search: search,
+                    budget: budget
                 })
             })
         })
@@ -1081,8 +1112,8 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
     const budget = req.query.budget
     const search = req.query.search.trim()
 
-    const searchKeyWord=`"%${search}%"`
-    const like =` AND ((studentdata.firstname LIKE ${searchKeyWord})or
+    const searchKeyWord = `"%${search}%"`
+    const like = ` AND ((studentdata.firstname LIKE ${searchKeyWord})or
 							(studentdata.lastname LIKE ${searchKeyWord})or
 							(user_job.title LIKE ${searchKeyWord}))`
 
@@ -1118,7 +1149,7 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
     if (!email) {
         return res.redirect("/home?error=106")//login first
     }
-    if(search){
+    if (search) {
         sql += like
     }
     // เริ่ม Query 1: sql2 (User Data) -> เก็บผลใน results
@@ -1167,7 +1198,7 @@ router.get("/home/filter/:job_type/budget", (req, res) => {
                     currentPage: startpage, // ส่งหน้าปัจจุบันไป
                     currentUrl: req.originalUrl,
                     paginationUrl: `/home/filter/${jobType}/budget`,
-                    search:search
+                    search: search
                 })
             })
         })
@@ -1207,7 +1238,7 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
     }
 
     if (search) {
-        whereClause += like 
+        whereClause += like
     }
 
     // 3. SQL นับจำนวนหน้า (ต้อง JOIN ด้วย ไม่งั้นหาชื่อคนไม่เจอ)
@@ -1222,7 +1253,7 @@ router.get("/home/filter/:job_type/:sort", (req, res) => {
                left join studentdata on studentdata.email = userdata.email
                left join service_reviews on service_reviews.student_id = userdata.ID
                ${whereClause} 
-               group by user_job.job_id` 
+               group by user_job.job_id`
 
     if (sort == "highlow") {
         sql += ` order by user_job.budjet asc`
@@ -1481,25 +1512,64 @@ router.get("/api/general/orders", (req, res) => {
             "10": "ซ่อมแซม",
             "11": "อื่นๆ"
         };
-        if (typeMap[req.query.table_type]) {
+        if (req.query.table_type === "1") {
+            conditions.push("(orderType = ? OR orderType = ?)");
+            params.push("งานทั่วไป");
+            params.push("รับจ้างทั่วไป");
+        } else if (typeMap[req.query.table_type]) {
             conditions.push("orderType = ?");
             params.push(typeMap[req.query.table_type]);
         }
     }
 
+    // Order by date descending (newest first)
+    // Pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
+    // Count total query
+    let countSql = "SELECT COUNT(*) as total FROM general_orders";
     if (conditions.length > 0) {
-        sql += " WHERE " + conditions.join(" AND ");
+        countSql += " WHERE " + conditions.join(" AND ");
     }
 
-    // Order by date descending (newest first)
-    sql += " ORDER BY post_date DESC";
+    // Data query
+    if (conditions.length > 0) {
+        // sql contains "SELECT * FROM general_orders" already
+        sql += " WHERE " + conditions.join(" AND ");
+    }
+    sql += " ORDER BY post_date DESC LIMIT ? OFFSET ?";
 
-    pool.query(sql, params, (err, results) => {
+    // Add limit/offset to params
+    params.push(limit);
+    params.push(offset);
+
+    // Run Count Query first
+    pool.query(countSql, params.slice(0, params.length - 2), (err, countResult) => { // Use params without limit/offset for count
         if (err) {
-            console.error("Error fetching general orders:", err);
+            console.error("Error counting general orders:", err);
             return res.status(500).json({ success: false, message: "Database error" });
         }
-        res.json({ success: true, data: results });
+        const totalCount = countResult[0].total;
+        const totalPage = Math.ceil(totalCount / limit);
+
+        // Run Data Query
+        pool.query(sql, params, (err, results) => {
+            if (err) {
+                console.error("Error fetching general orders:", err);
+                return res.status(500).json({ success: false, message: "Database error" });
+            }
+            res.json({
+                success: true,
+                data: results,
+                pagination: {
+                    currentPage: page,
+                    totalPage: totalPage,
+                    totalCount: totalCount
+                }
+            });
+        });
     });
 });
 
