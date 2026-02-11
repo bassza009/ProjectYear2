@@ -1,25 +1,58 @@
-# SDhire welcome
-# กลุ่ม 5 sec.2
+ <h1 align="center">SDhire กลุ่ม 5 sec.2</h1>
+    <h3 align="center">พื้นที่รวมงานฟรีแลนซ์ สำหรับเด็กมหาลัยรวมทุกโอกาสงานสำหรับนักศึกษา ไม่ว่าจะหาคนทำงานหรือหางานเอง พร้อมระบบโปรไฟล์ที่ช่วยสร้างพอร์ตให้เติบโต</h3>
+    <hr>
+    sec.1 <b>แนะนำสมาชิก</b>
+    <table >
+        <tr>
+            <th>ชื่อ-นามสกุล</th><br>
+            <th>รหัสนิสิต</th>
+            <th>หน้าที่</th>
+        </tr>
+        <tr>
+            <td>นางสาวกาญจนา เบ้าทอง</td>
+            <td>67021398</td>
+            <td>front end</td>
+        </tr>
+        <tr>
+            <td>นายณัฐภัทร สุคันธมาลา</td>
+            <td>67021714</td>
+            <td>front end</td>
+        </tr>
+        <tr>
+            <td>นายปรเมศร์ พันธ์ไชย</td>
+            <td>67021905</td>
+            <td>front end</td>
+        </tr>
+        <tr>
+            <td>นายภาวิต ปากเกร็ด</td>
+            <td>67022063</td>
+            <td>back end</td>
+        </tr>
+         <tr>
+            <td>นายจิรกิตติ์ พลทอง</td>
+            <td>67021799</td>
+            <td>back end</td>
+        </tr>
+    </table>
+    <hr>
+    sec.2 <b>แนะนำวิธีการเข้าและลงmodule</b>
+    <h3>1.Clone project</h1>
+    ```
+    gh repo clone https://github.com/bassza009/ProjectYear2.git 
+    ```
+    <h3>2.ติดตั้ง Modules</h1>
+    เข้าถึง Folder project
+    <br>
+    ```
+    cd ProjectYear2 
+    ```
+    <br>
+    ```
+    npm i 
+    ```
+    <hr>
+    sec.3 <b>คู่มือการใช้เว็ปไซต์</b>
+    <a href=""></a>
+    <hr>
 
-
-------------
-ขั้นตอนก่อนเริ่มเปิด website
-------------
-1.install node ก่อนเริ่ม website ตามคำสั่งข้างล่าง
-
-```
-npm install 
-```
-
-2.install database จากโฟลเดอร์ชื่อ databasefile
-ตั้งชื่อ 
-user: webtech
-password:1234
-port:3306
-
-3.ทำการเริ่ม website ตามคำสั่งข้างล่าง
-
-```
-npm run start
-```
 
