@@ -48,7 +48,7 @@
     <ol>
         <li>เปิดโปรแกรม heidi(ทำการ start ก่อนในโปรแกรม XAMPP)</li>
         <li>โหลด sql file จาก folder databasefile</li>
-        <li>run query ชื่อไฟล์ว่า"UPdatabasesdhire.sql"</li>
+        <li>run query ชื่อไฟล์ว่า"New_databasesdhire.sql"</li>
         <li>เข้าหน้า Manage user</li>
         <li>ทำการ add และใส่ username,password ตามที่ต้องการ(จะพ่วงไปกับขั้นตอนที่4ใหญ่)</li>
         <li>เพิ่มสิทธิ์เข้าถึงให้สามารถเข้าถึง database SDhire</li>
