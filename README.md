@@ -34,10 +34,10 @@
             <td>back end</td>
         </tr>
     </table>
-    sec.2 <b>แนะนำวิธีการเข้าและลงmodule</b>
+    sec.2 <b>แนะนำวิธีการเข้าและลงDependency</b>
     <h3>1.Clone project</h1>
     <pre><code>gh repo clone https://github.com/bassza009/ProjectYear2.git </code></pre>
-    <h3>2.ติดตั้ง Modules</h1>
+    <h3>2.ติดตั้ง Dependency</h1>
     เข้าถึง Folder project
     <br>
     <pre><code>cd ProjectYear2</code></pre>
