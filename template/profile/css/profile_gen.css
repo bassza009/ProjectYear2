@@ -227,8 +227,10 @@ main {
     margin-bottom: 15px;
     transition: all 0.3s ease;
     background: #fff;
+    /* เพิ่ม 2 บรรทัดนี้ */
+    width: 100%; 
+    box-sizing: border-box; 
 }
-
 .job-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -256,10 +258,11 @@ main {
     margin: 5px 0;
 
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* อยากให้โชว์กี่บรรทัดแล้วตัด (เช่น 2) */
+    -webkit-line-clamp: 2; 
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .job-meta-group {
@@ -282,6 +285,7 @@ main {
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
+    flex-shrink: 0;
 }
 
 /* ป้ายสถานะ */
