@@ -34,7 +34,6 @@
             <td>back end</td>
         </tr>
     </table>
-    <hr>
     sec.2 <b>แนะนำวิธีการเข้าและลงmodule</b>
     <h3>1.Clone project</h1>
     ```
