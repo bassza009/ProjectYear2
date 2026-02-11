@@ -34,25 +34,41 @@
             <td>back end</td>
         </tr>
     </table>
-    <hr>
     sec.2 <b>แนะนำวิธีการเข้าและลงmodule</b>
     <h3>1.Clone project</h1>
-    ```
-    gh repo clone https://github.com/bassza009/ProjectYear2.git 
-    ```
+    <pre><code>gh repo clone https://github.com/bassza009/ProjectYear2.git </code></pre>
     <h3>2.ติดตั้ง Modules</h1>
     เข้าถึง Folder project
     <br>
-    ```
-    cd ProjectYear2 
-    ```
+    <pre><code>cd ProjectYear2</code></pre>
     <br>
-    ```
-    npm i 
-    ```
+    <pre><code>npm i</code></pre>
     <hr>
-    sec.3 <b>คู่มือการใช้เว็ปไซต์</b>
-    <a href=""></a>
-    <hr>
-
-
+    <h3>3.Load sql ไฟล์</h3>
+    <ol>
+        <li>เปิดโปรแกรม heidi(ทำการ start ก่อนในโปรแกรม XAMPP)</li>
+        <li>โหลด sql file จาก folder databasefile</li>
+        <li>run query ชื่อไฟล์ว่า"UPdatabasesdhire.sql"</li>
+        <li>เข้าหน้า Manage user</li>
+        <li>ทำการ add และใส่ username,password ตามที่ต้องการ(จะพ่วงไปกับขั้นตอนที่4ใหญ่)</li>
+        <li>เพิ่มสิทธิ์เข้าถึงให้สามารถเข้าถึง database SDhire</li>
+    </ol>
+    <h3>4.ตั้งค่า Enviroment Varibel</h3>  
+    <ol>
+        <li>เข้าไฟล์ .env</li>
+        <li>กรอกข้อมูล user และ pass จะต้องตรงกับหัวข้อ3.5
+            <pre><code>
+                host = localhost 
+                user = ?
+                pass = ?
+                dbname = sdhire
+                secret = nklasdo322as
+            </code></pre>
+        </li>
+    </ol>
+    <h3>5.Run website</h3>
+    <pre><code>npm run start</code></pre>
+    <h3>6.คู่มือการใช้งาน Web site</h3>
+    <a href="https://github.com/bassza009/ProjectYear2/blob/main/Guidebook/%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%80%E0%B8%A7%E0%B9%87%E0%B8%9A%E0%B9%84%E0%B8%8B%E0%B8%95%E0%B9%8CSDhire_%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%A3%E0%B8%B0%E0%B8%AB%E0%B8%A7%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%99%E0%B8%B4%E0%B8%AA%E0%B8%B4%E0%B8%95%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%99%E0%B8%A3%E0%B8%AD%E0%B8%9A%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2.pdf">Guide book</a>
+<hr>
+หมายเหตุ:Backend ใช้ โฟล์เดอ template เป็นstatic file โฟล์เดอ frontend_SDhire จะเป็นรูปแบบของหน้าเว็ป
